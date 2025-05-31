@@ -1,0 +1,6 @@
+add_subdirectory(door)
+add_subdirectory(button)
+add_subdirectory(engine)
+add_subdirectory(sensor_close_end)
+add_subdirectory(sensor_open_end)
+add_subdirectory(dashboard)

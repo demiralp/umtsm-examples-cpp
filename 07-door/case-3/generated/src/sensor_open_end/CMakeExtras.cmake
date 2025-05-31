@@ -1,0 +1,1 @@
+../../../src/sensor_open_end/CMakeExtras.cmake
