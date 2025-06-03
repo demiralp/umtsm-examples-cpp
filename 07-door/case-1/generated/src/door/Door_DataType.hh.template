@@ -31,6 +31,7 @@
 
 #pragma once
 
+#include <Door_UserTypes.hh>
 #include <cstdint>
 #include <string>
 

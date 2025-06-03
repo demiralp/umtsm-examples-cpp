@@ -64,6 +64,10 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/NumberGuess_Auxilary.cpp")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/NumberGuess_Auxilary.cpp.template" "${CMAKE_CURRENT_SOURCE_DIR}/NumberGuess_Auxilary.cpp")
 endif()
 
+if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/NumberGuess_UserTypes.hh")
+    file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/NumberGuess_UserTypes.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/NumberGuess_UserTypes.hh")
+endif()
+
 if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/NumberGuess_DataType.hh")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/NumberGuess_DataType.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/NumberGuess_DataType.hh")
 endif()
@@ -73,7 +77,7 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/NumberGuess_DataType.cpp")
 endif()
 
 set(LIBRNumberGuess_SOURCE NumberGuess_DataType.cpp NumberGuess.cpp NumberGuess_Auxilary.cpp)
-set(LIBRNumberGuess_HEADER NumberGuess_DataType.hh NumberGuess.hh)
+set(LIBRNumberGuess_HEADER NumberGuess_UserTypes.hh NumberGuess_DataType.hh NumberGuess.hh)
 
 add_library(LIBRNumberGuess_Shared SHARED
   ${LIBRNumberGuess_SOURCE}

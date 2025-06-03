@@ -37,8 +37,8 @@ sm NumberGuess
 {
     properties
     {
-        unsigned int32 number;
-        unsigned int32 guess;
+        unsigned int number;
+        unsigned int guess;
         boolean scan_result;
         char answer;
         time_t game_begin;

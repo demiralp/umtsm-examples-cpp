@@ -64,6 +64,10 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Command_Auxilary.cpp")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Command_Auxilary.cpp.template" "${CMAKE_CURRENT_SOURCE_DIR}/Command_Auxilary.cpp")
 endif()
 
+if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Command_UserTypes.hh")
+    file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Command_UserTypes.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/Command_UserTypes.hh")
+endif()
+
 if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Command_DataType.hh")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Command_DataType.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/Command_DataType.hh")
 endif()
@@ -73,7 +77,7 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Command_DataType.cpp")
 endif()
 
 set(LIBRCommand_SOURCE Command_DataType.cpp Command.cpp Command_Auxilary.cpp)
-set(LIBRCommand_HEADER Command_DataType.hh Command.hh)
+set(LIBRCommand_HEADER Command_UserTypes.hh Command_DataType.hh Command.hh)
 
 add_library(LIBRCommand_Shared SHARED
   ${LIBRCommand_SOURCE}

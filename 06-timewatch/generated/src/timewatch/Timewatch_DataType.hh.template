@@ -31,6 +31,7 @@
 
 #pragma once
 
+#include <Timewatch_UserTypes.hh>
 #include <cstdint>
 #include <ctime>
 

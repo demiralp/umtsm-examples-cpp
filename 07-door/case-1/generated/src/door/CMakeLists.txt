@@ -64,6 +64,10 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Door_Auxilary.cpp")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Door_Auxilary.cpp.template" "${CMAKE_CURRENT_SOURCE_DIR}/Door_Auxilary.cpp")
 endif()
 
+if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Door_UserTypes.hh")
+    file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Door_UserTypes.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/Door_UserTypes.hh")
+endif()
+
 if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Door_DataType.hh")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Door_DataType.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/Door_DataType.hh")
 endif()
@@ -73,7 +77,7 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Door_DataType.cpp")
 endif()
 
 set(LIBRDoor_SOURCE Door_DataType.cpp Door.cpp Door_Auxilary.cpp)
-set(LIBRDoor_HEADER Door_DataType.hh Door.hh)
+set(LIBRDoor_HEADER Door_UserTypes.hh Door_DataType.hh Door.hh)
 
 add_library(LIBRDoor_Shared SHARED
   ${LIBRDoor_SOURCE}

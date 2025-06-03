@@ -62,7 +62,7 @@ void Paroot::FindTheRoots( Paroot_DataType const& input )
 
     instanceData.root1 = instanceData.root2 = -input.paramB / ( 2.0 * input.paramA );
     instanceData.croot1 = instanceData.croot2 = 0.0;
-    instanceData.solutionType                 = E_Paroot_Solution::MONO;
+    instanceData.solutionType                 = Paroot_Solution::MONO;
   }
   else if( delta > 0.0 )
   {
@@ -71,7 +71,7 @@ void Paroot::FindTheRoots( Paroot_DataType const& input )
     instanceData.root1  = ( -input.paramB - deltaSq ) / ( 2.0 * input.paramA );
     instanceData.root2  = ( -input.paramB + deltaSq ) / ( 2.0 * input.paramA );
     instanceData.croot1 = instanceData.croot2 = 0.0;
-    instanceData.solutionType                 = E_Paroot_Solution::REAL;
+    instanceData.solutionType                 = Paroot_Solution::REAL;
   }
   else
   {
@@ -80,7 +80,7 @@ void Paroot::FindTheRoots( Paroot_DataType const& input )
     instanceData.root1 = instanceData.root2 = 0.0;
     instanceData.croot1                     = ( -input.paramB - deltaSq ) / ( 2.0 * input.paramA );
     instanceData.croot2                     = ( -input.paramB + deltaSq ) / ( 2.0 * input.paramA );
-    instanceData.solutionType               = E_Paroot_Solution::COMPLEX;
+    instanceData.solutionType               = Paroot_Solution::COMPLEX;
   }
 }  // End of action function: FindTheRoots
 
@@ -118,18 +118,18 @@ void Paroot::WriteSolutions( Paroot_DataType const& input )
 {
   switch( input.solutionType )
   {
-    case E_Paroot_Solution::MONO:
+    case Paroot_Solution::MONO:
     {
       cout << "both roots are equal to : " << input.root1 << '\n';
       break;
     }
-    case E_Paroot_Solution::REAL:
+    case Paroot_Solution::REAL:
     {
       cout << "root1 : " << input.root1 << '\n';
       cout << "root2 : " << input.root2 << '\n';
       break;
     }
-    case E_Paroot_Solution::COMPLEX:
+    case Paroot_Solution::COMPLEX:
     {
       cout << "root1 : ";
       PrintComplexNumber( input.croot1.real( ), input.croot1.imag( ) );

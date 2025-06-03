@@ -31,6 +31,7 @@
 
 #pragma once
 
+#include <Sensor_Close_End_UserTypes.hh>
 #include <cstdint>
 
 class Door;

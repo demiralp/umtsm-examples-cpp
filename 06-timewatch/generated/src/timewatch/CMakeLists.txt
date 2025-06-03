@@ -64,6 +64,10 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Timewatch_Auxilary.cpp")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Timewatch_Auxilary.cpp.template" "${CMAKE_CURRENT_SOURCE_DIR}/Timewatch_Auxilary.cpp")
 endif()
 
+if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Timewatch_UserTypes.hh")
+    file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Timewatch_UserTypes.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/Timewatch_UserTypes.hh")
+endif()
+
 if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Timewatch_DataType.hh")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Timewatch_DataType.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/Timewatch_DataType.hh")
 endif()
@@ -73,7 +77,7 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Timewatch_DataType.cpp")
 endif()
 
 set(LIBRTimewatch_SOURCE Timewatch_DataType.cpp Timewatch.cpp Timewatch_Auxilary.cpp)
-set(LIBRTimewatch_HEADER Timewatch_DataType.hh Timewatch.hh)
+set(LIBRTimewatch_HEADER Timewatch_UserTypes.hh Timewatch_DataType.hh Timewatch.hh)
 
 add_library(LIBRTimewatch_Shared SHARED
   ${LIBRTimewatch_SOURCE}

@@ -45,7 +45,7 @@ void Paroot_DataType::initialize( )
 
   croot1 = croot2 = 0.0;
 
-  solutionType = E_Paroot_Solution::UNDEFINED;
+  solutionType = Paroot_Solution::UNDEFINED;
 }
 
 void Paroot_DataType::deinitialize( )

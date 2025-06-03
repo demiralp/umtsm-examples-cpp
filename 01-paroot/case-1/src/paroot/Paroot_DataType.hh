@@ -32,7 +32,7 @@
 #include <complex>
 #include <cstdint>
 
-enum class E_Paroot_Solution
+enum class Paroot_Solution
 {
   UNDEFINED,
   MONO,
@@ -51,7 +51,7 @@ class Paroot_DataType
     double root2;
     std::complex< double > croot1;
     std::complex< double > croot2;
-    E_Paroot_Solution solutionType;
+    Paroot_Solution solutionType;
 
     Paroot_DataType( );
     virtual ~Paroot_DataType( );

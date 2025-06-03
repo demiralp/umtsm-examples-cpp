@@ -64,6 +64,10 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Dashboard_Auxilary.cpp")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Dashboard_Auxilary.cpp.template" "${CMAKE_CURRENT_SOURCE_DIR}/Dashboard_Auxilary.cpp")
 endif()
 
+if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Dashboard_UserTypes.hh")
+    file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Dashboard_UserTypes.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/Dashboard_UserTypes.hh")
+endif()
+
 if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Dashboard_DataType.hh")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Dashboard_DataType.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/Dashboard_DataType.hh")
 endif()
@@ -73,7 +77,7 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Dashboard_DataType.cpp")
 endif()
 
 set(LIBRDashboard_SOURCE Dashboard_DataType.cpp Dashboard.cpp Dashboard_Auxilary.cpp)
-set(LIBRDashboard_HEADER Dashboard_DataType.hh Dashboard.hh)
+set(LIBRDashboard_HEADER Dashboard_UserTypes.hh Dashboard_DataType.hh Dashboard.hh)
 
 add_library(LIBRDashboard_Shared SHARED
   ${LIBRDashboard_SOURCE}

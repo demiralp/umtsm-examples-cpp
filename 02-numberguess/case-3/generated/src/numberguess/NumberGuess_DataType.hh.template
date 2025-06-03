@@ -31,14 +31,15 @@
 
 #pragma once
 
+#include <NumberGuess_UserTypes.hh>
 #include <cstdint>
 #include <ctime>
 
 class NumberGuess_DataType
 {
   public:
-    std::uint32_t number;
-    std::uint32_t guess;
+    unsigned int number;
+    unsigned int guess;
     bool scan_result;
     char answer;
     time_t game_begin;
