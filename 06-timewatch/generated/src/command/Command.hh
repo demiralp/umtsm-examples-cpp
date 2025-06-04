@@ -130,7 +130,7 @@ class Command
   private:
     static void* callDoAction_WaitForInput( void* arg );
 
-    static pthread_t lanchDoAction( void *(*threadStart)(void *), Command* pStateMachine, void *stackAddr, size_t stackSize );
+    static pthread_t launchDoAction( void *(*threadStart)(void *), Command* pStateMachine, void *stackAddr, size_t stackSize );
   };
 
   // End of Command.hh

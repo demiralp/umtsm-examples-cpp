@@ -264,7 +264,7 @@ void Command::enter_WaitForInput( )
 {
   runningState.Main = Main_States::E_WaitForInput;
 
-  doActionHandler = lanchDoAction( callDoAction_WaitForInput, this, nullptr, 0 );
+  doActionHandler = launchDoAction( callDoAction_WaitForInput, this, nullptr, 0 );
 }
 
 void Command::exit_WaitForInput( )
@@ -286,7 +286,7 @@ void* Command::callDoAction_WaitForInput( void* arg )
   return NULL;
 }
 
-pthread_t Command::lanchDoAction( void *(*threadStart)(void *), Command* pStateMachine, void *stackAddr, size_t stackSize )
+pthread_t Command::launchDoAction( void *(*threadStart)(void *), Command* pStateMachine, void *stackAddr, size_t stackSize )
 {
   pthread_t thr = 0;
 

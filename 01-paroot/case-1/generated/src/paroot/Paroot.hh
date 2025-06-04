@@ -125,7 +125,7 @@ class Paroot
     static void* callDoAction_Solve( void* arg );
     static void* callDoAction_Report( void* arg );
 
-    static pthread_t lanchDoAction( void *(*threadStart)(void *), Paroot* pStateMachine, void *stackAddr, size_t stackSize );
+    static pthread_t launchDoAction( void *(*threadStart)(void *), Paroot* pStateMachine, void *stackAddr, size_t stackSize );
   };
 
   // End of Paroot.hh

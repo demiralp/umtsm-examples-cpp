@@ -321,7 +321,7 @@ void NumberGuess::enter_GetEstimation( )
 
   AskEstimation( instanceData );
 
-  doActionHandler = lanchDoAction( callDoAction_GetEstimation, this, nullptr, 0 );
+  doActionHandler = launchDoAction( callDoAction_GetEstimation, this, nullptr, 0 );
 }
 
 void NumberGuess::enter_AskNewDeal( )
@@ -330,7 +330,7 @@ void NumberGuess::enter_AskNewDeal( )
 
   PrintAskNewDeal( instanceData );
 
-  doActionHandler = lanchDoAction( callDoAction_AskNewDeal, this, nullptr, 0 );
+  doActionHandler = launchDoAction( callDoAction_AskNewDeal, this, nullptr, 0 );
 }
 
 void NumberGuess::exit_GetEstimation( )
@@ -371,7 +371,7 @@ void* NumberGuess::callDoAction_AskNewDeal( void* arg )
   return NULL;
 }
 
-pthread_t NumberGuess::lanchDoAction( void *(*threadStart)(void *), NumberGuess* pStateMachine, void *stackAddr, size_t stackSize )
+pthread_t NumberGuess::launchDoAction( void *(*threadStart)(void *), NumberGuess* pStateMachine, void *stackAddr, size_t stackSize )
 {
   pthread_t thr = 0;
 

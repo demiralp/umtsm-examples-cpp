@@ -271,21 +271,21 @@ void Paroot::enter_Read( )
 {
   runningState.Main = Main_States::E_Read;
 
-  doActionHandler = lanchDoAction( callDoAction_Read, this, nullptr, 0 );
+  doActionHandler = launchDoAction( callDoAction_Read, this, nullptr, 0 );
 }
 
 void Paroot::enter_Solve( )
 {
   runningState.Main = Main_States::E_Solve;
 
-  doActionHandler = lanchDoAction( callDoAction_Solve, this, nullptr, 0 );
+  doActionHandler = launchDoAction( callDoAction_Solve, this, nullptr, 0 );
 }
 
 void Paroot::enter_Report( )
 {
   runningState.Main = Main_States::E_Report;
 
-  doActionHandler = lanchDoAction( callDoAction_Report, this, nullptr, 0 );
+  doActionHandler = launchDoAction( callDoAction_Report, this, nullptr, 0 );
 }
 
 void Paroot::exit_Read( )
@@ -345,7 +345,7 @@ void* Paroot::callDoAction_Report( void* arg )
   return NULL;
 }
 
-pthread_t Paroot::lanchDoAction( void *(*threadStart)(void *), Paroot* pStateMachine, void *stackAddr, size_t stackSize )
+pthread_t Paroot::launchDoAction( void *(*threadStart)(void *), Paroot* pStateMachine, void *stackAddr, size_t stackSize )
 {
   pthread_t thr = 0;
 

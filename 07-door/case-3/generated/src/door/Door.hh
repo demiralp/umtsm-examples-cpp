@@ -156,7 +156,7 @@ class Door
   private:
     static void* callDoAction_AutomaticMode_Open( void* arg );
 
-    static pthread_t lanchDoAction( void *(*threadStart)(void *), Door* pStateMachine, void *stackAddr, size_t stackSize );
+    static pthread_t launchDoAction( void *(*threadStart)(void *), Door* pStateMachine, void *stackAddr, size_t stackSize );
   };
 
   // End of Door.hh

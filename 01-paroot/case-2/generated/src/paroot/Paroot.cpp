@@ -483,49 +483,49 @@ void Paroot::enter_ReadA( )
 {
   runningState.Main = Main_States::E_ReadA;
 
-  doActionHandler = lanchDoAction( callDoAction_ReadA, this, nullptr, 0 );
+  doActionHandler = launchDoAction( callDoAction_ReadA, this, nullptr, 0 );
 }
 
 void Paroot::enter_ReadB( )
 {
   runningState.Main = Main_States::E_ReadB;
 
-  doActionHandler = lanchDoAction( callDoAction_ReadB, this, nullptr, 0 );
+  doActionHandler = launchDoAction( callDoAction_ReadB, this, nullptr, 0 );
 }
 
 void Paroot::enter_ReadC( )
 {
   runningState.Main = Main_States::E_ReadC;
 
-  doActionHandler = lanchDoAction( callDoAction_ReadC, this, nullptr, 0 );
+  doActionHandler = launchDoAction( callDoAction_ReadC, this, nullptr, 0 );
 }
 
 void Paroot::enter_Solve( )
 {
   runningState.Main = Main_States::E_Solve;
 
-  doActionHandler = lanchDoAction( callDoAction_Solve, this, nullptr, 0 );
+  doActionHandler = launchDoAction( callDoAction_Solve, this, nullptr, 0 );
 }
 
 void Paroot::enter_ComplexSolution( )
 {
   runningState.Main = Main_States::E_ComplexSolution;
 
-  doActionHandler = lanchDoAction( callDoAction_ComplexSolution, this, nullptr, 0 );
+  doActionHandler = launchDoAction( callDoAction_ComplexSolution, this, nullptr, 0 );
 }
 
 void Paroot::enter_SingleSolution( )
 {
   runningState.Main = Main_States::E_SingleSolution;
 
-  doActionHandler = lanchDoAction( callDoAction_SingleSolution, this, nullptr, 0 );
+  doActionHandler = launchDoAction( callDoAction_SingleSolution, this, nullptr, 0 );
 }
 
 void Paroot::enter_Solutions( )
 {
   runningState.Main = Main_States::E_Solutions;
 
-  doActionHandler = lanchDoAction( callDoAction_Solutions, this, nullptr, 0 );
+  doActionHandler = launchDoAction( callDoAction_Solutions, this, nullptr, 0 );
 }
 
 void Paroot::exit_ReadA( )
@@ -661,7 +661,7 @@ void* Paroot::callDoAction_Solutions( void* arg )
   return NULL;
 }
 
-pthread_t Paroot::lanchDoAction( void *(*threadStart)(void *), Paroot* pStateMachine, void *stackAddr, size_t stackSize )
+pthread_t Paroot::launchDoAction( void *(*threadStart)(void *), Paroot* pStateMachine, void *stackAddr, size_t stackSize )
 {
   pthread_t thr = 0;
 

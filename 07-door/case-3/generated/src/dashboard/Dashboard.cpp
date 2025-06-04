@@ -318,14 +318,14 @@ void Dashboard::enter_ReadKey( )
 {
   runningState.Keypad = Keypad_States::E_ReadKey;
 
-  doActionHandler[ doActionIndex_ReadKey ] = lanchDoAction( callDoAction_ReadKey, this, nullptr, 0 );
+  doActionHandler[ doActionIndex_ReadKey ] = launchDoAction( callDoAction_ReadKey, this, nullptr, 0 );
 }
 
 void Dashboard::enter_Display( )
 {
   runningState.Monitor = Monitor_States::E_Display;
 
-  doActionHandler[ doActionIndex_Display ] = lanchDoAction( callDoAction_Display, this, nullptr, 0 );
+  doActionHandler[ doActionIndex_Display ] = launchDoAction( callDoAction_Display, this, nullptr, 0 );
 }
 
 void Dashboard::exit_ReadKey( )
@@ -366,7 +366,7 @@ void* Dashboard::callDoAction_Display( void* arg )
   return NULL;
 }
 
-pthread_t Dashboard::lanchDoAction( void *(*threadStart)(void *), Dashboard* pStateMachine, void *stackAddr, size_t stackSize )
+pthread_t Dashboard::launchDoAction( void *(*threadStart)(void *), Dashboard* pStateMachine, void *stackAddr, size_t stackSize )
 {
   pthread_t thr = 0;
 

@@ -239,14 +239,14 @@ void Sensor_Open_End::enter_Idle( )
 {
   runningState.Main = Main_States::E_Idle;
 
-  doActionHandler = lanchDoAction( callDoAction_Idle, this, nullptr, 0 );
+  doActionHandler = launchDoAction( callDoAction_Idle, this, nullptr, 0 );
 }
 
 void Sensor_Open_End::enter_Check( )
 {
   runningState.Main = Main_States::E_Check;
 
-  doActionHandler = lanchDoAction( callDoAction_Check, this, nullptr, 0 );
+  doActionHandler = launchDoAction( callDoAction_Check, this, nullptr, 0 );
 }
 
 void Sensor_Open_End::exit_Idle( )
@@ -287,7 +287,7 @@ void* Sensor_Open_End::callDoAction_Check( void* arg )
   return NULL;
 }
 
-pthread_t Sensor_Open_End::lanchDoAction( void *(*threadStart)(void *), Sensor_Open_End* pStateMachine, void *stackAddr, size_t stackSize )
+pthread_t Sensor_Open_End::launchDoAction( void *(*threadStart)(void *), Sensor_Open_End* pStateMachine, void *stackAddr, size_t stackSize )
 {
   pthread_t thr = 0;
 

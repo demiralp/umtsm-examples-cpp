@@ -119,7 +119,7 @@ class Sensor_Close_End
     static void* callDoAction_Idle( void* arg );
     static void* callDoAction_Check( void* arg );
 
-    static pthread_t lanchDoAction( void *(*threadStart)(void *), Sensor_Close_End* pStateMachine, void *stackAddr, size_t stackSize );
+    static pthread_t launchDoAction( void *(*threadStart)(void *), Sensor_Close_End* pStateMachine, void *stackAddr, size_t stackSize );
   };
 
   // End of Sensor_Close_End.hh

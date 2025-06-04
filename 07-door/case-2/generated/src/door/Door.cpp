@@ -334,7 +334,7 @@ void Door::enter_Open( )
 
   resetWaitingTime( instanceData );
 
-  doActionHandler = lanchDoAction( callDoAction_Open, this, nullptr, 0 );
+  doActionHandler = launchDoAction( callDoAction_Open, this, nullptr, 0 );
 }
 
 void Door::enter_Closing( )
@@ -370,7 +370,7 @@ void* Door::callDoAction_Open( void* arg )
   return NULL;
 }
 
-pthread_t Door::lanchDoAction( void *(*threadStart)(void *), Door* pStateMachine, void *stackAddr, size_t stackSize )
+pthread_t Door::launchDoAction( void *(*threadStart)(void *), Door* pStateMachine, void *stackAddr, size_t stackSize )
 {
   pthread_t thr = 0;
 

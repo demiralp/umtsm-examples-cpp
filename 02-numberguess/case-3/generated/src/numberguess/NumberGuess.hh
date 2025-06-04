@@ -158,7 +158,7 @@ class NumberGuess
     static void* callDoAction_GetEstimation( void* arg );
     static void* callDoAction_AskNewDeal( void* arg );
 
-    static pthread_t lanchDoAction( void *(*threadStart)(void *), NumberGuess* pStateMachine, void *stackAddr, size_t stackSize );
+    static pthread_t launchDoAction( void *(*threadStart)(void *), NumberGuess* pStateMachine, void *stackAddr, size_t stackSize );
   };
 
   // End of NumberGuess.hh

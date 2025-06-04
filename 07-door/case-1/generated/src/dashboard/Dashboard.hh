@@ -149,7 +149,7 @@ class Dashboard
     static void* callDoAction_ReadKey( void* arg );
     static void* callDoAction_Display( void* arg );
 
-    static pthread_t lanchDoAction( void *(*threadStart)(void *), Dashboard* pStateMachine, void *stackAddr, size_t stackSize );
+    static pthread_t launchDoAction( void *(*threadStart)(void *), Dashboard* pStateMachine, void *stackAddr, size_t stackSize );
   };
 
   // End of Dashboard.hh
