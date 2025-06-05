@@ -1,0 +1,157 @@
+/*  ==============================================================================
+ *  Created by Fehmi Demiralp(Fedem) on 2025-05-29 GMT
+ *  Copyright (C) 2023-2025 Fedem (Fehmi Demiralp) <f.demiralp@gmail.com>
+ *
+ *  Released under the MIT License
+ *  ==============================================================================
+ */
+
+/*  Copyright (C) 2023-2025 Fedem (Fehmi Demiralp) <f.demiralp@gmail.com>
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+*/
+
+type external size_t;
+
+//
+// Event Generator
+//
+sm KeyPressEventGenerator
+{
+    properties
+    {
+        optional KeyPress sm_keypress;
+    }
+
+    region KeyBaseEvent
+    {
+        init -> KeyEvent;
+
+        state KeyEvent
+        {
+            do / ReadKey;
+
+            -> KeyEvent;
+        }
+    }
+
+    region TimeBaseEvent
+    {
+        init -> TimeCounter;
+
+        state TimeCounter
+        {
+            do / TimeBaseEventGenerator;
+
+            -> TimeCounter;
+        }
+    }
+}
+
+//
+// Event Executor
+//
+sm KeyPress
+{
+    properties
+    {
+        unsigned int issueId;
+        size_t countA;
+        size_t countB;
+        size_t countC;
+        size_t countDigit[9];
+        size_t countOdd;
+        size_t countEven;
+    }
+
+    entry / MessageHello;
+    init -> Listen;
+
+    fork Listen
+    {
+        -> ReadLetters;
+        -> ReadDigits;
+    }
+
+    region Alpha
+    {
+        state ReadLetters
+        {
+            keyA / CountA;
+            keyB / CountB;
+            keyC / CountC;
+
+            space / ResetLetterCounters;
+
+            keyF12 -> Pause; // pause counting letters
+
+            keyF1 -> Syncronize; // stop counting letters
+        }
+
+        state Pause
+        {
+            keyF12 -> ReadLetters;
+            keyF1 -> Syncronize;
+        }
+    }
+
+    region Numeric
+    {
+        state ReadDigits
+        {
+            key1 / CountOdd, Count1;
+            key3 / CountOdd, Count3;
+            key5 / CountOdd, Count5;
+            key7 / CountOdd, Count7;
+            key9 / CountOdd, Count9;
+
+            key2 / CountEven, Count2;
+            key4 / CountEven, Count4;
+            key6 / CountEven, Count6;
+            key8 / CountEven, Count8;
+
+            keyBackspace, keyDelete / ResetNumericCounters;
+
+            keyF2 -> Syncronize;
+        }
+    }
+
+    region Log
+    {
+        init -> PrintLog;
+
+        state PrintLog
+        {
+            entry / LogHeaders, LogCounters;
+
+            clock4log / LogCounters;
+
+            keyF1, keyF2 [IsCountingFinished] -> Syncronize;
+        }
+    }
+
+    join Syncronize -> WaitABit;
+
+    state WaitABit
+    {
+        entry / LogCounters, MessagePressSpaceToExit;
+
+        space -> terminate / MessageGoodBye;
+    }
+}
