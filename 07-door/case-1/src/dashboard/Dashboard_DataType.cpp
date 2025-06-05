@@ -51,7 +51,7 @@ void Dashboard_DataType::initialize( )
 
 void Dashboard_DataType::deinitialize( )
 {
-  /* blank */
+  // blank
 }
 
 // End of Dashboard_DataType.cpp

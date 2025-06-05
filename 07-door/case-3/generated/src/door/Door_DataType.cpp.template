@@ -47,6 +47,7 @@ void Door_DataType::initialize( )
 
 void Door_DataType::deinitialize( )
 {
+  // blank
 }
 
 // End of Door_DataType.cpp

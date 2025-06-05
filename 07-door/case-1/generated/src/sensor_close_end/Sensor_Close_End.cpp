@@ -273,7 +273,7 @@ void Sensor_Close_End::exit_Check( )
 
 void* Sensor_Close_End::callDoAction_Idle( void* arg )
 {
-  Sensor_Close_End* obj = static_cast< Sensor_Close_End* >( arg );
+  Sensor_Close_End* obj = reinterpret_cast< Sensor_Close_End* >( arg );
   obj->doAction_Idle( );
 
   return NULL;
@@ -281,7 +281,7 @@ void* Sensor_Close_End::callDoAction_Idle( void* arg )
 
 void* Sensor_Close_End::callDoAction_Check( void* arg )
 {
-  Sensor_Close_End* obj = static_cast< Sensor_Close_End* >( arg );
+  Sensor_Close_End* obj = reinterpret_cast< Sensor_Close_End* >( arg );
   obj->doAction_Check( );
 
   return NULL;

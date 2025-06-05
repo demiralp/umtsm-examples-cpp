@@ -47,6 +47,7 @@ void Button_DataType::initialize( )
 
 void Button_DataType::deinitialize( )
 {
+  // blank
 }
 
 // End of Button_DataType.cpp

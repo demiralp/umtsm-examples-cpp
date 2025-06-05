@@ -364,7 +364,7 @@ void Door::exit_Open( )
 
 void* Door::callDoAction_Open( void* arg )
 {
-  Door* obj = static_cast< Door* >( arg );
+  Door* obj = reinterpret_cast< Door* >( arg );
   obj->doAction_Open( );
 
   return NULL;

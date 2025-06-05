@@ -45,8 +45,8 @@
 
 namespace
 {
-  constexpr std::size_t doActionIndex_ReadKey = 1U;
-  constexpr std::size_t doActionIndex_Display = 2U;
+  constexpr std::size_t doActionIndex_ReadKey = 0U;
+  constexpr std::size_t doActionIndex_Display = 1U;
 }
 
 Dashboard::Dashboard( )
@@ -352,7 +352,7 @@ void Dashboard::exit_Display( )
 
 void* Dashboard::callDoAction_ReadKey( void* arg )
 {
-  Dashboard* obj = static_cast< Dashboard* >( arg );
+  Dashboard* obj = reinterpret_cast< Dashboard* >( arg );
   obj->doAction_ReadKey( );
 
   return NULL;
@@ -360,7 +360,7 @@ void* Dashboard::callDoAction_ReadKey( void* arg )
 
 void* Dashboard::callDoAction_Display( void* arg )
 {
-  Dashboard* obj = static_cast< Dashboard* >( arg );
+  Dashboard* obj = reinterpret_cast< Dashboard* >( arg );
   obj->doAction_Display( );
 
   return NULL;

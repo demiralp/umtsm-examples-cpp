@@ -47,6 +47,7 @@ void Engine_DataType::initialize( )
 
 void Engine_DataType::deinitialize( )
 {
+  // blank
 }
 
 // End of Engine_DataType.cpp

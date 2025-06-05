@@ -597,7 +597,7 @@ void Door::exit_AutomaticMode_Open( )
 
 void* Door::callDoAction_AutomaticMode_Open( void* arg )
 {
-  Door* obj = static_cast< Door* >( arg );
+  Door* obj = reinterpret_cast< Door* >( arg );
   obj->doAction_AutomaticMode_Open( );
 
   return NULL;
