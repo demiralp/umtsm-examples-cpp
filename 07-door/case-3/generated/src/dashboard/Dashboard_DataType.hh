@@ -31,7 +31,6 @@
 
 #pragma once
 
-#include <Dashboard_UserTypes.hh>
 #include <cstdint>
 
 class Door;

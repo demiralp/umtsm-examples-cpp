@@ -31,7 +31,6 @@
 
 #pragma once
 
-#include <Engine_UserTypes.hh>
 #include <cstdint>
 
 class Engine_DataType

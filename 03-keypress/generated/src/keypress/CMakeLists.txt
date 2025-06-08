@@ -64,10 +64,6 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/KeyPressEventGenerator_Auxilary.cpp"
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/KeyPressEventGenerator_Auxilary.cpp.template" "${CMAKE_CURRENT_SOURCE_DIR}/KeyPressEventGenerator_Auxilary.cpp")
 endif()
 
-if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/KeyPressEventGenerator_UserTypes.hh")
-    file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/KeyPressEventGenerator_UserTypes.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/KeyPressEventGenerator_UserTypes.hh")
-endif()
-
 if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/KeyPressEventGenerator_DataType.hh")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/KeyPressEventGenerator_DataType.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/KeyPressEventGenerator_DataType.hh")
 endif()
@@ -77,7 +73,7 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/KeyPressEventGenerator_DataType.cpp"
 endif()
 
 set(LIBRKeyPressEventGenerator_SOURCE KeyPressEventGenerator_DataType.cpp KeyPressEventGenerator.cpp KeyPressEventGenerator_Auxilary.cpp)
-set(LIBRKeyPressEventGenerator_HEADER KeyPressEventGenerator_UserTypes.hh KeyPressEventGenerator_DataType.hh KeyPressEventGenerator.hh)
+set(LIBRKeyPressEventGenerator_HEADER KeyPressEventGenerator_DataType.hh KeyPressEventGenerator.hh)
 
 add_library(LIBRKeyPressEventGenerator_Shared SHARED
   ${LIBRKeyPressEventGenerator_SOURCE}
@@ -122,10 +118,6 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/KeyPress_Auxilary.cpp")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/KeyPress_Auxilary.cpp.template" "${CMAKE_CURRENT_SOURCE_DIR}/KeyPress_Auxilary.cpp")
 endif()
 
-if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/KeyPress_UserTypes.hh")
-    file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/KeyPress_UserTypes.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/KeyPress_UserTypes.hh")
-endif()
-
 if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/KeyPress_DataType.hh")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/KeyPress_DataType.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/KeyPress_DataType.hh")
 endif()
@@ -135,7 +127,7 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/KeyPress_DataType.cpp")
 endif()
 
 set(LIBRKeyPress_SOURCE KeyPress_DataType.cpp KeyPress.cpp KeyPress_Auxilary.cpp)
-set(LIBRKeyPress_HEADER KeyPress_UserTypes.hh KeyPress_DataType.hh KeyPress.hh)
+set(LIBRKeyPress_HEADER KeyPress_DataType.hh KeyPress.hh)
 
 add_library(LIBRKeyPress_Shared SHARED
   ${LIBRKeyPress_SOURCE}

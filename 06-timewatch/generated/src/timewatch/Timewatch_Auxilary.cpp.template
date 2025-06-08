@@ -32,8 +32,12 @@
 #include "Timewatch.hh"
 
 #include <cassert>
+#include <csignal>
 #include <cstddef>
 #include <cstring>
+#include <mutex>
+#include <optional>
+#include <thread>
 
 // The implementation of the actions
 void Timewatch::Exit( Timewatch_DataType const& input )

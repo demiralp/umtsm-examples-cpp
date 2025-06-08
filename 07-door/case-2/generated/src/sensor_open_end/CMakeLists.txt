@@ -64,10 +64,6 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Sensor_Open_End_Auxilary.cpp")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Sensor_Open_End_Auxilary.cpp.template" "${CMAKE_CURRENT_SOURCE_DIR}/Sensor_Open_End_Auxilary.cpp")
 endif()
 
-if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Sensor_Open_End_UserTypes.hh")
-    file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Sensor_Open_End_UserTypes.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/Sensor_Open_End_UserTypes.hh")
-endif()
-
 if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Sensor_Open_End_DataType.hh")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Sensor_Open_End_DataType.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/Sensor_Open_End_DataType.hh")
 endif()
@@ -77,7 +73,7 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Sensor_Open_End_DataType.cpp")
 endif()
 
 set(LIBRSensor_Open_End_SOURCE Sensor_Open_End_DataType.cpp Sensor_Open_End.cpp Sensor_Open_End_Auxilary.cpp)
-set(LIBRSensor_Open_End_HEADER Sensor_Open_End_UserTypes.hh Sensor_Open_End_DataType.hh Sensor_Open_End.hh)
+set(LIBRSensor_Open_End_HEADER Sensor_Open_End_DataType.hh Sensor_Open_End.hh)
 
 add_library(LIBRSensor_Open_End_Shared SHARED
   ${LIBRSensor_Open_End_SOURCE}

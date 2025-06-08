@@ -31,7 +31,6 @@
 
 #pragma once
 
-#include <Button_UserTypes.hh>
 #include <cstdint>
 
 class Door;

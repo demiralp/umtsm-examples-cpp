@@ -31,7 +31,6 @@
 
 #pragma once
 
-#include <Command_UserTypes.hh>
 #include <cstdint>
 
 class Timewatch;

@@ -35,6 +35,10 @@
 
 #include <cstdint>
 
+#include <mutex>
+#include <optional>
+#include <thread>
+
 #include <KeyPress_DataType.hh>
 
 class KeyPress
@@ -75,6 +79,8 @@ class KeyPress
     };
 
   private:
+    std::mutex guard;
+
     struct
     {
       Main_States Main;

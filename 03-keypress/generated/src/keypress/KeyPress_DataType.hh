@@ -31,7 +31,6 @@
 
 #pragma once
 
-#include <KeyPress_UserTypes.hh>
 #include <cstddef>
 #include <cstdint>
 

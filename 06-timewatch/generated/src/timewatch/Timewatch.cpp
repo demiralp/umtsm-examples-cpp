@@ -34,8 +34,12 @@
 #include "Timewatch.hh"
 
 #include <cassert>
+#include <csignal>
 #include <cstddef>
 #include <cstring>
+#include <mutex>
+#include <optional>
+#include <thread>
 
 Timewatch::Timewatch( )
 {
@@ -49,12 +53,16 @@ Timewatch::~Timewatch( )
 
 void Timewatch::initialize( )
 {
+  std::lock_guard<std::mutex> lockGuard( guard );;
+
   instanceData.initialize( );
   runningState.Main = Main_States::E_init;
 }
 
 void Timewatch::deinitialize( )
 {
+  std::lock_guard<std::mutex> lockGuard( guard );;
+
   terminate( );
   runningState.Main = Main_States::E_final;
 
@@ -65,6 +73,8 @@ void Timewatch::start( )
 {
   if ( ! isIn_Main_Region( ) )
   {
+    std::lock_guard<std::mutex> lockGuard( guard );
+
     enter_Main( );
     init_Main( );
   }
@@ -169,6 +179,8 @@ void Timewatch::trigger_abort( )
 {
   __attribute__( ( unused ) ) bool doneMain = false;
 
+  std::lock_guard<std::mutex> lockGuard( guard );
+
   if ( isIn_Main_State( ) )
   {
     if ( isIn_Run_State( ) )
@@ -214,6 +226,8 @@ void Timewatch::trigger_help( )
 {
   __attribute__( ( unused ) ) bool doneMain = false;
 
+  std::lock_guard<std::mutex> lockGuard( guard );
+
   if ( isIn_Main_State( ) )
   {
     if ( isIn_Run_State( ) )
@@ -249,6 +263,8 @@ void Timewatch::trigger_pause( )
 {
   __attribute__( ( unused ) ) bool doneMain = false;
 
+  std::lock_guard<std::mutex> lockGuard( guard );
+
   if ( isIn_Run_State( ) )
   {
     if ( isIn_Pause_State( ) )
@@ -266,6 +282,8 @@ void Timewatch::trigger_print( )
 {
   __attribute__( ( unused ) ) bool doneMain = false;
 
+  std::lock_guard<std::mutex> lockGuard( guard );
+
   if ( isIn_Run_State( ) )
   {
     if ( isIn_Pause_State( ) )
@@ -282,6 +300,8 @@ void Timewatch::trigger_print( )
 void Timewatch::trigger_restart( )
 {
   __attribute__( ( unused ) ) bool doneMain = false;
+
+  std::lock_guard<std::mutex> lockGuard( guard );
 
   if ( isIn_Run_State( ) )
   {
@@ -307,6 +327,8 @@ void Timewatch::trigger_resume( )
 {
   __attribute__( ( unused ) ) bool doneMain = false;
 
+  std::lock_guard<std::mutex> lockGuard( guard );
+
   if ( isIn_Pause_State( ) )
   {
     PrintStatusResume( instanceData );
@@ -319,6 +341,8 @@ void Timewatch::trigger_resume( )
 void Timewatch::trigger_start( )
 {
   __attribute__( ( unused ) ) bool doneMain = false;
+
+  std::lock_guard<std::mutex> lockGuard( guard );
 
   if ( isIn_Idle_State( ) )
   {
@@ -342,6 +366,8 @@ void Timewatch::trigger_start( )
 void Timewatch::trigger_stop( )
 {
   __attribute__( ( unused ) ) bool doneMain = false;
+
+  std::lock_guard<std::mutex> lockGuard( guard );
 
   if ( isIn_Run_State( ) )
   {

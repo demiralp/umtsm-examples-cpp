@@ -31,7 +31,9 @@
 
 #pragma once
 
-/* *  Please use this file to declare user defined types to spport *  the types that are used in the generated files.
+/*
+ *  This file is intended for defining custom types
+ *  that support or match the types used in the generated files.
  */
 
 // End of Calculator_UserTypes.hh

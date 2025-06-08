@@ -31,7 +31,6 @@
 
 #pragma once
 
-#include <NumberGuess_UserTypes.hh>
 #include <cstdint>
 
 class NumberGuess_DataType

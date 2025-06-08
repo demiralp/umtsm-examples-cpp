@@ -31,7 +31,6 @@
 
 #pragma once
 
-#include <Paroot_UserTypes.hh>
 #include <cstdint>
 
 class Paroot_DataType

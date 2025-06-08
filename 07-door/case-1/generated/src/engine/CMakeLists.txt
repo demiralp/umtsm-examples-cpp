@@ -64,10 +64,6 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Engine_Auxilary.cpp")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Engine_Auxilary.cpp.template" "${CMAKE_CURRENT_SOURCE_DIR}/Engine_Auxilary.cpp")
 endif()
 
-if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Engine_UserTypes.hh")
-    file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Engine_UserTypes.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/Engine_UserTypes.hh")
-endif()
-
 if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Engine_DataType.hh")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Engine_DataType.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/Engine_DataType.hh")
 endif()
@@ -77,7 +73,7 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Engine_DataType.cpp")
 endif()
 
 set(LIBREngine_SOURCE Engine_DataType.cpp Engine.cpp Engine_Auxilary.cpp)
-set(LIBREngine_HEADER Engine_UserTypes.hh Engine_DataType.hh Engine.hh)
+set(LIBREngine_HEADER Engine_DataType.hh Engine.hh)
 
 add_library(LIBREngine_Shared SHARED
   ${LIBREngine_SOURCE}

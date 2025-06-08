@@ -35,6 +35,10 @@
 
 #include <cstdint>
 
+#include <mutex>
+#include <optional>
+#include <thread>
+
 #include <Timewatch_DataType.hh>
 
 class Timewatch
@@ -52,6 +56,8 @@ class Timewatch
     };
 
   private:
+    std::mutex guard;
+
     struct
     {
       Main_States Main;

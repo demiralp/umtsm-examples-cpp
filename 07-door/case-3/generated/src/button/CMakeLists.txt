@@ -64,10 +64,6 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Button_Auxilary.cpp")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Button_Auxilary.cpp.template" "${CMAKE_CURRENT_SOURCE_DIR}/Button_Auxilary.cpp")
 endif()
 
-if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Button_UserTypes.hh")
-    file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Button_UserTypes.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/Button_UserTypes.hh")
-endif()
-
 if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Button_DataType.hh")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Button_DataType.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/Button_DataType.hh")
 endif()
@@ -77,7 +73,7 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Button_DataType.cpp")
 endif()
 
 set(LIBRButton_SOURCE Button_DataType.cpp Button.cpp Button_Auxilary.cpp)
-set(LIBRButton_HEADER Button_UserTypes.hh Button_DataType.hh Button.hh)
+set(LIBRButton_HEADER Button_DataType.hh Button.hh)
 
 add_library(LIBRButton_Shared SHARED
   ${LIBRButton_SOURCE}

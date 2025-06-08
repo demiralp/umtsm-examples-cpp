@@ -56,20 +56,21 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/CMakeExtras.cmake)
   include(${CMAKE_CURRENT_SOURCE_DIR}/CMakeExtras.cmake)
 endif()
-
-#
-# Build State Machine `Paroot`
-#
-if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Paroot_Auxilary.cpp")
-    file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Paroot_Auxilary.cpp.template" "${CMAKE_CURRENT_SOURCE_DIR}/Paroot_Auxilary.cpp")
-endif()
-
 if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Paroot_Types.hh")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Paroot_Types.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/Paroot_Types.hh")
 endif()
 
 if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Paroot_UserTypes.hh")
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Paroot_UserTypes.hh.template" "${CMAKE_CURRENT_SOURCE_DIR}/Paroot_UserTypes.hh")
+endif()
+
+set(Paroot_HEADER Paroot_Types.hh Paroot_UserTypes.hh )
+
+#
+# Build State Machine `Paroot`
+#
+if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Paroot_Auxilary.cpp")
+    file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Paroot_Auxilary.cpp.template" "${CMAKE_CURRENT_SOURCE_DIR}/Paroot_Auxilary.cpp")
 endif()
 
 if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Paroot_DataType.hh")
@@ -81,7 +82,7 @@ if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Paroot_DataType.cpp")
 endif()
 
 set(LIBRParoot_SOURCE Paroot_DataType.cpp Paroot.cpp Paroot_Auxilary.cpp)
-set(LIBRParoot_HEADER Paroot_Types.hh Paroot_UserTypes.hh Paroot_DataType.hh Paroot.hh)
+set(LIBRParoot_HEADER ${Paroot_HEADER} Paroot_DataType.hh Paroot.hh)
 
 add_library(LIBRParoot_Shared SHARED
   ${LIBRParoot_SOURCE}

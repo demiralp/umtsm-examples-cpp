@@ -32,8 +32,12 @@
 #include "KeyPress.hh"
 
 #include <cassert>
+#include <csignal>
 #include <cstddef>
 #include <cstring>
+#include <mutex>
+#include <optional>
+#include <thread>
 
 // The implementation of the guards
 bool KeyPress::IsCountingFinished( ) const

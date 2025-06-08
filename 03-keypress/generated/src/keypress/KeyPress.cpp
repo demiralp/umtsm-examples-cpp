@@ -34,8 +34,12 @@
 #include "KeyPress.hh"
 
 #include <cassert>
+#include <csignal>
 #include <cstddef>
 #include <cstring>
+#include <mutex>
+#include <optional>
+#include <thread>
 
 KeyPress::KeyPress( )
 {
@@ -49,12 +53,16 @@ KeyPress::~KeyPress( )
 
 void KeyPress::initialize( )
 {
+  std::lock_guard<std::mutex> lockGuard( guard );;
+
   instanceData.initialize( );
   runningState.Main = Main_States::E_init;
 }
 
 void KeyPress::deinitialize( )
 {
+  std::lock_guard<std::mutex> lockGuard( guard );;
+
   terminate( );
   runningState.Main = Main_States::E_final;
 
@@ -65,6 +73,8 @@ void KeyPress::start( )
 {
   if ( ! isIn_Main_Region( ) )
   {
+    std::lock_guard<std::mutex> lockGuard( guard );
+
     enter_Main( );
     init_Main( );
   }
@@ -236,6 +246,8 @@ void KeyPress::trigger_clock4log( )
   __attribute__( ( unused ) ) bool doneMain = false;
   __attribute__( ( unused ) ) bool doneLog = false;
 
+  std::lock_guard<std::mutex> lockGuard( guard );
+
   if ( isIn_Log_Region( ) )
   {
     doneLog = true;
@@ -255,6 +267,8 @@ void KeyPress::trigger_key1( )
 {
   __attribute__( ( unused ) ) bool doneMain = false;
   __attribute__( ( unused ) ) bool doneNumeric = false;
+
+  std::lock_guard<std::mutex> lockGuard( guard );
 
   if ( isIn_Numeric_Region( ) )
   {
@@ -277,6 +291,8 @@ void KeyPress::trigger_key2( )
   __attribute__( ( unused ) ) bool doneMain = false;
   __attribute__( ( unused ) ) bool doneNumeric = false;
 
+  std::lock_guard<std::mutex> lockGuard( guard );
+
   if ( isIn_Numeric_Region( ) )
   {
     doneNumeric = true;
@@ -297,6 +313,8 @@ void KeyPress::trigger_key3( )
 {
   __attribute__( ( unused ) ) bool doneMain = false;
   __attribute__( ( unused ) ) bool doneNumeric = false;
+
+  std::lock_guard<std::mutex> lockGuard( guard );
 
   if ( isIn_Numeric_Region( ) )
   {
@@ -319,6 +337,8 @@ void KeyPress::trigger_key4( )
   __attribute__( ( unused ) ) bool doneMain = false;
   __attribute__( ( unused ) ) bool doneNumeric = false;
 
+  std::lock_guard<std::mutex> lockGuard( guard );
+
   if ( isIn_Numeric_Region( ) )
   {
     doneNumeric = true;
@@ -339,6 +359,8 @@ void KeyPress::trigger_key5( )
 {
   __attribute__( ( unused ) ) bool doneMain = false;
   __attribute__( ( unused ) ) bool doneNumeric = false;
+
+  std::lock_guard<std::mutex> lockGuard( guard );
 
   if ( isIn_Numeric_Region( ) )
   {
@@ -361,6 +383,8 @@ void KeyPress::trigger_key6( )
   __attribute__( ( unused ) ) bool doneMain = false;
   __attribute__( ( unused ) ) bool doneNumeric = false;
 
+  std::lock_guard<std::mutex> lockGuard( guard );
+
   if ( isIn_Numeric_Region( ) )
   {
     doneNumeric = true;
@@ -381,6 +405,8 @@ void KeyPress::trigger_key7( )
 {
   __attribute__( ( unused ) ) bool doneMain = false;
   __attribute__( ( unused ) ) bool doneNumeric = false;
+
+  std::lock_guard<std::mutex> lockGuard( guard );
 
   if ( isIn_Numeric_Region( ) )
   {
@@ -403,6 +429,8 @@ void KeyPress::trigger_key8( )
   __attribute__( ( unused ) ) bool doneMain = false;
   __attribute__( ( unused ) ) bool doneNumeric = false;
 
+  std::lock_guard<std::mutex> lockGuard( guard );
+
   if ( isIn_Numeric_Region( ) )
   {
     doneNumeric = true;
@@ -423,6 +451,8 @@ void KeyPress::trigger_key9( )
 {
   __attribute__( ( unused ) ) bool doneMain = false;
   __attribute__( ( unused ) ) bool doneNumeric = false;
+
+  std::lock_guard<std::mutex> lockGuard( guard );
 
   if ( isIn_Numeric_Region( ) )
   {
@@ -445,6 +475,8 @@ void KeyPress::trigger_keyA( )
   __attribute__( ( unused ) ) bool doneMain = false;
   __attribute__( ( unused ) ) bool doneAlpha = false;
 
+  std::lock_guard<std::mutex> lockGuard( guard );
+
   if ( isIn_Alpha_Region( ) )
   {
     doneAlpha = true;
@@ -464,6 +496,8 @@ void KeyPress::trigger_keyB( )
 {
   __attribute__( ( unused ) ) bool doneMain = false;
   __attribute__( ( unused ) ) bool doneAlpha = false;
+
+  std::lock_guard<std::mutex> lockGuard( guard );
 
   if ( isIn_Alpha_Region( ) )
   {
@@ -485,6 +519,8 @@ void KeyPress::trigger_keyBackspace( )
   __attribute__( ( unused ) ) bool doneMain = false;
   __attribute__( ( unused ) ) bool doneNumeric = false;
 
+  std::lock_guard<std::mutex> lockGuard( guard );
+
   if ( isIn_Numeric_Region( ) )
   {
     doneNumeric = true;
@@ -504,6 +540,8 @@ void KeyPress::trigger_keyC( )
 {
   __attribute__( ( unused ) ) bool doneMain = false;
   __attribute__( ( unused ) ) bool doneAlpha = false;
+
+  std::lock_guard<std::mutex> lockGuard( guard );
 
   if ( isIn_Alpha_Region( ) )
   {
@@ -525,6 +563,8 @@ void KeyPress::trigger_keyDelete( )
   __attribute__( ( unused ) ) bool doneMain = false;
   __attribute__( ( unused ) ) bool doneNumeric = false;
 
+  std::lock_guard<std::mutex> lockGuard( guard );
+
   if ( isIn_Numeric_Region( ) )
   {
     doneNumeric = true;
@@ -545,6 +585,8 @@ void KeyPress::trigger_keyF1( )
   __attribute__( ( unused ) ) bool doneMain = false;
   __attribute__( ( unused ) ) bool doneAlpha = false;
   __attribute__( ( unused ) ) bool doneLog = false;
+
+  std::lock_guard<std::mutex> lockGuard( guard );
 
   if ( isIn_Alpha_Region( ) )
   {
@@ -590,6 +632,8 @@ void KeyPress::trigger_keyF12( )
   __attribute__( ( unused ) ) bool doneMain = false;
   __attribute__( ( unused ) ) bool doneAlpha = false;
 
+  std::lock_guard<std::mutex> lockGuard( guard );
+
   if ( isIn_Alpha_Region( ) )
   {
     doneAlpha = true;
@@ -614,6 +658,8 @@ void KeyPress::trigger_keyF2( )
   __attribute__( ( unused ) ) bool doneMain = false;
   __attribute__( ( unused ) ) bool doneNumeric = false;
   __attribute__( ( unused ) ) bool doneLog = false;
+
+  std::lock_guard<std::mutex> lockGuard( guard );
 
   if ( isIn_Numeric_Region( ) )
   {
@@ -653,6 +699,8 @@ void KeyPress::trigger_space( )
 {
   __attribute__( ( unused ) ) bool doneMain = false;
   __attribute__( ( unused ) ) bool doneAlpha = false;
+
+  std::lock_guard<std::mutex> lockGuard( guard );
 
   if ( isIn_WaitABit_State( ) )
   {

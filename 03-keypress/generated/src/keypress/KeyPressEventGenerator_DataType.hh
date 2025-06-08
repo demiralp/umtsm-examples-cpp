@@ -31,7 +31,6 @@
 
 #pragma once
 
-#include <KeyPressEventGenerator_UserTypes.hh>
 #include <cstdint>
 
 class KeyPress;
