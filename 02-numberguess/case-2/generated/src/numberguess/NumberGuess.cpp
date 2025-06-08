@@ -371,7 +371,7 @@ void NumberGuess::exit_AskNewDeal( )
 
 void* NumberGuess::callDoAction_GetEstimation( void* arg )
 {
-  NumberGuess* obj = static_cast< NumberGuess* >( arg );
+  NumberGuess* obj = reinterpret_cast< NumberGuess* >( arg );
   obj->doAction_GetEstimation( );
 
   return NULL;
@@ -379,7 +379,7 @@ void* NumberGuess::callDoAction_GetEstimation( void* arg )
 
 void* NumberGuess::callDoAction_AskNewDeal( void* arg )
 {
-  NumberGuess* obj = static_cast< NumberGuess* >( arg );
+  NumberGuess* obj = reinterpret_cast< NumberGuess* >( arg );
   obj->doAction_AskNewDeal( );
 
   return NULL;

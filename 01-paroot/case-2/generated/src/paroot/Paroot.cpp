@@ -607,7 +607,7 @@ void Paroot::exit_Solutions( )
 
 void* Paroot::callDoAction_ReadA( void* arg )
 {
-  Paroot* obj = static_cast< Paroot* >( arg );
+  Paroot* obj = reinterpret_cast< Paroot* >( arg );
   obj->doAction_ReadA( );
 
   return NULL;
@@ -615,7 +615,7 @@ void* Paroot::callDoAction_ReadA( void* arg )
 
 void* Paroot::callDoAction_ReadB( void* arg )
 {
-  Paroot* obj = static_cast< Paroot* >( arg );
+  Paroot* obj = reinterpret_cast< Paroot* >( arg );
   obj->doAction_ReadB( );
 
   return NULL;
@@ -623,7 +623,7 @@ void* Paroot::callDoAction_ReadB( void* arg )
 
 void* Paroot::callDoAction_ReadC( void* arg )
 {
-  Paroot* obj = static_cast< Paroot* >( arg );
+  Paroot* obj = reinterpret_cast< Paroot* >( arg );
   obj->doAction_ReadC( );
 
   return NULL;
@@ -631,7 +631,7 @@ void* Paroot::callDoAction_ReadC( void* arg )
 
 void* Paroot::callDoAction_Solve( void* arg )
 {
-  Paroot* obj = static_cast< Paroot* >( arg );
+  Paroot* obj = reinterpret_cast< Paroot* >( arg );
   obj->doAction_Solve( );
 
   return NULL;
@@ -639,7 +639,7 @@ void* Paroot::callDoAction_Solve( void* arg )
 
 void* Paroot::callDoAction_ComplexSolution( void* arg )
 {
-  Paroot* obj = static_cast< Paroot* >( arg );
+  Paroot* obj = reinterpret_cast< Paroot* >( arg );
   obj->doAction_ComplexSolution( );
 
   return NULL;
@@ -647,7 +647,7 @@ void* Paroot::callDoAction_ComplexSolution( void* arg )
 
 void* Paroot::callDoAction_SingleSolution( void* arg )
 {
-  Paroot* obj = static_cast< Paroot* >( arg );
+  Paroot* obj = reinterpret_cast< Paroot* >( arg );
   obj->doAction_SingleSolution( );
 
   return NULL;
@@ -655,7 +655,7 @@ void* Paroot::callDoAction_SingleSolution( void* arg )
 
 void* Paroot::callDoAction_Solutions( void* arg )
 {
-  Paroot* obj = static_cast< Paroot* >( arg );
+  Paroot* obj = reinterpret_cast< Paroot* >( arg );
   obj->doAction_Solutions( );
 
   return NULL;

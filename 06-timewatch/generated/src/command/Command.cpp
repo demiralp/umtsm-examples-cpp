@@ -280,7 +280,7 @@ void Command::exit_WaitForInput( )
 
 void* Command::callDoAction_WaitForInput( void* arg )
 {
-  Command* obj = static_cast< Command* >( arg );
+  Command* obj = reinterpret_cast< Command* >( arg );
   obj->doAction_WaitForInput( );
 
   return NULL;

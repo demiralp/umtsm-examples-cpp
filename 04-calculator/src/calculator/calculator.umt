@@ -1,0 +1,244 @@
+/*  ==============================================================================
+ *  Created by Fehmi Demiralp(Fedem) on 2025-05-29 GMT
+ *  Copyright (C) 2023-2025 Fedem (Fehmi Demiralp) <f.demiralp@gmail.com>
+ *
+ *  Released under the MIT License
+ *  ==============================================================================
+ */
+
+/*  Copyright (C) 2023-2025 Fedem (Fehmi Demiralp) <f.demiralp@gmail.com>
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ */
+
+enumeration Calculator_Error
+{
+    E_NO_ERROR,
+    E_OVERFLOW,
+    E_DIVISION_BY_ZERO,
+    E_FAULTY
+}
+
+enumeration Calculator_Operator
+{
+    E_OP_NONE,
+    E_OP_PLUS,
+    E_OP_MINUS,
+    E_OP_MULTIPLY,
+    E_OP_DIVIDE,
+    E_OP_ENTER
+}
+
+//
+// Calculator
+//
+sm Calculator
+{
+    properties
+    {
+        float64 Accumulator;
+        Calculator_Operator Operator;
+        Calculator_Error ErrorNo;
+    }
+
+    init -> Start;
+
+    fork Start
+    {
+        -> CalculatorKeypad;
+        -> Process;
+        -> CalculatorDisplay;
+    }
+
+    region Input
+    {
+        state CalculatorKeypad instantiate Keypad;
+    }
+
+    region ProcessingUnit
+    {
+        state Process
+        {
+            init -> EnterBaseDigits / ResetAccumulations, NotifyDisplayUpdate;
+            do / CheckErrorStatus;
+
+            entry / ResetAccumulations;
+
+            Reset -> EnterBaseDigits / ClearLastEntry, ResetAccumulations, DrawSpliteLine, NotifyDisplayUpdate;
+            Clear -> EnterBaseDigits / ClearLastEntry, NotifyDisplayUpdate;
+
+            Plus -> EnterBaseDigits / Additions, ClearLastEntry;
+            Minus -> EnterBaseDigits / Substractions, ClearLastEntry;
+            Multiplay -> EnterBaseDigits / Multiplications, ClearLastEntry;
+            Division -> EnterBaseDigits / Divides, ClearLastEntry;
+
+            Enter -> EnterBaseDigits / Calculate, ClearLastEntry;
+
+            -> DisplayErrorMessage;
+
+            state EnterBaseDigits
+            {
+                entry / ClearFraction, ClearExponent, NotifyDisplayUpdate;
+
+                Digit / PushBaseDigit, NotifyDisplayUpdate;
+                Backspace / EraseBaseDigit, NotifyDisplayUpdate;
+                Dot -> EnterFractions;
+                Exponents [ ! IsBaseZero  ] -> EnterExponents;
+                ChangeSign / ChangeBaseSign, NotifyDisplayUpdate;
+            }
+
+            state EnterFractions
+            {
+                entry / ClearExponent, SetFractionEntry, NotifyDisplayUpdate;
+
+                Digit / PushFractionDigit, NotifyDisplayUpdate;
+                Backspace [IsFractionZero] -> EnterBaseDigits;
+                Backspace / EraseFractionDigit, NotifyDisplayUpdate;
+                Exponents [ (! IsBaseZero || ! IsFractionZero ) && IsThereSpaceForExponent ] -> EnterExponents / RemoveZerosFromFraction;
+                ChangeSign / ChangeBaseSign, NotifyDisplayUpdate;
+            }
+
+            state EnterExponents
+            {
+                entry / SetExponentEntry, NotifyDisplayUpdate;
+
+                Digit / PushExponentDigit, NotifyDisplayUpdate;
+                Backspace [IsExponentZero && IsFractionZero] -> EnterBaseDigits;
+                Backspace [IsExponentZero] -> EnterFractions;
+                Backspace / EraseExponentDigit, NotifyDisplayUpdate;
+                ChangeSign / ChangeExponetSign, NotifyDisplayUpdate;
+            }
+        }
+
+        choice DisplayErrorMessage
+        {
+            [HasDivisionByZeroError] -> DivisionByZero;
+            [HasOverflowError] -> Overflow;
+            [IsFaulty] -> Faulty;
+        }
+
+        state Error
+        {
+            exit / NotifyReset;
+
+            Clear, Reset ->  Process / DrawSpliteLine;
+
+            state Faulty
+            {
+                entry / NotifyFaultError;
+            }
+
+            state DivisionByZero
+            {
+                entry / NotifyDivisionByZeroError;
+            }
+
+            state Overflow
+            {
+                entry / NotifyOverflowError;
+            }
+        }
+    }
+
+    region Output
+    {
+        state CalculatorDisplay instantiate Display;
+    }
+
+    SwitchOff -> terminate;
+}
+
+//
+// Keypad
+//
+sm Keypad
+{
+    properties
+    {
+        int LastInputKey;
+        optional Calculator pCalculator;
+    }
+
+    do / ReadKey;
+
+    Notify [IsReset] / NotifyReset;
+    Notify [IsClear] / NotifyClear;
+    Notify [IsBackspace] / NotifyBackspce;
+    Notify [IsDigit] / NotifyDigit;
+    Notify [IsDot] / NotifyDot;
+    Notify [IsExponent] / NotifyExponent;
+    Notify [IsPlus] / NotifyPlus;
+    Notify [IsMinus] / NotifyMinus;
+    Notify [IsMultiplay] / NotifyMultiplay;
+    Notify [IsDivisor] / NotifyDivisor;
+    Notify [IsEnter] / NotifyEnter;
+    Notify [IsSignature] / NotifySignatureChange;
+}
+
+//
+// Display
+//
+sm Display
+{
+    properties
+    {
+        char BaseDigits[16];
+        char FractionalDigits[16];
+        char ExponantionalDigits[5];
+        boolean BaseSignaturePositive;
+        boolean ExponantionalSignaturePositive;
+        boolean FractinalStart;
+        boolean ExponentStart;
+    }
+
+    init -> DisplayEntry;
+
+    state DisplayEntry
+    {
+        entry / DisplayUpdate;
+
+        Update / DisplayUpdate;
+
+        Overflow -> OverflowError;
+        DivisionByZero -> DivisionByZeroError;
+        Faulty -> FaultyError;
+    }
+
+    state ErrorMessages
+    {
+        Clear, Reset -> DisplayEntry;
+
+        state OverflowError
+        {
+            entry / DisplayOverflowError;
+        }
+
+        state DivisionByZeroError
+        {
+            entry / DisplayDivisionByZeroError;
+        }
+
+        state FaultyError
+        {
+            entry / DisplayFaultyError;
+        }
+    }
+
+    SwitchOff -> terminate;
+}

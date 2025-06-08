@@ -47,6 +47,7 @@ void NumberGuess_DataType::initialize( )
 
 void NumberGuess_DataType::deinitialize( )
 {
+  // blank
 }
 
 // End of NumberGuess_DataType.cpp

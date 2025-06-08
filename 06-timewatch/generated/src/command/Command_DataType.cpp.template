@@ -47,6 +47,7 @@ void Command_DataType::initialize( )
 
 void Command_DataType::deinitialize( )
 {
+  // blank
 }
 
 // End of Command_DataType.cpp

@@ -323,7 +323,7 @@ void Paroot::exit_Report( )
 
 void* Paroot::callDoAction_Read( void* arg )
 {
-  Paroot* obj = static_cast< Paroot* >( arg );
+  Paroot* obj = reinterpret_cast< Paroot* >( arg );
   obj->doAction_Read( );
 
   return NULL;
@@ -331,7 +331,7 @@ void* Paroot::callDoAction_Read( void* arg )
 
 void* Paroot::callDoAction_Solve( void* arg )
 {
-  Paroot* obj = static_cast< Paroot* >( arg );
+  Paroot* obj = reinterpret_cast< Paroot* >( arg );
   obj->doAction_Solve( );
 
   return NULL;
@@ -339,7 +339,7 @@ void* Paroot::callDoAction_Solve( void* arg )
 
 void* Paroot::callDoAction_Report( void* arg )
 {
-  Paroot* obj = static_cast< Paroot* >( arg );
+  Paroot* obj = reinterpret_cast< Paroot* >( arg );
   obj->doAction_Report( );
 
   return NULL;

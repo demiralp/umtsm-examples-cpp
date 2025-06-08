@@ -47,6 +47,7 @@ void Timewatch_DataType::initialize( )
 
 void Timewatch_DataType::deinitialize( )
 {
+  // blank
 }
 
 // End of Timewatch_DataType.cpp
