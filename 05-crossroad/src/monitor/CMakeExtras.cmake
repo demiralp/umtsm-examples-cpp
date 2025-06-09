@@ -21,4 +21,12 @@ set(LIBMonitor_INCLUDES_EXTRA
     ${CMAKE_SOURCE_DIR}/generated/src/pedestrian-light
     ${CMAKE_SOURCE_DIR}/generated/src/trafficlight
 )
-set(TESTMonitor_LIB_EXTRA -lncurses)
+set(TESTMonitor_LIB_EXTRA 
+    LIBRCrossroad_Static
+    LIBRDashboard_Static
+    LIBRExecutionDirector_Static
+    LIBRLane_Static
+    LIBRTrafficLight_Static
+    LIBRPedestrianLights_Static
+    -lncurses
+)

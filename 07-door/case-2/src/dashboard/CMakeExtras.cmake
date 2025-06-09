@@ -22,4 +22,11 @@ set(LIBDashboard_INCLUDES_EXTRA
     ${CMAKE_SOURCE_DIR}/generated/src/sensor_close_end
     ${CMAKE_SOURCE_DIR}/generated/src/sensor_open_end
 )
-set(TESTDashboard_LIB_EXTRA -lncurses)
+set(TESTDashboard_LIB_EXTRA
+    LIBRDoor_Static
+    LIBREngine_Static
+    LIBRSensor_Open_End_Static
+    LIBRSensor_Close_End_Static
+    LIBRButton_Static
+    -lncurses
+)

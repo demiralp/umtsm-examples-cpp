@@ -15,4 +15,12 @@
 #set(LIBLane_HEADER_EXTRA )
 #set(LIBLane_LIB_EXTRA )
 #set(LIBLane_INCLUDES_EXTRA "${CMAKE_CURRRENT_SOURCE_DIR}")
-#set(TESTLane_LIB_EXTRA )
+set(TESTLane_LIB_EXTRA 
+    LIBRCrossroad_Static
+    LIBRDashboard_Static
+    LIBRExecutionDirector_Static
+    LIBRMonitor_Static
+    LIBRTrafficLight_Static
+    LIBRPedestrianLights_Static
+    -lncurses
+)

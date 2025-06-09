@@ -25,8 +25,8 @@ set(TESTCrossroad_LIB_EXTRA
     LIBRDashboard_Static
     LIBRLane_Static
     LIBRTrafficLight_Static
-    LIBRPedestrianLights_Static
     LIBRMonitor_Static
+    LIBRPedestrianLights_Static
     LIBRExecutionDirector_Static
     -lncurses
 )

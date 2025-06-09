@@ -18,4 +18,8 @@ set(LIBButton_LIB_EXTRA -lncurses)
 set(LIBButton_INCLUDES_EXTRA
     ${CMAKE_SOURCE_DIR}/generated/src/door
 )
-set(TESTButton_LIB_EXTRA -lncurses)
+set(TESTButton_LIB_EXTRA
+    LIBRDoor_Static
+    LIBREngine_Static
+    -lncurses
+)

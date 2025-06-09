@@ -23,7 +23,7 @@ set(TESTCalculator_LIB_EXTRA LIBRKeypad_Shared LIBRDisplay_Shared -lncurses)
 #set(LIBKeypad_HEADER_EXTRA )
 #set(LIBKeypad_LIB_EXTRA )
 #set(LIBKeypad_INCLUDES_EXTRA "${CMAKE_CURRRENT_SOURCE_DIR}")
-#set(TESTKeypad_LIB_EXTRA )
+set(TESTKeypad_LIB_EXTRA LIBRCalculator_Static LIBRDisplay_Static -lncurses)
 
 #
 # Display
@@ -32,4 +32,4 @@ set(LIBDisplay_SOURCE_EXTRA Display_Utilities.cpp)
 set(LIBDisplay_HEADER_EXTRA Display_Utilities.hh)
 #set(LIBDisplay_LIB_EXTRA )
 #set(LIBDisplay_INCLUDES_EXTRA "${CMAKE_CURRRENT_SOURCE_DIR}")
-#set(TESTDisplay_LIB_EXTRA )
+set(TESTDisplay_LIB_EXTRA -lncurses)

@@ -18,4 +18,8 @@ set(LIBSensor_Open_End_LIB_EXTRA -lncurses)
 set(LIBSensor_Open_End_INCLUDES_EXTRA
     ${CMAKE_SOURCE_DIR}/generated/src/door
 )
-set(TESTSensor_Open_End_LIB_EXTRA -lncurses)
+set(TESTSensor_Open_End_LIB_EXTRA
+    LIBRDoor_Static
+    LIBREngine_Static
+    -lncurses
+)

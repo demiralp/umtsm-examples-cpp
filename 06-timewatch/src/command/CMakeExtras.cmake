@@ -8,4 +8,6 @@ set(LIBCommand_INCLUDES_EXTRA
     ${CMAKE_SOURCE_DIR}/generated/src/command
     ${CMAKE_SOURCE_DIR}/generated/src/timewatch
 )
-set(TESTCommand_LIB_EXTRA -lncurses)
+set(TESTCommand_LIB_EXTRA 
+    LIBRTimewatch_Static
+    -lncurses)
