@@ -30,31 +30,35 @@
 #include "Timewatch.hh"
 
 #include <cassert>
+#include <csignal>
 #include <cstddef>
 #include <cstring>
+#include <mutex>
+#include <optional>
+#include <thread>
+
 #include <csignal>
 #include <ctime>
-
 #include <ncurses.h>
 
 // The implementation of the actions
-void Timewatch::Exit( Timewatch_DataType const& input )
+void Timewatch::Exit( [[maybe_unused]] Timewatch_DataType const& input )
 {
   std::raise( SIGINT );
-} // End of action function: Exit
+}  // End of action function: Exit
 
-void Timewatch::InitPauseTime( Timewatch_DataType const& input )
+void Timewatch::InitPauseTime( [[maybe_unused]] Timewatch_DataType const& input )
 {
   std::time( &instanceData.Run.Pause.start_pause_time );
 }  // End of action function: InitPauseTime
 
-void Timewatch::InitWatchProperties( Timewatch_DataType const& input )
+void Timewatch::InitWatchProperties( [[maybe_unused]] Timewatch_DataType const& input )
 {
   std::time( &instanceData.Run.start_time );
   instanceData.Run.suspended_duration= 0.0;
-} // End of action function: InitWatchProperties
+}  // End of action function: InitWatchProperties
 
-void Timewatch::PrintElapsedTime( Timewatch_DataType const& input )
+void Timewatch::PrintElapsedTime( [[maybe_unused]] Timewatch_DataType const& input )
 {
   std::time_t now;
   std::time( &now );
@@ -66,9 +70,9 @@ void Timewatch::PrintElapsedTime( Timewatch_DataType const& input )
 
   printw( "%1.0fs\n", totalTime);
   refresh( );
-} /* End of action function: Timewatch_PrintElapsedTime */
+}  // End of action function: PrintElapsedTime
 
-void Timewatch::PrintHelp( Timewatch_DataType const& input )
+void Timewatch::PrintHelp( [[maybe_unused]] Timewatch_DataType const& input )
 {
   printw( "H - Print help menu\n");
   refresh( );
@@ -86,38 +90,38 @@ void Timewatch::PrintHelp( Timewatch_DataType const& input )
   refresh( );
   printw( "SPACE - Print counter\n");
   refresh( );
-} // End of action function: PrintHelp
+}  // End of action function: PrintHelp
 
-void Timewatch::PrintStatusIdle( Timewatch_DataType const& input )
+void Timewatch::PrintStatusIdle( [[maybe_unused]] Timewatch_DataType const& input )
 {
   printw( "<IDLE>\n");
   refresh( );
-} // End of action function: PrintStatusIdle
+}  // End of action function: PrintStatusIdle
 
-void Timewatch::PrintStatusPause( Timewatch_DataType const& input )
+void Timewatch::PrintStatusPause( [[maybe_unused]] Timewatch_DataType const& input )
 {
   printw( "<PAUSE>\n");
   refresh( );
-} // End of action function: PrintStatusPause
+}  // End of action function: PrintStatusPause
 
-void Timewatch::PrintStatusReset( Timewatch_DataType const& input )
+void Timewatch::PrintStatusReset( [[maybe_unused]] Timewatch_DataType const& input )
 {
   printw( "<RESTART>\n");
   refresh( );
-} // End of action function: PrintStatusReset
+}  // End of action function: PrintStatusReset
 
-void Timewatch::PrintStatusResume( Timewatch_DataType const& input )
+void Timewatch::PrintStatusResume( [[maybe_unused]] Timewatch_DataType const& input )
 {
   printw( "<RESUME>\n");
-} // End of action function: PrintStatusResume
+}  // End of action function: PrintStatusResume
 
-void Timewatch::PrintStatusRun( Timewatch_DataType const& input )
+void Timewatch::PrintStatusRun( [[maybe_unused]] Timewatch_DataType const& input )
 {
   printw( "<RUN>\n");
   refresh( );
-} // End of action function: PrintStatusRun
+}  // End of action function: PrintStatusRun
 
-void Timewatch::ReportTotalTime( Timewatch_DataType const& input )
+void Timewatch::ReportTotalTime( [[maybe_unused]] Timewatch_DataType const& input )
 {
   time_t now;
   time( &now );
@@ -125,14 +129,14 @@ void Timewatch::ReportTotalTime( Timewatch_DataType const& input )
 
   printw( "total time : %1.0fs\n", totalTime);
   refresh( );
-} // End of action function: ReportTotalTime
+}  // End of action function: ReportTotalTime
 
-void Timewatch::UpdateSuspendentDuration( Timewatch_DataType const& input )
+void Timewatch::UpdateSuspendentDuration( [[maybe_unused]] Timewatch_DataType const& input )
 {
   time_t now;
   time( &now );
   instanceData.Run.suspended_duration+= difftime( now, input.Run.Pause.start_pause_time );
   instanceData.Run.Pause.start_pause_time= now;
-} // End of action function: UpdateSuspendentDuration
+}  // End of action function: UpdateSuspendentDuration
 
 // End of Timewatch_Auxilary.cpp

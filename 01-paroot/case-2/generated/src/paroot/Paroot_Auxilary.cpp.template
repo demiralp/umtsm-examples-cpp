@@ -61,35 +61,35 @@ bool Paroot::isSingleSolution( ) const
 }  // End of guard function: isSingleSolution
 
 // The implementation of the actions
-void Paroot::FindTheRoots( Paroot_DataType const& input )
+void Paroot::FindTheRoots( [[maybe_unused]] Paroot_DataType const& input )
 {
 }  // End of action function: FindTheRoots
 
-void Paroot::ReadParameterA( Paroot_DataType const& input )
+void Paroot::ReadParameterA( [[maybe_unused]] Paroot_DataType const& input )
 {
 }  // End of action function: ReadParameterA
 
-void Paroot::ReadParameterB( Paroot_DataType const& input )
+void Paroot::ReadParameterB( [[maybe_unused]] Paroot_DataType const& input )
 {
 }  // End of action function: ReadParameterB
 
-void Paroot::ReadParameterC( Paroot_DataType const& input )
+void Paroot::ReadParameterC( [[maybe_unused]] Paroot_DataType const& input )
 {
 }  // End of action function: ReadParameterC
 
-void Paroot::WarningParamAIsZero( Paroot_DataType const& input )
+void Paroot::WarningParamAIsZero( [[maybe_unused]] Paroot_DataType const& input )
 {
 }  // End of action function: WarningParamAIsZero
 
-void Paroot::WriteComplexSolution( Paroot_DataType const& input )
+void Paroot::WriteComplexSolution( [[maybe_unused]] Paroot_DataType const& input )
 {
 }  // End of action function: WriteComplexSolution
 
-void Paroot::WriteSingleSolution( Paroot_DataType const& input )
+void Paroot::WriteSingleSolution( [[maybe_unused]] Paroot_DataType const& input )
 {
 }  // End of action function: WriteSingleSolution
 
-void Paroot::WriteSolutions( Paroot_DataType const& input )
+void Paroot::WriteSolutions( [[maybe_unused]] Paroot_DataType const& input )
 {
 }  // End of action function: WriteSolutions
 

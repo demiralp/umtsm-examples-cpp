@@ -42,15 +42,15 @@
 #include <unistd.h>
 
 // The implementation of the actions
-void Monitor::ClearMessage( Monitor_DataType const& input )
+void Monitor::ClearMessage( [[maybe_unused]] Monitor_DataType const& input )
 {
 }  // End of action function: ClearMessage
 
-void Monitor::DisplayStatusOfLanes( Monitor_DataType const& input )
+void Monitor::DisplayStatusOfLanes( [[maybe_unused]] Monitor_DataType const& input )
 {
 }  // End of action function: DisplayStatusOfLanes
 
-void Monitor::RequestUpdate( Monitor_DataType const& input )
+void Monitor::RequestUpdate( [[maybe_unused]] Monitor_DataType const& input )
 {
 }  // End of action function: RequestUpdate
 

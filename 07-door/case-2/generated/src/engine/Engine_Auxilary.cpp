@@ -36,28 +36,28 @@
 #include <cstring>
 
 // The implementation of the actions
-void Engine::PowerOffLeftWire( Engine_DataType const& input )
+void Engine::PowerOffLeftWire( [[maybe_unused]] Engine_DataType const& input )
 {
 }  // End of action function: PowerOffLeftWire
 
-void Engine::PowerOffRightWire( Engine_DataType const& input )
+void Engine::PowerOffRightWire( [[maybe_unused]] Engine_DataType const& input )
 {
 }  // End of action function: PowerOffRightWire
 
-void Engine::PowerUpLeftWire( Engine_DataType const& input )
+void Engine::PowerUpLeftWire( [[maybe_unused]] Engine_DataType const& input )
 {
 }  // End of action function: PowerUpLeftWire
 
-void Engine::PowerUpRightWire( Engine_DataType const& input )
+void Engine::PowerUpRightWire( [[maybe_unused]] Engine_DataType const& input )
 {
 }  // End of action function: PowerUpRightWire
 
 // The implementation of the Persistency Functions
-void Engine::store_Deep_Main( Main_States state, Engine_DataType const& instance ) const
+void Engine::store_Deep_Main( [[maybe_unused]] Main_States state, [[maybe_unused]] Engine_DataType const& instance ) const
 {
 }  // End of action function: store_Deep_Main
 
-Engine::Main_States Engine::load_Deep_Main( Engine_DataType const& instance ) const
+Engine::Main_States Engine::load_Deep_Main( [[maybe_unused]] Engine_DataType const& instance ) const
 {
   Main_States result = Main_States::E_init;
   return result;

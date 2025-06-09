@@ -30,16 +30,19 @@
 #include "Paroot.hh"
 
 #include <cassert>
-#include <cmath>
-#include <complex>
 #include <csignal>
 #include <cstddef>
-#include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <iostream>
-#include <pthread.h>
+#include <mutex>
+#include <optional>
+#include <thread>
 #include <unistd.h>
+
+#include <cmath>
+#include <complex>
+#include <cstdio>
+#include <iostream>
 
 using namespace std;
 
@@ -70,7 +73,7 @@ bool Paroot::isSingleSolution( ) const
 }  // End of guard function: isSingleSolution
 
 // The implementation of the actions
-void Paroot::FindTheRoots( Paroot_DataType const& input )
+void Paroot::FindTheRoots( [[maybe_unused]] Paroot_DataType const& input )
 {
   double delta = ( input.paramB * input.paramB - 4.0 * input.paramA * input.paramC );
 
@@ -101,9 +104,9 @@ void Paroot::FindTheRoots( Paroot_DataType const& input )
     instanceData.croot2        = ( -input.paramB + deltaSq ) / ( 2.0 * input.paramA );
     instanceData.solutionType  = Paroot_Solution::COMPLEX;
   }
-} // End of action function: FindTheRoots
+}  // End of action function: FindTheRoots
 
-void Paroot::ReadParameterA( Paroot_DataType const& input )
+void Paroot::ReadParameterA( [[maybe_unused]] Paroot_DataType const& input )
 {
   bool readingOkay = false;
   do
@@ -116,7 +119,7 @@ void Paroot::ReadParameterA( Paroot_DataType const& input )
 
 }  // End of action function: ReadParameterA
 
-void Paroot::ReadParameterB( Paroot_DataType const& input )
+void Paroot::ReadParameterB( [[maybe_unused]] Paroot_DataType const& input )
 {
   bool readingOkay = false;
   do
@@ -128,7 +131,7 @@ void Paroot::ReadParameterB( Paroot_DataType const& input )
 
 }  // End of action function: ReadParameterB
 
-void Paroot::ReadParameterC( Paroot_DataType const& input )
+void Paroot::ReadParameterC( [[maybe_unused]] Paroot_DataType const& input )
 {
   bool readingOkay = false;
   do
@@ -139,23 +142,23 @@ void Paroot::ReadParameterC( Paroot_DataType const& input )
   } while( ! readingOkay );
 }  // End of action function: ReadParameterC
 
-void Paroot::WarningParamAIsZero( Paroot_DataType const& input )
+void Paroot::WarningParamAIsZero( [[maybe_unused]] Paroot_DataType const& input )
 {
   printf("Parameter A must be different than zero!\n");
 }  // End of action function: WarningParamAIsZero
 
-void Paroot::WriteComplexSolution( Paroot_DataType const& input )
+void Paroot::WriteComplexSolution( [[maybe_unused]] Paroot_DataType const& input )
 {
   cout << "root1 : " << instanceData.croot1 << '\n';
   cout << "root2 : " << instanceData.croot2 << '\n';
 }  // End of action function: WriteComplexSolution
 
-void Paroot::WriteSingleSolution( Paroot_DataType const& input )
+void Paroot::WriteSingleSolution( [[maybe_unused]] Paroot_DataType const& input )
 {
   cout << "both roots are equal to : " << input.root1 << '\n';
 }  // End of action function: WriteSingleSolution
 
-void Paroot::WriteSolutions( Paroot_DataType const& input )
+void Paroot::WriteSolutions( [[maybe_unused]] Paroot_DataType const& input )
 {
     cout << "root1 : " << input.root1 << '\n';
     cout << "root2 : " << input.root2 << '\n';

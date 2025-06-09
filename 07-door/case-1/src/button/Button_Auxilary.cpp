@@ -36,7 +36,7 @@
 #include <Door.hh>
 
 // The implementation of the actions
-void Button::SendNotification( Button_DataType const& input )
+void Button::SendNotification( [[maybe_unused]] Button_DataType const& input )
 {
   instanceData.pDoor->trigger_ButtonPressed();
 }  // End of action function: SendNotification

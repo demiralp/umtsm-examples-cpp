@@ -37,11 +37,10 @@
 #include <mutex>
 #include <optional>
 #include <thread>
-#include <ctime>
-#include <random>
-
 #include <unistd.h>
 
+#include <ctime>
+#include <random>
 #include <iostream>
 
 // The implementation of the guards
@@ -75,29 +74,29 @@ bool NumberGuess::IsNumberInRange( ) const
 }  // End of guard function: IsNumberInRange
 
 // The implementation of the actions
-void NumberGuess::AskEstimation( NumberGuess_DataType const& input )
+void NumberGuess::AskEstimation( [[maybe_unused]] NumberGuess_DataType const& input )
 {
   std::cout << "Please make an estimation : ";
   std::cout.flush( );
 }  // End of action function: AskEstimation
 
-void NumberGuess::PrintAskNewDeal( NumberGuess_DataType const& input )
+void NumberGuess::PrintAskNewDeal( [[maybe_unused]] NumberGuess_DataType const& input )
 {
   std::cout << "Do you wanna play more game? ";
   std::cout.flush( );
 }  // End of action function: PrintAskNewDeal
 
-void NumberGuess::PrintConguratulation( NumberGuess_DataType const& input )
+void NumberGuess::PrintConguratulation( [[maybe_unused]] NumberGuess_DataType const& input )
 {
   std::cout << "\n   *** Done. Congratulations! ***\n\n";
 }  // End of action function: PrintConguratulation
 
-void NumberGuess::PrintGoodBye( NumberGuess_DataType const& input )
+void NumberGuess::PrintGoodBye( [[maybe_unused]] NumberGuess_DataType const& input )
 {
   std::cout << "\nSee you next time. Bye bye\n";
 }  // End of action function: PrintGoodBye
 
-void NumberGuess::PrintHints( NumberGuess_DataType const& input )
+void NumberGuess::PrintHints( [[maybe_unused]] NumberGuess_DataType const& input )
 {
    if ( input.number > input.guess )
    {
@@ -109,27 +108,27 @@ void NumberGuess::PrintHints( NumberGuess_DataType const& input )
    }
 }  // End of action function: PrintHints
 
-void NumberGuess::PrintNoNumberIsRead( NumberGuess_DataType const& input )
+void NumberGuess::PrintNoNumberIsRead( [[maybe_unused]] NumberGuess_DataType const& input )
 {
   std::cout << "Please enter a number!\n";
 }  // End of action function: PrintNoNumberIsRead
 
-void NumberGuess::PrintNumberIsNotInRange( NumberGuess_DataType const& input )
+void NumberGuess::PrintNumberIsNotInRange( [[maybe_unused]] NumberGuess_DataType const& input )
 {
   std::cout<< "Please enter a number betwen 1 and 99!\n";
 }  // End of action function: PrintNumberIsNotInRange
 
-void NumberGuess::PrintVola( NumberGuess_DataType const& input )
+void NumberGuess::PrintVola( [[maybe_unused]] NumberGuess_DataType const& input )
 {
   std::cout << "Heyooo!\n";
 }  // End of action function: PrintVola
 
-void NumberGuess::PrintWarning( NumberGuess_DataType const& input )
+void NumberGuess::PrintWarning( [[maybe_unused]] NumberGuess_DataType const& input )
 {
   std::cout << "please answer pressing the key either 'Y' or 'N' only\n";
 }  // End of action function: PrintWarning
 
-void NumberGuess::ReadAnswerToContinue( NumberGuess_DataType const& input )
+void NumberGuess::ReadAnswerToContinue( [[maybe_unused]] NumberGuess_DataType const& input )
 {
   char buffer[256];
   std::cin.getline( buffer, sizeof(buffer)-1 );
@@ -155,7 +154,7 @@ void NumberGuess::ReadAnswerToContinue( NumberGuess_DataType const& input )
   std::cout << std::flush;
 }  // End of action function: ReadAnswerToContinue
 
-void NumberGuess::ReadEstimation( NumberGuess_DataType const& input )
+void NumberGuess::ReadEstimation( [[maybe_unused]] NumberGuess_DataType const& input )
 {
   char buffer[256];
   std::cin.getline( buffer, sizeof(buffer)-1 );
@@ -201,12 +200,12 @@ void NumberGuess::ReadEstimation( NumberGuess_DataType const& input )
   std::cout << std::flush;
 }  // End of action function: ReadEstimation
 
-void NumberGuess::Salute( NumberGuess_DataType const& input )
+void NumberGuess::Salute( [[maybe_unused]] NumberGuess_DataType const& input )
 {
   std::cout << "\nHello there. Let's play. I will pick a number between 1 and 99. And you will guess the number I picked\n";
 }  // End of action function: Salute
 
-void NumberGuess::SetANumber( NumberGuess_DataType const& input )
+void NumberGuess::SetANumber( [[maybe_unused]] NumberGuess_DataType const& input )
 {
   static std::random_device rd;
   static std::mt19937 generator(rd());

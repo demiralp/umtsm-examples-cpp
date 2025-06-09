@@ -186,7 +186,7 @@ Display_DataType* Display::getData( ) noexcept
 
 void Display::trigger_Clear( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -217,7 +217,7 @@ void Display::trigger_Clear( )
 
 void Display::trigger_DivisionByZero( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -230,7 +230,7 @@ void Display::trigger_DivisionByZero( )
 
 void Display::trigger_Faulty( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -243,7 +243,7 @@ void Display::trigger_Faulty( )
 
 void Display::trigger_Overflow( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -256,7 +256,7 @@ void Display::trigger_Overflow( )
 
 void Display::trigger_Reset( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -287,7 +287,7 @@ void Display::trigger_Reset( )
 
 void Display::trigger_SwitchOff( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -325,7 +325,7 @@ void Display::trigger_SwitchOff( )
 
 void Display::trigger_Update( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 

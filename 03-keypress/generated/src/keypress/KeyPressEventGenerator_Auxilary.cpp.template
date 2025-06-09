@@ -42,11 +42,11 @@
 #include <unistd.h>
 
 // The implementation of the actions
-void KeyPressEventGenerator::ReadKey( KeyPressEventGenerator_DataType const& input )
+void KeyPressEventGenerator::ReadKey( [[maybe_unused]] KeyPressEventGenerator_DataType const& input )
 {
 }  // End of action function: ReadKey
 
-void KeyPressEventGenerator::TimeBaseEventGenerator( KeyPressEventGenerator_DataType const& input )
+void KeyPressEventGenerator::TimeBaseEventGenerator( [[maybe_unused]] KeyPressEventGenerator_DataType const& input )
 {
 }  // End of action function: TimeBaseEventGenerator
 

@@ -168,7 +168,7 @@ Engine_DataType* Engine::getData( ) noexcept
 
 void Engine::trigger_runACCW( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   if ( isIn_Idle_State( ) )
   {
@@ -181,7 +181,7 @@ void Engine::trigger_runACCW( )
 
 void Engine::trigger_runCCW( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   if ( isIn_Idle_State( ) )
   {
@@ -194,7 +194,7 @@ void Engine::trigger_runCCW( )
 
 void Engine::trigger_stop( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   if ( isIn_Running_State( ) )
   {

@@ -128,7 +128,7 @@ Button_DataType* Button::getData( ) noexcept
 
 void Button::trigger_Pressed( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   if ( isIn_Main_State( ) )
   {

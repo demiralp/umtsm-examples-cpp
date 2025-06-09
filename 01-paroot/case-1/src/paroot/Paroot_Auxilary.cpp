@@ -30,16 +30,19 @@
 #include "Paroot.hh"
 
 #include <cassert>
-#include <cmath>
-#include <complex>
 #include <csignal>
 #include <cstddef>
-#include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <iostream>
-#include <pthread.h>
+#include <mutex>
+#include <optional>
+#include <thread>
 #include <unistd.h>
+
+#include <cmath>
+#include <complex>
+#include <cstdio>
+#include <iostream>
 
 using namespace std;
 
@@ -52,7 +55,7 @@ namespace
 }  // namespace
 
 // The implementation of the actions
-void Paroot::FindTheRoots( Paroot_DataType const& input )
+void Paroot::FindTheRoots( [[maybe_unused]] Paroot_DataType const& input )
 {
   double delta = ( input.paramB * input.paramB - 4.0 * input.paramA * input.paramC );
 
@@ -84,7 +87,7 @@ void Paroot::FindTheRoots( Paroot_DataType const& input )
   }
 }  // End of action function: FindTheRoots
 
-void Paroot::ReadParameters( Paroot_DataType const& input )
+void Paroot::ReadParameters( [[maybe_unused]] Paroot_DataType const& input )
 {
 #if 1
   bool readingOkay = false;
@@ -114,7 +117,7 @@ void Paroot::ReadParameters( Paroot_DataType const& input )
 #endif
 }  // End of action function: ReadParameters
 
-void Paroot::WriteSolutions( Paroot_DataType const& input )
+void Paroot::WriteSolutions( [[maybe_unused]] Paroot_DataType const& input )
 {
   switch( input.solutionType )
   {

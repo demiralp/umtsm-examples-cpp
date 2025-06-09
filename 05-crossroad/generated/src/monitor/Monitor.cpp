@@ -141,7 +141,7 @@ Monitor_DataType* Monitor::getData( ) noexcept
 
 void Monitor::trigger_ClearMessage( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -153,7 +153,7 @@ void Monitor::trigger_ClearMessage( )
 
 void Monitor::trigger_Update( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 

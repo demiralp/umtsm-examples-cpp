@@ -307,8 +307,8 @@ Lane_DataType* Lane::getData( ) noexcept
 
 void Lane::trigger_Allowed( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneAvailability = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneAvailability = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -331,8 +331,8 @@ void Lane::trigger_Allowed( )
 
 void Lane::trigger_Close( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneStatus = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneStatus = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -360,8 +360,8 @@ void Lane::trigger_Close( )
 
 void Lane::trigger_Disallowed( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneAvailability = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneAvailability = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -384,8 +384,8 @@ void Lane::trigger_Disallowed( )
 
 void Lane::trigger_Open( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneStatus = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneStatus = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -413,8 +413,8 @@ void Lane::trigger_Open( )
 
 void Lane::trigger_Prepare( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneStatus = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneStatus = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -451,8 +451,8 @@ void Lane::trigger_Prepare( )
 
 void Lane::trigger_StartControlling( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneControlling = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneControlling = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -489,8 +489,8 @@ void Lane::trigger_StartControlling( )
 
 void Lane::trigger_StopControlling( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneControlling = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneControlling = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -516,8 +516,8 @@ void Lane::trigger_StopControlling( )
 
 void Lane::trigger_SystemDisabled( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneControlling = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneControlling = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 

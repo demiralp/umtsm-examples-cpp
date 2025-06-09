@@ -119,67 +119,67 @@ bool Keypad::IsSignature( ) const
 }  // End of guard function: IsSignature
 
 // The implementation of the actions
-void Keypad::NotifyBackspce( Keypad_DataType const& input )
+void Keypad::NotifyBackspce( [[maybe_unused]] Keypad_DataType const& input )
 {
   instanceData.pCalculator->trigger_Backspace( );
 }  // End of action function: NotifyBackspce
 
-void Keypad::NotifyClear( Keypad_DataType const& input )
+void Keypad::NotifyClear( [[maybe_unused]] Keypad_DataType const& input )
 {
   instanceData.pCalculator->trigger_Clear( );
 }  // End of action function: NotifyClear
 
-void Keypad::NotifyDigit( Keypad_DataType const& input )
+void Keypad::NotifyDigit( [[maybe_unused]] Keypad_DataType const& input )
 {
   instanceData.pCalculator->trigger_Digit( );
 }  // End of action function: NotifyDigit
 
-void Keypad::NotifyDivisor( Keypad_DataType const& input )
+void Keypad::NotifyDivisor( [[maybe_unused]] Keypad_DataType const& input )
 {
   instanceData.pCalculator->trigger_Division( );
 }  // End of action function: NotifyDivisor
 
-void Keypad::NotifyDot( Keypad_DataType const& input )
+void Keypad::NotifyDot( [[maybe_unused]] Keypad_DataType const& input )
 {
   instanceData.pCalculator->trigger_Dot( );
 }  // End of action function: NotifyDot
 
-void Keypad::NotifyEnter( Keypad_DataType const& input )
+void Keypad::NotifyEnter( [[maybe_unused]] Keypad_DataType const& input )
 {
   instanceData.pCalculator->trigger_Enter( );
 }  // End of action function: NotifyEnter
 
-void Keypad::NotifyExponent( Keypad_DataType const& input )
+void Keypad::NotifyExponent( [[maybe_unused]] Keypad_DataType const& input )
 {
   instanceData.pCalculator->trigger_Exponents( );
 }  // End of action function: NotifyExponent
 
-void Keypad::NotifyMinus( Keypad_DataType const& input )
+void Keypad::NotifyMinus( [[maybe_unused]] Keypad_DataType const& input )
 {
   instanceData.pCalculator->trigger_Minus( );
 }  // End of action function: NotifyMinus
 
-void Keypad::NotifyMultiplay( Keypad_DataType const& input )
+void Keypad::NotifyMultiplay( [[maybe_unused]] Keypad_DataType const& input )
 {
   instanceData.pCalculator->trigger_Multiplay( );
 }  // End of action function: NotifyMultiplay
 
-void Keypad::NotifyPlus( Keypad_DataType const& input )
+void Keypad::NotifyPlus( [[maybe_unused]] Keypad_DataType const& input )
 {
   instanceData.pCalculator->trigger_Plus( );
 }  // End of action function: NotifyPlus
 
-void Keypad::NotifyReset( Keypad_DataType const& input )
+void Keypad::NotifyReset( [[maybe_unused]] Keypad_DataType const& input )
 {
   instanceData.pCalculator->trigger_Reset( );
 }  // End of action function: NotifyReset
 
-void Keypad::NotifySignatureChange( Keypad_DataType const& input )
+void Keypad::NotifySignatureChange( [[maybe_unused]] Keypad_DataType const& input )
 {
   instanceData.pCalculator->trigger_ChangeSign( );
 }  // End of action function: NotifySignatureChange
 
-void Keypad::ReadKey( Keypad_DataType const& input )
+void Keypad::ReadKey( [[maybe_unused]] Keypad_DataType const& input )
 {
   static char const * const keyChar = ".,+-/*=eEsScC";
   while( true )

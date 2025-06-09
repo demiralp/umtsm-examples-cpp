@@ -30,8 +30,12 @@
 #include "KeyPress.hh"
 
 #include <cassert>
+#include <csignal>
 #include <cstddef>
 #include <cstring>
+#include <mutex>
+#include <optional>
+#include <thread>
 
 #include <ncurses.h>
 
@@ -43,77 +47,77 @@ bool KeyPress::IsCountingFinished( ) const
 }  // End of guard function: IsCountingFinished
 
 // The implementation of the actions
-void KeyPress::Count1( KeyPress_DataType const& input )
+void KeyPress::Count1( [[maybe_unused]] KeyPress_DataType const& input )
 {
   instanceData.countDigit[ 0 ] = input.countDigit[ 0 ] + 1;
 }  // End of action function: Count1
 
-void KeyPress::Count2( KeyPress_DataType const& input )
+void KeyPress::Count2( [[maybe_unused]] KeyPress_DataType const& input )
 {
   instanceData.countDigit[ 1 ] = input.countDigit[ 1 ] + 1;
 }  // End of action function: Count2
 
-void KeyPress::Count3( KeyPress_DataType const& input )
+void KeyPress::Count3( [[maybe_unused]] KeyPress_DataType const& input )
 {
   instanceData.countDigit[ 2 ] = input.countDigit[ 2 ] + 1;
 }  // End of action function: Count3
 
-void KeyPress::Count4( KeyPress_DataType const& input )
+void KeyPress::Count4( [[maybe_unused]] KeyPress_DataType const& input )
 {
   instanceData.countDigit[ 3 ] = input.countDigit[ 3 ] + 1;
 }  // End of action function: Count4
 
-void KeyPress::Count5( KeyPress_DataType const& input )
+void KeyPress::Count5( [[maybe_unused]] KeyPress_DataType const& input )
 {
   instanceData.countDigit[ 4 ] = input.countDigit[ 4 ] + 1;
 }  // End of action function: Count5
 
-void KeyPress::Count6( KeyPress_DataType const& input )
+void KeyPress::Count6( [[maybe_unused]] KeyPress_DataType const& input )
 {
   instanceData.countDigit[ 5 ] = input.countDigit[ 5 ] + 1;
 }  // End of action function: Count6
 
-void KeyPress::Count7( KeyPress_DataType const& input )
+void KeyPress::Count7( [[maybe_unused]] KeyPress_DataType const& input )
 {
   instanceData.countDigit[ 6 ] = input.countDigit[ 6 ] + 1;
 }  // End of action function: Count7
 
-void KeyPress::Count8( KeyPress_DataType const& input )
+void KeyPress::Count8( [[maybe_unused]] KeyPress_DataType const& input )
 {
   instanceData.countDigit[ 7 ] = input.countDigit[ 7 ] + 1;
 }  // End of action function: Count8
 
-void KeyPress::Count9( KeyPress_DataType const& input )
+void KeyPress::Count9( [[maybe_unused]] KeyPress_DataType const& input )
 {
   instanceData.countDigit[ 8 ] = input.countDigit[ 8 ] + 1;
 }  // End of action function: Count9
 
-void KeyPress::CountA( KeyPress_DataType const& input )
+void KeyPress::CountA( [[maybe_unused]] KeyPress_DataType const& input )
 {
   instanceData.countA = input.countA + 1;
 }  // End of action function: CountA
 
-void KeyPress::CountB( KeyPress_DataType const& input )
+void KeyPress::CountB( [[maybe_unused]] KeyPress_DataType const& input )
 {
   instanceData.countB = input.countB + 1;
 }  // End of action function: CountB
 
-void KeyPress::CountC( KeyPress_DataType const& input )
+void KeyPress::CountC( [[maybe_unused]] KeyPress_DataType const& input )
 {
   instanceData.countC = input.countC + 1;
 }  // End of action function: CountC
 
-void KeyPress::CountEven( KeyPress_DataType const& input )
+void KeyPress::CountEven( [[maybe_unused]] KeyPress_DataType const& input )
 {
   instanceData.countEven = input.countEven + 1;
 }  // End of action function: CountEven
 
-void KeyPress::CountOdd( KeyPress_DataType const& input )
+void KeyPress::CountOdd( [[maybe_unused]] KeyPress_DataType const& input )
 {
   instanceData.countOdd = input.countOdd + 1;
 }  // End of action function: CountOdd
 
-void KeyPress::LogCounters( KeyPress_DataType const& input )
+void KeyPress::LogCounters( [[maybe_unused]] KeyPress_DataType const& input )
 {
   printw( "\r%5u %-4zu %-4zu %-4zu %-4zu %-4zu",
           input.issueId,
@@ -157,7 +161,7 @@ void KeyPress::LogCounters( KeyPress_DataType const& input )
   instanceData.issueId = input.issueId + 1;
 }  // End of action function: LogCounters
 
-void KeyPress::LogHeaders( KeyPress_DataType const& input )
+void KeyPress::LogHeaders( [[maybe_unused]] KeyPress_DataType const& input )
 {
   printw( "\n%5s %-4s %-4s %-4s %-4s %-4s", "Issue", "A", "B", "C", "Odd", "Even" );
   for( size_t i = 0; i < sizeof( input.countDigit ) / sizeof( input.countDigit[ 0 ] ); ++i )
@@ -175,12 +179,12 @@ void KeyPress::LogHeaders( KeyPress_DataType const& input )
   printw( " -- --\n" );
 }  // End of action function: LogHeaders
 
-void KeyPress::MessageGoodBye( KeyPress_DataType const& input )
+void KeyPress::MessageGoodBye( [[maybe_unused]] KeyPress_DataType const& input )
 {
   printw( "\nSee you next time. Good Bye\n" );
 }  // End of action function: MessageGoodBye
 
-void KeyPress::MessageHello( KeyPress_DataType const& input )
+void KeyPress::MessageHello( [[maybe_unused]] KeyPress_DataType const& input )
 {
   printw( "Counts letter A, B and C, all are incase sensitive, and mumbers between 1 and 9 pressed using by keyboard.\n" );
   printw( "Pressing F12 will pause the counting letters A, B and C.\n" );
@@ -191,17 +195,17 @@ void KeyPress::MessageHello( KeyPress_DataType const& input )
   printw( "Pressing SPACE will be reset the counters for letters keys.\n\n" );
 }  // End of action function: MessageHello
 
-void KeyPress::MessagePressSpaceToExit( KeyPress_DataType const& input )
+void KeyPress::MessagePressSpaceToExit( [[maybe_unused]] KeyPress_DataType const& input )
 {
   printw( "\nPress SPACE to exit\n" );
 }  // End of action function: MessagePressSpaceToExit
 
-void KeyPress::ResetLetterCounters( KeyPress_DataType const& input )
+void KeyPress::ResetLetterCounters( [[maybe_unused]] KeyPress_DataType const& input )
 {
   instanceData.countA = instanceData.countB = instanceData.countC = 0;
 }  // End of action function: ResetLetterCounters
 
-void KeyPress::ResetNumericCounters( KeyPress_DataType const& input )
+void KeyPress::ResetNumericCounters( [[maybe_unused]] KeyPress_DataType const& input )
 {
   instanceData.countOdd = instanceData.countEven = 0;
 

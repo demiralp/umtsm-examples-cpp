@@ -31,10 +31,10 @@
 #include <Engine.hh>
 
 #include <cassert>
-#include <csignal>
 #include <cstddef>
-#include <cstdlib>
 #include <cstring>
+#include <csignal>
+#include <cstdlib>
 #include <mutex>
 #include <optional>
 #include <thread>
@@ -42,30 +42,30 @@
 #define KEEP_DOOR_OPEN ( 5 )
 
 // The implementation of the actions
-void Door::engineRunACCW( Door_DataType const& input )
+void Door::engineRunACCW( [[maybe_unused]] Door_DataType const& input )
 {
   time( &instanceData.doorActionTimeStart  );
   instanceData.pEngine->trigger_runACCW();
 }  // End of action function: engineRunACCW
 
-void Door::engineRunCCW( Door_DataType const& input )
+void Door::engineRunCCW( [[maybe_unused]] Door_DataType const& input )
 {
   time( &instanceData.doorActionTimeStart );
   instanceData.pEngine->trigger_runCCW();
 }  // End of action function: engineRunCCW
 
-void Door::engineStop( Door_DataType const& input )
+void Door::engineStop( [[maybe_unused]] Door_DataType const& input )
 {
   instanceData.pEngine->trigger_stop();
 }  // End of action function: engineStop
 
-void Door::resetWaitingTime( Door_DataType const& input )
+void Door::resetWaitingTime( [[maybe_unused]] Door_DataType const& input )
 {
   time( &instanceData.waitUntil  );
   instanceData.waitUntil += KEEP_DOOR_OPEN;
 }  // End of action function: resetWaitingTime
 
-void Door::wait( Door_DataType const& input )
+void Door::wait( [[maybe_unused]] Door_DataType const& input )
 {
   do
   {
@@ -81,7 +81,7 @@ void Door::wait( Door_DataType const& input )
 }  // End of action function: wait
 
 // The implementation of the Persistency Functions
-void Door::store_Shallow_Main( Main_States state, Door_DataType const& instance ) const
+void Door::store_Shallow_Main( [[maybe_unused]] Main_States state, [[maybe_unused]] Door_DataType const& instance ) const
 {
   static char const* const regfile = "door";
   char const* folder               = getenv( "TMPDIR" );
@@ -107,7 +107,7 @@ void Door::store_Shallow_Main( Main_States state, Door_DataType const& instance 
   }
 }  // End of action function: store_Shallow_Main
 
-Door::Main_States Door::load_Shallow_Main( Door_DataType const& instance ) const
+Door::Main_States Door::load_Shallow_Main( [[maybe_unused]] Door_DataType const& instance ) const
 {
   Main_States result = Main_States::E_init;
 

@@ -44,7 +44,7 @@
 #define SIMULATION_DOOR_OPEN_DURATION ( 3U )
 
 // The implementation of the actions
-void Sensor_Open_End::checkDoorOpen( Sensor_Open_End_DataType const& input )
+void Sensor_Open_End::checkDoorOpen( [[maybe_unused]] Sensor_Open_End_DataType const& input )
 {
   time_t end;
   time( &end );
@@ -63,12 +63,12 @@ void Sensor_Open_End::checkDoorOpen( Sensor_Open_End_DataType const& input )
   } while( true );
 }  // End of action function: checkDoorOpen
 
-void Sensor_Open_End::notifyDoorOpen( Sensor_Open_End_DataType const& input )
+void Sensor_Open_End::notifyDoorOpen( [[maybe_unused]] Sensor_Open_End_DataType const& input )
 {
   instanceData.pDoor->trigger_DoorOpen();
 }  // End of action function: notifyDoorOpen
 
-void Sensor_Open_End::waitUntilDoorStartOpening( Sensor_Open_End_DataType const& input )
+void Sensor_Open_End::waitUntilDoorStartOpening( [[maybe_unused]] Sensor_Open_End_DataType const& input )
 {
   do
   {

@@ -27,11 +27,10 @@
  *  SOFTWARE.
  */
 
-#include "KeyPress.hh"
 #include "KeyPressEventGenerator.hh"
+#include "KeyPress.hh"
 
 #include <cassert>
-#include <chrono>
 #include <csignal>
 #include <cstddef>
 #include <cstdlib>
@@ -39,13 +38,13 @@
 #include <mutex>
 #include <optional>
 #include <thread>
-
 #include <unistd.h>
 
+#include <chrono>
 #include <ncurses.h>
 
 // The implementation of the actions
-void KeyPressEventGenerator::ReadKey( KeyPressEventGenerator_DataType const& input )
+void KeyPressEventGenerator::ReadKey( [[maybe_unused]] KeyPressEventGenerator_DataType const& input )
 {
   char prev = 0;
 
@@ -168,7 +167,7 @@ void KeyPressEventGenerator::ReadKey( KeyPressEventGenerator_DataType const& inp
   }
 }  // End of action function: ReadKey
 
-void KeyPressEventGenerator::TimeBaseEventGenerator( KeyPressEventGenerator_DataType const& input )
+void KeyPressEventGenerator::TimeBaseEventGenerator( [[maybe_unused]] KeyPressEventGenerator_DataType const& input )
 {
   clock_t start, end;
   unsigned long long duration;

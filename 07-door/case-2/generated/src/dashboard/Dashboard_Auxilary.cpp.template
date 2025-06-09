@@ -49,15 +49,15 @@ bool Dashboard::IsKey_B( ) const
 }  // End of guard function: IsKey_B
 
 // The implementation of the actions
-void Dashboard::ButtonPress( Dashboard_DataType const& input )
+void Dashboard::ButtonPress( [[maybe_unused]] Dashboard_DataType const& input )
 {
 }  // End of action function: ButtonPress
 
-void Dashboard::DisplayDoorStatus( Dashboard_DataType const& input )
+void Dashboard::DisplayDoorStatus( [[maybe_unused]] Dashboard_DataType const& input )
 {
 }  // End of action function: DisplayDoorStatus
 
-void Dashboard::ReadCommand( Dashboard_DataType const& input )
+void Dashboard::ReadCommand( [[maybe_unused]] Dashboard_DataType const& input )
 {
 }  // End of action function: ReadCommand
 

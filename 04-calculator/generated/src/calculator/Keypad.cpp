@@ -141,7 +141,7 @@ Keypad_DataType* Keypad::getData( ) noexcept
 
 void Keypad::trigger_Notify( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 

@@ -632,8 +632,8 @@ void Calculator::subSMTrigger_Update( SubstateMachines subsm )
 
 void Calculator::trigger_Backspace( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneProcessingUnit = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneProcessingUnit = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -686,8 +686,8 @@ void Calculator::trigger_Backspace( )
 
 void Calculator::trigger_ChangeSign( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneProcessingUnit = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneProcessingUnit = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -719,8 +719,8 @@ void Calculator::trigger_ChangeSign( )
 
 void Calculator::trigger_Clear( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneProcessingUnit = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneProcessingUnit = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -804,8 +804,8 @@ void Calculator::trigger_Clear( )
 
 void Calculator::trigger_Digit( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneProcessingUnit = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneProcessingUnit = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -837,8 +837,8 @@ void Calculator::trigger_Digit( )
 
 void Calculator::trigger_Division( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneProcessingUnit = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneProcessingUnit = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -887,15 +887,15 @@ void Calculator::trigger_Division( )
 
 void Calculator::trigger_DivisionByZero( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 }
 
 void Calculator::trigger_Dot( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneProcessingUnit = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneProcessingUnit = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -913,8 +913,8 @@ void Calculator::trigger_Dot( )
 
 void Calculator::trigger_Enter( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneProcessingUnit = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneProcessingUnit = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -963,8 +963,8 @@ void Calculator::trigger_Enter( )
 
 void Calculator::trigger_Exponents( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneProcessingUnit = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneProcessingUnit = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -999,15 +999,15 @@ void Calculator::trigger_Exponents( )
 
 void Calculator::trigger_Faulty( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 }
 
 void Calculator::trigger_Minus( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneProcessingUnit = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneProcessingUnit = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1056,8 +1056,8 @@ void Calculator::trigger_Minus( )
 
 void Calculator::trigger_Multiplay( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneProcessingUnit = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneProcessingUnit = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1106,8 +1106,8 @@ void Calculator::trigger_Multiplay( )
 
 void Calculator::trigger_Notify( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneInput = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneInput = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1128,15 +1128,15 @@ void Calculator::trigger_Notify( )
 
 void Calculator::trigger_Overflow( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 }
 
 void Calculator::trigger_Plus( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneProcessingUnit = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneProcessingUnit = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1185,8 +1185,8 @@ void Calculator::trigger_Plus( )
 
 void Calculator::trigger_Reset( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneProcessingUnit = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneProcessingUnit = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1278,10 +1278,10 @@ void Calculator::trigger_Reset( )
 
 void Calculator::trigger_SwitchOff( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneInput = false;
-  __attribute__( ( unused ) ) bool doneProcessingUnit = false;
-  __attribute__( ( unused ) ) bool doneOutput = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneInput = false;
+  [[maybe_unused]] bool doneProcessingUnit = false;
+  [[maybe_unused]] bool doneOutput = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1377,7 +1377,7 @@ void Calculator::trigger_SwitchOff( )
 
 void Calculator::trigger_Update( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 }

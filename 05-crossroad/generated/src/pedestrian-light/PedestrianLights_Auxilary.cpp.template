@@ -79,23 +79,23 @@ bool PedestrianLights::IsSystemSwitching( ) const
 }  // End of guard function: IsSystemSwitching
 
 // The implementation of the actions
-void PedestrianLights::CountForFlashing( PedestrianLights_DataType const& input )
+void PedestrianLights::CountForFlashing( [[maybe_unused]] PedestrianLights_DataType const& input )
 {
 }  // End of action function: CountForFlashing
 
-void PedestrianLights::SwitchGreenLightOff( PedestrianLights_DataType const& input )
+void PedestrianLights::SwitchGreenLightOff( [[maybe_unused]] PedestrianLights_DataType const& input )
 {
 }  // End of action function: SwitchGreenLightOff
 
-void PedestrianLights::SwitchGreenLightOn( PedestrianLights_DataType const& input )
+void PedestrianLights::SwitchGreenLightOn( [[maybe_unused]] PedestrianLights_DataType const& input )
 {
 }  // End of action function: SwitchGreenLightOn
 
-void PedestrianLights::SwitchRedLightOff( PedestrianLights_DataType const& input )
+void PedestrianLights::SwitchRedLightOff( [[maybe_unused]] PedestrianLights_DataType const& input )
 {
 }  // End of action function: SwitchRedLightOff
 
-void PedestrianLights::SwitchRedLightOn( PedestrianLights_DataType const& input )
+void PedestrianLights::SwitchRedLightOn( [[maybe_unused]] PedestrianLights_DataType const& input )
 {
 }  // End of action function: SwitchRedLightOn
 

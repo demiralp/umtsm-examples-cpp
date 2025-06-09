@@ -126,47 +126,47 @@ bool Dashboard::IsKey_U( ) const
 }  // End of guard function: IsKey_U
 
 // The implementation of the actions
-void Dashboard::DisableLane1( Dashboard_DataType const& input )
+void Dashboard::DisableLane1( [[maybe_unused]] Dashboard_DataType const& input )
 {
   instanceData.pExecutionDirector->trigger_DisableLane1( );
 }  // End of action function: DisableLane1
 
-void Dashboard::DisableLane2( Dashboard_DataType const& input )
+void Dashboard::DisableLane2( [[maybe_unused]] Dashboard_DataType const& input )
 {
   instanceData.pExecutionDirector->trigger_DisableLane2( );
 }  // End of action function: DisableLane2
 
-void Dashboard::DisableLane3( Dashboard_DataType const& input )
+void Dashboard::DisableLane3( [[maybe_unused]] Dashboard_DataType const& input )
 {
   instanceData.pExecutionDirector->trigger_DisableLane3( );
 }  // End of action function: DisableLane3
 
-void Dashboard::DisableLane4( Dashboard_DataType const& input )
+void Dashboard::DisableLane4( [[maybe_unused]] Dashboard_DataType const& input )
 {
   instanceData.pExecutionDirector->trigger_DisableLane4( );
 }  // End of action function: DisableLane4
 
-void Dashboard::EnableLane1( Dashboard_DataType const& input )
+void Dashboard::EnableLane1( [[maybe_unused]] Dashboard_DataType const& input )
 {
   instanceData.pExecutionDirector->trigger_EnableLane1( );
 }  // End of action function: EnableLane1
 
-void Dashboard::EnableLane2( Dashboard_DataType const& input )
+void Dashboard::EnableLane2( [[maybe_unused]] Dashboard_DataType const& input )
 {
   instanceData.pExecutionDirector->trigger_EnableLane2( );
 }  // End of action function: EnableLane2
 
-void Dashboard::EnableLane3( Dashboard_DataType const& input )
+void Dashboard::EnableLane3( [[maybe_unused]] Dashboard_DataType const& input )
 {
   instanceData.pExecutionDirector->trigger_EnableLane3( );
 }  // End of action function: EnableLane3
 
-void Dashboard::EnableLane4( Dashboard_DataType const& input )
+void Dashboard::EnableLane4( [[maybe_unused]] Dashboard_DataType const& input )
 {
   instanceData.pExecutionDirector->trigger_EnableLane4( );
 }  // End of action function: EnableLane4
 
-void Dashboard::OpenLane1( Dashboard_DataType const& input )
+void Dashboard::OpenLane1( [[maybe_unused]] Dashboard_DataType const& input )
 {
   if( instanceData.pCrossroad->getSubSM_Lane1( )->isIn_Available_State( ) )
   {
@@ -174,7 +174,7 @@ void Dashboard::OpenLane1( Dashboard_DataType const& input )
   }
 }  // End of action function: OpenLane1
 
-void Dashboard::OpenLane2( Dashboard_DataType const& input )
+void Dashboard::OpenLane2( [[maybe_unused]] Dashboard_DataType const& input )
 {
   if( instanceData.pCrossroad->getSubSM_Lane2( )->isIn_Available_State( ) )
   {
@@ -182,7 +182,7 @@ void Dashboard::OpenLane2( Dashboard_DataType const& input )
   }
 }  // End of action function: OpenLane2
 
-void Dashboard::OpenLane3( Dashboard_DataType const& input )
+void Dashboard::OpenLane3( [[maybe_unused]] Dashboard_DataType const& input )
 {
   if( instanceData.pCrossroad->getSubSM_Lane3( )->isIn_Available_State( ) )
   {
@@ -190,7 +190,7 @@ void Dashboard::OpenLane3( Dashboard_DataType const& input )
   }
 }  // End of action function: OpenLane3
 
-void Dashboard::OpenLane4( Dashboard_DataType const& input )
+void Dashboard::OpenLane4( [[maybe_unused]] Dashboard_DataType const& input )
 {
   if( instanceData.pCrossroad->getSubSM_Lane4( )->isIn_Available_State( ) )
   {
@@ -198,7 +198,7 @@ void Dashboard::OpenLane4( Dashboard_DataType const& input )
   }
 }  // End of action function: OpenLane4
 
-void Dashboard::OpenPedestrianLanes( Dashboard_DataType const& input )
+void Dashboard::OpenPedestrianLanes( [[maybe_unused]] Dashboard_DataType const& input )
 {
   if( instanceData.pCrossroad->getSubSM_PedestrianLanes( )->isIn_Available_State( ) )
   {
@@ -206,12 +206,12 @@ void Dashboard::OpenPedestrianLanes( Dashboard_DataType const& input )
   }
 }  // End of action function: OpenPedestrianLanes
 
-void Dashboard::Quit( Dashboard_DataType const& input )
+void Dashboard::Quit( [[maybe_unused]] Dashboard_DataType const& input )
 {
   raise( SIGINT );
 }  // End of action function: Quit
 
-void Dashboard::ReadCommand( Dashboard_DataType const& input )
+void Dashboard::ReadCommand( [[maybe_unused]] Dashboard_DataType const& input )
 {
   static char const* const keyChar = "CcDdEeSsPpQqRrUu1234 ";
   bool okay                        = false;
@@ -226,36 +226,36 @@ void Dashboard::ReadCommand( Dashboard_DataType const& input )
   instanceData.LastInputKey = ch;
 }  // End of action function: ReadCommand
 
-void Dashboard::ReadLaneNumber( Dashboard_DataType const& input )
+void Dashboard::ReadLaneNumber( [[maybe_unused]] Dashboard_DataType const& input )
 {
   instanceData.LastInputKey = wgetch( stdscr );
 }  // End of action function: ReadLaneNumber
 
-void Dashboard::RunTheSystem( Dashboard_DataType const& input )
+void Dashboard::RunTheSystem( [[maybe_unused]] Dashboard_DataType const& input )
 {
   instanceData.pExecutionDirector->trigger_SystemEnabled( );
   instanceData.pMonitor->trigger_Update( );
 }  // End of action function: RunTheSystem
 
-void Dashboard::StandbyTheSystem( Dashboard_DataType const& input )
+void Dashboard::StandbyTheSystem( [[maybe_unused]] Dashboard_DataType const& input )
 {
   instanceData.pExecutionDirector->trigger_SystemDisabled( );
   instanceData.pMonitor->trigger_Update( );
 }  // End of action function: StandbyTheSystem
 
-void Dashboard::SwitchToControlledProgram( Dashboard_DataType const& input )
+void Dashboard::SwitchToControlledProgram( [[maybe_unused]] Dashboard_DataType const& input )
 {
   instanceData.pExecutionDirector->trigger_TakeControl( );
   instanceData.pMonitor->trigger_Update( );
 }  // End of action function: SwitchToControlledProgram
 
-void Dashboard::SwitchToUncontrolledProgram( Dashboard_DataType const& input )
+void Dashboard::SwitchToUncontrolledProgram( [[maybe_unused]] Dashboard_DataType const& input )
 {
   instanceData.pExecutionDirector->trigger_ReleaseControl( );
   instanceData.pMonitor->trigger_Update( );
 }  // End of action function: SwitchToUncontrolledProgram
 
-void Dashboard::UpdateScreen( Dashboard_DataType const& input )
+void Dashboard::UpdateScreen( [[maybe_unused]] Dashboard_DataType const& input )
 {
   instanceData.pMonitor->trigger_Update( );
 }  // End of action function: UpdateScreen

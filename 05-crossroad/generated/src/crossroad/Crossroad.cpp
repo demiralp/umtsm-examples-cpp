@@ -937,12 +937,12 @@ void Crossroad::subSMTrigger_SystemEnabled( SubstateMachines subsm )
 
 void Crossroad::trigger_Allowed( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneRgLane1 = false;
-  __attribute__( ( unused ) ) bool doneRgLane2 = false;
-  __attribute__( ( unused ) ) bool doneRgLane3 = false;
-  __attribute__( ( unused ) ) bool doneRgLane4 = false;
-  __attribute__( ( unused ) ) bool doneRgPedestrianLanes = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneRgLane1 = false;
+  [[maybe_unused]] bool doneRgLane2 = false;
+  [[maybe_unused]] bool doneRgLane3 = false;
+  [[maybe_unused]] bool doneRgLane4 = false;
+  [[maybe_unused]] bool doneRgPedestrianLanes = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1019,12 +1019,12 @@ void Crossroad::trigger_Allowed( )
 
 void Crossroad::trigger_Check( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneRgTrafficLight1 = false;
-  __attribute__( ( unused ) ) bool doneRgTrafficLight2 = false;
-  __attribute__( ( unused ) ) bool doneRgTrafficLight3 = false;
-  __attribute__( ( unused ) ) bool doneRgTrafficLight4 = false;
-  __attribute__( ( unused ) ) bool doneRgPedestrianLight = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneRgTrafficLight1 = false;
+  [[maybe_unused]] bool doneRgTrafficLight2 = false;
+  [[maybe_unused]] bool doneRgTrafficLight3 = false;
+  [[maybe_unused]] bool doneRgTrafficLight4 = false;
+  [[maybe_unused]] bool doneRgPedestrianLight = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1101,12 +1101,12 @@ void Crossroad::trigger_Check( )
 
 void Crossroad::trigger_Close( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneRgLane1 = false;
-  __attribute__( ( unused ) ) bool doneRgLane2 = false;
-  __attribute__( ( unused ) ) bool doneRgLane3 = false;
-  __attribute__( ( unused ) ) bool doneRgLane4 = false;
-  __attribute__( ( unused ) ) bool doneRgPedestrianLanes = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneRgLane1 = false;
+  [[maybe_unused]] bool doneRgLane2 = false;
+  [[maybe_unused]] bool doneRgLane3 = false;
+  [[maybe_unused]] bool doneRgLane4 = false;
+  [[maybe_unused]] bool doneRgPedestrianLanes = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1183,12 +1183,12 @@ void Crossroad::trigger_Close( )
 
 void Crossroad::trigger_Disallowed( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneRgLane1 = false;
-  __attribute__( ( unused ) ) bool doneRgLane2 = false;
-  __attribute__( ( unused ) ) bool doneRgLane3 = false;
-  __attribute__( ( unused ) ) bool doneRgLane4 = false;
-  __attribute__( ( unused ) ) bool doneRgPedestrianLanes = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneRgLane1 = false;
+  [[maybe_unused]] bool doneRgLane2 = false;
+  [[maybe_unused]] bool doneRgLane3 = false;
+  [[maybe_unused]] bool doneRgLane4 = false;
+  [[maybe_unused]] bool doneRgPedestrianLanes = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1265,12 +1265,12 @@ void Crossroad::trigger_Disallowed( )
 
 void Crossroad::trigger_Open( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneRgLane1 = false;
-  __attribute__( ( unused ) ) bool doneRgLane2 = false;
-  __attribute__( ( unused ) ) bool doneRgLane3 = false;
-  __attribute__( ( unused ) ) bool doneRgLane4 = false;
-  __attribute__( ( unused ) ) bool doneRgPedestrianLanes = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneRgLane1 = false;
+  [[maybe_unused]] bool doneRgLane2 = false;
+  [[maybe_unused]] bool doneRgLane3 = false;
+  [[maybe_unused]] bool doneRgLane4 = false;
+  [[maybe_unused]] bool doneRgPedestrianLanes = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1347,12 +1347,12 @@ void Crossroad::trigger_Open( )
 
 void Crossroad::trigger_Prepare( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneRgLane1 = false;
-  __attribute__( ( unused ) ) bool doneRgLane2 = false;
-  __attribute__( ( unused ) ) bool doneRgLane3 = false;
-  __attribute__( ( unused ) ) bool doneRgLane4 = false;
-  __attribute__( ( unused ) ) bool doneRgPedestrianLanes = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneRgLane1 = false;
+  [[maybe_unused]] bool doneRgLane2 = false;
+  [[maybe_unused]] bool doneRgLane3 = false;
+  [[maybe_unused]] bool doneRgLane4 = false;
+  [[maybe_unused]] bool doneRgPedestrianLanes = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1429,12 +1429,12 @@ void Crossroad::trigger_Prepare( )
 
 void Crossroad::trigger_StartControlling( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneRgLane1 = false;
-  __attribute__( ( unused ) ) bool doneRgLane2 = false;
-  __attribute__( ( unused ) ) bool doneRgLane3 = false;
-  __attribute__( ( unused ) ) bool doneRgLane4 = false;
-  __attribute__( ( unused ) ) bool doneRgPedestrianLanes = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneRgLane1 = false;
+  [[maybe_unused]] bool doneRgLane2 = false;
+  [[maybe_unused]] bool doneRgLane3 = false;
+  [[maybe_unused]] bool doneRgLane4 = false;
+  [[maybe_unused]] bool doneRgPedestrianLanes = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1511,12 +1511,12 @@ void Crossroad::trigger_StartControlling( )
 
 void Crossroad::trigger_StopControlling( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneRgLane1 = false;
-  __attribute__( ( unused ) ) bool doneRgLane2 = false;
-  __attribute__( ( unused ) ) bool doneRgLane3 = false;
-  __attribute__( ( unused ) ) bool doneRgLane4 = false;
-  __attribute__( ( unused ) ) bool doneRgPedestrianLanes = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneRgLane1 = false;
+  [[maybe_unused]] bool doneRgLane2 = false;
+  [[maybe_unused]] bool doneRgLane3 = false;
+  [[maybe_unused]] bool doneRgLane4 = false;
+  [[maybe_unused]] bool doneRgPedestrianLanes = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1593,17 +1593,17 @@ void Crossroad::trigger_StopControlling( )
 
 void Crossroad::trigger_SystemDisabled( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneRgLane1 = false;
-  __attribute__( ( unused ) ) bool doneRgLane2 = false;
-  __attribute__( ( unused ) ) bool doneRgLane3 = false;
-  __attribute__( ( unused ) ) bool doneRgLane4 = false;
-  __attribute__( ( unused ) ) bool doneRgPedestrianLanes = false;
-  __attribute__( ( unused ) ) bool doneRgTrafficLight1 = false;
-  __attribute__( ( unused ) ) bool doneRgTrafficLight2 = false;
-  __attribute__( ( unused ) ) bool doneRgTrafficLight3 = false;
-  __attribute__( ( unused ) ) bool doneRgTrafficLight4 = false;
-  __attribute__( ( unused ) ) bool doneRgPedestrianLight = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneRgLane1 = false;
+  [[maybe_unused]] bool doneRgLane2 = false;
+  [[maybe_unused]] bool doneRgLane3 = false;
+  [[maybe_unused]] bool doneRgLane4 = false;
+  [[maybe_unused]] bool doneRgPedestrianLanes = false;
+  [[maybe_unused]] bool doneRgTrafficLight1 = false;
+  [[maybe_unused]] bool doneRgTrafficLight2 = false;
+  [[maybe_unused]] bool doneRgTrafficLight3 = false;
+  [[maybe_unused]] bool doneRgTrafficLight4 = false;
+  [[maybe_unused]] bool doneRgPedestrianLight = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1750,12 +1750,12 @@ void Crossroad::trigger_SystemDisabled( )
 
 void Crossroad::trigger_SystemEnabled( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneRgTrafficLight1 = false;
-  __attribute__( ( unused ) ) bool doneRgTrafficLight2 = false;
-  __attribute__( ( unused ) ) bool doneRgTrafficLight3 = false;
-  __attribute__( ( unused ) ) bool doneRgTrafficLight4 = false;
-  __attribute__( ( unused ) ) bool doneRgPedestrianLight = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneRgTrafficLight1 = false;
+  [[maybe_unused]] bool doneRgTrafficLight2 = false;
+  [[maybe_unused]] bool doneRgTrafficLight3 = false;
+  [[maybe_unused]] bool doneRgTrafficLight4 = false;
+  [[maybe_unused]] bool doneRgPedestrianLight = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 

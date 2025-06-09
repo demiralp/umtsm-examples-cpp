@@ -177,7 +177,7 @@ Timewatch_DataType* Timewatch::getData( ) noexcept
 
 void Timewatch::trigger_abort( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -224,7 +224,7 @@ void Timewatch::trigger_abort( )
 
 void Timewatch::trigger_help( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -261,7 +261,7 @@ void Timewatch::trigger_help( )
 
 void Timewatch::trigger_pause( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -280,7 +280,7 @@ void Timewatch::trigger_pause( )
 
 void Timewatch::trigger_print( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -299,7 +299,7 @@ void Timewatch::trigger_print( )
 
 void Timewatch::trigger_restart( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -325,7 +325,7 @@ void Timewatch::trigger_restart( )
 
 void Timewatch::trigger_resume( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -340,7 +340,7 @@ void Timewatch::trigger_resume( )
 
 void Timewatch::trigger_start( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -365,7 +365,7 @@ void Timewatch::trigger_start( )
 
 void Timewatch::trigger_stop( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 

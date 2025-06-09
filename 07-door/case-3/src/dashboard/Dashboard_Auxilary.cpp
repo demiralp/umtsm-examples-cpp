@@ -49,8 +49,8 @@
 
 static void PrintHelpLine( char const* const key, char const* const summary );
 static void PrintHelp(
-  __attribute__( ( unused ) ) Dashboard* const smInfo,
-  __attribute__( ( unused ) ) Dashboard_DataType const* const pInstanceData );
+  [[maybe_unused]] Dashboard* const smInfo,
+  [[maybe_unused]] Dashboard_DataType const* const pInstanceData );
 
 // The implementation of the guards
 bool Dashboard::IsKey_A( ) const
@@ -72,12 +72,12 @@ bool Dashboard::IsKey_M( ) const
 }  // End of guard function: IsKey_M
 
 // The implementation of the actions
-void Dashboard::ButtonPress( Dashboard_DataType const& input )
+void Dashboard::ButtonPress( [[maybe_unused]] Dashboard_DataType const& input )
 {
   instanceData.pButton->trigger_Pressed();
 }  // End of action function: ButtonPress
 
-void Dashboard::DisplayDoorStatus( Dashboard_DataType const& input )
+void Dashboard::DisplayDoorStatus( [[maybe_unused]] Dashboard_DataType const& input )
 {
   while( true )
   {
@@ -255,8 +255,8 @@ static void PrintHelpLine( char const* const key, char const* const summary )
 }
 
 static void PrintHelp(
-  __attribute__( ( unused ) ) Dashboard* const smInfo,
-  __attribute__( ( unused ) ) Dashboard_DataType const* const pInstanceData )
+  [[maybe_unused]] Dashboard* const smInfo,
+  [[maybe_unused]] Dashboard_DataType const* const pInstanceData )
 {
   printw( "Keys for controlling the door\n" );
 

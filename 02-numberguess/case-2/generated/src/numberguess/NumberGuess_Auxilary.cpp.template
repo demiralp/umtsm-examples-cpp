@@ -85,59 +85,59 @@ bool NumberGuess::IsOnLeave( ) const
 }  // End of guard function: IsOnLeave
 
 // The implementation of the actions
-void NumberGuess::AskEstimation( NumberGuess_DataType const& input )
+void NumberGuess::AskEstimation( [[maybe_unused]] NumberGuess_DataType const& input )
 {
 }  // End of action function: AskEstimation
 
-void NumberGuess::PrintAskNewDeal( NumberGuess_DataType const& input )
+void NumberGuess::PrintAskNewDeal( [[maybe_unused]] NumberGuess_DataType const& input )
 {
 }  // End of action function: PrintAskNewDeal
 
-void NumberGuess::PrintConguratulation( NumberGuess_DataType const& input )
+void NumberGuess::PrintConguratulation( [[maybe_unused]] NumberGuess_DataType const& input )
 {
 }  // End of action function: PrintConguratulation
 
-void NumberGuess::PrintGoodBye( NumberGuess_DataType const& input )
+void NumberGuess::PrintGoodBye( [[maybe_unused]] NumberGuess_DataType const& input )
 {
 }  // End of action function: PrintGoodBye
 
-void NumberGuess::PrintHints( NumberGuess_DataType const& input )
+void NumberGuess::PrintHints( [[maybe_unused]] NumberGuess_DataType const& input )
 {
 }  // End of action function: PrintHints
 
-void NumberGuess::PrintNoNumberIsRead( NumberGuess_DataType const& input )
+void NumberGuess::PrintNoNumberIsRead( [[maybe_unused]] NumberGuess_DataType const& input )
 {
 }  // End of action function: PrintNoNumberIsRead
 
-void NumberGuess::PrintNumberIsNotInRange( NumberGuess_DataType const& input )
+void NumberGuess::PrintNumberIsNotInRange( [[maybe_unused]] NumberGuess_DataType const& input )
 {
 }  // End of action function: PrintNumberIsNotInRange
 
-void NumberGuess::PrintShowNumber( NumberGuess_DataType const& input )
+void NumberGuess::PrintShowNumber( [[maybe_unused]] NumberGuess_DataType const& input )
 {
 }  // End of action function: PrintShowNumber
 
-void NumberGuess::PrintVola( NumberGuess_DataType const& input )
+void NumberGuess::PrintVola( [[maybe_unused]] NumberGuess_DataType const& input )
 {
 }  // End of action function: PrintVola
 
-void NumberGuess::PrintWarning( NumberGuess_DataType const& input )
+void NumberGuess::PrintWarning( [[maybe_unused]] NumberGuess_DataType const& input )
 {
 }  // End of action function: PrintWarning
 
-void NumberGuess::ReadAnswerToContinue( NumberGuess_DataType const& input )
+void NumberGuess::ReadAnswerToContinue( [[maybe_unused]] NumberGuess_DataType const& input )
 {
 }  // End of action function: ReadAnswerToContinue
 
-void NumberGuess::ReadEstimation( NumberGuess_DataType const& input )
+void NumberGuess::ReadEstimation( [[maybe_unused]] NumberGuess_DataType const& input )
 {
 }  // End of action function: ReadEstimation
 
-void NumberGuess::Salute( NumberGuess_DataType const& input )
+void NumberGuess::Salute( [[maybe_unused]] NumberGuess_DataType const& input )
 {
 }  // End of action function: Salute
 
-void NumberGuess::SetANumber( NumberGuess_DataType const& input )
+void NumberGuess::SetANumber( [[maybe_unused]] NumberGuess_DataType const& input )
 {
 }  // End of action function: SetANumber
 

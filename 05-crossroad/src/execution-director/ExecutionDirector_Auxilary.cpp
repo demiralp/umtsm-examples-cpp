@@ -34,7 +34,6 @@
 #include "Monitor.hh"
 
 #include <cassert>
-#include <cmath>
 #include <csignal>
 #include <cstddef>
 #include <cstdlib>
@@ -43,6 +42,8 @@
 #include <optional>
 #include <thread>
 #include <unistd.h>
+
+#include <cmath>
 
 namespace
 {
@@ -172,7 +173,7 @@ bool ExecutionDirector::IsUncontrolledModeRequested( ) const
 }  // End of guard function: IsUncontrolledModeRequested
 
 // The implementation of the actions
-void ExecutionDirector::CheckRouteRequest( ExecutionDirector_DataType const& input )
+void ExecutionDirector::CheckRouteRequest( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.NextLane      = input.LaneRequested;
   instanceData.LaneRequested = -1;
@@ -180,28 +181,28 @@ void ExecutionDirector::CheckRouteRequest( ExecutionDirector_DataType const& inp
   TellLaneAvailability( this, &input, &instanceData );
 }  // End of action function: CheckRouteRequest
 
-void ExecutionDirector::ClearControlMode( ExecutionDirector_DataType const& input )
+void ExecutionDirector::ClearControlMode( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.ControlModeStatus = ControlMode::PERSISTENT_CONTROL_MODE;
 }  // End of action function: ClearControlMode
 
-void ExecutionDirector::DisableSystem( ExecutionDirector_DataType const& input )
+void ExecutionDirector::DisableSystem( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.pCrossroad->trigger_SystemDisabled( );
 }  // End of action function: DisableSystem
 
-void ExecutionDirector::EnableSystem( ExecutionDirector_DataType const& input )
+void ExecutionDirector::EnableSystem( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.pCrossroad->trigger_SystemEnabled( );
 }  // End of action function: EnableSystem
 
-void ExecutionDirector::NotifyCrossroad( ExecutionDirector_DataType const& input )
+void ExecutionDirector::NotifyCrossroad( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.pCrossroad->trigger_Check( );
   instanceData.pMonitor->trigger_Update( );
 }  // End of action function: NotifyCrossroad
 
-void ExecutionDirector::OrderOpenLane1( ExecutionDirector_DataType const& input )
+void ExecutionDirector::OrderOpenLane1( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   auto crossroad = instanceData.pCrossroad;
 
@@ -224,7 +225,7 @@ void ExecutionDirector::OrderOpenLane1( ExecutionDirector_DataType const& input 
   }
 }  // End of action function: OrderOpenLane1
 
-void ExecutionDirector::OrderOpenLane2( ExecutionDirector_DataType const& input )
+void ExecutionDirector::OrderOpenLane2( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   auto crossroad = instanceData.pCrossroad;
 
@@ -247,7 +248,7 @@ void ExecutionDirector::OrderOpenLane2( ExecutionDirector_DataType const& input 
   }
 }  // End of action function: OrderOpenLane2
 
-void ExecutionDirector::OrderOpenLane3( ExecutionDirector_DataType const& input )
+void ExecutionDirector::OrderOpenLane3( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   auto crossroad = instanceData.pCrossroad;
 
@@ -270,7 +271,7 @@ void ExecutionDirector::OrderOpenLane3( ExecutionDirector_DataType const& input 
   }
 }  // End of action function: OrderOpenLane3
 
-void ExecutionDirector::OrderOpenLane4( ExecutionDirector_DataType const& input )
+void ExecutionDirector::OrderOpenLane4( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   auto crossroad = instanceData.pCrossroad;
 
@@ -293,7 +294,7 @@ void ExecutionDirector::OrderOpenLane4( ExecutionDirector_DataType const& input 
   }
 }  // End of action function: OrderOpenLane4
 
-void ExecutionDirector::OrderOpenPedestrianLanes( ExecutionDirector_DataType const& input )
+void ExecutionDirector::OrderOpenPedestrianLanes( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   auto crossroad = instanceData.pCrossroad;
 
@@ -308,7 +309,7 @@ void ExecutionDirector::OrderOpenPedestrianLanes( ExecutionDirector_DataType con
   crossroad->subSMTrigger_Open( Crossroad::SubstateMachines::E_SubSM_PedestrianLanes );
 }  // End of action function: OrderOpenPedestrianLanes
 
-void ExecutionDirector::PrepareForNextLane( ExecutionDirector_DataType const& input )
+void ExecutionDirector::PrepareForNextLane( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   auto crossroad = instanceData.pCrossroad;
 
@@ -347,7 +348,7 @@ void ExecutionDirector::PrepareForNextLane( ExecutionDirector_DataType const& in
     }
     else
     {
-      // not other availabe lanes
+      // No other available lanes
     }
   }
   else if( pLane2->isIn_Open_State( ) )
@@ -364,7 +365,7 @@ void ExecutionDirector::PrepareForNextLane( ExecutionDirector_DataType const& in
     }
     else if( posiablyLaneP )
     {
-      // no Nothing
+      // Do Nothing
     }
     else if( posiablyLane1 )
     {
@@ -372,7 +373,7 @@ void ExecutionDirector::PrepareForNextLane( ExecutionDirector_DataType const& in
     }
     else
     {
-      // not other availabe lanes
+      // No other available lanes
     }
   }
   else if( pLane3->isIn_Open_State( ) )
@@ -385,7 +386,7 @@ void ExecutionDirector::PrepareForNextLane( ExecutionDirector_DataType const& in
     }
     else if( posiablyLaneP )
     {
-      // no Nothing
+      // Do Nothing
     }
     else if( posiablyLane1 )
     {
@@ -397,7 +398,7 @@ void ExecutionDirector::PrepareForNextLane( ExecutionDirector_DataType const& in
     }
     else
     {
-      // not other availabe lanes
+      // No other available lanes
     }
   }
   else if( pLane4->isIn_Open_State( ) )
@@ -410,7 +411,7 @@ void ExecutionDirector::PrepareForNextLane( ExecutionDirector_DataType const& in
     }
     else if( posiablyLaneP )
     {
-      // no Nothing
+      // Do Nothing
     }
     else if( posiablyLane1 )
     {
@@ -426,7 +427,7 @@ void ExecutionDirector::PrepareForNextLane( ExecutionDirector_DataType const& in
     }
     else
     {
-      // not other availabe lanes
+      // No other available lanes
     }
   }
   else if( pPedestrianLanes->isIn_Open_State( ) )
@@ -451,38 +452,22 @@ void ExecutionDirector::PrepareForNextLane( ExecutionDirector_DataType const& in
     }
     else
     {
-      // not other availabe lanes
+      // No other available lanes
     }
   }
-  else if( posiablyLane1 )
+  else
   {
-    pLane1->trigger_Prepare( );
-  }
-  else if( posiablyLane2 )
-  {
-    pLane2->trigger_Prepare( );
-  }
-  else if( posiablyLane3 )
-  {
-    pLane3->trigger_Prepare( );
-  }
-  else if( posiablyLane4 )
-  {
-    pLane4->trigger_Prepare( );
-  }
-  else if( posiablyLaneP )
-  {
-    pPedestrianLanes->trigger_Prepare( );
+    /* No other availabe lanes */
   }
 
 }  // End of action function: PrepareForNextLane
 
-void ExecutionDirector::SetControlledMode( ExecutionDirector_DataType const& input )
+void ExecutionDirector::SetControlledMode( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.ControlModeStatus = ControlMode::CONTROLLED;
 }  // End of action function: SetControlledMode
 
-void ExecutionDirector::SetDisableLane1( ExecutionDirector_DataType const& input )
+void ExecutionDirector::SetDisableLane1( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.LaneCmd1 = Lane_Command::E_CMD_DISABLE_LANE;
   if( ! isIn_Operational_State( ) )
@@ -493,7 +478,7 @@ void ExecutionDirector::SetDisableLane1( ExecutionDirector_DataType const& input
   }
 }  // End of action function: SetDisableLane1
 
-void ExecutionDirector::SetDisableLane2( ExecutionDirector_DataType const& input )
+void ExecutionDirector::SetDisableLane2( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.LaneCmd2 = Lane_Command::E_CMD_DISABLE_LANE;
   if( ! isIn_Operational_State( ) )
@@ -503,7 +488,7 @@ void ExecutionDirector::SetDisableLane2( ExecutionDirector_DataType const& input
   }
 }  // End of action function: SetDisableLane2
 
-void ExecutionDirector::SetDisableLane3( ExecutionDirector_DataType const& input )
+void ExecutionDirector::SetDisableLane3( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.LaneCmd3 = Lane_Command::E_CMD_DISABLE_LANE;
   if( ! isIn_Operational_State( ) )
@@ -513,7 +498,7 @@ void ExecutionDirector::SetDisableLane3( ExecutionDirector_DataType const& input
   }
 }  // End of action function: SetDisableLane3
 
-void ExecutionDirector::SetDisableLane4( ExecutionDirector_DataType const& input )
+void ExecutionDirector::SetDisableLane4( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.LaneCmd4 = Lane_Command::E_CMD_DISABLE_LANE;
   if( ! isIn_Operational_State( ) )
@@ -523,7 +508,7 @@ void ExecutionDirector::SetDisableLane4( ExecutionDirector_DataType const& input
   }
 }  // End of action function: SetDisableLane4
 
-void ExecutionDirector::SetEnableLane1( ExecutionDirector_DataType const& input )
+void ExecutionDirector::SetEnableLane1( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.LaneCmd1 = Lane_Command::E_CMD_ENABLE_LANE;
   if( ! isIn_Operational_State( ) )
@@ -533,7 +518,7 @@ void ExecutionDirector::SetEnableLane1( ExecutionDirector_DataType const& input 
   }
 }  // End of action function: SetEnableLane1
 
-void ExecutionDirector::SetEnableLane2( ExecutionDirector_DataType const& input )
+void ExecutionDirector::SetEnableLane2( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.LaneCmd2 = Lane_Command::E_CMD_ENABLE_LANE;
   if( ! isIn_Operational_State( ) )
@@ -543,7 +528,7 @@ void ExecutionDirector::SetEnableLane2( ExecutionDirector_DataType const& input 
   }
 }  // End of action function: SetEnableLane2
 
-void ExecutionDirector::SetEnableLane3( ExecutionDirector_DataType const& input )
+void ExecutionDirector::SetEnableLane3( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.LaneCmd3 = Lane_Command::E_CMD_ENABLE_LANE;
   if( ! isIn_Operational_State( ) )
@@ -553,7 +538,7 @@ void ExecutionDirector::SetEnableLane3( ExecutionDirector_DataType const& input 
   }
 }  // End of action function: SetEnableLane3
 
-void ExecutionDirector::SetEnableLane4( ExecutionDirector_DataType const& input )
+void ExecutionDirector::SetEnableLane4( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.LaneCmd4 = Lane_Command::E_CMD_ENABLE_LANE;
   if( ! isIn_Operational_State( ) )
@@ -563,54 +548,54 @@ void ExecutionDirector::SetEnableLane4( ExecutionDirector_DataType const& input 
   }
 }  // End of action function: SetEnableLane4
 
-void ExecutionDirector::SetNextOpenLane1( ExecutionDirector_DataType const& input )
+void ExecutionDirector::SetNextOpenLane1( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.LaneRequested = 1;
 }  // End of action function: SetNextOpenLane1
 
-void ExecutionDirector::SetNextOpenLane2( ExecutionDirector_DataType const& input )
+void ExecutionDirector::SetNextOpenLane2( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.LaneRequested = 2;
 }  // End of action function: SetNextOpenLane2
 
-void ExecutionDirector::SetNextOpenLane3( ExecutionDirector_DataType const& input )
+void ExecutionDirector::SetNextOpenLane3( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.LaneRequested = 3;
 }  // End of action function: SetNextOpenLane3
 
-void ExecutionDirector::SetNextOpenLane4( ExecutionDirector_DataType const& input )
+void ExecutionDirector::SetNextOpenLane4( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.LaneRequested = 4;
 }  // End of action function: SetNextOpenLane4
 
-void ExecutionDirector::SetNextOpenLanePedestrianLanes( ExecutionDirector_DataType const& input )
+void ExecutionDirector::SetNextOpenLanePedestrianLanes( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.LaneRequested = 0;
 }  // End of action function: SetNextOpenLanePedestrianLanes
 
-void ExecutionDirector::SetUncontrolledMode( ExecutionDirector_DataType const& input )
+void ExecutionDirector::SetUncontrolledMode( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.ControlModeStatus = ControlMode::UNCONTROLLED;
 }  // End of action function: SetUncontrolledMode
 
-void ExecutionDirector::StartControlMode( ExecutionDirector_DataType const& input )
+void ExecutionDirector::StartControlMode( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.LaneClosingCompleted = false;
   instanceData.pCrossroad->trigger_StartControlling( );
 }  // End of action function: StartControlMode
 
-void ExecutionDirector::StartSystemSwitchingTimer( ExecutionDirector_DataType const& input )
+void ExecutionDirector::StartSystemSwitchingTimer( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   time( &instanceData.StartSwitchingTime );
 }  // End of action function: StartSystemSwitchingTimer
 
-void ExecutionDirector::StartUncontrolMode( ExecutionDirector_DataType const& input )
+void ExecutionDirector::StartUncontrolMode( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.pCrossroad->trigger_StopControlling( );
   instanceData.LaneRequested = -1;
 }  // End of action function: StartUncontrolMode
 
-void ExecutionDirector::StopTraffic( ExecutionDirector_DataType const& input )
+void ExecutionDirector::StopTraffic( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   auto crossroad = instanceData.pCrossroad;
 
@@ -626,17 +611,17 @@ void ExecutionDirector::StopTraffic( ExecutionDirector_DataType const& input )
   instanceData.pMonitor->trigger_Update( );
 }  // End of action function: StopTraffic
 
-void ExecutionDirector::Update( ExecutionDirector_DataType const& input )
+void ExecutionDirector::Update( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.pMonitor->trigger_Update( );
 }  // End of action function: Update
 
-void ExecutionDirector::WaitForInterval( ExecutionDirector_DataType const& input )
+void ExecutionDirector::WaitForInterval( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   usleep( RUN_INTERVAL_TIME_US );
 }  // End of action function: WaitForInterval
 
-void ExecutionDirector::WaitForLane1( ExecutionDirector_DataType const& input )
+void ExecutionDirector::WaitForLane1( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   if( instanceData.pCrossroad->getSubSM_Lane1( )->isIn_Available_State( ) )
   {
@@ -645,7 +630,7 @@ void ExecutionDirector::WaitForLane1( ExecutionDirector_DataType const& input )
   }
 }  // End of action function: WaitForLane1
 
-void ExecutionDirector::WaitForLane2( ExecutionDirector_DataType const& input )
+void ExecutionDirector::WaitForLane2( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   if( instanceData.pCrossroad->getSubSM_Lane2( )->isIn_Available_State( ) )
   {
@@ -654,7 +639,7 @@ void ExecutionDirector::WaitForLane2( ExecutionDirector_DataType const& input )
   }
 }  // End of action function: WaitForLane2
 
-void ExecutionDirector::WaitForLane3( ExecutionDirector_DataType const& input )
+void ExecutionDirector::WaitForLane3( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   if( instanceData.pCrossroad->getSubSM_Lane3( )->isIn_Available_State( ) )
   {
@@ -663,7 +648,7 @@ void ExecutionDirector::WaitForLane3( ExecutionDirector_DataType const& input )
   }
 }  // End of action function: WaitForLane3
 
-void ExecutionDirector::WaitForLane4( ExecutionDirector_DataType const& input )
+void ExecutionDirector::WaitForLane4( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   if( instanceData.pCrossroad->getSubSM_Lane4( )->isIn_Available_State( ) )
   {
@@ -672,7 +657,7 @@ void ExecutionDirector::WaitForLane4( ExecutionDirector_DataType const& input )
   }
 }  // End of action function: WaitForLane4
 
-void ExecutionDirector::WaitForNextLaneOpen( ExecutionDirector_DataType const& input )
+void ExecutionDirector::WaitForNextLaneOpen( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   if( ! input.LaneClosingCompleted )
   {
@@ -681,13 +666,13 @@ void ExecutionDirector::WaitForNextLaneOpen( ExecutionDirector_DataType const& i
   }
 }  // End of action function: WaitForNextLaneOpen
 
-void ExecutionDirector::WaitForPedestrians( ExecutionDirector_DataType const& input )
+void ExecutionDirector::WaitForPedestrians( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.LaneClosingCompleted = false;
   usleep( RUN_PEDESTRIANLANES_MS );
 }  // End of action function: WaitForPedestrians
 
-void ExecutionDirector::WaitForSystemSwitchingTimer( ExecutionDirector_DataType const& input )
+void ExecutionDirector::WaitForSystemSwitchingTimer( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   time_t now;
   time( &now );
@@ -700,13 +685,13 @@ void ExecutionDirector::WaitForSystemSwitchingTimer( ExecutionDirector_DataType 
   usleep( remainingtime );
 }  // End of action function: WaitForSystemSwitchingTimer
 
-void ExecutionDirector::WaitForTrafficStops( ExecutionDirector_DataType const& input )
+void ExecutionDirector::WaitForTrafficStops( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   usleep( RUN_STOPING_TRAFFIC_MS );
 }  // End of action function: WaitForTrafficStops
 
 // The implementation of the Persistency Functions
-void ExecutionDirector::store_Shallow_Operational( Main_States state, ExecutionDirector_DataType const& instance ) const
+void ExecutionDirector::store_Shallow_Operational( [[maybe_unused]] Main_States state, [[maybe_unused]] ExecutionDirector_DataType const& instance ) const
 {
   static char const* const regfile = "crossroad-executor.bin";
   char const* folder               = getenv( "TMPDIR" );
@@ -729,7 +714,7 @@ void ExecutionDirector::store_Shallow_Operational( Main_States state, ExecutionD
   }
 }  // End of action function: store_Shallow_Operational
 
-ExecutionDirector::Main_States ExecutionDirector::load_Shallow_Operational( ExecutionDirector_DataType const& instance ) const
+ExecutionDirector::Main_States ExecutionDirector::load_Shallow_Operational( [[maybe_unused]] ExecutionDirector_DataType const& instance ) const
 {
   static constexpr Main_States mainStates[] = {
     Main_States::E_init,

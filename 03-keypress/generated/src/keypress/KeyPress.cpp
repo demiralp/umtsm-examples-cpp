@@ -243,8 +243,8 @@ KeyPress_DataType* KeyPress::getData( ) noexcept
 
 void KeyPress::trigger_clock4log( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneLog = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneLog = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -265,8 +265,8 @@ void KeyPress::trigger_clock4log( )
 
 void KeyPress::trigger_key1( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneNumeric = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneNumeric = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -288,8 +288,8 @@ void KeyPress::trigger_key1( )
 
 void KeyPress::trigger_key2( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneNumeric = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneNumeric = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -311,8 +311,8 @@ void KeyPress::trigger_key2( )
 
 void KeyPress::trigger_key3( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneNumeric = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneNumeric = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -334,8 +334,8 @@ void KeyPress::trigger_key3( )
 
 void KeyPress::trigger_key4( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneNumeric = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneNumeric = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -357,8 +357,8 @@ void KeyPress::trigger_key4( )
 
 void KeyPress::trigger_key5( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneNumeric = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneNumeric = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -380,8 +380,8 @@ void KeyPress::trigger_key5( )
 
 void KeyPress::trigger_key6( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneNumeric = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneNumeric = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -403,8 +403,8 @@ void KeyPress::trigger_key6( )
 
 void KeyPress::trigger_key7( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneNumeric = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneNumeric = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -426,8 +426,8 @@ void KeyPress::trigger_key7( )
 
 void KeyPress::trigger_key8( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneNumeric = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneNumeric = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -449,8 +449,8 @@ void KeyPress::trigger_key8( )
 
 void KeyPress::trigger_key9( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneNumeric = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneNumeric = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -472,8 +472,8 @@ void KeyPress::trigger_key9( )
 
 void KeyPress::trigger_keyA( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneAlpha = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneAlpha = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -494,8 +494,8 @@ void KeyPress::trigger_keyA( )
 
 void KeyPress::trigger_keyB( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneAlpha = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneAlpha = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -516,8 +516,8 @@ void KeyPress::trigger_keyB( )
 
 void KeyPress::trigger_keyBackspace( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneNumeric = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneNumeric = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -538,8 +538,8 @@ void KeyPress::trigger_keyBackspace( )
 
 void KeyPress::trigger_keyC( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneAlpha = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneAlpha = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -560,8 +560,8 @@ void KeyPress::trigger_keyC( )
 
 void KeyPress::trigger_keyDelete( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneNumeric = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneNumeric = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -582,9 +582,9 @@ void KeyPress::trigger_keyDelete( )
 
 void KeyPress::trigger_keyF1( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneAlpha = false;
-  __attribute__( ( unused ) ) bool doneLog = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneAlpha = false;
+  [[maybe_unused]] bool doneLog = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -629,8 +629,8 @@ void KeyPress::trigger_keyF1( )
 
 void KeyPress::trigger_keyF12( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneAlpha = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneAlpha = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -655,9 +655,9 @@ void KeyPress::trigger_keyF12( )
 
 void KeyPress::trigger_keyF2( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneNumeric = false;
-  __attribute__( ( unused ) ) bool doneLog = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneNumeric = false;
+  [[maybe_unused]] bool doneLog = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -697,8 +697,8 @@ void KeyPress::trigger_keyF2( )
 
 void KeyPress::trigger_space( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneAlpha = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneAlpha = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 

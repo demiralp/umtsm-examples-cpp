@@ -93,49 +93,49 @@ bool Command::isSpacePressed( ) const
 } // End of guard function: isSpacePressed
 
 // The implementation of the actions
-void Command::ReadKey( Command_DataType const& input )
+void Command::ReadKey( [[maybe_unused]] Command_DataType const& input )
 {
   instanceData.key= wgetch(stdscr);
-} // End of action function: ReadKey
+}  // End of action function: ReadKey
 
-void Command::SendAbortEvent( Command_DataType const& input )
+void Command::SendAbortEvent( [[maybe_unused]] Command_DataType const& input )
 {
   instanceData.timer->trigger_abort();
-} // End of action function: SendAbortEvent
+}  // End of action function: SendAbortEvent
 
-void Command::SendHelpEvent( Command_DataType const& input )
+void Command::SendHelpEvent( [[maybe_unused]] Command_DataType const& input )
 {
   instanceData.timer->trigger_help();
-} // End of action function: SendHelpEvent
+}  // End of action function: SendHelpEvent
 
-void Command::SendPauseEvent( Command_DataType const& input )
+void Command::SendPauseEvent( [[maybe_unused]] Command_DataType const& input )
 {
   instanceData.timer->trigger_pause();
-} // End of action function: SendPauseEvent
+}  // End of action function: SendPauseEvent
 
-void Command::SendPrintLapsEvent( Command_DataType const& input )
+void Command::SendPrintLapsEvent( [[maybe_unused]] Command_DataType const& input )
 {
   instanceData.timer->trigger_print();
-} // End of action function: SendPrintLapsEvent
+}  // End of action function: SendPrintLapsEvent
 
-void Command::SendRestartEvent( Command_DataType const& input )
+void Command::SendRestartEvent( [[maybe_unused]] Command_DataType const& input )
 {
   instanceData.timer->trigger_restart();
-} // End of action function: SendRestartEvent
+}  // End of action function: SendRestartEvent
 
-void Command::SendResumeEvent( Command_DataType const& input )
+void Command::SendResumeEvent( [[maybe_unused]] Command_DataType const& input )
 {
   instanceData.timer->trigger_resume();
-} // End of action function: SendResumeEvent
+}  // End of action function: SendResumeEvent
 
-void Command::SendStartEvent( Command_DataType const& input )
+void Command::SendStartEvent( [[maybe_unused]] Command_DataType const& input )
 {
   instanceData.timer->trigger_start();
-} // End of action function: SendStartEvent
+}  // End of action function: SendStartEvent
 
-void Command::SendStopEvent( Command_DataType const& input )
+void Command::SendStopEvent( [[maybe_unused]] Command_DataType const& input )
 {
   instanceData.timer->trigger_stop();
-} // End of action function: SendStopEvent
+}  // End of action function: SendStopEvent
 
 // End of Command_Auxilary.cpp

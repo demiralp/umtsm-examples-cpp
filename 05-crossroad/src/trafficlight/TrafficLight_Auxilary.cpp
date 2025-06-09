@@ -100,7 +100,7 @@ bool TrafficLight::IsStopCheckAndGo( ) const
 {
   bool const result = instanceData.pLane->isIn_StopAndCheck_State( )
     && instanceData.pLane->isIn_Uncontrolled_State( )
-    && instanceData.pLane->isIn_Available_State();
+    && instanceData.pLane->isIn_Available_State( );
   return result;
 }  // End of guard function: IsStopCheckAndGo
 
@@ -117,37 +117,37 @@ bool TrafficLight::IsSystemSwitching( ) const
 }  // End of guard function: IsSystemSwitching
 
 // The implementation of the actions
-void TrafficLight::CountForFlashing( TrafficLight_DataType const& input )
+void TrafficLight::CountForFlashing( [[maybe_unused]] TrafficLight_DataType const& input )
 {
   usleep( RUN_FLASHING_US );
 }  // End of action function: CountForFlashing
 
-void TrafficLight::SwitchAmberLightOff( TrafficLight_DataType const& input )
+void TrafficLight::SwitchAmberLightOff( [[maybe_unused]] TrafficLight_DataType const& input )
 {
   instanceData.pMonitor->trigger_Update( );
 }  // End of action function: SwitchAmberLightOff
 
-void TrafficLight::SwitchAmberLightOn( TrafficLight_DataType const& input )
+void TrafficLight::SwitchAmberLightOn( [[maybe_unused]] TrafficLight_DataType const& input )
 {
   instanceData.pMonitor->trigger_Update( );
 }  // End of action function: SwitchAmberLightOn
 
-void TrafficLight::SwitchGreenLightOff( TrafficLight_DataType const& input )
+void TrafficLight::SwitchGreenLightOff( [[maybe_unused]] TrafficLight_DataType const& input )
 {
   instanceData.pMonitor->trigger_Update( );
 }  // End of action function: SwitchGreenLightOff
 
-void TrafficLight::SwitchGreenLightOn( TrafficLight_DataType const& input )
+void TrafficLight::SwitchGreenLightOn( [[maybe_unused]] TrafficLight_DataType const& input )
 {
   instanceData.pMonitor->trigger_Update( );
 }  // End of action function: SwitchGreenLightOn
 
-void TrafficLight::SwitchRedLightOff( TrafficLight_DataType const& input )
+void TrafficLight::SwitchRedLightOff( [[maybe_unused]] TrafficLight_DataType const& input )
 {
   instanceData.pMonitor->trigger_Update( );
 }  // End of action function: SwitchRedLightOff
 
-void TrafficLight::SwitchRedLightOn( TrafficLight_DataType const& input )
+void TrafficLight::SwitchRedLightOn( [[maybe_unused]] TrafficLight_DataType const& input )
 {
   instanceData.pMonitor->trigger_Update( );
 }  // End of action function: SwitchRedLightOn

@@ -30,10 +30,15 @@
 #include "Lane.hh"
 
 #include <cassert>
+#include <csignal>
 #include <cstddef>
+#include <cstring>
+#include <mutex>
+#include <optional>
+#include <thread>
+
 #include <cstdio>
 #include <cstdlib>
-#include <cstring>
 
 // The implementation of the guards
 bool Lane::IsCheckAndGo( ) const
@@ -43,7 +48,7 @@ bool Lane::IsCheckAndGo( ) const
 }  // End of guard function: IsCheckAndGo
 
 // The implementation of the Persistency Functions
-void Lane::store_Shallow_Availability( Availability_States state, Lane_DataType const& instance ) const
+void Lane::store_Shallow_Availability( [[maybe_unused]] Availability_States state, [[maybe_unused]] Lane_DataType const& instance ) const
 {
   static char const* const regfile = "crossroad-lane";
   char const* folder               = getenv( "TMPDIR" );
@@ -68,7 +73,7 @@ void Lane::store_Shallow_Availability( Availability_States state, Lane_DataType 
   }
 }  // End of action function: store_Shallow_Availability
 
-Lane::Availability_States Lane::load_Shallow_Availability( Lane_DataType const& instance ) const
+Lane::Availability_States Lane::load_Shallow_Availability( [[maybe_unused]] Lane_DataType const& instance ) const
 {
   static constexpr Availability_States availStates[] = {
     Availability_States::E_init,

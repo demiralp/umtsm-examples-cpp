@@ -339,7 +339,7 @@ ExecutionDirector_DataType* ExecutionDirector::getData( ) noexcept
 
 void ExecutionDirector::trigger_DisableLane1( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -442,7 +442,7 @@ void ExecutionDirector::trigger_DisableLane1( )
 
 void ExecutionDirector::trigger_DisableLane2( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -545,7 +545,7 @@ void ExecutionDirector::trigger_DisableLane2( )
 
 void ExecutionDirector::trigger_DisableLane3( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -648,7 +648,7 @@ void ExecutionDirector::trigger_DisableLane3( )
 
 void ExecutionDirector::trigger_DisableLane4( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -751,7 +751,7 @@ void ExecutionDirector::trigger_DisableLane4( )
 
 void ExecutionDirector::trigger_EnableLane1( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -854,7 +854,7 @@ void ExecutionDirector::trigger_EnableLane1( )
 
 void ExecutionDirector::trigger_EnableLane2( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -957,7 +957,7 @@ void ExecutionDirector::trigger_EnableLane2( )
 
 void ExecutionDirector::trigger_EnableLane3( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1060,7 +1060,7 @@ void ExecutionDirector::trigger_EnableLane3( )
 
 void ExecutionDirector::trigger_EnableLane4( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1163,7 +1163,7 @@ void ExecutionDirector::trigger_EnableLane4( )
 
 void ExecutionDirector::trigger_OpenLane1( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1229,7 +1229,7 @@ void ExecutionDirector::trigger_OpenLane1( )
 
 void ExecutionDirector::trigger_OpenLane2( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1295,7 +1295,7 @@ void ExecutionDirector::trigger_OpenLane2( )
 
 void ExecutionDirector::trigger_OpenLane3( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1361,7 +1361,7 @@ void ExecutionDirector::trigger_OpenLane3( )
 
 void ExecutionDirector::trigger_OpenLane4( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1427,7 +1427,7 @@ void ExecutionDirector::trigger_OpenLane4( )
 
 void ExecutionDirector::trigger_OpenPedestrianLanes( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1493,7 +1493,7 @@ void ExecutionDirector::trigger_OpenPedestrianLanes( )
 
 void ExecutionDirector::trigger_ReleaseControl( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1632,7 +1632,7 @@ void ExecutionDirector::trigger_ReleaseControl( )
 
 void ExecutionDirector::trigger_SystemDisabled( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1776,7 +1776,7 @@ void ExecutionDirector::trigger_SystemDisabled( )
 
 void ExecutionDirector::trigger_SystemEnabled( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1800,7 +1800,7 @@ void ExecutionDirector::trigger_SystemEnabled( )
 
 void ExecutionDirector::trigger_TakeControl( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 

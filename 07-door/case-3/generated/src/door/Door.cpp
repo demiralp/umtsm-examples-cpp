@@ -240,7 +240,7 @@ Door_DataType* Door::getData( ) noexcept
 
 void Door::trigger_Automatic( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -279,7 +279,7 @@ void Door::trigger_Automatic( )
 
 void Door::trigger_ButtonPressed( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -338,7 +338,7 @@ void Door::trigger_ButtonPressed( )
 
 void Door::trigger_DoorClosed( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -363,7 +363,7 @@ void Door::trigger_DoorClosed( )
 
 void Door::trigger_DoorOpen( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -389,7 +389,7 @@ void Door::trigger_DoorOpen( )
 
 void Door::trigger_Manual( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 

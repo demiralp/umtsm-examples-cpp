@@ -298,9 +298,9 @@ PedestrianLights_DataType* PedestrianLights::getData( ) noexcept
 
 void PedestrianLights::trigger_Check( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneTop = false;
-  __attribute__( ( unused ) ) bool doneBottom = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneTop = false;
+  [[maybe_unused]] bool doneBottom = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -552,9 +552,9 @@ void PedestrianLights::trigger_Check( )
 
 void PedestrianLights::trigger_SystemDisabled( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneTop = false;
-  __attribute__( ( unused ) ) bool doneBottom = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneTop = false;
+  [[maybe_unused]] bool doneBottom = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -653,9 +653,9 @@ void PedestrianLights::trigger_SystemDisabled( )
 
 void PedestrianLights::trigger_SystemEnabled( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneTop = false;
-  __attribute__( ( unused ) ) bool doneBottom = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneTop = false;
+  [[maybe_unused]] bool doneBottom = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 

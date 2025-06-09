@@ -169,7 +169,7 @@ NumberGuess_DataType* NumberGuess::getData( ) noexcept
 
 void NumberGuess::trigger_abort( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -207,7 +207,7 @@ void NumberGuess::trigger_abort( )
 
 void NumberGuess::trigger_clock1sec( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -269,7 +269,7 @@ void NumberGuess::trigger_clock1sec( )
 
 void NumberGuess::trigger_newgame( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -309,7 +309,7 @@ void NumberGuess::trigger_newgame( )
 
 void NumberGuess::trigger_show( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
+  [[maybe_unused]] bool doneMain = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 

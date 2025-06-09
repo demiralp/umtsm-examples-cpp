@@ -44,11 +44,11 @@
 #include <cstdlib>
 #include <cstring>
 #include <mutex>
-#include <ncurses.h>
 #include <optional>
 #include <thread>
-
 #include <unistd.h>
+
+#include <ncurses.h>
 
 namespace
 {
@@ -156,6 +156,7 @@ namespace
       }
     }
 
+    PrintHelpLine( "P", "Open the pedestrian lanes" );
     PrintHelpLine( "Q", "Quit" );
     PrintHelpLine( "Ctrl+C", "Terminate immediately" );
     PrintHelpLine( "SPACE", "Update this screen" );
@@ -163,12 +164,12 @@ namespace
 }  // namespace
 
 // The implementation of the actions
-void Monitor::ClearMessage( Monitor_DataType const& input )
+void Monitor::ClearMessage( [[maybe_unused]] Monitor_DataType const& input )
 {
   instanceData.Message[ 0 ] = '\0';
 }  // End of action function: ClearMessage
 
-void Monitor::DisplayStatusOfLanes( Monitor_DataType const& input )
+void Monitor::DisplayStatusOfLanes( [[maybe_unused]] Monitor_DataType const& input )
 {
   Lane* pLane[ 4 ];
   auto crossroad = instanceData.pCrossroad;
@@ -380,7 +381,7 @@ void Monitor::DisplayStatusOfLanes( Monitor_DataType const& input )
   }
 }  // End of action function: DisplayStatusOfLanes
 
-void Monitor::RequestUpdate( Monitor_DataType const& input )
+void Monitor::RequestUpdate( [[maybe_unused]] Monitor_DataType const& input )
 {
   instanceData.UpdateStatus = true;
 }  // End of action function: RequestUpdate

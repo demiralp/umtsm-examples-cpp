@@ -40,51 +40,51 @@
 #include <thread>
 
 // The implementation of the actions
-void Timewatch::Exit( Timewatch_DataType const& input )
+void Timewatch::Exit( [[maybe_unused]] Timewatch_DataType const& input )
 {
 }  // End of action function: Exit
 
-void Timewatch::InitPauseTime( Timewatch_DataType const& input )
+void Timewatch::InitPauseTime( [[maybe_unused]] Timewatch_DataType const& input )
 {
 }  // End of action function: InitPauseTime
 
-void Timewatch::InitWatchProperties( Timewatch_DataType const& input )
+void Timewatch::InitWatchProperties( [[maybe_unused]] Timewatch_DataType const& input )
 {
 }  // End of action function: InitWatchProperties
 
-void Timewatch::PrintElapsedTime( Timewatch_DataType const& input )
+void Timewatch::PrintElapsedTime( [[maybe_unused]] Timewatch_DataType const& input )
 {
 }  // End of action function: PrintElapsedTime
 
-void Timewatch::PrintHelp( Timewatch_DataType const& input )
+void Timewatch::PrintHelp( [[maybe_unused]] Timewatch_DataType const& input )
 {
 }  // End of action function: PrintHelp
 
-void Timewatch::PrintStatusIdle( Timewatch_DataType const& input )
+void Timewatch::PrintStatusIdle( [[maybe_unused]] Timewatch_DataType const& input )
 {
 }  // End of action function: PrintStatusIdle
 
-void Timewatch::PrintStatusPause( Timewatch_DataType const& input )
+void Timewatch::PrintStatusPause( [[maybe_unused]] Timewatch_DataType const& input )
 {
 }  // End of action function: PrintStatusPause
 
-void Timewatch::PrintStatusReset( Timewatch_DataType const& input )
+void Timewatch::PrintStatusReset( [[maybe_unused]] Timewatch_DataType const& input )
 {
 }  // End of action function: PrintStatusReset
 
-void Timewatch::PrintStatusResume( Timewatch_DataType const& input )
+void Timewatch::PrintStatusResume( [[maybe_unused]] Timewatch_DataType const& input )
 {
 }  // End of action function: PrintStatusResume
 
-void Timewatch::PrintStatusRun( Timewatch_DataType const& input )
+void Timewatch::PrintStatusRun( [[maybe_unused]] Timewatch_DataType const& input )
 {
 }  // End of action function: PrintStatusRun
 
-void Timewatch::ReportTotalTime( Timewatch_DataType const& input )
+void Timewatch::ReportTotalTime( [[maybe_unused]] Timewatch_DataType const& input )
 {
 }  // End of action function: ReportTotalTime
 
-void Timewatch::UpdateSuspendentDuration( Timewatch_DataType const& input )
+void Timewatch::UpdateSuspendentDuration( [[maybe_unused]] Timewatch_DataType const& input )
 {
 }  // End of action function: UpdateSuspendentDuration
 

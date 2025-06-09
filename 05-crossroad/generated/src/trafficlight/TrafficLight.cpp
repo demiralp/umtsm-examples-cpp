@@ -375,10 +375,10 @@ TrafficLight_DataType* TrafficLight::getData( ) noexcept
 
 void TrafficLight::trigger_Check( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneTop = false;
-  __attribute__( ( unused ) ) bool doneMiddle = false;
-  __attribute__( ( unused ) ) bool doneBottom = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneTop = false;
+  [[maybe_unused]] bool doneMiddle = false;
+  [[maybe_unused]] bool doneBottom = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -578,13 +578,7 @@ void TrafficLight::trigger_Check( )
             exit_Amber_Off_Flashing( );
             runningState.Middle = Middle_States::E_Amber_Off;
           }
-          else if ( IsSystemOperational( ) && IsLaneOnClosing( ) )
-          {
-            exit_Amber_Off_Flashing( );
-            enter_Amber_On( );
-            runningState.Middle = Middle_States::E_Amber_On;
-          }
-          else if ( IsSystemOperational( ) && IsLaneOnOpening( ) )
+          else if ( IsSystemOperational( ) && ( IsLaneOnClosing( ) || IsLaneOnOpening( ) ) )
           {
             exit_Amber_Off_Flashing( );
             enter_Amber_On( );
@@ -616,12 +610,7 @@ void TrafficLight::trigger_Check( )
         }
         else
         {
-          if ( IsSystemOperational( ) && IsLaneOnClosing( ) )
-          {
-            enter_Amber_On( );
-            runningState.Middle = Middle_States::E_Amber_On;
-          }
-          else if ( IsSystemOperational( ) && IsLaneOnOpening( ) )
+          if ( IsSystemOperational( ) && ( IsLaneOnClosing( ) || IsLaneOnOpening( ) ) )
           {
             enter_Amber_On( );
             runningState.Middle = Middle_States::E_Amber_On;
@@ -912,10 +901,10 @@ void TrafficLight::trigger_Check( )
 
 void TrafficLight::trigger_SystemDisabled( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneTop = false;
-  __attribute__( ( unused ) ) bool doneMiddle = false;
-  __attribute__( ( unused ) ) bool doneBottom = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneTop = false;
+  [[maybe_unused]] bool doneMiddle = false;
+  [[maybe_unused]] bool doneBottom = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -1060,10 +1049,10 @@ void TrafficLight::trigger_SystemDisabled( )
 
 void TrafficLight::trigger_SystemEnabled( )
 {
-  __attribute__( ( unused ) ) bool doneMain = false;
-  __attribute__( ( unused ) ) bool doneTop = false;
-  __attribute__( ( unused ) ) bool doneMiddle = false;
-  __attribute__( ( unused ) ) bool doneBottom = false;
+  [[maybe_unused]] bool doneMain = false;
+  [[maybe_unused]] bool doneTop = false;
+  [[maybe_unused]] bool doneMiddle = false;
+  [[maybe_unused]] bool doneBottom = false;
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
