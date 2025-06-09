@@ -1,0 +1,278 @@
+/*  ==============================================================================
+ *  Created by Fehmi Demiralp(Fedem) on 2025-05-29 GMT
+ *  Copyright (C) 2023-2025 Fedem (Fehmi Demiralp) <f.demiralp@gmail.com>
+ *
+ *  Released under the MIT License
+ *  ==============================================================================
+ */
+
+/*  Copyright (C) 2023-2025 Fedem (Fehmi Demiralp) <f.demiralp@gmail.com>
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ */
+
+type sm Crossroad;
+type sm Monitor;
+type external object time_t;
+
+enumeration ControlMode
+{
+    PERSISTENT_CONTROL_MODE,
+    CONTROLLED,
+    UNCONTROLLED
+}
+
+enumeration Lane_Command
+{
+    E_CMD_NOPE,
+    E_CMD_DISABLE_LANE,
+    E_CMD_ENABLE_LANE
+}
+
+//*********************************************************
+// ExecutionDirector
+//*********************************************************
+
+sm ExecutionDirector
+{
+    properties
+    {
+        ControlMode ControlModeStatus;
+        time_t StartSwitchingTime;
+        boolean LaneClosingCompleted;
+        optional Crossroad pCrossroad;
+        optional Monitor pMonitor;
+        int LaneRequested;
+        int NextLane;
+        Lane_Command LaneCmd1;
+        Lane_Command LaneCmd2;
+        Lane_Command LaneCmd3;
+        Lane_Command LaneCmd4;
+    }
+
+    init -> StandBy;
+
+    state StandBy
+    {
+        entry / StopTraffic, DisableSystem, NotifyCrossroad;
+        exit / EnableSystem;
+
+        SystemEnabled -> GoesToOperational / ClearControlMode;
+        TakeControl -> GoesToOperational / SetControlledMode;
+        ReleaseControl -> GoesToOperational / SetUncontrolledMode;
+    }
+
+    state SwitchSystem
+    {
+        entry / StartSystemSwitchingTimer, NotifyCrossroad;
+
+        state GoesToOperational
+        {
+            do / WaitForSystemSwitchingTimer;
+
+            SystemDisabled -> GoesToStandby;
+            TakeControl / SetControlledMode;
+            ReleaseControl / SetUncontrolledMode;
+
+            [IsControlledModeRequested]-> Controlled;
+            [IsUncontrolledModeRequested] -> Uncontrolled;
+            -> Operational;
+        }
+
+        state GoesToStandby
+        {
+            do / WaitForSystemSwitchingTimer;
+
+            SystemEnabled -> GoesToOperational;
+            TakeControl -> GoesToOperational / SetControlledMode;
+            ReleaseControl -> GoesToOperational / SetUncontrolledMode;
+
+            -> StandBy;
+        }
+    }
+
+    state SwitchControlState
+    {
+        entry / StopTraffic;
+        do / WaitForTrafficStops;
+
+        SystemDisabled -> GoesToStandby;
+        TakeControl / SetControlledMode;
+        ReleaseControl / SetUncontrolledMode;
+
+        [IsControlledModeRequested]-> Controlled;
+        [IsUncontrolledModeRequested] -> Uncontrolled;
+        -> Operational;
+    }
+
+
+    state Operational
+    {
+        persistent history -> Uncontrolled;
+
+        exit / StopTraffic;
+
+        SystemDisabled -> GoesToStandby;
+
+        state Uncontrolled
+        {
+            init -> CheckRequests;
+            entry / StartUncontrolMode, NotifyCrossroad;
+
+            TakeControl -> SwitchControlState / SetControlledMode;
+
+            state CheckRequests
+            {
+                entry / CheckRouteRequest, Update;
+                do / WaitForInterval;
+
+                -->;
+            }
+        }
+
+        state Controlled
+        {
+            entry / StartControlMode, NotifyCrossroad;
+            init -> OnClosePedestrianLanes / StopTraffic;
+
+            // ------------------------------- 1 ----------------------------
+            state OpenLane1
+            {
+                entry / OrderOpenLane1, NotifyCrossroad;
+                do / WaitForLane1;
+
+                -> OnCloseLane1;
+            }
+
+            state OnCloseLane1
+            {
+                entry / PrepareForNextLane, NotifyCrossroad;
+                do / WaitForNextLaneOpen;
+
+                [IsNextLane2] -> OpenLane2;
+                [IsNextLane3] -> OpenLane3;
+                [IsNextLane4] -> OpenLane4;
+                [IsNextLanePedestrianLanes] -> OpenPedestrianLanes;;
+                -> OpenLane2;
+            }
+
+            // ------------------------------- 2 ----------------------------
+            state OpenLane2
+            {
+                entry / OrderOpenLane2, NotifyCrossroad;
+                do / WaitForLane2;
+
+                -> OnCloseLane2;
+            }
+
+            state OnCloseLane2
+            {
+                entry / PrepareForNextLane, NotifyCrossroad;
+                do / WaitForNextLaneOpen;
+
+                [IsNextLane1] -> OpenLane1;
+                [IsNextLane3] -> OpenLane3;
+                [IsNextLane4] -> OpenLane4;
+                [IsNextLanePedestrianLanes] -> OpenPedestrianLanes;;
+                -> OpenLane3;
+            }
+
+            // ------------------------------- 3 ----------------------------
+            state OpenLane3
+            {
+                entry / OrderOpenLane3, NotifyCrossroad;
+                do / WaitForLane3;
+
+                -> OnCloseLane3;
+            }
+
+            state OnCloseLane3
+            {
+                entry / PrepareForNextLane, NotifyCrossroad;
+                do / WaitForNextLaneOpen;
+
+                [IsNextLane1] -> OpenLane1;
+                [IsNextLane2] -> OpenLane2;
+                [IsNextLane4] -> OpenLane4;
+                [IsNextLanePedestrianLanes] -> OpenPedestrianLanes;;
+                -> OpenLane4;
+            }
+
+            // ------------------------------- 4 ----------------------------
+            state OpenLane4
+            {
+                entry / OrderOpenLane4, NotifyCrossroad;
+                do / WaitForLane4;
+
+                -> OnCloseLane4;
+            }
+
+            state OnCloseLane4
+            {
+                entry / PrepareForNextLane, NotifyCrossroad;
+                do / WaitForNextLaneOpen;
+
+                [IsNextLane1] -> OpenLane1;
+                [IsNextLane2] -> OpenLane2;
+                [IsNextLane3] -> OpenLane3;
+                [IsNextLanePedestrianLanes] -> OpenPedestrianLanes;
+                -> OpenPedestrianLanes;
+            }
+
+            // ------------------------ Pedestrian Lanes --------------------
+            state OpenPedestrianLanes
+            {
+                entry / OrderOpenPedestrianLanes, NotifyCrossroad;
+                do / WaitForPedestrians;
+
+                -> OnClosePedestrianLanes;
+            }
+
+            state OnClosePedestrianLanes
+            {
+                entry / PrepareForNextLane, NotifyCrossroad;
+                do / WaitForNextLaneOpen;
+
+                [IsNextLane1] -> OpenLane1;
+                [IsNextLane2] -> OpenLane2;
+                [IsNextLane3] -> OpenLane3;
+                [IsNextLane4] -> OpenLane4;
+                -> OpenLane1;
+            }
+
+            ReleaseControl -> SwitchControlState / SetUncontrolledMode;
+
+            OpenLane1 / SetNextOpenLane1, Update;
+            OpenLane2 / SetNextOpenLane2, Update;
+            OpenLane3 / SetNextOpenLane3, Update;
+            OpenLane4 / SetNextOpenLane4, Update;
+            OpenPedestrianLanes / SetNextOpenLanePedestrianLanes, Update;
+        }
+    }
+
+    DisableLane1 / SetDisableLane1;
+    DisableLane2 / SetDisableLane2;
+    DisableLane3 / SetDisableLane3;
+    DisableLane4 / SetDisableLane4;
+
+    EnableLane1 / SetEnableLane1;
+    EnableLane2 / SetEnableLane2;
+    EnableLane3 / SetEnableLane3;
+    EnableLane4 / SetEnableLane4;
+}

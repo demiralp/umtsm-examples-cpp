@@ -1,0 +1,122 @@
+/*  ==============================================================================
+ *  Created by Fehmi Demiralp(Fedem) on 2025-05-29 GMT
+ *  Copyright (C) 2023-2025 Fedem (Fehmi Demiralp) <f.demiralp@gmail.com>
+ *
+ *  Released under the MIT License
+ *  ==============================================================================
+ */
+
+/*  Copyright (C) 2023-2025 Fedem (Fehmi Demiralp) <f.demiralp@gmail.com>
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ */
+
+import "Lane.umt"
+import "TrafficLight.umt"
+import "PedestrianLights.umt"
+
+//*********************************************************
+// Crossroad
+//*********************************************************
+
+sm Crossroad
+{
+    properties
+    {
+        int Id;
+    }
+
+    init -> Start;
+
+    fork Start
+    {
+        -> Lane1;
+        -> Lane2;
+        -> Lane3;
+        -> Lane4;
+        -> PedestrianLanes;
+        -> TrafficLight1;
+        -> TrafficLight2;
+        -> TrafficLight3;
+        -> TrafficLight4;
+        -> PedestrianLight;
+    }
+
+    //*********************************************************
+    // Lanes
+    //*********************************************************
+    region RgLane1
+    {
+        state Lane1 instantiate Lane;
+    }
+
+    region RgLane2
+    {
+        state Lane2 instantiate Lane;
+    }
+
+    region RgLane3
+    {
+        state Lane3 instantiate Lane;
+    }
+
+    region RgLane4
+    {
+        state Lane4 instantiate Lane;
+    }
+
+    //*********************************************************
+    // Pedestrian Lanes
+    //*********************************************************
+    region RgPedestrianLanes
+    {
+        state PedestrianLanes instantiate Lane;
+    }
+
+    //*********************************************************
+    // Traffic Lights
+    //*********************************************************
+    region RgTrafficLight1
+    {
+        state TrafficLight1 instantiate TrafficLight;
+    }
+
+    region RgTrafficLight2
+    {
+        state TrafficLight2 instantiate TrafficLight;
+    }
+
+    region RgTrafficLight3
+    {
+        state TrafficLight3 instantiate TrafficLight;
+    }
+
+    region RgTrafficLight4
+    {
+        state TrafficLight4 instantiate TrafficLight;
+    }
+
+    //*********************************************************
+    // Pedestrian Lights
+    //*********************************************************
+    region RgPedestrianLight
+    {
+        state PedestrianLight instantiate PedestrianLights;
+    }
+}
