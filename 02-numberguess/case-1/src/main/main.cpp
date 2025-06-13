@@ -43,7 +43,7 @@ int main( )
 {
   numberguess.start( );
 
-  while( numberguess.isIn_Main_Region( ) )
+  while( numberguess.isAlive( ) )
   {
     std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
   }

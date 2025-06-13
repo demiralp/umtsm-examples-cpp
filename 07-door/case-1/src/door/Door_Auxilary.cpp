@@ -1,5 +1,5 @@
 /*  ==============================================================================
- *  Created by Fehmi Demiralp(Fedem) on 2025-05-30 GMT
+ *  Created by Fehmi Demiralp(Fedem) on 2025-06-15 GMT
  *  Copyright (C) 2023-2025 Fedem (Fehmi Demiralp) <f.demiralp@gmail.com>
  *
  *  Released under the MIT License
@@ -39,7 +39,15 @@
 #include <optional>
 #include <thread>
 
-#define KEEP_DOOR_OPEN ( 5 )
+#include <fstream>
+#include <sstream>
+#include <vector>
+
+namespace
+{
+  static constexpr std::string_view regfile      = "cpp-door";
+  static constexpr std::string_view tmpDirEnvVar = "TMPDIR";
+}  // namespace
 
 // The implementation of the actions
 void Door::engineRunACCW( [[maybe_unused]] Door_DataType const& input )
@@ -59,97 +67,69 @@ void Door::engineStop( [[maybe_unused]] Door_DataType const& input )
 
 // The implementation of the Persistency Functions
 void Door::store_Shallow_Main( [[maybe_unused]] Main_States state, [[maybe_unused]] Door_DataType const& instance ) const
+try
 {
-  static char const* const regfile = "door";
-  char const* folder               = getenv( "TMPDIR" );
-  char path[ 256 ];
-  if( folder == 0 )
-  {
-    folder = "/tmp";
-  }
+  std::ostringstream path;
+  char* folder = getenv( tmpDirEnvVar.data( ) );
 
-  strcpy( path, folder );
-  strcat( path, "/" );
-  strcat( path, regfile );
-  strcat( path, "-" );
-  strcat( path, instanceData.id.c_str() );
-  strcat( path, ".bin" );
+  path << ( folder ? folder : "/tmp" ) << '/' << regfile << instance.id << ".bin";
 
-  FILE* fd = fopen( path, "wb" );
-  if( fd != NULL )
+  std::ofstream stream( path.str( ), std::ios::out | std::ios::binary );
+
+  if( stream.is_open( ) )
   {
     uint16_t sdata = (uint16_t)state;
-    fwrite( &sdata, sizeof( sdata ), 1, fd );
-    fclose( fd );
+    stream << sdata;
   }
+
+  stream.close( );
+}
+catch( ... )
+{
 }  // End of action function: store_Shallow_Main
 
 Door::Main_States Door::load_Shallow_Main( [[maybe_unused]] Door_DataType const& instance ) const
+try
 {
   Main_States result = Main_States::E_init;
 
-  static char const* const regfile = "door";
-  char const* folder               = getenv( "TMPDIR" );
-  char path[ 256 ];
-  if( folder == 0 )
-  {
-    folder = "/tmp";
-  }
+  static std::vector< Main_States > const doorStates {
+        Main_States::E_init,
+        Main_States::E_Main,
+        Main_States::E_Open,
+        Main_States::E_Closing,
+        Main_States::E_Close,
+        Main_States::E_Opening,
+        Main_States::E_final
+  };
 
-  strcpy( path, folder );
-  strcat( path, "/" );
-  strcat( path, regfile );
-  strcat( path, "-" );
-  strcat( path, instanceData.id.c_str() );
-  strcat( path, ".bin" );
+  std::ostringstream path;
 
-  FILE* fd = fopen( path, "rb" );
-  if( fd != NULL )
+  char* folder = getenv( tmpDirEnvVar.data( ) );
+
+  path << ( folder ? folder : "/tmp" ) << '/' << regfile << instance.id << ".bin";
+
+  std::ifstream stream;
+
+  stream.open( path.str( ), std::ios::in | std::ios::binary );
+
+  if( stream.is_open( ) )
   {
     uint16_t sdata;
-    fread( &sdata, sizeof( sdata ), 1, fd );
-    fclose( fd );
+    stream >> sdata;
+    stream.close( );
 
-    switch( sdata )
+    if( sdata < doorStates.size( ) )
     {
-      case 0:
-      {
-        result= Main_States::E_init;
-        break;
-      }
-      case 1:
-      {
-        result= Main_States::E_Main;
-        break;
-      }
-      case 2:
-      {
-        result= Main_States::E_Open;
-        break;
-      }
-      case 3:
-      {
-        result= Main_States::E_Closing;
-        break;
-      }
-      case 4:
-      {
-        result= Main_States::E_Close;
-        break;
-      }
-      case 5:
-      {
-        result= Main_States::E_Opening;
-        break;
-      }
-      case 6:
-      {
-        result= Main_States::E_final;
-        break;
-      }
+      result = doorStates[ sdata ];
     }
   }
 
+  return result;
+}
+catch( ... )
+{
+  Main_States result = Main_States::E_init;
   return result;
 }  // End of loader function: load_Shallow_Main
 

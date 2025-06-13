@@ -1,5 +1,5 @@
 /*  ==============================================================================
- *  Created by Fehmi Demiralp(Fedem) on 2025-05-30 GMT
+ *  Created by Fehmi Demiralp(Fedem) on 2025-06-15 GMT
  *  Copyright (C) 2023-2025 Fedem (Fehmi Demiralp) <f.demiralp@gmail.com>
  *
  *  Released under the MIT License
@@ -69,8 +69,8 @@ void Dashboard::DisplayDoorStatus( [[maybe_unused]] Dashboard_DataType const& in
 {
   while( true )
   {
-    usleep( 200000 );
-
+    std::this_thread::sleep_for( std::chrono::milliseconds(200));
+    
     clear( );
 
     /* Door Working Mode */

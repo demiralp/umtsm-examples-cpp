@@ -38,14 +38,15 @@
 #include <optional>
 #include <thread>
 #include <unistd.h>
-
-#include <ctime>
 #include <random>
 #include <iostream>
 
-#define GAME_TIME (1U*60U)
-#define ESTIMATION_TIME (20U)
-#define WARNING_TIME (10U)
+namespace
+{
+  constexpr std::chrono::minutes GAME_TIME(1U);
+  constexpr std::chrono::seconds ESTIMATION_TIME(20U);
+  constexpr std::chrono::seconds WARNING_TIME(10U);
+}
 
 // The implementation of the guards
 bool NumberGuess::AreNumbersEqual( ) const
@@ -56,8 +57,8 @@ bool NumberGuess::AreNumbersEqual( ) const
 
 bool NumberGuess::IsAnsweringTimeUp( ) const
 {
-  time_t now= time( NULL );
-  bool const result = (difftime(now, instanceData.estimation_begin) >= ESTIMATION_TIME);
+  TimePoint now= std::chrono::system_clock::now();
+  bool const result = now >= (instanceData.estimation_begin + ESTIMATION_TIME);
   return result;
 }  // End of guard function: IsAnsweringTimeUp
 
@@ -86,8 +87,8 @@ bool NumberGuess::IsDraw( ) const
 
 bool NumberGuess::IsGameTimeOver( ) const
 {
-  time_t now= time( NULL );
-  bool const result = (difftime(now, instanceData.game_begin) >= GAME_TIME);
+  TimePoint now= std::chrono::system_clock::now();
+  bool const result = now >= ( instanceData.game_begin + GAME_TIME );
   return result;
 }  // End of guard function: IsGameTimeOver
 
@@ -109,8 +110,8 @@ bool NumberGuess::IsTimeRunOut( ) const
 
   if (result)
   {
-    time_t now= time( NULL );
-    result = difftime(now, instanceData.estimation_begin) >= WARNING_TIME;
+    TimePoint now= std::chrono::system_clock::now();
+    result = now >= ( instanceData.estimation_begin + WARNING_TIME );
   }
 
   return result;
@@ -195,9 +196,10 @@ void NumberGuess::PrintWarning( [[maybe_unused]] NumberGuess_DataType const& inp
 void NumberGuess::ReadAnswerToContinue( [[maybe_unused]] NumberGuess_DataType const& input )
 {
   char buffer[256];
+  std::cin.clear();
   std::cin.getline( buffer, sizeof(buffer)-1 );
   instanceData.answer= 0;
-  if (!std::cin.bad())
+  if (!std::cin.fail())
   {
     static constexpr auto ws = " \t\n\r\v";
     
@@ -221,9 +223,10 @@ void NumberGuess::ReadAnswerToContinue( [[maybe_unused]] NumberGuess_DataType co
 void NumberGuess::ReadEstimation( [[maybe_unused]] NumberGuess_DataType const& input )
 {
   char buffer[256];
+  std::cin.clear();
   std::cin.getline( buffer, sizeof(buffer)-1 );
   instanceData.answer= 0;
-  if (!std::cin.bad())
+  if (!std::cin.fail())
   {
     static constexpr auto ws = " \t\n\r\v";
     static constexpr auto digits = "1234567890";
@@ -236,7 +239,7 @@ void NumberGuess::ReadEstimation( [[maybe_unused]] NumberGuess_DataType const& i
       str.erase( 0, pos );      
     }
 
-    pos = str.find_last_not_of (ws );
+    pos = str.find_last_not_of ( ws );
     if ( pos != str.npos )
     {
       str.erase( pos + 1 );
@@ -283,13 +286,13 @@ void NumberGuess::SetANumber( [[maybe_unused]] NumberGuess_DataType const& input
 
 void NumberGuess::StartAnswerTimer( [[maybe_unused]] NumberGuess_DataType const& input )
 {
-  instanceData.estimation_begin= time(NULL);
+  instanceData.estimation_begin= std::chrono::system_clock::now();
   instanceData.warn= true;
 }  // End of action function: StartAnswerTimer
 
 void NumberGuess::StartEstimationTimer( [[maybe_unused]] NumberGuess_DataType const& input )
 {
-  instanceData.game_begin= time(NULL);
+  instanceData.game_begin= std::chrono::system_clock::now();
 }  // End of action function: StartEstimationTimer
 
 // End of NumberGuess_Auxilary.cpp

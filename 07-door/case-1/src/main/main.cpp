@@ -93,13 +93,6 @@ int main( )
   refresh( );
 
   /* Initilaize entire the state machines */
-  door.initialize( );
-  button.initialize( );
-  engine.initialize( );
-  scloseend.initialize( );
-  sopenend.initialize( );
-  dashboard.initialize( );
-
   door.instanceData.id      = "case-1";
   door.instanceData.pEngine = &engine;
 

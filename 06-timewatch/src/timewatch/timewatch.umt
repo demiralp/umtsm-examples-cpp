@@ -32,7 +32,8 @@
 // Timewatch
 //*********************************************************
 
-type external time_t;
+type external TimePoint;
+type external Duration;
 
 sm Timewatch
 {
@@ -46,8 +47,8 @@ sm Timewatch
     {
         properties
         {
-            time_t start_time;
-            double suspended_duration;
+            TimePoint start_time;
+            Duration suspended_duration;
         }
 
         entry / InitWatchProperties;
@@ -62,7 +63,7 @@ sm Timewatch
         {
             properties
             {
-                time_t start_pause_time;
+                TimePoint start_pause_time;
             }
 
             entry / InitPauseTime, PrintStatusPause;

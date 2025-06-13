@@ -29,7 +29,8 @@
 
 type sm Crossroad;
 type sm Monitor;
-type external object time_t;
+
+type external TimePoint;
 
 enumeration ControlMode
 {
@@ -54,7 +55,7 @@ sm ExecutionDirector
     properties
     {
         ControlMode ControlModeStatus;
-        time_t StartSwitchingTime;
+        TimePoint StartSwitchingTime;
         boolean LaneClosingCompleted;
         optional Crossroad pCrossroad;
         optional Monitor pMonitor;

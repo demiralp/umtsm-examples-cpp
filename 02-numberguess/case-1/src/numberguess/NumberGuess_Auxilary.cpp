@@ -1,5 +1,5 @@
 /*  ==============================================================================
- *  Created by Fehmi Demiralp(Fedem) on 2025-05-11 GMT
+ *  Created by Fehmi Demiralp(Fedem) on 2025-06-15 GMT
  *  Copyright (C) 2023-2025 Fedem (Fehmi Demiralp) <f.demiralp@gmail.com>
  *
  *  Released under the MIT License
@@ -38,8 +38,6 @@
 #include <optional>
 #include <thread>
 #include <unistd.h>
-
-#include <ctime>
 #include <random>
 #include <iostream>
 
@@ -131,9 +129,10 @@ void NumberGuess::PrintWarning( [[maybe_unused]] NumberGuess_DataType const& inp
 void NumberGuess::ReadAnswerToContinue( [[maybe_unused]] NumberGuess_DataType const& input )
 {
   char buffer[256];
+  std::cin.clear();
   std::cin.getline( buffer, sizeof(buffer)-1 );
   instanceData.answer= 0;
-  if (!std::cin.bad())
+  if (!std::cin.fail())
   {
     static constexpr auto ws = " \t\n\r\v";
     
@@ -157,9 +156,10 @@ void NumberGuess::ReadAnswerToContinue( [[maybe_unused]] NumberGuess_DataType co
 void NumberGuess::ReadEstimation( [[maybe_unused]] NumberGuess_DataType const& input )
 {
   char buffer[256];
+  std::cin.clear();
   std::cin.getline( buffer, sizeof(buffer)-1 );
   instanceData.answer= 0;
-  if (!std::cin.bad())
+  if (!std::cin.fail())
   {
     static constexpr auto ws = " \t\n\r\v";
     static constexpr auto digits = "1234567890";
@@ -172,7 +172,7 @@ void NumberGuess::ReadEstimation( [[maybe_unused]] NumberGuess_DataType const& i
       str.erase( 0, pos );      
     }
 
-    pos = str.find_last_not_of (ws );
+    pos = str.find_last_not_of ( ws );
     if ( pos != str.npos )
     {
       str.erase( pos + 1 );

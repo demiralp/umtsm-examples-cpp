@@ -36,40 +36,55 @@
 #include <iostream>
 #include <cstdlib>
 #include <csignal>
+#include <atomic>
 
 #include <unistd.h>
 
 NumberGuess numberguess;
+volatile std::sig_atomic_t signalReceived = -1;
 
 void signal_handler( int sig )
 {
-  switch( sig )
+  signalReceived = sig;
+}
+
+void SignalHandler( )
+{
+  do
   {
-    case SIGINT:
+    std::this_thread::sleep_for( std::chrono::milliseconds( 20 ) );
+    switch( signalReceived )
     {
-      numberguess.trigger_abort( );
-      break;
+      case SIGINT:
+      {
+        numberguess.trigger_abort( );
+        break;
+      }
+      case SIGUSR1:
+      {
+        numberguess.trigger_show( );
+        break;
+      }
+      case SIGUSR2:
+      {
+        numberguess.trigger_newgame( );
+        break;
+      }
     }
-    case SIGUSR1:
-    {
-      numberguess.trigger_show( );
-      break;
-    }
-    case SIGUSR2:
-    {
-      numberguess.trigger_newgame( );
-      break;
-    }
-  }
+    signalReceived = -1;
+  } while( true );
 }
 
 int main( )
 {
-  numberguess.start( );
+  std::thread SignalExecutor( SignalHandler );
+  SignalExecutor.detach();
 
   signal( SIGINT, signal_handler );
   signal( SIGUSR1, signal_handler );
   signal( SIGUSR2, signal_handler );
+
+  numberguess.start( );
 
   while( numberguess.isAlive( ) )
   {

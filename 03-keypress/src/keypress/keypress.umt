@@ -27,7 +27,10 @@
  *  SOFTWARE.
  */
 
-type external size_t;
+namespace std
+{
+    type external size_t;
+}
 
 //
 // Event Generator
@@ -72,12 +75,12 @@ sm KeyPress
     properties
     {
         unsigned int issueId;
-        size_t countA;
-        size_t countB;
-        size_t countC;
-        size_t countDigit[9];
-        size_t countOdd;
-        size_t countEven;
+        std:size_t countA;
+        std:size_t countB;
+        std:size_t countC;
+        std:size_t countDigit[9];
+        std:size_t countOdd;
+        std:size_t countEven;
     }
 
     entry / MessageHello;

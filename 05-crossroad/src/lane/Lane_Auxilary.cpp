@@ -39,6 +39,17 @@
 
 #include <cstdio>
 #include <cstdlib>
+#include <fstream>
+#include <sstream>
+#include <vector>
+
+#include <iostream>
+
+namespace
+{
+  static constexpr std::string_view regfile      = "cpp-crossroad-lane";
+  static constexpr std::string_view tmpDirEnvVar = "TMPDIR";
+}  // namespace
 
 // The implementation of the guards
 bool Lane::IsCheckAndGo( ) const
@@ -49,70 +60,66 @@ bool Lane::IsCheckAndGo( ) const
 
 // The implementation of the Persistency Functions
 void Lane::store_Shallow_Availability( [[maybe_unused]] Availability_States state, [[maybe_unused]] Lane_DataType const& instance ) const
+try
 {
-  static char const* const regfile = "crossroad-lane";
-  char const* folder               = getenv( "TMPDIR" );
-  char path[ 256 ];
-  if( folder == 0 )
-  {
-    folder = "/tmp";
-  }
+  std::ostringstream path;
+  char* folder = getenv( tmpDirEnvVar.data( ) );
 
-  strcpy( path, folder );
-  strcat( path, "/" );
-  strcat( path, regfile );
-  strcat( path, instance.Id.c_str( ) );
-  strcat( path, ".bin" );
+  path << ( folder ? folder : "/tmp" ) << '/' << regfile << instance.Id << ".bin";
 
-  FILE* fd = fopen( path, "wb" );
-  if( fd != NULL )
+  std::ofstream stream( path.str( ), std::ios::out | std::ios::binary );
+
+  if( stream.is_open( ) )
   {
     uint16_t sdata = (uint16_t)state;
-    fwrite( &sdata, sizeof( sdata ), 1, fd );
-    fclose( fd );
+    stream << sdata;
   }
+
+  stream.close( );
+}
+catch( ... )
+{
 }  // End of action function: store_Shallow_Availability
 
 Lane::Availability_States Lane::load_Shallow_Availability( [[maybe_unused]] Lane_DataType const& instance ) const
+try
 {
-  static constexpr Availability_States availStates[] = {
+  Availability_States result = Availability_States::E_init;
+
+  static std::vector< Availability_States > const availStates {
     Availability_States::E_init,
     Availability_States::E_Available,
     Availability_States::E_Unavailable,
     Availability_States::E_final
   };
 
-  static constexpr std::size_t maxStates = sizeof( availStates ) / sizeof( availStates[ 0 ] );
+  std::ostringstream path;
 
-  static char const* const regfile = "crossroad-lane";
-  char const* folder               = getenv( "TMPDIR" );
-  char path[ 256 ];
-  Availability_States result = Availability_States::E_init;
+  char* folder = getenv( tmpDirEnvVar.data( ) );
 
-  if( folder == 0 )
-  {
-    folder = "/tmp";
-  }
+  path << ( folder ? folder : "/tmp" ) << '/' << regfile << instance.Id << ".bin";
 
-  strcpy( path, folder );
-  strcat( path, "/" );
-  strcat( path, regfile );
-  strcat( path, instance.Id.c_str( ) );
-  strcat( path, ".bin" );
+  std::ifstream stream;
 
-  FILE* fd = fopen( path, "rb" );
-  if( fd != NULL )
+  stream.open( path.str( ), std::ios::in | std::ios::binary );
+
+  if( stream.is_open( ) )
   {
     uint16_t sdata;
-    fread( &sdata, sizeof( sdata ), 1, fd );
-    fclose( fd );
+    stream >> sdata;
+    stream.close( );
 
-    if( sdata < maxStates )
+    if( sdata < availStates.size( ) )
     {
       result = availStates[ sdata ];
     }
   }
 
+  return result;
+}
+catch( ... )
+{
+  Availability_States const result = Availability_States::E_init;
   return result;
 }  // End of loader function: load_Shallow_Availability
 

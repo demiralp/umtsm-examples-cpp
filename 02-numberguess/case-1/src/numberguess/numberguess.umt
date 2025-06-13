@@ -62,6 +62,7 @@ sm NumberGuess
             [!IsANumberRead] -> / PrintNoNumberIsRead;
             [!IsNumberInRange] -> / PrintNumberIsNotInRange;
             [AreNumbersEqual] -> AskNewDeal / PrintConguratulation;
+
             -> / PrintHints;
         }
     }
@@ -78,6 +79,7 @@ sm NumberGuess
     {
         [IsAnswerYes] -> PlayGame / PrintVola;
         [IsAnswerNo] -> terminate / PrintGoodBye;
+
         -> / PrintWarning;
     }
 }

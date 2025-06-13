@@ -89,7 +89,6 @@ void Paroot::FindTheRoots( [[maybe_unused]] Paroot_DataType const& input )
 
 void Paroot::ReadParameters( [[maybe_unused]] Paroot_DataType const& input )
 {
-#if 1
   bool readingOkay = false;
   do
   {
@@ -112,9 +111,6 @@ void Paroot::ReadParameters( [[maybe_unused]] Paroot_DataType const& input )
     cout.flush( );
     readingOkay = ReadParameter( &instanceData.paramC );
   } while( ! readingOkay );
-#else
-  while( true );
-#endif
 }  // End of action function: ReadParameters
 
 void Paroot::WriteSolutions( [[maybe_unused]] Paroot_DataType const& input )

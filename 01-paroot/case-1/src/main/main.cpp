@@ -29,14 +29,16 @@
 
 #include <Paroot.hh>
 
-#include <condition_variable>
 #include <csignal>
 #include <iostream>
 #include <stdlib.h>
 #include <thread>
+#include <atomic>
 #include <unistd.h>
 
 Paroot parabole;
+
+volatile std::sig_atomic_t haltParoot;
 
 void signal_handler( int sig )
 {
@@ -44,7 +46,7 @@ void signal_handler( int sig )
   {
     case SIGINT:
     {
-      parabole.halt( );
+      haltParoot= true;
       break;
     }
   }
@@ -60,9 +62,11 @@ int main( )
   while( parabole.isAlive( ) )
   {
     std::this_thread::sleep_for( std::chrono::milliseconds(100));
+    if ( haltParoot)
+    {
+      parabole.halt();
+    }
   }
-
-  // parabole.startFrom_CSolve();
 
   /* exit the application */
   std::cout << "\nExited!\n";

@@ -42,7 +42,7 @@ ExecutionDirector_DataType::~ExecutionDirector_DataType( )
 void ExecutionDirector_DataType::initialize( )
 {
   ControlModeStatus    = ControlMode::PERSISTENT_CONTROL_MODE;
-  StartSwitchingTime   = 0;
+  StartSwitchingTime   = std::chrono::system_clock::now( );
   pCrossroad           = nullptr;
   pMonitor             = nullptr;
   LaneClosingCompleted = false;

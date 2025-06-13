@@ -1,5 +1,5 @@
 /*  ==============================================================================
- *  Created by Fehmi Demiralp(Fedem) on 2025-05-29 GMT
+ *  Created by Fehmi Demiralp(Fedem) on 2025-06-15 GMT
  *  Copyright (C) 2023-2025 Fedem (Fehmi Demiralp) <f.demiralp@gmail.com>
  *
  *  Released under the MIT License
@@ -41,26 +41,16 @@
 
 #include <Door.hh>
 
-#define SIMULATION_DOOR_OPEN_DURATION ( 3U )
+namespace
+{
+  std::chrono::seconds SIMULATION_DOOR_OPEN_DURATION( 3U );
+} // namespace
 
 // The implementation of the actions
 void Sensor_Open_End::checkDoorOpen( [[maybe_unused]] Sensor_Open_End_DataType const& input )
 {
-  time_t end;
-  time( &end );
-  end += SIMULATION_DOOR_OPEN_DURATION;
-
-  do
-  {
-    time_t now;
-    time( &now );
-    if( now >= end )
-    {
-      break;
-    }
-
-    usleep( 20000 );
-  } while( true );
+  auto const end = std::chrono::system_clock::now( ) + SIMULATION_DOOR_OPEN_DURATION;
+  std::this_thread::sleep_until( end );
 }  // End of action function: checkDoorOpen
 
 void Sensor_Open_End::notifyDoorOpen( [[maybe_unused]] Sensor_Open_End_DataType const& input )
@@ -77,7 +67,7 @@ void Sensor_Open_End::waitUntilDoorStartOpening( [[maybe_unused]] Sensor_Open_En
     {
       break;
     }
-    usleep( 20000U );
+    std::this_thread::sleep_for( std::chrono::milliseconds( 20 ) );
   } while( true );
 }  // End of action function: waitUntilDoorStartOpening
 

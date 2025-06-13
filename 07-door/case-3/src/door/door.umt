@@ -27,7 +27,7 @@
  *  SOFTWARE.
  */
 
-type external time_t;
+type external TimePoint;
 type sm Engine;
 
 sm Door
@@ -36,8 +36,8 @@ sm Door
     {
         string id;
         optional Engine pEngine;
-        time_t doorActionTimeStart;  // used by sensors to simulate closing or opening the door
-        time_t waitUntil;
+        TimePoint doorActionTimeStart;  // used by sensors to simulate closing or opening the door
+        TimePoint waitUntil;
     }
 
     persistent deep history -> ManualMode:Open;

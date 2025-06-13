@@ -31,7 +31,7 @@
 /*               CASE 3                       */
 /**********************************************/
 
-type external time_t;
+type external TimePoint;
 
 sm NumberGuess
 {
@@ -41,8 +41,8 @@ sm NumberGuess
         unsigned int guess;
         boolean scan_result;
         char answer;
-        time_t game_begin;
-        time_t estimation_begin;
+        TimePoint game_begin;
+        TimePoint estimation_begin;
         boolean warn;
     }
 
@@ -74,6 +74,7 @@ sm NumberGuess
             [not IsANumberRead] -> GetEstimation / PrintNoNumberIsRead;
             [not IsNumberInRange] -> GetEstimation / PrintNumberIsNotInRange;
             [AreNumbersEqual] -> AskNewDeal / PrintConguratulation;
+
             -> GetEstimation / PrintHints;
         }
     }
@@ -98,5 +99,5 @@ sm NumberGuess
 
     abort -> terminate / PrintGoodBye;
     show / PrintShowNumber;
-    newgame -> PlayGame / Salute;
+    newgame --> PlayGame / Salute;
 }

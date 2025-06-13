@@ -1,14 +1,12 @@
-/*
- *  ==============================================================================
+/*  ==============================================================================
  *  Created by Fehmi Demiralp(Fedem) on 2025-04-11 GMT
  *  Copyright (C) 2023-2025 Fedem (Fehmi Demiralp) <f.demiralp@gmail.com>
  *
  *  Released under the MIT License
- *  ============================================================================
+ *  ==============================================================================
  */
 
-/*
- *  Copyright (C) 2023-2025 Fedem (Fehmi Demiralp) <f.demiralp@gmail.com>
+/*  Copyright (C) 2023-2025 Fedem (Fehmi Demiralp) <f.demiralp@gmail.com>
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -53,12 +51,12 @@ void Paroot_DataType::initialize( )
   croot1 = 
   croot2 = 0.0;
   
-  solutionType    = Paroot_Solution::UNDEFINED;
+  solutionType = Paroot_Solution::UNDEFINED;
 }
 
 void Paroot_DataType::deinitialize( )
 {
-  /* do nothing */
+  /* does nothing */
 }
 
 // End of Paroot_DataType.cpp

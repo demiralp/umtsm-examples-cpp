@@ -1,5 +1,5 @@
 /*  ==============================================================================
- *  Created by Fehmi Demiralp(Fedem) on 2025-05-29 GMT
+ *  Created by Fehmi Demiralp(Fedem) on 2025-06-15 GMT
  *  Copyright (C) 2023-2025 Fedem (Fehmi Demiralp) <f.demiralp@gmail.com>
  *
  *  Released under the MIT License
@@ -81,7 +81,7 @@ void Dashboard::DisplayDoorStatus( [[maybe_unused]] Dashboard_DataType const& in
 {
   while( true )
   {
-    usleep( 200000 );
+    std::this_thread::sleep_for( std::chrono::milliseconds(200));
 
     clear( );
 
@@ -102,16 +102,14 @@ void Dashboard::DisplayDoorStatus( [[maybe_unused]] Dashboard_DataType const& in
     {
       char const* st = NULL;
       int color= 0;
-      int rtime = 0;
+      std::chrono::seconds rtime( 0U );
 
       if( instanceData.pDoor->isIn_AutomaticMode_Open_State() || instanceData.pDoor->isIn_ManualMode_Open_State() )
       {
         st = "Open";
         color= 5; // GREEN
 
-        time_t now;
-        time( &now); 
-        rtime = input.pDoor->instanceData.waitUntil - now;
+        rtime = std::chrono::duration_cast< std::chrono::seconds>( input.pDoor->instanceData.waitUntil - std::chrono::system_clock::now() );
       }
       else if( instanceData.pDoor->isIn_AutomaticMode_Close_State() || instanceData.pDoor->isIn_ManualMode_Close_State() )
       {
@@ -135,9 +133,9 @@ void Dashboard::DisplayDoorStatus( [[maybe_unused]] Dashboard_DataType const& in
 
       attron( COLOR_PAIR( color ) );
       printw( " %s", st );
-      if ( rtime > 0 )
+      if ( rtime > std::chrono::milliseconds(0) )
       {
-        printw( " (%d)", rtime );
+        printw( " (%d)", rtime + std::chrono::seconds(1));
       }
       printw("\n");
       attroff( COLOR_PAIR( color ) );

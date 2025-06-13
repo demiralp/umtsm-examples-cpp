@@ -64,6 +64,7 @@ sm NumberGuess
             [not IsANumberRead] -> GetEstimation / PrintNoNumberIsRead;
             [not IsNumberInRange] -> GetEstimation / PrintNumberIsNotInRange;
             [AreNumbersEqual] -> AskNewDeal / PrintConguratulation;
+
             -> GetEstimation / PrintHints;
         }
     }

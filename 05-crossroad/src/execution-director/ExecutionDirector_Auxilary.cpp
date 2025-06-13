@@ -47,18 +47,17 @@
 
 namespace
 {
-  constexpr unsigned int MS_IN_US                  = 1000000U;
-  constexpr unsigned int RUN_LANE_MS               = 10U * MS_IN_US;
-  constexpr unsigned int RUN_LANE1_MS              = RUN_LANE_MS;
-  constexpr unsigned int RUN_LANE2_MS              = RUN_LANE_MS;
-  constexpr unsigned int RUN_LANE3_MS              = RUN_LANE_MS;
-  constexpr unsigned int RUN_LANE4_MS              = RUN_LANE_MS;
-  constexpr unsigned int RUN_PEDESTRIANLANES_MS    = 8U * MS_IN_US;
-  constexpr unsigned int RUN_PREPARING_MS          = 4U * MS_IN_US;
-  constexpr unsigned int RUN_STOPING_TRAFFIC_MS    = RUN_LANE_MS;
-  constexpr unsigned int RUN_SWITCHING_TIME_MS     = 7U * MS_IN_US;
-  constexpr unsigned int RUN_MIN_SWITCHING_TIME_MS = 5U * MS_IN_US;
-  constexpr unsigned int RUN_INTERVAL_TIME_US      = 3U * MS_IN_US;
+  constexpr std::chrono::seconds RUN_LANE_MS( 10U );
+  constexpr std::chrono::seconds RUN_LANE1_MS( RUN_LANE_MS );
+  constexpr std::chrono::seconds RUN_LANE2_MS( RUN_LANE_MS );
+  constexpr std::chrono::seconds RUN_LANE3_MS( RUN_LANE_MS );
+  constexpr std::chrono::seconds RUN_LANE4_MS( RUN_LANE_MS );
+  constexpr std::chrono::seconds RUN_PEDESTRIANLANES_MS( 8U );
+  constexpr std::chrono::seconds RUN_PREPARING_MS( 4U );
+  constexpr std::chrono::seconds RUN_STOPING_TRAFFIC_MS( RUN_LANE_MS );
+  constexpr std::chrono::seconds RUN_SWITCHING_TIME_MS( 7U );
+  constexpr std::chrono::seconds RUN_MIN_SWITCHING_TIME_MS( 5U );
+  constexpr std::chrono::seconds RUN_INTERVAL_TIME_US( 3U );
 
   // internal functions
   void TellLaneAvailability(
@@ -586,7 +585,7 @@ void ExecutionDirector::StartControlMode( [[maybe_unused]] ExecutionDirector_Dat
 
 void ExecutionDirector::StartSystemSwitchingTimer( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
-  time( &instanceData.StartSwitchingTime );
+  instanceData.StartSwitchingTime = std::chrono::system_clock::now( );
 }  // End of action function: StartSystemSwitchingTimer
 
 void ExecutionDirector::StartUncontrolMode( [[maybe_unused]] ExecutionDirector_DataType const& input )
@@ -618,7 +617,7 @@ void ExecutionDirector::Update( [[maybe_unused]] ExecutionDirector_DataType cons
 
 void ExecutionDirector::WaitForInterval( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
-  usleep( RUN_INTERVAL_TIME_US );
+  std::this_thread::sleep_for( RUN_INTERVAL_TIME_US );
 }  // End of action function: WaitForInterval
 
 void ExecutionDirector::WaitForLane1( [[maybe_unused]] ExecutionDirector_DataType const& input )
@@ -626,7 +625,7 @@ void ExecutionDirector::WaitForLane1( [[maybe_unused]] ExecutionDirector_DataTyp
   if( instanceData.pCrossroad->getSubSM_Lane1( )->isIn_Available_State( ) )
   {
     instanceData.LaneClosingCompleted = false;
-    usleep( RUN_LANE1_MS );
+    std::this_thread::sleep_for( RUN_LANE1_MS );
   }
 }  // End of action function: WaitForLane1
 
@@ -635,7 +634,7 @@ void ExecutionDirector::WaitForLane2( [[maybe_unused]] ExecutionDirector_DataTyp
   if( instanceData.pCrossroad->getSubSM_Lane2( )->isIn_Available_State( ) )
   {
     instanceData.LaneClosingCompleted = false;
-    usleep( RUN_LANE2_MS );
+    std::this_thread::sleep_for( RUN_LANE2_MS );
   }
 }  // End of action function: WaitForLane2
 
@@ -644,7 +643,7 @@ void ExecutionDirector::WaitForLane3( [[maybe_unused]] ExecutionDirector_DataTyp
   if( instanceData.pCrossroad->getSubSM_Lane3( )->isIn_Available_State( ) )
   {
     instanceData.LaneClosingCompleted = false;
-    usleep( RUN_LANE3_MS );
+    std::this_thread::sleep_for( RUN_LANE3_MS );
   }
 }  // End of action function: WaitForLane3
 
@@ -653,7 +652,7 @@ void ExecutionDirector::WaitForLane4( [[maybe_unused]] ExecutionDirector_DataTyp
   if( instanceData.pCrossroad->getSubSM_Lane4( )->isIn_Available_State( ) )
   {
     instanceData.LaneClosingCompleted = false;
-    usleep( RUN_LANE4_MS );
+    std::this_thread::sleep_for( RUN_LANE4_MS );
   }
 }  // End of action function: WaitForLane4
 
@@ -661,7 +660,7 @@ void ExecutionDirector::WaitForNextLaneOpen( [[maybe_unused]] ExecutionDirector_
 {
   if( ! input.LaneClosingCompleted )
   {
-    usleep( RUN_PREPARING_MS );
+    std::this_thread::sleep_for( RUN_PREPARING_MS );
     instanceData.LaneClosingCompleted = true;
   }
 }  // End of action function: WaitForNextLaneOpen
@@ -669,25 +668,25 @@ void ExecutionDirector::WaitForNextLaneOpen( [[maybe_unused]] ExecutionDirector_
 void ExecutionDirector::WaitForPedestrians( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.LaneClosingCompleted = false;
-  usleep( RUN_PEDESTRIANLANES_MS );
+  std::this_thread::sleep_for( RUN_PEDESTRIANLANES_MS );
 }  // End of action function: WaitForPedestrians
 
 void ExecutionDirector::WaitForSystemSwitchingTimer( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
-  time_t now;
-  time( &now );
-  double remainingtime = ceil( RUN_SWITCHING_TIME_MS - difftime( now, input.StartSwitchingTime ) );
+  auto const now = std::chrono::system_clock::now( );
+
+  auto remainingtime = RUN_SWITCHING_TIME_MS - ( now - input.StartSwitchingTime );
   if( remainingtime < RUN_MIN_SWITCHING_TIME_MS )
   {
     remainingtime = RUN_MIN_SWITCHING_TIME_MS;
   }
 
-  usleep( remainingtime );
+  std::this_thread::sleep_for( remainingtime );
 }  // End of action function: WaitForSystemSwitchingTimer
 
 void ExecutionDirector::WaitForTrafficStops( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
-  usleep( RUN_STOPING_TRAFFIC_MS );
+  std::this_thread::sleep_for( RUN_STOPING_TRAFFIC_MS );
 }  // End of action function: WaitForTrafficStops
 
 // The implementation of the Persistency Functions

@@ -38,9 +38,9 @@
 #include <csignal>
 #include <cstddef>
 #include <cstdlib>
-#include <cstring>
 #include <mutex>
 #include <optional>
+#include <string>
 #include <thread>
 #include <unistd.h>
 
@@ -213,14 +213,14 @@ void Dashboard::Quit( [[maybe_unused]] Dashboard_DataType const& input )
 
 void Dashboard::ReadCommand( [[maybe_unused]] Dashboard_DataType const& input )
 {
-  static char const* const keyChar = "CcDdEeSsPpQqRrUu1234 ";
-  bool okay                        = false;
+  static constexpr std::string_view keyChar = "CcDdEeSsPpQqRrUu1234 ";
+  bool okay                                 = false;
   int ch;
 
   do
   {
     ch   = wgetch( stdscr );
-    okay = strchr( keyChar, ch ) != NULL;
+    okay = keyChar.find( ch ) != keyChar.npos;
   } while( ! okay );
 
   instanceData.LastInputKey = ch;

@@ -27,8 +27,8 @@
  *  SOFTWARE.
  */
 
-#include "KeyPressEventGenerator.hh"
 #include "KeyPress.hh"
+#include "KeyPressEventGenerator.hh"
 
 #include <cassert>
 #include <csignal>
@@ -169,16 +169,15 @@ void KeyPressEventGenerator::ReadKey( [[maybe_unused]] KeyPressEventGenerator_Da
 
 void KeyPressEventGenerator::TimeBaseEventGenerator( [[maybe_unused]] KeyPressEventGenerator_DataType const& input )
 {
-  clock_t start, end;
-  unsigned long long duration;
+  static constexpr std::chrono::milliseconds period( 20U );
 
   while( true )
   {
-    start = clock( );
+    auto const start = std::chrono::high_resolution_clock::now( );
     instanceData.sm_keypress->trigger_clock4log( );
-    end      = clock( );
-    duration = static_cast< unsigned long long >( 1000000.0 * ( end - start ) / CLOCKS_PER_SEC );
-    std::this_thread::sleep_for( std::chrono::microseconds( 20000 - duration ) );
+    auto const end      = std::chrono::high_resolution_clock::now( );
+    auto const duration = end - start;
+    std::this_thread::sleep_for( period - duration );
   }
 }  // End of action function: TimeBaseEventGenerator
 

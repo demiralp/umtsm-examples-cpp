@@ -39,6 +39,7 @@
 #include <mutex>
 #include <optional>
 #include <thread>
+#include <string>
 #include <unistd.h>
 
 #include <ncurses.h>
@@ -181,14 +182,14 @@ void Keypad::NotifySignatureChange( [[maybe_unused]] Keypad_DataType const& inpu
 
 void Keypad::ReadKey( [[maybe_unused]] Keypad_DataType const& input )
 {
-  static char const * const keyChar = ".,+-/*=eEsScC";
+  static constexpr std::string_view keyChar = ".,+-/*=eEsScC";
   while( true )
   {
     int ch;
     instanceData.LastInputKey = ch = wgetch(stdscr);
 
-    if ( isdigit(ch) ||
-         strchr(keyChar, ch) != NULL ||
+    if ( std::isdigit(ch) ||
+         keyChar.find( ch ) != keyChar.npos ||
          ch == '\n' ||
          ch == KEY_ENTER ||
          ch == KEY_BACKSPACE ||
