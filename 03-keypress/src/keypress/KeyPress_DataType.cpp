@@ -45,7 +45,7 @@ void KeyPress_DataType::initialize( )
 
   countA = countB = countC = countOdd = countEven = 0;
 
-  for( size_t i = 0; i < sizeof( countDigit ) / sizeof( countDigit[ 0 ] ); ++i )
+  for( ::std::size_t i = 0; i < sizeof( countDigit ) / sizeof( countDigit[ 0 ] ); ++i )
   {
     countDigit[ i ] = 0;
   }
