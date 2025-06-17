@@ -125,9 +125,6 @@ class Timewatch
     virtual void PrintStatusRun( Timewatch_DataType const& input );
     virtual void ReportTotalTime( Timewatch_DataType const& input );
     virtual void UpdateSuspendentDuration( Timewatch_DataType const& input );
+};
 
-  // The interface of the thread support functions
-  private:
-  };
-
-  // End of Timewatch.hh
+// End of Timewatch.hh

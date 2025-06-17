@@ -57,3 +57,4 @@ namespace
 }  // namespace
 
 // End of Calculator_InitTests.cpp
+

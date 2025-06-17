@@ -54,3 +54,4 @@ namespace
 }  // namespace
 
 // End of KeyPressEventGenerator_InitTests.cpp
+

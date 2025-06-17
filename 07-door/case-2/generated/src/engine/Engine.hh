@@ -123,9 +123,6 @@ class Engine
   protected:
     virtual void store_Deep_Main( Main_States state, Engine_DataType const& instance ) const;
     virtual Main_States load_Deep_Main( Engine_DataType const& instance ) const;
+};
 
-  // The interface of the thread support functions
-  private:
-  };
-
-  // End of Engine.hh
+// End of Engine.hh

@@ -175,9 +175,6 @@ class Lane
   protected:
     virtual void store_Shallow_Availability( Availability_States state, Lane_DataType const& instance ) const;
     virtual Availability_States load_Shallow_Availability( Lane_DataType const& instance ) const;
+};
 
-  // The interface of the thread support functions
-  private:
-  };
-
-  // End of Lane.hh
+// End of Lane.hh

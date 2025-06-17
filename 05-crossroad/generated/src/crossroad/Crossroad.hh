@@ -325,9 +325,6 @@ class Crossroad
     void init_TrafficLight3( );
     void init_TrafficLight4( );
     void init_PedestrianLight( );
+};
 
-  // The interface of the thread support functions
-  private:
-  };
-
-  // End of Crossroad.hh
+// End of Crossroad.hh

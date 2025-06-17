@@ -56,3 +56,4 @@ namespace
 }  // namespace
 
 // End of PedestrianLights_InitTests.cpp
+

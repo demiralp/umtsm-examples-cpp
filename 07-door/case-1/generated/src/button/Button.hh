@@ -86,13 +86,9 @@ class Button
     void finalize_Main( );
     void terminate( );
 
-
   // The interface of the actions
   protected:
     virtual void SendNotification( Button_DataType const& input );
+};
 
-  // The interface of the thread support functions
-  private:
-  };
-
-  // End of Button.hh
+// End of Button.hh

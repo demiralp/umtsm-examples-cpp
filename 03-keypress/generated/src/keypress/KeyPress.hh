@@ -188,9 +188,6 @@ class KeyPress
     virtual void MessagePressSpaceToExit( KeyPress_DataType const& input );
     virtual void ResetLetterCounters( KeyPress_DataType const& input );
     virtual void ResetNumericCounters( KeyPress_DataType const& input );
+};
 
-  // The interface of the thread support functions
-  private:
-  };
-
-  // End of KeyPress.hh
+// End of KeyPress.hh

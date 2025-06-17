@@ -115,9 +115,6 @@ class Display
     virtual void DisplayFaultyError( Display_DataType const& input );
     virtual void DisplayOverflowError( Display_DataType const& input );
     virtual void DisplayUpdate( Display_DataType const& input );
+};
 
-  // The interface of the thread support functions
-  private:
-  };
-
-  // End of Display.hh
+// End of Display.hh

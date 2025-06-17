@@ -54,3 +54,4 @@ namespace
 }  // namespace
 
 // End of NumberGuess_InitTests.cpp
+

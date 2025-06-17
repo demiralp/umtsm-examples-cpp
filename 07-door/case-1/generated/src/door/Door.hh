@@ -119,9 +119,6 @@ class Door
   protected:
     virtual void store_Shallow_Main( Main_States state, Door_DataType const& instance ) const;
     virtual Main_States load_Shallow_Main( Door_DataType const& instance ) const;
+};
 
-  // The interface of the thread support functions
-  private:
-  };
-
-  // End of Door.hh
+// End of Door.hh

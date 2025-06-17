@@ -37,7 +37,6 @@ class Engine_DataType
 {
   public:
     /// @todo please define instance dependend data of the state machine here
-    int dumy;
 
     Engine_DataType( );
     virtual ~Engine_DataType( );

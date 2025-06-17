@@ -57,3 +57,4 @@ namespace
 }  // namespace
 
 // End of TrafficLight_InitTests.cpp
+

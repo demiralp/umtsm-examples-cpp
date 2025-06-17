@@ -37,7 +37,6 @@ class Paroot_DataType
 {
   public:
     /// @todo please define instance dependend data of the state machine here
-    int dumy;
 
     Paroot_DataType( );
     virtual ~Paroot_DataType( );

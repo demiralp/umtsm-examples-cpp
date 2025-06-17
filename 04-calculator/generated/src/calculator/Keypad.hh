@@ -101,7 +101,6 @@ class Keypad
 
     void exit_Main( );
 
-
   // The interface of the guards
   public:
     virtual bool IsBackspace( ) const;

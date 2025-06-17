@@ -56,3 +56,4 @@ namespace
 }  // namespace
 
 // End of KeyPress_InitTests.cpp
+

@@ -102,7 +102,6 @@ class Monitor
 
     void exit_Main( );
 
-
   // The interface of the actions
   protected:
     virtual void ClearMessage( Monitor_DataType const& input );
