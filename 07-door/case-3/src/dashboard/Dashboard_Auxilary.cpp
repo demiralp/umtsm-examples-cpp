@@ -29,20 +29,15 @@
 
 #include "Dashboard.hh"
 
-#include <cassert>
-#include <csignal>
 #include <cstddef>
 #include <cstdlib>
 #include <cstring>
-#include <mutex>
-#include <optional>
-#include <thread>
-#include <unistd.h>
 
 #include <ncurses.h>
+#include <unistd.h>
 
-#include <Door.hh>
 #include <Button.hh>
+#include <Door.hh>
 #include <Engine.hh>
 #include <Sensor_Close_End.hh>
 #include <Sensor_Open_End.hh>
@@ -74,20 +69,20 @@ bool Dashboard::IsKey_M( ) const
 // The implementation of the actions
 void Dashboard::ButtonPress( [[maybe_unused]] Dashboard_DataType const& input )
 {
-  instanceData.pButton->trigger_Pressed();
+  instanceData.pButton->trigger_Pressed( );
 }  // End of action function: ButtonPress
 
 void Dashboard::DisplayDoorStatus( [[maybe_unused]] Dashboard_DataType const& input )
 {
   while( true )
   {
-    std::this_thread::sleep_for( std::chrono::milliseconds(200));
+    std::this_thread::sleep_for( std::chrono::milliseconds( 200 ) );
 
     clear( );
 
     /* Door Working Mode */
     {
-      char const* wmode = instanceData.pDoor->isIn_AutomaticMode_State( ) ? "Automatic" : "Manual";
+      char const* const wmode = instanceData.pDoor->isIn_AutomaticMode_State( ) ? "Automatic" : "Manual";
 
       attron( COLOR_PAIR( 1 ) );
       printw( "%-19s :", "Door Working Mode" );
@@ -101,30 +96,30 @@ void Dashboard::DisplayDoorStatus( [[maybe_unused]] Dashboard_DataType const& in
     /* Door status */
     {
       char const* st = NULL;
-      int color= 0;
+      int color      = 0;
       std::chrono::seconds rtime( 0U );
 
-      if( instanceData.pDoor->isIn_AutomaticMode_Open_State() || instanceData.pDoor->isIn_ManualMode_Open_State() )
+      if( instanceData.pDoor->isIn_AutomaticMode_Open_State( ) || instanceData.pDoor->isIn_ManualMode_Open_State( ) )
       {
-        st = "Open";
-        color= 5; // GREEN
+        st    = "Open";
+        color = 5;  // GREEN
 
-        rtime = std::chrono::duration_cast< std::chrono::seconds>( input.pDoor->instanceData.waitUntil - std::chrono::system_clock::now() );
+        rtime = std::chrono::duration_cast< std::chrono::seconds >( input.pDoor->instanceData.waitUntil - std::chrono::system_clock::now( ) );
       }
-      else if( instanceData.pDoor->isIn_AutomaticMode_Close_State() || instanceData.pDoor->isIn_ManualMode_Close_State() )
+      else if( instanceData.pDoor->isIn_AutomaticMode_Close_State( ) || instanceData.pDoor->isIn_ManualMode_Close_State( ) )
       {
-        st = "Closed";
-        color= 3; // RED
+        st    = "Closed";
+        color = 3;  // RED
       }
-      else if( instanceData.pDoor->isIn_AutomaticMode_Opening_State() || instanceData.pDoor->isIn_ManualMode_Opening_State() )
+      else if( instanceData.pDoor->isIn_AutomaticMode_Opening_State( ) || instanceData.pDoor->isIn_ManualMode_Opening_State( ) )
       {
-        st = "Opening ...";
-        color = 6; // WHITE 
+        st    = "Opening ...";
+        color = 6;  // WHITE
       }
-      else if( instanceData.pDoor->isIn_AutomaticMode_Closing_State() || instanceData.pDoor->isIn_ManualMode_Closing_State() )
+      else if( instanceData.pDoor->isIn_AutomaticMode_Closing_State( ) || instanceData.pDoor->isIn_ManualMode_Closing_State( ) )
       {
-        st = "Closing ...";
-        color = 4; // YELLOW
+        st    = "Closing ...";
+        color = 4;  // YELLOW
       }
 
       attron( COLOR_PAIR( 1 ) );
@@ -133,11 +128,11 @@ void Dashboard::DisplayDoorStatus( [[maybe_unused]] Dashboard_DataType const& in
 
       attron( COLOR_PAIR( color ) );
       printw( " %s", st );
-      if ( rtime > std::chrono::milliseconds(0) )
+      if( rtime > std::chrono::milliseconds( 0 ) )
       {
-        printw( " (%d)", rtime + std::chrono::seconds(1));
+        printw( " (%ld)", ( rtime + std::chrono::seconds( 1 ) ).count( ) );
       }
-      printw("\n");
+      printw( "\n" );
       attroff( COLOR_PAIR( color ) );
     }
 
@@ -145,15 +140,15 @@ void Dashboard::DisplayDoorStatus( [[maybe_unused]] Dashboard_DataType const& in
     {
       char const* engmode = NULL;
 
-      if( instanceData.pEngine->isIn_Idle_State() )
+      if( instanceData.pEngine->isIn_Idle_State( ) )
       {
         engmode = "Idle";
       }
-      else if( instanceData.pEngine->isIn_CCW_State() )
+      else if( instanceData.pEngine->isIn_CCW_State( ) )
       {
         engmode = "CCW";
       }
-      else if( instanceData.pEngine->isIn_ACCW_State() )
+      else if( instanceData.pEngine->isIn_ACCW_State( ) )
       {
         engmode = "Anti CCW";
       }
@@ -171,11 +166,11 @@ void Dashboard::DisplayDoorStatus( [[maybe_unused]] Dashboard_DataType const& in
     {
       char const* sclose = NULL;
 
-      if( instanceData.pCloseEnd->isIn_Idle_State() )
+      if( instanceData.pCloseEnd->isIn_Idle_State( ) )
       {
         sclose = "Idle";
       }
-      else if( instanceData.pCloseEnd->isIn_Check_State() )
+      else if( instanceData.pCloseEnd->isIn_Check_State( ) )
       {
         sclose = "Check";
       }
@@ -193,11 +188,11 @@ void Dashboard::DisplayDoorStatus( [[maybe_unused]] Dashboard_DataType const& in
     {
       char const* sopen = NULL;
 
-      if( instanceData.pOpenEnd->isIn_Idle_State() )
+      if( instanceData.pOpenEnd->isIn_Idle_State( ) )
       {
         sopen = "Idle";
       }
-      else if( instanceData.pOpenEnd->isIn_Check_State() )
+      else if( instanceData.pOpenEnd->isIn_Check_State( ) )
       {
         sopen = "Check";
       }
@@ -216,7 +211,7 @@ void Dashboard::DisplayDoorStatus( [[maybe_unused]] Dashboard_DataType const& in
   }
 }  // End of action function: DisplayDoorStatus
 
-void Dashboard::ReadCommand( Dashboard_DataType const& input )
+void Dashboard::ReadCommand( [[maybe_unused]] Dashboard_DataType const& input )
 {
   static char const* const keyChar = "AaBbMm";
   bool okay                        = false;
@@ -231,14 +226,14 @@ void Dashboard::ReadCommand( Dashboard_DataType const& input )
   instanceData.LastInputKey = ch;
 }  // End of action function: ReadCommand
 
-void Dashboard::SwitchAutomaticMode( Dashboard_DataType const& input )
+void Dashboard::SwitchAutomaticMode( [[maybe_unused]] Dashboard_DataType const& input )
 {
-  instanceData.pDoor->trigger_Automatic();
+  instanceData.pDoor->trigger_Automatic( );
 }  // End of action function: SwitchAutomaticMode
 
-void Dashboard::SwitchManualMode( Dashboard_DataType const& input )
+void Dashboard::SwitchManualMode( [[maybe_unused]] Dashboard_DataType const& input )
 {
-  instanceData.pDoor->trigger_Manual();
+  instanceData.pDoor->trigger_Manual( );
 }  // End of action function: SwitchManualMode
 
 static void PrintHelpLine( char const* const key, char const* const summary )

@@ -30,18 +30,8 @@
 #include "KeyPress.hh"
 #include "KeyPressEventGenerator.hh"
 
-#include <cassert>
-#include <csignal>
-#include <cstddef>
-#include <cstdlib>
-#include <cstring>
-#include <mutex>
-#include <optional>
-#include <thread>
-#include <unistd.h>
-
-#include <chrono>
 #include <ncurses.h>
+#include <unistd.h>
 
 // The implementation of the actions
 void KeyPressEventGenerator::ReadKey( [[maybe_unused]] KeyPressEventGenerator_DataType const& input )

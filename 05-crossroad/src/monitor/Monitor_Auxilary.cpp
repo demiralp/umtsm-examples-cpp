@@ -38,17 +38,10 @@
 
 #include "ExecutionDirector.hh"
 
-#include <cassert>
-#include <csignal>
-#include <cstddef>
-#include <cstdlib>
-#include <cstring>
-#include <mutex>
-#include <optional>
-#include <thread>
+#include <ncurses.h>
 #include <unistd.h>
 
-#include <ncurses.h>
+#include <iostream>
 
 namespace
 {
@@ -197,6 +190,7 @@ void Monitor::DisplayStatusOfLanes( [[maybe_unused]] Monitor_DataType const& inp
       usleep( 10000 );
     }
 
+    std::cout << "310\n";
     clear( );
 
     attron( COLOR_PAIR( 1 ) );

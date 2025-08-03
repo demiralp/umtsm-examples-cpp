@@ -29,20 +29,16 @@
 
 #include "Dashboard.hh"
 
-#include <cassert>
-#include <csignal>
 #include <cstddef>
 #include <cstdlib>
 #include <cstring>
-#include <mutex>
-#include <optional>
 #include <thread>
-#include <unistd.h>
 
 #include <ncurses.h>
+#include <unistd.h>
 
-#include <Door.hh>
 #include <Button.hh>
+#include <Door.hh>
 #include <Engine.hh>
 #include <Sensor_Close_End.hh>
 #include <Sensor_Open_End.hh>
@@ -62,15 +58,15 @@ bool Dashboard::IsKey_B( ) const
 // The implementation of the actions
 void Dashboard::ButtonPress( [[maybe_unused]] Dashboard_DataType const& input )
 {
-  instanceData.pButton->trigger_Pressed();
+  instanceData.pButton->trigger_Pressed( );
 }  // End of action function: ButtonPress
 
 void Dashboard::DisplayDoorStatus( [[maybe_unused]] Dashboard_DataType const& input )
 {
   while( true )
   {
-    std::this_thread::sleep_for( std::chrono::milliseconds(200));
-    
+    std::this_thread::sleep_for( std::chrono::milliseconds( 200 ) );
+
     clear( );
 
     /* Door Working Mode */
@@ -89,27 +85,27 @@ void Dashboard::DisplayDoorStatus( [[maybe_unused]] Dashboard_DataType const& in
     /* Door status */
     {
       char const* st = NULL;
-      int color= 0;
+      int color      = 0;
 
-      if( instanceData.pDoor->isIn_Open_State() )
+      if( instanceData.pDoor->isIn_Open_State( ) )
       {
-        st = "Open";
-        color= 5; // GREEN
+        st    = "Open";
+        color = 5;  // GREEN
       }
-      else if( instanceData.pDoor->isIn_Close_State() )
+      else if( instanceData.pDoor->isIn_Close_State( ) )
       {
-        st = "Closed";
-        color= 3; // RED
+        st    = "Closed";
+        color = 3;  // RED
       }
-      else if( instanceData.pDoor->isIn_Opening_State() )
+      else if( instanceData.pDoor->isIn_Opening_State( ) )
       {
-        st = "Opening ...";
-        color = 6; // WHITE 
+        st    = "Opening ...";
+        color = 6;  // WHITE
       }
-      else if( instanceData.pDoor->isIn_Closing_State() )
+      else if( instanceData.pDoor->isIn_Closing_State( ) )
       {
-        st = "Closing ...";
-        color = 4; // YELLOW
+        st    = "Closing ...";
+        color = 4;  // YELLOW
       }
 
       attron( COLOR_PAIR( 1 ) );
@@ -125,15 +121,15 @@ void Dashboard::DisplayDoorStatus( [[maybe_unused]] Dashboard_DataType const& in
     {
       char const* engmode = NULL;
 
-      if( instanceData.pEngine->isIn_Idle_State() )
+      if( instanceData.pEngine->isIn_Idle_State( ) )
       {
         engmode = "Idle";
       }
-      else if( instanceData.pEngine->isIn_CCW_State() )
+      else if( instanceData.pEngine->isIn_CCW_State( ) )
       {
         engmode = "CCW";
       }
-      else if( instanceData.pEngine->isIn_ACCW_State() )
+      else if( instanceData.pEngine->isIn_ACCW_State( ) )
       {
         engmode = "Anti CCW";
       }
@@ -151,11 +147,11 @@ void Dashboard::DisplayDoorStatus( [[maybe_unused]] Dashboard_DataType const& in
     {
       char const* sclose = NULL;
 
-      if( instanceData.pCloseEnd->isIn_Idle_State() )
+      if( instanceData.pCloseEnd->isIn_Idle_State( ) )
       {
         sclose = "Idle";
       }
-      else if( instanceData.pCloseEnd->isIn_Check_State() )
+      else if( instanceData.pCloseEnd->isIn_Check_State( ) )
       {
         sclose = "Check";
       }
@@ -173,11 +169,11 @@ void Dashboard::DisplayDoorStatus( [[maybe_unused]] Dashboard_DataType const& in
     {
       char const* sopen = NULL;
 
-      if( instanceData.pOpenEnd->isIn_Idle_State() )
+      if( instanceData.pOpenEnd->isIn_Idle_State( ) )
       {
         sopen = "Idle";
       }
-      else if( instanceData.pOpenEnd->isIn_Check_State() )
+      else if( instanceData.pOpenEnd->isIn_Check_State( ) )
       {
         sopen = "Check";
       }

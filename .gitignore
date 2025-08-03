@@ -57,3 +57,4 @@ set-date.sh
 Makefile
 *.drawio
 .vscode
+.cache

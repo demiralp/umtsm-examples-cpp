@@ -43,7 +43,7 @@ Lane_DataType::~Lane_DataType( )
 void Lane_DataType::initialize( )
 {
   Id.clear( );
-  UncontrolMode = UncontrolModeType::E_STOP_AND_CHECK;
+  UncontrolledMode = UncontrolledModeType::E_STOP_AND_CHECK;
 }
 
 void Lane_DataType::deinitialize( )

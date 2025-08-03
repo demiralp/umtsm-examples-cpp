@@ -31,19 +31,8 @@
 
 #include "Calculator.hh"
 
-#include <cassert>
-#include <csignal>
-#include <cstddef>
-#include <cstdlib>
-#include <cstring>
-#include <mutex>
-#include <optional>
-#include <thread>
-#include <string>
-#include <unistd.h>
-
 #include <ncurses.h>
-#include <wchar.h>
+#include <unistd.h>
 
 // The implementation of the guards
 bool Keypad::IsBackspace( ) const
@@ -60,7 +49,7 @@ bool Keypad::IsClear( ) const
 
 bool Keypad::IsDigit( ) const
 {
-  bool const result = isdigit(instanceData.LastInputKey);
+  bool const result = isdigit( instanceData.LastInputKey );
   return result;
 }  // End of guard function: IsDigit
 
@@ -120,10 +109,10 @@ bool Keypad::IsSignature( ) const
 }  // End of guard function: IsSignature
 
 // The implementation of the actions
-void Keypad::NotifyBackspce( [[maybe_unused]] Keypad_DataType const& input )
+void Keypad::NotifyBackspace( [[maybe_unused]] Keypad_DataType const& input )
 {
   instanceData.pCalculator->trigger_Backspace( );
-}  // End of action function: NotifyBackspce
+}  // End of action function: NotifyBackspace
 
 void Keypad::NotifyClear( [[maybe_unused]] Keypad_DataType const& input )
 {
@@ -186,16 +175,11 @@ void Keypad::ReadKey( [[maybe_unused]] Keypad_DataType const& input )
   while( true )
   {
     int ch;
-    instanceData.LastInputKey = ch = wgetch(stdscr);
+    instanceData.LastInputKey = ch = wgetch( stdscr );
 
-    if ( std::isdigit(ch) ||
-         keyChar.find( ch ) != keyChar.npos ||
-         ch == '\n' ||
-         ch == KEY_ENTER ||
-         ch == KEY_BACKSPACE ||
-         ch == KEY_DC )
+    if( std::isdigit( ch ) || keyChar.find( ch ) != keyChar.npos || ch == '\n' || ch == KEY_ENTER || ch == KEY_BACKSPACE || ch == KEY_DC )
     {
-      trigger_Notify();
+      trigger_Notify( );
     }
   }
 }  // End of action function: ReadKey

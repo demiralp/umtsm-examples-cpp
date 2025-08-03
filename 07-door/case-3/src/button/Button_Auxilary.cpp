@@ -30,15 +30,13 @@
 #include "Button.hh"
 
 #include <cassert>
-#include <cstddef>
-#include <cstring>
 
 #include <Door.hh>
 
 // The implementation of the actions
 void Button::SendNotification( [[maybe_unused]] Button_DataType const& input )
 {
-  instanceData.pDoor->trigger_ButtonPressed();
+  instanceData.pDoor->trigger_ButtonPressed( );
 }  // End of action function: SendNotification
 
 // End of Button_Auxilary.cpp

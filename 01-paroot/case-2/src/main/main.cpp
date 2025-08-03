@@ -25,20 +25,20 @@
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
-*/
+ */
 
 #include <Paroot.hh>
 
 #include <csignal>
+#include <cstdlib>
 #include <iostream>
-#include <stdlib.h>
 #include <thread>
-#include <atomic>
+
 #include <unistd.h>
 
 Paroot parabole;
 
-volatile std::sig_atomic_t haltParoot = false;
+std::sig_atomic_t volatile haltParoot = false;
 
 void signal_handler( int sig )
 {
@@ -46,29 +46,33 @@ void signal_handler( int sig )
   {
     case SIGINT:
     {
-      haltParoot= true;
+      haltParoot = true;
       break;
+    }
+    default:
+    {
+      // blank
     }
   }
 }
 
 int main( )
 {
-  /* Start entire the State Machines */
+  // Start entire the State Machines
   parabole.start( );
 
   signal( SIGINT, signal_handler );
 
   while( parabole.isAlive( ) )
   {
-    std::this_thread::sleep_for( std::chrono::milliseconds(100));
-    if ( haltParoot )
+    std::this_thread::sleep_for( std::chrono::milliseconds( 100 ) );
+    if( haltParoot )
     {
-      parabole.halt();
+      parabole.halt( );
     }
   }
 
-  /* exit the application */
+  // exit the application
   std::cout << "\nExited!\n";
 
   return EXIT_SUCCESS;

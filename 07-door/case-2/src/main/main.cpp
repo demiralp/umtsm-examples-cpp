@@ -34,15 +34,15 @@
 #include <Sensor_Close_End.hh>
 #include <Sensor_Open_End.hh>
 
-#include <pthread.h>
-#include <signal.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
+#include <atomic>
+#include <csignal>
+#include <cstdlib>
+#include <iostream>
 
 #include <ncurses.h>
+#include <unistd.h>
 
-pthread_mutex_t blocker;
+std::atomic_flag blocker = ATOMIC_FLAG_INIT;
 
 Door door;
 Button button;
@@ -57,20 +57,29 @@ void signal_handler( int sig )
   {
     case SIGINT:
     {
-      pthread_mutex_unlock( &blocker );
+      blocker.clear( );
       break;
+    }
+    default:
+    {
+      // blank
     }
   }
 }
 
 int main( )
 {
+  while( blocker.test_and_set( ) )
+  {
+    // blank
+  }
+
   initscr( );
 
   if( has_colors( ) == FALSE )
   {
     endwin( );
-    printf( "Your terminal does not support color\n" );
+    std::cerr << "Your terminal does not support color\n";
     return EXIT_FAILURE;
   }
 
@@ -92,7 +101,7 @@ int main( )
   clear( );
   refresh( );
 
-  /* Initilaize entire the state machines */
+  // Initialize entire the state machines
   door.instanceData.id      = "case-2";
   door.instanceData.pEngine = &engine;
 
@@ -107,7 +116,7 @@ int main( )
   dashboard.instanceData.pOpenEnd  = &sopenend;
   dashboard.instanceData.pCloseEnd = &scloseend;
 
-  /* Start entire the State Machines */
+  // Start entire the State Machines
   engine.start( );
   door.start( );
   button.start( );
@@ -115,15 +124,15 @@ int main( )
   sopenend.start( );
   dashboard.start( );
 
-  /* Allow entire the state machines run for  indefinite time until CTRL-C is pressed */
-  pthread_mutex_lock( &blocker );
-
+  // Allow entire the state machines run for  indefinite time until CTRL-C is pressed
   signal( SIGINT, signal_handler );
 
-  pthread_mutex_lock( &blocker );
-  pthread_mutex_unlock( &blocker );
+  while( blocker.test_and_set( ) )
+  {
+    // blank
+  }
 
-  /* exit the application */
+  // exit the application
   clear( );
   printw( "Exited!\n" );
   refresh( );

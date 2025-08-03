@@ -29,14 +29,8 @@
 
 #include "Sensor_Open_End.hh"
 
-#include <cassert>
-#include <csignal>
-#include <cstddef>
-#include <cstdlib>
-#include <cstring>
-#include <mutex>
-#include <optional>
 #include <thread>
+
 #include <unistd.h>
 
 #include <Door.hh>
@@ -44,7 +38,7 @@
 namespace
 {
   std::chrono::seconds SIMULATION_DOOR_OPEN_DURATION( 3U );
-} // namespace
+}  // namespace
 
 // The implementation of the actions
 void Sensor_Open_End::checkDoorOpen( [[maybe_unused]] Sensor_Open_End_DataType const& input )
@@ -55,14 +49,14 @@ void Sensor_Open_End::checkDoorOpen( [[maybe_unused]] Sensor_Open_End_DataType c
 
 void Sensor_Open_End::notifyDoorOpen( [[maybe_unused]] Sensor_Open_End_DataType const& input )
 {
-  instanceData.pDoor->trigger_DoorOpen();
+  instanceData.pDoor->trigger_DoorOpen( );
 }  // End of action function: notifyDoorOpen
 
 void Sensor_Open_End::waitUntilDoorStartOpening( [[maybe_unused]] Sensor_Open_End_DataType const& input )
 {
   do
   {
-    bool const opening = instanceData.pDoor->isIn_AutomaticMode_Opening_State() || instanceData.pDoor->isIn_ManualMode_Opening_State();
+    bool const opening = instanceData.pDoor->isIn_AutomaticMode_Opening_State( ) || instanceData.pDoor->isIn_ManualMode_Opening_State( );
     if( opening )
     {
       break;

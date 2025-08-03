@@ -134,7 +134,7 @@ sm ExecutionDirector
         state Uncontrolled
         {
             init -> CheckRequests;
-            entry / StartUncontrolMode, NotifyCrossroad;
+            entry / StartUncontrolledMode, NotifyCrossroad;
 
             TakeControl -> SwitchControlState / SetControlledMode;
 

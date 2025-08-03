@@ -36,6 +36,6 @@
 
 #include <chrono>
 
-typedef std::chrono::time_point<  std::chrono::system_clock > TimePoint;
+typedef std::chrono::time_point< std::chrono::system_clock > TimePoint;
 
 // End of NumberGuess_UserTypes.hh

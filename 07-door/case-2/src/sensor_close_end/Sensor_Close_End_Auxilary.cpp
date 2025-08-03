@@ -29,14 +29,8 @@
 
 #include "Sensor_Close_End.hh"
 
-#include <cassert>
-#include <csignal>
-#include <cstddef>
-#include <cstdlib>
-#include <cstring>
-#include <mutex>
-#include <optional>
 #include <thread>
+
 #include <unistd.h>
 
 #include <Door.hh>
@@ -44,7 +38,7 @@
 namespace
 {
   std::chrono::seconds SIMULATION_DOOR_CLOSE_DURATION( 3U );
-} // namespace
+}  // namespace
 
 // The implementation of the actions
 void Sensor_Close_End::checkDoorClosed( [[maybe_unused]] Sensor_Close_End_DataType const& input )
@@ -55,14 +49,14 @@ void Sensor_Close_End::checkDoorClosed( [[maybe_unused]] Sensor_Close_End_DataTy
 
 void Sensor_Close_End::notifyDoorClosed( [[maybe_unused]] Sensor_Close_End_DataType const& input )
 {
-    instanceData.pDoor->trigger_DoorClosed();
+  instanceData.pDoor->trigger_DoorClosed( );
 }  // End of action function: notifyDoorClosed
 
 void Sensor_Close_End::waitUntilDoorStartClosing( [[maybe_unused]] Sensor_Close_End_DataType const& input )
 {
   do
   {
-    bool const closing = instanceData.pDoor->isIn_Closing_State();
+    bool const closing = instanceData.pDoor->isIn_Closing_State( );
     if( closing )
     {
       break;

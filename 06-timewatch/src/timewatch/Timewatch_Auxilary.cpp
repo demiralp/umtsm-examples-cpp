@@ -29,16 +29,9 @@
 
 #include "Timewatch.hh"
 
-#include <cassert>
+#include <chrono>
 #include <csignal>
-#include <cstddef>
-#include <cstring>
-#include <mutex>
-#include <optional>
-#include <thread>
 
-#include <csignal>
-#include <ctime>
 #include <ncurses.h>
 
 // The implementation of the actions
@@ -49,91 +42,93 @@ void Timewatch::Exit( [[maybe_unused]] Timewatch_DataType const& input )
 
 void Timewatch::InitPauseTime( [[maybe_unused]] Timewatch_DataType const& input )
 {
-  instanceData.Run.Pause.start_pause_time = std::chrono::high_resolution_clock::now();
+  instanceData.Run.Pause.start_pause_time = std::chrono::high_resolution_clock::now( );
 }  // End of action function: InitPauseTime
 
 void Timewatch::InitWatchProperties( [[maybe_unused]] Timewatch_DataType const& input )
 {
-  instanceData.Run.start_time = std::chrono::high_resolution_clock::now();
-  instanceData.Run.suspended_duration= std::chrono::milliseconds( 0U );
+  instanceData.Run.start_time         = std::chrono::high_resolution_clock::now( );
+  instanceData.Run.suspended_duration = std::chrono::milliseconds( 0U );
 }  // End of action function: InitWatchProperties
 
 void Timewatch::PrintElapsedTime( [[maybe_unused]] Timewatch_DataType const& input )
 {
-  auto const now = std::chrono::high_resolution_clock::now();
-  auto totalTime= now - input.Run.start_time;
+  auto const now = std::chrono::high_resolution_clock::now( );
+  auto totalTime = now - input.Run.start_time;
   totalTime -= input.Run.suspended_duration;
-  if ( isIn_Pause_State())
+  if( isIn_Pause_State( ) )
   {
     totalTime -= now - input.Run.Pause.start_pause_time;
   }
 
-  printw( "%1.3fs\n", std::chrono::duration_cast< std::chrono::milliseconds>(totalTime)/1000.0);
+  auto const elapsedTime = std::chrono::duration_cast< std::chrono::milliseconds >( totalTime ).count( ) / 1000.0;
+  printw( "%1.3fs\n", elapsedTime );
   refresh( );
 }  // End of action function: PrintElapsedTime
 
 void Timewatch::PrintHelp( [[maybe_unused]] Timewatch_DataType const& input )
 {
-  printw( "H - Print help menu\n");
+  printw( "H - Print help menu\n" );
   refresh( );
-  printw( "S - Start timer\n");
+  printw( "S - Start timer\n" );
   refresh( );
-  printw( "Z - Stop timer\n");
+  printw( "Z - Stop timer\n" );
   refresh( );
-  printw( "P - Pause timer\n");
+  printw( "P - Pause timer\n" );
   refresh( );
-  printw( "R - Resume timer\n");
+  printw( "R - Resume timer\n" );
   refresh( );
-  printw( "X - Restart timer\n");
+  printw( "X - Restart timer\n" );
   refresh( );
-  printw( "Q - Exit\n");
+  printw( "Q - Exit\n" );
   refresh( );
-  printw( "SPACE - Print counter\n");
+  printw( "SPACE - Print counter\n" );
   refresh( );
 }  // End of action function: PrintHelp
 
 void Timewatch::PrintStatusIdle( [[maybe_unused]] Timewatch_DataType const& input )
 {
-  printw( "<IDLE>\n");
+  printw( "<IDLE>\n" );
   refresh( );
 }  // End of action function: PrintStatusIdle
 
 void Timewatch::PrintStatusPause( [[maybe_unused]] Timewatch_DataType const& input )
 {
-  printw( "<PAUSE>\n");
+  printw( "<PAUSE>\n" );
   refresh( );
 }  // End of action function: PrintStatusPause
 
 void Timewatch::PrintStatusReset( [[maybe_unused]] Timewatch_DataType const& input )
 {
-  printw( "<RESTART>\n");
+  printw( "<RESTART>\n" );
   refresh( );
 }  // End of action function: PrintStatusReset
 
 void Timewatch::PrintStatusResume( [[maybe_unused]] Timewatch_DataType const& input )
 {
-  printw( "<RESUME>\n");
+  printw( "<RESUME>\n" );
 }  // End of action function: PrintStatusResume
 
 void Timewatch::PrintStatusRun( [[maybe_unused]] Timewatch_DataType const& input )
 {
-  printw( "<RUN>\n");
+  printw( "<RUN>\n" );
   refresh( );
 }  // End of action function: PrintStatusRun
 
 void Timewatch::ReportTotalTime( [[maybe_unused]] Timewatch_DataType const& input )
 {
-  auto const now = std::chrono::high_resolution_clock::now();
-  auto totalTime = now - input.Run.start_time - input.Run.suspended_duration;
+  auto const now       = std::chrono::high_resolution_clock::now( );
+  auto const totalTime = now - input.Run.start_time - input.Run.suspended_duration;
 
-  printw( "total time : %1.3fs\n", std::chrono::duration_cast< std::chrono::milliseconds>( totalTime ) / 1000.0);
+  auto const totalTimeInSec = std::chrono::duration_cast< std::chrono::milliseconds >( totalTime ).count( ) / 1000.0;
+  printw( "total time : %1.3fs\n", totalTimeInSec );
   refresh( );
 }  // End of action function: ReportTotalTime
 
 void Timewatch::UpdateSuspendentDuration( [[maybe_unused]] Timewatch_DataType const& input )
 {
-  auto const now = std::chrono::high_resolution_clock::now();
-  instanceData.Run.suspended_duration +=  std::chrono::duration_cast<  std::chrono::milliseconds>( now - input.Run.Pause.start_pause_time );
+  auto const now = std::chrono::high_resolution_clock::now( );
+  instanceData.Run.suspended_duration += std::chrono::duration_cast< std::chrono::milliseconds >( now - input.Run.Pause.start_pause_time );
   instanceData.Run.Pause.start_pause_time = now;
 }  // End of action function: UpdateSuspendentDuration
 

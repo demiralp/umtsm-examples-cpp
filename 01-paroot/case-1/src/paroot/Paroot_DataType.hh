@@ -30,7 +30,6 @@
 #pragma once
 
 #include <complex>
-#include <cstdint>
 
 enum class Paroot_Solution
 {

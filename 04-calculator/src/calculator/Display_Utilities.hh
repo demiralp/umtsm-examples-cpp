@@ -25,7 +25,7 @@
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
-*/
+ */
 
 #pragma once
 
@@ -35,7 +35,7 @@
 
 namespace Display_Internal
 {
-    void GetAccumulatorData( Display_DataType const * const data, char * const accdata, size_t datalen );
+  void GetAccumulatorData( Display_DataType const* const data, char* const accdata, size_t datalen );
 }
 
 // End of Display_Utilities.hh

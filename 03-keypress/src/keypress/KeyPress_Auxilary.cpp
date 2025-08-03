@@ -29,14 +29,6 @@
 
 #include "KeyPress.hh"
 
-#include <cassert>
-#include <csignal>
-#include <cstddef>
-#include <cstring>
-#include <mutex>
-#include <optional>
-#include <thread>
-
 #include <ncurses.h>
 
 // The implementation of the guards

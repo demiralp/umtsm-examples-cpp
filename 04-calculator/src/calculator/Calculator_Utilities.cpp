@@ -32,47 +32,46 @@
 #include "Calculator_DataType.hh"
 #include "Display_Utilities.hh"
 
-#include <math.h>
-
+#include <cmath>
 #include <ncurses.h>
 
 namespace Calculator_Internal
 {
   void CalculateAccumulator(
     Calculator* const smInfo,
-    Calculator_DataType const * const pInputData,
+    Calculator_DataType const* const pInputData,
     Calculator_DataType* const pOutputData,
     Calculator_Operator currentOp )
   {
     static char const OpChar[] = { ' ', '+', '-', '*', '/', '=' };
 
-    char dispdata[20];
-    Display_Internal::GetAccumulatorData( smInfo->getSubSM_CalculatorDisplay()->getData(), dispdata, sizeof(dispdata) );
+    char dispdata[ 20 ];
+    Display_Internal::GetAccumulatorData( smInfo->getSubSM_CalculatorDisplay( )->getData( ), dispdata, sizeof( dispdata ) );
     long double value;
-    int err= sscanf( dispdata, "%Le", &value );
+    int err = sscanf( dispdata, "%Le", &value );
 
-    if ( pInputData->Operator != Calculator_Operator::E_OP_NONE )
+    if( pInputData->Operator != Calculator_Operator::E_OP_NONE )
     {
-      DrawSeparator();
+      DrawSeparator( );
     }
     else
     {
-      printw( "%c", OpChar[static_cast<int>( currentOp) ] );
+      printw( "%c", OpChar[ static_cast< int >( currentOp ) ] );
     }
 
-    if ( ( err != 1) && isinf( value ) )
+    if( ( err != 1 ) && std::isinf( value ) )
     {
-      pOutputData->ErrorNo= Calculator_Error::E_OVERFLOW;
+      pOutputData->ErrorNo = Calculator_Error::E_OVERFLOW;
     }
     else
     {
-      switch (pInputData->Operator)
+      switch( pInputData->Operator )
       {
         case Calculator_Operator::E_OP_ENTER:
-        [[fallthrough]];
+          [[fallthrough]];
         case Calculator_Operator::E_OP_NONE:
         {
-          pOutputData->Accumulator= value;
+          pOutputData->Accumulator = value;
           break;
         }
         case Calculator_Operator::E_OP_PLUS:
@@ -92,9 +91,9 @@ namespace Calculator_Internal
         }
         case Calculator_Operator::E_OP_DIVIDE:
         {
-          if ( value == 0.0 )
+          if( value == 0.0 )
           {
-            pOutputData->ErrorNo= Calculator_Error::E_DIVISION_BY_ZERO;
+            pOutputData->ErrorNo = Calculator_Error::E_DIVISION_BY_ZERO;
           }
           else
           {
@@ -104,34 +103,34 @@ namespace Calculator_Internal
         }
       }
 
-      if ( pOutputData->ErrorNo == Calculator_Error::E_NO_ERROR)
+      if( pOutputData->ErrorNo == Calculator_Error::E_NO_ERROR )
       {
-        if(isinf(pOutputData->Accumulator))
+        if( std::isinf( pOutputData->Accumulator ) )
         {
-          pOutputData->ErrorNo= Calculator_Error::E_OVERFLOW;
+          pOutputData->ErrorNo = Calculator_Error::E_OVERFLOW;
         }
-        else if ( pOutputData->Operator != Calculator_Operator::E_OP_NONE )
+        else if( pOutputData->Operator != Calculator_Operator::E_OP_NONE )
         {
-          printw("%-20.15LG%c", pOutputData->Accumulator, OpChar[static_cast<int>( currentOp ) ] );
+          printw( "%-20.15LG%c", pOutputData->Accumulator, OpChar[ static_cast< int >( currentOp ) ] );
         }
       }
 
-      if ( pOutputData->ErrorNo == Calculator_Error::E_NO_ERROR)
+      if( pOutputData->ErrorNo == Calculator_Error::E_NO_ERROR )
       {
-        if (currentOp == Calculator_Operator::E_OP_ENTER)
+        if( currentOp == Calculator_Operator::E_OP_ENTER )
         {
-          DrawSeparator();
+          DrawSeparator( );
         }
         else
         {
-          printw("\n");
+          printw( "\n" );
         }
 
         pOutputData->Operator = currentOp;
       }
-      else if (pOutputData->Operator == Calculator_Operator::E_OP_NONE )
+      else if( pOutputData->Operator == Calculator_Operator::E_OP_NONE )
       {
-          DrawSeparator();
+        DrawSeparator( );
       }
       else
       {
@@ -142,14 +141,14 @@ namespace Calculator_Internal
 
   void DrawSeparator( )
   {
-    printw("\n");
-    for(int i=20; i; --i)
+    printw( "\n" );
+    for( int i = 20; i; --i )
     {
-      printw("-");
+      printw( "-" );
     }
-    printw("\n");
+    printw( "\n" );
   }  // End of action function: DrawSpliteLine
 
-}
+}  // namespace Calculator_Internal
 
 // End of Calculator_Utilities.cpp

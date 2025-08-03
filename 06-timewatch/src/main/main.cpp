@@ -25,20 +25,19 @@
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
-*/
+ */
 
-#include <Timewatch.hh>
 #include <Command.hh>
+#include <Timewatch.hh>
 
-#include <pthread.h>
-#include <signal.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
+#include <atomic>
+#include <csignal>
+#include <cstdlib>
 
 #include <ncurses.h>
+#include <unistd.h>
 
-pthread_mutex_t blocker;
+std::atomic_flag blocker = ATOMIC_FLAG_INIT;
 
 void signal_handler( int sig )
 {
@@ -46,44 +45,49 @@ void signal_handler( int sig )
   {
     case SIGINT:
     {
-      pthread_mutex_unlock( &blocker );
+      blocker.clear( );
       break;
+    }
+    default:
+    {
+      // blank
     }
   }
 }
 
 int main( )
 {
+  while( blocker.test_and_set( ) )
+  {
+    // blank
+  }
+
   initscr( );
 
   noecho( );
   cbreak( );
-  // keypad( stdscr, true );
-  // nodelay( stdscr, true );
-  // notimeout( stdscr, true );
   set_escdelay( 0 );
-  // clrtobot();
   clear( );
   refresh( );
 
   Timewatch timewatch;
   Command command;
-  
-  command.instanceData.timer= &timewatch;
 
-  /* Start entire State Machines */
-  command.start();
-  timewatch.start();
+  command.instanceData.timer = &timewatch;
 
-  /* Allow entire state machines run for  indefinite time until CTRL-C is pressed */
-  pthread_mutex_lock( &blocker );
+  // Start entire State Machines
+  command.start( );
+  timewatch.start( );
 
+  // Allow entire state machines run for  indefinite time until CTRL-C is pressed
   signal( SIGINT, signal_handler );
 
-  pthread_mutex_lock( &blocker );
-  pthread_mutex_unlock( &blocker );
+  while( blocker.test_and_set( ) )
+  {
+    // blank
+  }
 
-  /* exit the application */
+  // exit the application
   clear( );
   refresh( );
 

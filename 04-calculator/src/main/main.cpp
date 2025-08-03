@@ -25,49 +25,47 @@
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
-*/
+ */
 
 #include <Calculator.hh>
-#include <Keypad.hh>
 #include <Display.hh>
+#include <Keypad.hh>
 
-#include <unistd.h>
-#include <stdlib.h>
+#include <cstdlib>
+#include <thread>
 
 #include <ncurses.h>
-
-#include <thread>
+#include <unistd.h>
 
 Calculator calculator;
 
-
-int main()
+int main( )
 {
-    initscr();
+  initscr( );
 
-    erase();
-    clear();
-    noecho();
-    cbreak();
-    keypad(stdscr, true);
-    nodelay(stdscr, true);
-    notimeout(stdscr, true);
-    set_escdelay(0);
-    clrtobot();
-    refresh();
+  erase( );
+  clear( );
+  noecho( );
+  cbreak( );
+  keypad( stdscr, true );
+  nodelay( stdscr, true );
+  notimeout( stdscr, true );
+  set_escdelay( 0 );
+  clrtobot( );
+  refresh( );
 
-    calculator.getSMData_CalculatorKeypad()->pCalculator = &calculator;
+  calculator.getSMData_CalculatorKeypad( )->pCalculator = &calculator;
 
-    calculator.start( );
+  calculator.start( );
 
-    while( calculator.isAlive( ) )
-    {
-        std::this_thread::sleep_for( std::chrono::seconds(1) );
-    }
+  while( calculator.isAlive( ) )
+  {
+    std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
+  }
 
-    printw("Exited!\n");
+  printw( "Exited!\n" );
 
-    endwin();
+  endwin( );
 
-    return EXIT_SUCCESS;
+  return EXIT_SUCCESS;
 }

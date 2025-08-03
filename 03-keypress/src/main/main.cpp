@@ -30,10 +30,11 @@
 #include <KeyPress.hh>
 #include <KeyPressEventGenerator.hh>
 
-#include <stdlib.h>
-#include <unistd.h>
+#include <cstdlib>
+#include <thread>
 
 #include <ncurses.h>
+#include <unistd.h>
 
 KeyPress keypress;
 KeyPressEventGenerator eventgenerator;
@@ -60,7 +61,7 @@ int main( )
 
   while( keypress.isAlive( ) )
   {
-    sleep( 1 );
+    std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
   }
 
   printw( "Exited!\n" );

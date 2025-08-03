@@ -25,12 +25,10 @@
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
-*/
+ */
 
 #include <cmath>
 #include <complex>
-#include <cstddef>
-#include <cstdio>
 #include <cstdlib>
 #include <iostream>
 
@@ -161,11 +159,11 @@ void Paroot::WriteSolutions( )
     case COMPLEX:
     {
       cout << "root1 : ";
-      PrintComplexNumber( croot1.real(), croot1.imag());
+      PrintComplexNumber( croot1.real( ), croot1.imag( ) );
       cout << '\n';
 
       cout << "root2 : ";
-      PrintComplexNumber( croot2.real(), croot2.imag());
+      PrintComplexNumber( croot2.real( ), croot2.imag( ) );
       cout << '\n';
       break;
     }
@@ -198,9 +196,9 @@ void Paroot::PrintComplexNumber( double real, double imag )
 {
   cout << real;
 
-  if ( fabs(imag) > EPSILON)
+  if( fabs( imag ) > EPSILON )
   {
-    if (imag > 0 )
+    if( imag > 0 )
     {
       cout << '+';
     }

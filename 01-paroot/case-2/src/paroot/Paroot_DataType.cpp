@@ -41,16 +41,10 @@ Paroot_DataType::~Paroot_DataType( )
 
 void Paroot_DataType::initialize( )
 {
-  paramA = 
-  paramB = 
-  paramC = 
-  delta = 
-  root1 = 
-  root2 = 0.0;
+  paramA = paramB = paramC = delta = root1 = root2 = 0.0;
 
-  croot1 = 
-  croot2 = 0.0;
-  
+  croot1 = croot2 = 0.0;
+
   solutionType = Paroot_Solution::UNDEFINED;
 }
 

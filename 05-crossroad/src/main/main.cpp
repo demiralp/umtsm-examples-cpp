@@ -32,17 +32,15 @@
 #include <ExecutionDirector.hh>
 #include <Monitor.hh>
 
-#include <pthread.h>
-#include <signal.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-
-#include <ncurses.h>
-
+#include <atomic>
+#include <csignal>
+#include <cstdlib>
 #include <iostream>
 
-pthread_mutex_t blocker;
+#include <ncurses.h>
+#include <unistd.h>
+
+std::atomic_flag blocker = ATOMIC_FLAG_INIT;
 
 Crossroad crossroad;
 ExecutionDirector executor;
@@ -55,14 +53,23 @@ void signal_handler( int sig )
   {
     case SIGINT:
     {
-      pthread_mutex_unlock( &blocker );
+      blocker.clear( );
       break;
+    }
+    default:
+    {
+      // blank
     }
   }
 }
 
 int main( )
 {
+  while( blocker.test_and_set( ) )
+  {
+    // blank
+  }
+
   initscr( );
 
   if( has_colors( ) == FALSE )
@@ -86,11 +93,7 @@ int main( )
 
   noecho( );
   cbreak( );
-  // keypad( stdscr, true );
-  // nodelay( stdscr, true );
-  // notimeout( stdscr, true );
   set_escdelay( 0 );
-  // clrtobot();
   clear( );
   refresh( );
 
@@ -112,48 +115,48 @@ int main( )
 
   // Configure Crossroad
   // Configure Crossroad.Lane1
-  auto pLane1           = crossroad.getSMData_Lane1( );
-  pLane1->Id            = "1";
-  pLane1->UncontrolMode = UncontrolModeType::E_STOP_AND_CHECK;
+  auto pLane1              = crossroad.getSMData_Lane1( );
+  pLane1->Id               = "1";
+  pLane1->UncontrolledMode = UncontrolledModeType::E_STOP_AND_CHECK;
 
   // Configure Crossroad.Lane2
-  auto pLane2           = crossroad.getSMData_Lane2( );
-  pLane2->Id            = "2";
-  pLane2->UncontrolMode = UncontrolModeType::E_STOP_AND_CHECK;
+  auto pLane2              = crossroad.getSMData_Lane2( );
+  pLane2->Id               = "2";
+  pLane2->UncontrolledMode = UncontrolledModeType::E_STOP_AND_CHECK;
 
   // Configure Crossroad.Lane3
-  auto pLane3           = crossroad.getSMData_Lane3( );
-  pLane3->Id            = "3";
-  pLane3->UncontrolMode = UncontrolModeType::E_CHECK;
+  auto pLane3              = crossroad.getSMData_Lane3( );
+  pLane3->Id               = "3";
+  pLane3->UncontrolledMode = UncontrolledModeType::E_CHECK;
 
   // Configure Crossroad.Lane4
-  auto pLane4           = crossroad.getSMData_Lane4( );
-  pLane4->Id            = "4";
-  pLane4->UncontrolMode = UncontrolModeType::E_CHECK;
+  auto pLane4              = crossroad.getSMData_Lane4( );
+  pLane4->Id               = "4";
+  pLane4->UncontrolledMode = UncontrolledModeType::E_CHECK;
 
   // Configure Crossroad.PedestrianLanes
   auto pPedestrianLanes = crossroad.getSMData_PedestrianLanes( );
   pPedestrianLanes->Id  = "P";
 
-  // Configure Crossroad.TraficLight1
+  // Configure Crossroad.TrafficLight1
   auto pTrafficLight1                = crossroad.getSMData_TrafficLight1( );
   pTrafficLight1->pLane              = crossroad.getSubSM_Lane1( );
   pTrafficLight1->pMonitor           = &monitor;
   pTrafficLight1->pExecutionDirector = &executor;
 
-  // Configure Crossroad.TraficLight2
+  // Configure Crossroad.TrafficLight2
   auto pTrafficLight2                = crossroad.getSMData_TrafficLight2( );
   pTrafficLight2->pLane              = crossroad.getSubSM_Lane2( );
   pTrafficLight2->pMonitor           = &monitor;
   pTrafficLight2->pExecutionDirector = &executor;
 
-  // Configure Crossroad.TraficLight3
+  // Configure Crossroad.TrafficLight3
   auto pTrafficLight3                = crossroad.getSMData_TrafficLight3( );
   pTrafficLight3->pLane              = crossroad.getSubSM_Lane3( );
   pTrafficLight3->pMonitor           = &monitor;
   pTrafficLight3->pExecutionDirector = &executor;
 
-  // Configure Crossroad.TraficLight4
+  // Configure Crossroad.TrafficLight4
   auto pTrafficLight4                = crossroad.getSMData_TrafficLight4( );
   pTrafficLight4->pLane              = crossroad.getSubSM_Lane4( );
   pTrafficLight4->pMonitor           = &monitor;
@@ -172,12 +175,12 @@ int main( )
   crossroad.start( );
 
   // Allow entire the state machines run for  indefinite time until CTRL-C is pressed
-  pthread_mutex_lock( &blocker );
-
   signal( SIGINT, signal_handler );
 
-  pthread_mutex_lock( &blocker );
-  pthread_mutex_unlock( &blocker );
+  while( blocker.test_and_set( ) )
+  {
+    // blank
+  }
 
   // exit the application
   clear( );

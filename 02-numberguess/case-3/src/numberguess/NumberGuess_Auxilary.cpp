@@ -30,23 +30,17 @@
 #include "NumberGuess.hh"
 
 #include <cassert>
-#include <csignal>
-#include <cstddef>
-#include <cstdlib>
-#include <cstring>
-#include <mutex>
-#include <optional>
-#include <thread>
-#include <unistd.h>
-#include <random>
 #include <iostream>
+#include <random>
+
+#include <unistd.h>
 
 namespace
 {
-  constexpr std::chrono::minutes GAME_TIME(1U);
-  constexpr std::chrono::seconds ESTIMATION_TIME(20U);
-  constexpr std::chrono::seconds WARNING_TIME(10U);
-}
+  constexpr std::chrono::minutes GAME_TIME( 1U );
+  constexpr std::chrono::seconds ESTIMATION_TIME( 20U );
+  constexpr std::chrono::seconds WARNING_TIME( 10U );
+}  // namespace
 
 // The implementation of the guards
 bool NumberGuess::AreNumbersEqual( ) const
@@ -57,20 +51,20 @@ bool NumberGuess::AreNumbersEqual( ) const
 
 bool NumberGuess::IsAnsweringTimeUp( ) const
 {
-  TimePoint now= std::chrono::system_clock::now();
-  bool const result = now >= (instanceData.estimation_begin + ESTIMATION_TIME);
+  TimePoint now     = std::chrono::system_clock::now( );
+  bool const result = now >= ( instanceData.estimation_begin + ESTIMATION_TIME );
   return result;
 }  // End of guard function: IsAnsweringTimeUp
 
 bool NumberGuess::IsAnswerNo( ) const
 {
-  bool const result = (instanceData.answer == 'N' || instanceData.answer == 'n');
+  bool const result = ( instanceData.answer == 'N' || instanceData.answer == 'n' );
   return result;
 }  // End of guard function: IsAnswerNo
 
 bool NumberGuess::IsAnswerYes( ) const
 {
-  bool const result = (instanceData.answer == 'Y' || instanceData.answer == 'y');
+  bool const result = ( instanceData.answer == 'Y' || instanceData.answer == 'y' );
   return result;
 }  // End of guard function: IsAnswerYes
 
@@ -81,20 +75,20 @@ bool NumberGuess::IsANumberRead( ) const
 
 bool NumberGuess::IsDraw( ) const
 {
-  bool const result = (instanceData.answer == '?');
+  bool const result = ( instanceData.answer == '?' );
   return result;
 }  // End of guard function: IsDraw
 
 bool NumberGuess::IsGameTimeOver( ) const
 {
-  TimePoint now= std::chrono::system_clock::now();
+  TimePoint now     = std::chrono::system_clock::now( );
   bool const result = now >= ( instanceData.game_begin + GAME_TIME );
   return result;
 }  // End of guard function: IsGameTimeOver
 
 bool NumberGuess::IsNumberInRange( ) const
 {
-  bool const result = ( instanceData.guess > 0 && instanceData.guess < 100);
+  bool const result = ( instanceData.guess > 0 && instanceData.guess < 100 );
   return result;
 }  // End of guard function: IsNumberInRange
 
@@ -108,10 +102,10 @@ bool NumberGuess::IsTimeRunOut( ) const
 {
   bool result = instanceData.warn;
 
-  if (result)
+  if( result )
   {
-    TimePoint now= std::chrono::system_clock::now();
-    result = now >= ( instanceData.estimation_begin + WARNING_TIME );
+    TimePoint now = std::chrono::system_clock::now( );
+    result        = now >= ( instanceData.estimation_begin + WARNING_TIME );
   }
 
   return result;
@@ -147,20 +141,20 @@ void NumberGuess::PrintGoodBye( [[maybe_unused]] NumberGuess_DataType const& inp
 
 void NumberGuess::PrintHints( [[maybe_unused]] NumberGuess_DataType const& input )
 {
-   if ( input.number > input.guess )
-   {
-     std::cout << "Your guess, "<< input.guess << ", is smaller\n";
-   }
-   else if ( input.number < input.guess )
-   {
-     std::cout << "Your guess, " << input.guess << ", is bigger\n";
-   }
+  if( input.number > input.guess )
+  {
+    std::cout << "Your guess, " << input.guess << ", is smaller\n";
+  }
+  else if( input.number < input.guess )
+  {
+    std::cout << "Your guess, " << input.guess << ", is bigger\n";
+  }
 }  // End of action function: PrintHints
 
 void NumberGuess::PrintHurryUp( [[maybe_unused]] NumberGuess_DataType const& input )
 {
-    std::cout << "\n *** Time is going up. Hurry up! *** \n\n";
-    instanceData.warn= false;
+  std::cout << "\n *** Time is going up. Hurry up! *** \n\n";
+  instanceData.warn = false;
 }  // End of action function: PrintHurryUp
 
 void NumberGuess::PrintNoNumberIsRead( [[maybe_unused]] NumberGuess_DataType const& input )
@@ -170,7 +164,7 @@ void NumberGuess::PrintNoNumberIsRead( [[maybe_unused]] NumberGuess_DataType con
 
 void NumberGuess::PrintNumberIsNotInRange( [[maybe_unused]] NumberGuess_DataType const& input )
 {
-  std::cout<< "Please enter a number betwen 1 and 99!\n";
+  std::cout << "Please enter a number betwen 1 and 99!\n";
 }  // End of action function: PrintNumberIsNotInRange
 
 void NumberGuess::PrintShowNumber( [[maybe_unused]] NumberGuess_DataType const& input )
@@ -195,25 +189,25 @@ void NumberGuess::PrintWarning( [[maybe_unused]] NumberGuess_DataType const& inp
 
 void NumberGuess::ReadAnswerToContinue( [[maybe_unused]] NumberGuess_DataType const& input )
 {
-  char buffer[256];
-  std::cin.clear();
-  std::cin.getline( buffer, sizeof(buffer)-1 );
-  instanceData.answer= 0;
-  if (!std::cin.fail())
+  char buffer[ 256 ];
+  std::cin.clear( );
+  std::cin.getline( buffer, sizeof( buffer ) - 1 );
+  instanceData.answer = 0;
+  if( ! std::cin.fail( ) )
   {
     static constexpr auto ws = " \t\n\r\v";
-    
+
     std::string str( buffer );
 
     auto pos = str.find_first_not_of( ws );
-    if ( pos != str.npos )
+    if( pos != str.npos )
     {
-      str.erase( 0, pos );      
+      str.erase( 0, pos );
     }
 
-    if ( ! str.empty() )
+    if( ! str.empty( ) )
     {
-      instanceData.answer= str.front();
+      instanceData.answer = str.front( );
     }
   }
 
@@ -222,49 +216,49 @@ void NumberGuess::ReadAnswerToContinue( [[maybe_unused]] NumberGuess_DataType co
 
 void NumberGuess::ReadEstimation( [[maybe_unused]] NumberGuess_DataType const& input )
 {
-  char buffer[256];
-  std::cin.clear();
-  std::cin.getline( buffer, sizeof(buffer)-1 );
-  instanceData.answer= 0;
-  if (!std::cin.fail())
+  char buffer[ 256 ];
+  std::cin.clear( );
+  std::cin.getline( buffer, sizeof( buffer ) - 1 );
+  instanceData.answer = 0;
+  if( ! std::cin.fail( ) )
   {
-    static constexpr auto ws = " \t\n\r\v";
+    static constexpr auto ws     = " \t\n\r\v";
     static constexpr auto digits = "1234567890";
-    
+
     std::string str( buffer );
 
     auto pos = str.find_first_not_of( ws );
-    if ( pos != str.npos )
+    if( pos != str.npos )
     {
-      str.erase( 0, pos );      
+      str.erase( 0, pos );
     }
 
-    pos = str.find_last_not_of ( ws );
-    if ( pos != str.npos )
+    pos = str.find_last_not_of( ws );
+    if( pos != str.npos )
     {
       str.erase( pos + 1 );
     }
 
     pos = str.find_first_not_of( digits );
-    if ( pos != str.npos )
+    if( pos != str.npos )
     {
-      instanceData.scan_result= false;
+      instanceData.scan_result = false;
     }
     else
     {
       try
       {
-        instanceData.guess = std::stoul(  str );
-        instanceData.scan_result= true;
+        instanceData.guess       = std::stoul( str );
+        instanceData.scan_result = true;
       }
-      catch(const std::exception& e)
+      catch( std::exception const& e )
       {
-        instanceData.scan_result= false;
+        instanceData.scan_result = false;
       }
     }
-    if ( !instanceData.scan_result && ! str.empty( ))
+    if( ! instanceData.scan_result && ! str.empty( ) )
     {
-      instanceData.answer = str.front();
+      instanceData.answer = str.front( );
     }
   }
 
@@ -279,20 +273,20 @@ void NumberGuess::Salute( [[maybe_unused]] NumberGuess_DataType const& input )
 void NumberGuess::SetANumber( [[maybe_unused]] NumberGuess_DataType const& input )
 {
   static std::random_device rd;
-  static std::mt19937 generator(rd());
-  static std::uniform_int_distribution<long unsigned int> numberDistribution( 1, 99 );
+  static std::mt19937 generator( rd( ) );
+  static std::uniform_int_distribution< long unsigned int > numberDistribution( 1, 99 );
   instanceData.number = numberDistribution( generator );
 }  // End of action function: SetANumber
 
 void NumberGuess::StartAnswerTimer( [[maybe_unused]] NumberGuess_DataType const& input )
 {
-  instanceData.estimation_begin= std::chrono::system_clock::now();
-  instanceData.warn= true;
+  instanceData.estimation_begin = std::chrono::system_clock::now( );
+  instanceData.warn             = true;
 }  // End of action function: StartAnswerTimer
 
 void NumberGuess::StartEstimationTimer( [[maybe_unused]] NumberGuess_DataType const& input )
 {
-  instanceData.game_begin= std::chrono::system_clock::now();
+  instanceData.game_begin = std::chrono::system_clock::now( );
 }  // End of action function: StartEstimationTimer
 
 // End of NumberGuess_Auxilary.cpp

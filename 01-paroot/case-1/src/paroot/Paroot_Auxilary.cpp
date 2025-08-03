@@ -30,19 +30,12 @@
 #include "Paroot.hh"
 
 #include <cassert>
-#include <csignal>
-#include <cstddef>
-#include <cstdlib>
-#include <cstring>
-#include <mutex>
-#include <optional>
-#include <thread>
-#include <unistd.h>
-
 #include <cmath>
 #include <complex>
 #include <cstdio>
 #include <iostream>
+
+#include <unistd.h>
 
 using namespace std;
 
@@ -155,7 +148,7 @@ namespace
 
       iss >> *param;
 
-      result = static_cast<bool>(iss);
+      result = static_cast< bool >( iss );
     }
 
     fflush( stdin );

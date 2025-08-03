@@ -28,41 +28,32 @@
  */
 
 #include "Display.hh"
-
 #include "Display_Utilities.hh"
-
-#include <cassert>
-#include <csignal>
-#include <cstddef>
-#include <cstring>
-#include <mutex>
-#include <optional>
-#include <thread>
 
 #include <ncurses.h>
 
 // The implementation of the actions
 void Display::DisplayDivisionByZeroError( [[maybe_unused]] Display_DataType const& input )
 {
-  printw("\r<<DIVISION BY ZERO>>");
+  printw( "\r<<DIVISION BY ZERO>>" );
 }  // End of action function: DisplayDivisionByZeroError
 
 void Display::DisplayFaultyError( [[maybe_unused]] Display_DataType const& input )
 {
-  printw("\r<<ERROR>>");
+  printw( "\r<<ERROR>>" );
 }  // End of action function: DisplayFaultyError
 
 void Display::DisplayOverflowError( [[maybe_unused]] Display_DataType const& input )
 {
-  printw("\r<<OVERFLOW ERROR>>");
+  printw( "\r<<OVERFLOW ERROR>>" );
 }  // End of action function: DisplayOverflowError
 
 void Display::DisplayUpdate( [[maybe_unused]] Display_DataType const& input )
 {
-  char accdata[20];
-  Display_Internal::GetAccumulatorData(&input, accdata, sizeof(accdata));
+  char accdata[ 20 ];
+  Display_Internal::GetAccumulatorData( &input, accdata, sizeof( accdata ) );
 
-  printw("\r%-20s", accdata);
+  printw( "\r%-20s", accdata );
 }  // End of action function: DisplayUpdate
 
 // End of Display_Auxilary.cpp

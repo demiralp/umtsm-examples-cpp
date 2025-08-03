@@ -25,7 +25,7 @@
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
-*/
+ */
 
 /**********************************************/
 /*               CASE 3                       */
@@ -33,15 +33,13 @@
 
 #include <NumberGuess.hh>
 
-#include <iostream>
-#include <cstdlib>
 #include <csignal>
-#include <atomic>
+#include <cstdlib>
 
 #include <unistd.h>
 
 NumberGuess numberguess;
-volatile std::sig_atomic_t signalReceived = -1;
+std::sig_atomic_t volatile signalReceived = -1;
 
 void signal_handler( int sig )
 {
@@ -70,6 +68,10 @@ void SignalHandler( )
         numberguess.trigger_newgame( );
         break;
       }
+      default:
+      {
+        // blank
+      }
     }
     signalReceived = -1;
   } while( true );
@@ -78,7 +80,7 @@ void SignalHandler( )
 int main( )
 {
   std::thread SignalExecutor( SignalHandler );
-  SignalExecutor.detach();
+  SignalExecutor.detach( );
 
   signal( SIGINT, signal_handler );
   signal( SIGUSR1, signal_handler );

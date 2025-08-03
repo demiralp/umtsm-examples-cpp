@@ -41,13 +41,12 @@ Display_DataType::~Display_DataType( )
 
 void Display_DataType::initialize( )
 {
-  BaseDigits[0] = 
-  FractionalDigits[0] = 
-  ExponantionalDigits[0] = '\0';
-  BaseSignaturePositive = true;
-  ExponantionalSignaturePositive = true;
-  FractinalStart = false;
-  ExponentStart = false;
+  BaseDigits[ 0 ] = FractionalDigits[ 0 ] = ExponentialDigits[ 0 ] = '\0';
+
+  BaseSignaturePositive        = true;
+  ExponentialSignaturePositive = true;
+  FractionalStart              = false;
+  ExponentStart                = false;
 }
 
 void Display_DataType::deinitialize( )

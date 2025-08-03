@@ -80,11 +80,11 @@ sm Calculator
 
             entry / ResetAccumulations;
 
-            Reset -> EnterBaseDigits / ClearLastEntry, ResetAccumulations, DrawSpliteLine, NotifyDisplayUpdate;
+            Reset -> EnterBaseDigits / ClearLastEntry, ResetAccumulations, DrawSplitLine, NotifyDisplayUpdate;
             Clear -> EnterBaseDigits / ClearLastEntry, NotifyDisplayUpdate;
 
             Plus -> EnterBaseDigits / Additions, ClearLastEntry;
-            Minus -> EnterBaseDigits / Substractions, ClearLastEntry;
+            Minus -> EnterBaseDigits / Subtractions, ClearLastEntry;
             Multiplay -> EnterBaseDigits / Multiplications, ClearLastEntry;
             Division -> EnterBaseDigits / Divides, ClearLastEntry;
 
@@ -122,7 +122,7 @@ sm Calculator
                 Backspace [IsExponentZero && IsFractionZero] -> EnterBaseDigits;
                 Backspace [IsExponentZero] -> EnterFractions;
                 Backspace / EraseExponentDigit, NotifyDisplayUpdate;
-                ChangeSign / ChangeExponetSign, NotifyDisplayUpdate;
+                ChangeSign / ChangeExponentSign, NotifyDisplayUpdate;
             }
         }
 
@@ -137,7 +137,7 @@ sm Calculator
         {
             exit / NotifyReset;
 
-            Clear, Reset ->  Process / DrawSpliteLine;
+            Clear, Reset ->  Process / DrawSplitLine;
 
             state Faulty
             {
@@ -179,7 +179,7 @@ sm Keypad
 
     Notify [IsReset] / NotifyReset;
     Notify [IsClear] / NotifyClear;
-    Notify [IsBackspace] / NotifyBackspce;
+    Notify [IsBackspace] / NotifyBackspace;
     Notify [IsDigit] / NotifyDigit;
     Notify [IsDot] / NotifyDot;
     Notify [IsExponent] / NotifyExponent;
@@ -200,10 +200,10 @@ sm Display
     {
         char BaseDigits[16];
         char FractionalDigits[16];
-        char ExponantionalDigits[5];
+        char ExponentialDigits[5];
         boolean BaseSignaturePositive;
-        boolean ExponantionalSignaturePositive;
-        boolean FractinalStart;
+        boolean ExponentialSignaturePositive;
+        boolean FractionalStart;
         boolean ExponentStart;
     }
 

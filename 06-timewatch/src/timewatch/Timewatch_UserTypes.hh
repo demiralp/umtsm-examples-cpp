@@ -36,7 +36,7 @@
 
 #include <chrono>
 
-typedef std::chrono::time_point<  std::chrono::system_clock > TimePoint;
-typedef std::chrono::milliseconds Duration; 
+typedef std::chrono::time_point< std::chrono::system_clock > TimePoint;
+typedef std::chrono::milliseconds Duration;
 
 // End of Timewatch_UserTypes.hh

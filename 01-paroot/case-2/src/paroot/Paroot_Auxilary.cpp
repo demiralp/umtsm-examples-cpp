@@ -30,19 +30,12 @@
 #include "Paroot.hh"
 
 #include <cassert>
-#include <csignal>
-#include <cstddef>
-#include <cstdlib>
-#include <cstring>
-#include <mutex>
-#include <optional>
-#include <thread>
-#include <unistd.h>
-
 #include <cmath>
 #include <complex>
 #include <cstdio>
 #include <iostream>
+
+#include <unistd.h>
 
 using namespace std;
 
@@ -51,7 +44,7 @@ namespace
   constexpr double EPSILON = 1e-8;
 
   bool ReadParameter( double* const param );
-}
+}  // namespace
 
 // The implementation of the guards
 bool Paroot::isComplexSolution( ) const
@@ -78,31 +71,30 @@ void Paroot::FindTheRoots( [[maybe_unused]] Paroot_DataType const& input )
   double delta = ( input.paramB * input.paramB - 4.0 * input.paramA * input.paramC );
 
   if( fabs( delta ) <= EPSILON )
-{
+  {
     delta = 0.0;
 
     instanceData.root1 = instanceData.root2 = -input.paramB / ( 2.0 * input.paramA );
     instanceData.croot1 = instanceData.croot2 = 0.0;
-    instanceData.solutionType    = Paroot_Solution::MONO;
+    instanceData.solutionType                 = Paroot_Solution::MONO;
   }
   else if( delta > 0.0 )
   {
     double deltaSq = sqrt( delta );
 
-    instanceData.root1          = ( -input.paramB - deltaSq ) / ( 2.0 * input.paramA );
-    instanceData.root2          = ( -input.paramB + deltaSq ) / ( 2.0 * input.paramA );
+    instanceData.root1  = ( -input.paramB - deltaSq ) / ( 2.0 * input.paramA );
+    instanceData.root2  = ( -input.paramB + deltaSq ) / ( 2.0 * input.paramA );
     instanceData.croot1 = instanceData.croot2 = 0.0;
-    instanceData.solutionType    = Paroot_Solution::REAL;
+    instanceData.solutionType                 = Paroot_Solution::REAL;
   }
   else
   {
     auto deltaSq = sqrt( complex< double >( delta ) );
 
-    instanceData.root1 = 
-    instanceData.root2 = 0.0;
-    instanceData.croot1        = ( -input.paramB - deltaSq ) / ( 2.0 * input.paramA );
-    instanceData.croot2        = ( -input.paramB + deltaSq ) / ( 2.0 * input.paramA );
-    instanceData.solutionType  = Paroot_Solution::COMPLEX;
+    instanceData.root1 = instanceData.root2 = 0.0;
+    instanceData.croot1                     = ( -input.paramB - deltaSq ) / ( 2.0 * input.paramA );
+    instanceData.croot2                     = ( -input.paramB + deltaSq ) / ( 2.0 * input.paramA );
+    instanceData.solutionType               = Paroot_Solution::COMPLEX;
   }
 }  // End of action function: FindTheRoots
 
@@ -144,7 +136,7 @@ void Paroot::ReadParameterC( [[maybe_unused]] Paroot_DataType const& input )
 
 void Paroot::WarningParamAIsZero( [[maybe_unused]] Paroot_DataType const& input )
 {
-  printf("Parameter A must be different than zero!\n");
+  printf( "Parameter A must be different than zero!\n" );
 }  // End of action function: WarningParamAIsZero
 
 void Paroot::WriteComplexSolution( [[maybe_unused]] Paroot_DataType const& input )
@@ -160,8 +152,8 @@ void Paroot::WriteSingleSolution( [[maybe_unused]] Paroot_DataType const& input 
 
 void Paroot::WriteSolutions( [[maybe_unused]] Paroot_DataType const& input )
 {
-    cout << "root1 : " << input.root1 << '\n';
-    cout << "root2 : " << input.root2 << '\n';
+  cout << "root1 : " << input.root1 << '\n';
+  cout << "root2 : " << input.root2 << '\n';
 }  // End of action function: WriteSolutions
 
 namespace
@@ -187,6 +179,6 @@ namespace
 
     return result;
   }
-}
+}  // namespace
 
 // End of Paroot_Auxilary.cpp

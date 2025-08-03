@@ -36,11 +36,11 @@ namespace Calculator_Internal
 {
   void CalculateAccumulator(
     Calculator* const smInfo,
-    Calculator_DataType const * const pInputData,
+    Calculator_DataType const* const pInputData,
     Calculator_DataType* const pOutputData,
     Calculator_Operator currentOp );
 
   void DrawSeparator( );
-}
+}  // namespace Calculator_Internal
 
 // End of Calculator_Utilities.hh

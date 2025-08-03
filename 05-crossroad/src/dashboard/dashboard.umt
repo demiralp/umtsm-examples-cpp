@@ -40,9 +40,9 @@ sm Dashboard
     properties
     {
         int LastInputKey;
-        optional ExecutionDirector pExecutionDirector;
-        optional Monitor pMonitor;
-        optional Crossroad pCrossroad;
+        shared ExecutionDirector pExecutionDirector;
+        shared Monitor pMonitor;
+        shared Crossroad pCrossroad;
     }
 
     init -> SimpleRead;

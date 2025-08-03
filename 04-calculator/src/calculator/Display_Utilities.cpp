@@ -34,51 +34,51 @@
 
 namespace Display_Internal
 {
-  void GetAccumulatorData( Display_DataType const * const data, char * const accdata, size_t datalen )
+  void GetAccumulatorData( Display_DataType const* const data, char* const accdata, size_t datalen )
   {
-    if ( accdata != NULL)
+    if( accdata != NULL )
     {
       size_t len = 0;
       size_t tlen;
-      char * ptr= accdata;
+      char* ptr = accdata;
 
-      if ( ! data->BaseSignaturePositive)
+      if( ! data->BaseSignaturePositive )
       {
-        *ptr= '-';
+        *ptr = '-';
         ptr++;
         len++;
       }
 
-      tlen= strlen(data->BaseDigits);
-      if ( tlen > 0 )
+      tlen = std::strlen( data->BaseDigits );
+      if( tlen > 0 )
       {
-        snprintf(ptr, datalen-len, "%s", data->BaseDigits);
+        snprintf( ptr, datalen - len, "%s", data->BaseDigits );
         ptr += tlen;
         len += tlen;
 
-        tlen = strlen(data->FractionalDigits);
-        if (tlen > 0 || data->FractinalStart )
+        tlen = std::strlen( data->FractionalDigits );
+        if( tlen > 0 || data->FractionalStart )
         {
           *ptr = '.';
           ptr++;
           len++;
         }
 
-        if ( tlen > 0 )
+        if( tlen > 0 )
         {
-          snprintf( ptr, datalen-len, "%s", data->FractionalDigits);
+          snprintf( ptr, datalen - len, "%s", data->FractionalDigits );
           ptr += tlen;
           len += tlen;
         }
 
-        tlen = strlen(data->ExponantionalDigits);
-        if ( tlen > 0 || data->ExponentStart)
+        tlen = std::strlen( data->ExponentialDigits );
+        if( tlen > 0 || data->ExponentStart )
         {
           *ptr = 'E';
           ptr++;
           len++;
 
-          if ( !data->ExponantionalSignaturePositive)
+          if( ! data->ExponentialSignaturePositive )
           {
             *ptr = '-';
             ptr++;
@@ -86,16 +86,16 @@ namespace Display_Internal
           }
         }
 
-        if (tlen > 0 )
+        if( tlen > 0 )
         {
-          snprintf( ptr, datalen-len, "%s", data->ExponantionalDigits);
+          snprintf( ptr, datalen - len, "%s", data->ExponentialDigits );
           ptr += tlen;
           len += tlen;
         }
       }
       else
       {
-        *ptr= '0';
+        *ptr = '0';
         ptr++;
         len++;
       }
@@ -103,6 +103,6 @@ namespace Display_Internal
       *ptr = '\0';
     }
   }
-}
+}  // namespace Display_Internal
 
 // End of Display_Utilities.cpp

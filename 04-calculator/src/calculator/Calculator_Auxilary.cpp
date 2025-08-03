@@ -34,18 +34,11 @@
 #include "Display.hh"
 #include "Display_DataType.hh"
 
-#include <cassert>
-#include <csignal>
-#include <cstddef>
-#include <cstdlib>
-#include <cstring>
-#include <mutex>
-#include <optional>
-#include <thread>
-#include <unistd.h>
-
 #include <algorithm>
+#include <cstring>
+
 #include <ncurses.h>
+#include <unistd.h>
 
 // The implementation of the guards
 bool Calculator::HasDivisionByZeroError( ) const
@@ -62,11 +55,11 @@ bool Calculator::HasOverflowError( ) const
 
 bool Calculator::IsBaseZero( ) const
 {
-  bool result = true;
-  char const * pStr= &subSM.CalculatorDisplay.instanceData.BaseDigits[0];
-  while( result && *pStr != '\0')
+  bool result      = true;
+  char const* pStr = &subSM.CalculatorDisplay.instanceData.BaseDigits[ 0 ];
+  while( result && *pStr != '\0' )
   {
-    result = (*pStr == '0');
+    result = ( *pStr == '0' );
     pStr++;
   }
 
@@ -75,11 +68,11 @@ bool Calculator::IsBaseZero( ) const
 
 bool Calculator::IsExponentZero( ) const
 {
-  bool result = true;
-  char const * pStr= &subSM.CalculatorDisplay.instanceData.ExponantionalDigits[0];
-  while( result && *pStr != '\0')
+  bool result      = true;
+  char const* pStr = &subSM.CalculatorDisplay.instanceData.ExponentialDigits[ 0 ];
+  while( result && *pStr != '\0' )
   {
-    result = (*pStr == '0');
+    result = ( *pStr == '0' );
     pStr++;
   }
 
@@ -94,11 +87,11 @@ bool Calculator::IsFaulty( ) const
 
 bool Calculator::IsFractionZero( ) const
 {
-  bool result = true;
-  char const * pStr= &subSM.CalculatorDisplay.instanceData.FractionalDigits[0];
-  while( result && *pStr != '\0')
+  bool result      = true;
+  char const* pStr = &subSM.CalculatorDisplay.instanceData.FractionalDigits[ 0 ];
+  while( result && *pStr != '\0' )
   {
-    result = (*pStr == '0');
+    result = ( *pStr == '0' );
     pStr++;
   }
 
@@ -107,11 +100,11 @@ bool Calculator::IsFractionZero( ) const
 
 bool Calculator::IsThereSpaceForExponent( ) const
 {
-  size_t const baseLen = std::max<int>(1, strlen( subSM.CalculatorDisplay.instanceData.BaseDigits ) ) + 1;
-  bool const isFracZero = IsFractionZero( );
-  size_t const fractionLen = isFracZero? 0 : ( strlen( subSM.CalculatorDisplay.instanceData.FractionalDigits ) + 1 );
+  size_t const baseLen     = std::max< int >( 1, std::strlen( subSM.CalculatorDisplay.instanceData.BaseDigits ) ) + 1;
+  bool const isFracZero    = IsFractionZero( );
+  size_t const fractionLen = isFracZero ? 0 : ( std::strlen( subSM.CalculatorDisplay.instanceData.FractionalDigits ) + 1 );
 
-  bool result = (baseLen+fractionLen) < 18;
+  bool result = ( baseLen + fractionLen ) < 18;
   return result;
 }  // End of guard function: IsThereSpaceForExponent
 
@@ -131,14 +124,14 @@ void Calculator::ChangeBaseSign( [[maybe_unused]] Calculator_DataType const& inp
   subSM.CalculatorDisplay.instanceData.BaseSignaturePositive = ! subSM.CalculatorDisplay.instanceData.BaseSignaturePositive;
 }  // End of action function: ChangeBaseSign
 
-void Calculator::ChangeExponetSign( [[maybe_unused]] Calculator_DataType const& input )
+void Calculator::ChangeExponentSign( [[maybe_unused]] Calculator_DataType const& input )
 {
-  subSM.CalculatorDisplay.instanceData.ExponantionalSignaturePositive = (! subSM.CalculatorDisplay.instanceData.ExponantionalSignaturePositive);
-}  // End of action function: ChangeExponetSign
+  subSM.CalculatorDisplay.instanceData.ExponentialSignaturePositive = ( ! subSM.CalculatorDisplay.instanceData.ExponentialSignaturePositive );
+}  // End of action function: ChangeExponentSign
 
 void Calculator::CheckErrorStatus( [[maybe_unused]] Calculator_DataType const& input )
 {
-  while (input.ErrorNo == Calculator_Error::E_NO_ERROR)
+  while( input.ErrorNo == Calculator_Error::E_NO_ERROR )
   {
     std::this_thread::sleep_for( std::chrono::microseconds( 500000 ) );
   }
@@ -146,20 +139,20 @@ void Calculator::CheckErrorStatus( [[maybe_unused]] Calculator_DataType const& i
 
 void Calculator::ClearExponent( [[maybe_unused]] Calculator_DataType const& input )
 {
-  subSM.CalculatorDisplay.instanceData.ExponentStart = false;
-  subSM.CalculatorDisplay.instanceData.ExponantionalSignaturePositive= true;
-  subSM.CalculatorDisplay.instanceData.ExponantionalDigits[0] = '\0';
+  subSM.CalculatorDisplay.instanceData.ExponentStart                = false;
+  subSM.CalculatorDisplay.instanceData.ExponentialSignaturePositive = true;
+  subSM.CalculatorDisplay.instanceData.ExponentialDigits[ 0 ]       = '\0';
 }  // End of action function: ClearExponent
 
 void Calculator::ClearFraction( [[maybe_unused]] Calculator_DataType const& input )
 {
-  subSM.CalculatorDisplay.instanceData.FractinalStart= false;
-  subSM.CalculatorDisplay.instanceData.FractionalDigits[0] = '\0';
+  subSM.CalculatorDisplay.instanceData.FractionalStart       = false;
+  subSM.CalculatorDisplay.instanceData.FractionalDigits[ 0 ] = '\0';
 }  // End of action function: ClearFraction
 
 void Calculator::ClearLastEntry( [[maybe_unused]] Calculator_DataType const& input )
 {
-  subSM.CalculatorDisplay.instanceData.initialize();
+  subSM.CalculatorDisplay.instanceData.initialize( );
 }  // End of action function: ClearLastEntry
 
 void Calculator::Divides( [[maybe_unused]] Calculator_DataType const& input )
@@ -167,46 +160,46 @@ void Calculator::Divides( [[maybe_unused]] Calculator_DataType const& input )
   Calculator_Internal::CalculateAccumulator( this, &input, &instanceData, Calculator_Operator::E_OP_DIVIDE );
 }  // End of action function: Divides
 
-void Calculator::DrawSpliteLine( [[maybe_unused]] Calculator_DataType const& input )
+void Calculator::DrawSplitLine( [[maybe_unused]] Calculator_DataType const& input )
 {
-  Calculator_Internal::DrawSeparator();
-}  // End of action function: DrawSpliteLine
+  Calculator_Internal::DrawSeparator( );
+}  // End of action function: DrawSplitLine
 
 void Calculator::EraseBaseDigit( [[maybe_unused]] Calculator_DataType const& input )
 {
-  size_t len= strlen(subSM.CalculatorDisplay.instanceData.BaseDigits);
-  if ( len > 0 )
+  size_t len = std::strlen( subSM.CalculatorDisplay.instanceData.BaseDigits );
+  if( len > 0 )
   {
     len--;
-    subSM.CalculatorDisplay.instanceData.BaseDigits[len]= '\0';
+    subSM.CalculatorDisplay.instanceData.BaseDigits[ len ] = '\0';
   }
 }  // End of action function: EraseBaseDigit
 
 void Calculator::EraseExponentDigit( [[maybe_unused]] Calculator_DataType const& input )
 {
-  size_t len= strlen(subSM.CalculatorDisplay.instanceData.ExponantionalDigits);
-  if ( len > 0 )
+  size_t len = std::strlen( subSM.CalculatorDisplay.instanceData.ExponentialDigits );
+  if( len > 0 )
   {
     len--;
-    subSM.CalculatorDisplay.instanceData.ExponantionalDigits[len]= '\0';
+    subSM.CalculatorDisplay.instanceData.ExponentialDigits[ len ] = '\0';
   }
   else
   {
-    subSM.CalculatorDisplay.instanceData.ExponentStart= false;
+    subSM.CalculatorDisplay.instanceData.ExponentStart = false;
   }
 }  // End of action function: EraseExponentDigit
 
 void Calculator::EraseFractionDigit( [[maybe_unused]] Calculator_DataType const& input )
 {
-  size_t len= strlen(subSM.CalculatorDisplay.instanceData.FractionalDigits);
-  if ( len > 0 )
+  size_t len = std::strlen( subSM.CalculatorDisplay.instanceData.FractionalDigits );
+  if( len > 0 )
   {
     len--;
-    subSM.CalculatorDisplay.instanceData.FractionalDigits[len]= '\0';
+    subSM.CalculatorDisplay.instanceData.FractionalDigits[ len ] = '\0';
   }
   else
   {
-    subSM.CalculatorDisplay.instanceData.FractinalStart= false;
+    subSM.CalculatorDisplay.instanceData.FractionalStart = false;
   }
 }  // End of action function: EraseFractionDigit
 
@@ -217,44 +210,43 @@ void Calculator::Multiplications( [[maybe_unused]] Calculator_DataType const& in
 
 void Calculator::NotifyDisplayUpdate( [[maybe_unused]] Calculator_DataType const& input )
 {
-  subSM.CalculatorDisplay.trigger_Update();
+  subSM.CalculatorDisplay.trigger_Update( );
 }  // End of action function: NotifyDisplayUpdate
 
 void Calculator::NotifyDivisionByZeroError( [[maybe_unused]] Calculator_DataType const& input )
 {
-  subSM.CalculatorDisplay.trigger_DivisionByZero();
+  subSM.CalculatorDisplay.trigger_DivisionByZero( );
 }  // End of action function: NotifyDivisionByZeroError
 
 void Calculator::NotifyFaultError( [[maybe_unused]] Calculator_DataType const& input )
 {
-  subSM.CalculatorDisplay.trigger_Faulty();
+  subSM.CalculatorDisplay.trigger_Faulty( );
 }  // End of action function: NotifyFaultError
 
 void Calculator::NotifyOverflowError( [[maybe_unused]] Calculator_DataType const& input )
 {
-  subSM.CalculatorDisplay.trigger_Overflow();
+  subSM.CalculatorDisplay.trigger_Overflow( );
 }  // End of action function: NotifyOverflowError
 
 void Calculator::NotifyReset( [[maybe_unused]] Calculator_DataType const& input )
 {
-  subSM.CalculatorDisplay.trigger_Reset();
+  subSM.CalculatorDisplay.trigger_Reset( );
 }  // End of action function: NotifyReset
 
 void Calculator::PushBaseDigit( [[maybe_unused]] Calculator_DataType const& input )
 {
-  size_t const allowence = std::min<int>( 19, sizeof( subSM.CalculatorDisplay.instanceData.BaseDigits )-2 );
+  size_t const allowance = std::min< int >( 19, sizeof( subSM.CalculatorDisplay.instanceData.BaseDigits ) - 2 );
 
-  size_t baseLen= strlen( subSM.CalculatorDisplay.instanceData.BaseDigits );
+  size_t baseLen = std::strlen( subSM.CalculatorDisplay.instanceData.BaseDigits );
 
-  if ( baseLen == 1 && subSM.CalculatorDisplay.instanceData.BaseDigits[0] == '0')
+  if( baseLen == 1 && subSM.CalculatorDisplay.instanceData.BaseDigits[ 0 ] == '0' )
   {
-    subSM.CalculatorDisplay.instanceData.BaseDigits[0]= (char)subSM.CalculatorKeypad.instanceData.LastInputKey;
+    subSM.CalculatorDisplay.instanceData.BaseDigits[ 0 ] = (char)subSM.CalculatorKeypad.instanceData.LastInputKey;
   }
-  else if ((baseLen < allowence) &&
-           (baseLen > 0 || subSM.CalculatorKeypad.instanceData.LastInputKey != '0'))
+  else if( ( baseLen < allowance ) && ( baseLen > 0 || subSM.CalculatorKeypad.instanceData.LastInputKey != '0' ) )
   {
-    subSM.CalculatorDisplay.instanceData.BaseDigits[baseLen]= (char)subSM.CalculatorKeypad.instanceData.LastInputKey;
-    subSM.CalculatorDisplay.instanceData.BaseDigits[baseLen+1]= '\0';
+    subSM.CalculatorDisplay.instanceData.BaseDigits[ baseLen ]     = (char)subSM.CalculatorKeypad.instanceData.LastInputKey;
+    subSM.CalculatorDisplay.instanceData.BaseDigits[ baseLen + 1 ] = '\0';
   }
   else
   {
@@ -264,58 +256,57 @@ void Calculator::PushBaseDigit( [[maybe_unused]] Calculator_DataType const& inpu
 
 void Calculator::PushExponentDigit( [[maybe_unused]] Calculator_DataType const& input )
 {
-  size_t const baseLen = std::max<int>(1, strlen( subSM.CalculatorDisplay.instanceData.BaseDigits ) ) + 1;
-  bool const isFracZero = IsFractionZero( );
-  size_t const fractionLen = isFracZero? 0 : ( strlen( subSM.CalculatorDisplay.instanceData.FractionalDigits ) + 1 );
+  size_t const baseLen     = std::max< int >( 1, std::strlen( subSM.CalculatorDisplay.instanceData.BaseDigits ) ) + 1;
+  bool const isFracZero    = IsFractionZero( );
+  size_t const fractionLen = isFracZero ? 0 : ( std::strlen( subSM.CalculatorDisplay.instanceData.FractionalDigits ) + 1 );
 
-  size_t const allowence = std::min<int>( sizeof( subSM.CalculatorDisplay.instanceData.ExponantionalDigits ) - 1, 18 - (baseLen+fractionLen) );
+  size_t const allowance = std::min< int >( sizeof( subSM.CalculatorDisplay.instanceData.ExponentialDigits ) - 1, 18 - ( baseLen + fractionLen ) );
 
-  size_t expLen= strlen( subSM.CalculatorDisplay.instanceData.ExponantionalDigits );
+  size_t expLen = std::strlen( subSM.CalculatorDisplay.instanceData.ExponentialDigits );
 
-  if ((expLen < allowence) &&
-      (expLen > 0 || subSM.CalculatorKeypad.instanceData.LastInputKey != '0'))
+  if( ( expLen < allowance ) && ( expLen > 0 || subSM.CalculatorKeypad.instanceData.LastInputKey != '0' ) )
   {
-    subSM.CalculatorDisplay.instanceData.ExponantionalDigits[expLen]= (char)subSM.CalculatorKeypad.instanceData.LastInputKey;
-    subSM.CalculatorDisplay.instanceData.ExponantionalDigits[expLen+1]= '\0';
+    subSM.CalculatorDisplay.instanceData.ExponentialDigits[ expLen ]     = (char)subSM.CalculatorKeypad.instanceData.LastInputKey;
+    subSM.CalculatorDisplay.instanceData.ExponentialDigits[ expLen + 1 ] = '\0';
   }
 }  // End of action function: PushExponentDigit
 
 void Calculator::PushFractionDigit( [[maybe_unused]] Calculator_DataType const& input )
 {
-  size_t const allowence = std::min<int>( 17-strlen(subSM.CalculatorDisplay.instanceData.BaseDigits), sizeof( subSM.CalculatorDisplay.instanceData.FractionalDigits ) - 1 );
+  size_t const allowance = std::min< int >( 17 - std::strlen( subSM.CalculatorDisplay.instanceData.BaseDigits ), sizeof( subSM.CalculatorDisplay.instanceData.FractionalDigits ) - 1 );
 
-  size_t baseLen= strlen( subSM.CalculatorDisplay.instanceData.FractionalDigits);
-  if (baseLen < allowence)
+  size_t baseLen = std::strlen( subSM.CalculatorDisplay.instanceData.FractionalDigits );
+  if( baseLen < allowance )
   {
-    subSM.CalculatorDisplay.instanceData.FractionalDigits[baseLen]= (char)subSM.CalculatorKeypad.instanceData.LastInputKey;
-    subSM.CalculatorDisplay.instanceData.FractionalDigits[baseLen+1]= '\0';
+    subSM.CalculatorDisplay.instanceData.FractionalDigits[ baseLen ]     = (char)subSM.CalculatorKeypad.instanceData.LastInputKey;
+    subSM.CalculatorDisplay.instanceData.FractionalDigits[ baseLen + 1 ] = '\0';
   }
 }  // End of action function: PushFractionDigit
 
 void Calculator::RemoveZerosFromFraction( [[maybe_unused]] Calculator_DataType const& input )
 {
-  size_t tLen= strlen(subSM.CalculatorDisplay.instanceData.FractionalDigits);
+  size_t tLen = std::strlen( subSM.CalculatorDisplay.instanceData.FractionalDigits );
   while( tLen > 0 )
   {
     --tLen;
-    if ( subSM.CalculatorDisplay.instanceData.FractionalDigits[tLen] == '0' )
+    if( subSM.CalculatorDisplay.instanceData.FractionalDigits[ tLen ] == '0' )
     {
-      subSM.CalculatorDisplay.instanceData.FractionalDigits[tLen] = '\0';
+      subSM.CalculatorDisplay.instanceData.FractionalDigits[ tLen ] = '\0';
     }
     else
     {
-     break;
+      break;
     }
   }
-  if ( subSM.CalculatorDisplay.instanceData.FractionalDigits[0] == '\0')
+  if( subSM.CalculatorDisplay.instanceData.FractionalDigits[ 0 ] == '\0' )
   {
-    subSM.CalculatorDisplay.instanceData.FractinalStart= false;
+    subSM.CalculatorDisplay.instanceData.FractionalStart = false;
   }
 }  // End of action function: RemoveZerosFromFraction
 
 void Calculator::ResetAccumulations( [[maybe_unused]] Calculator_DataType const& input )
 {
-  instanceData.initialize();
+  instanceData.initialize( );
 }  // End of action function: ResetAccumulations
 
 void Calculator::SetExponentEntry( [[maybe_unused]] Calculator_DataType const& input )
@@ -325,19 +316,19 @@ void Calculator::SetExponentEntry( [[maybe_unused]] Calculator_DataType const& i
 
 void Calculator::SetFractionEntry( [[maybe_unused]] Calculator_DataType const& input )
 {
-  size_t const baseLen= strlen( subSM.CalculatorDisplay.instanceData.BaseDigits);
-  if (baseLen == 0 )
+  size_t const baseLen = std::strlen( subSM.CalculatorDisplay.instanceData.BaseDigits );
+  if( baseLen == 0 )
   {
-    subSM.CalculatorDisplay.instanceData.BaseDigits[0] = '0';
-    subSM.CalculatorDisplay.instanceData.BaseDigits[1] = '\0';
+    subSM.CalculatorDisplay.instanceData.BaseDigits[ 0 ] = '0';
+    subSM.CalculatorDisplay.instanceData.BaseDigits[ 1 ] = '\0';
   }
 
-  subSM.CalculatorDisplay.instanceData.FractinalStart= true;
+  subSM.CalculatorDisplay.instanceData.FractionalStart = true;
 }  // End of action function: SetFractionEntry
 
-void Calculator::Substractions( [[maybe_unused]] Calculator_DataType const& input )
+void Calculator::Subtractions( [[maybe_unused]] Calculator_DataType const& input )
 {
   Calculator_Internal::CalculateAccumulator( this, &input, &instanceData, Calculator_Operator::E_OP_MINUS );
-}  // End of action function: Substractions
+}  // End of action function: Subtractions
 
 // End of Calculator_Auxilary.cpp

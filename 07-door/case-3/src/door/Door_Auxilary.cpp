@@ -30,15 +30,8 @@
 #include "Door.hh"
 #include <Engine.hh>
 
-#include <cassert>
-#include <cstddef>
-#include <cstring>
-#include <csignal>
-#include <cstdlib>
-#include <mutex>
-#include <optional>
-#include <thread>
 #include <chrono>
+#include <cstdlib>
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -54,18 +47,18 @@ namespace
 void Door::engineRunACCW( [[maybe_unused]] Door_DataType const& input )
 {
   instanceData.doorActionTimeStart = std::chrono::system_clock::now( );
-  instanceData.pEngine->trigger_runACCW();
+  instanceData.pEngine->trigger_runACCW( );
 }  // End of action function: engineRunACCW
 
 void Door::engineRunCCW( [[maybe_unused]] Door_DataType const& input )
 {
   instanceData.doorActionTimeStart = std::chrono::system_clock::now( );
-  instanceData.pEngine->trigger_runCCW();
+  instanceData.pEngine->trigger_runCCW( );
 }  // End of action function: engineRunCCW
 
 void Door::engineStop( [[maybe_unused]] Door_DataType const& input )
 {
-  instanceData.pEngine->trigger_stop();
+  instanceData.pEngine->trigger_stop( );
 }  // End of action function: engineStop
 
 void Door::resetWaitingTime( [[maybe_unused]] Door_DataType const& input )
@@ -107,19 +100,19 @@ try
   Main_States result = Main_States::E_init;
 
   static std::vector< Main_States > const doorStates {
-      Main_States::E_init,
-      Main_States::E_Main,
-      Main_States::E_AutomaticMode,
-      Main_States::E_AutomaticMode_Open,
-      Main_States::E_AutomaticMode_Closing,
-      Main_States::E_AutomaticMode_Close,
-      Main_States::E_AutomaticMode_Opening,
-      Main_States::E_ManualMode,
-      Main_States::E_ManualMode_Open,
-      Main_States::E_ManualMode_Closing,
-      Main_States::E_ManualMode_Close,
-      Main_States::E_ManualMode_Opening,
-      Main_States::E_final
+    Main_States::E_init,
+    Main_States::E_Main,
+    Main_States::E_AutomaticMode,
+    Main_States::E_AutomaticMode_Open,
+    Main_States::E_AutomaticMode_Closing,
+    Main_States::E_AutomaticMode_Close,
+    Main_States::E_AutomaticMode_Opening,
+    Main_States::E_ManualMode,
+    Main_States::E_ManualMode_Open,
+    Main_States::E_ManualMode_Closing,
+    Main_States::E_ManualMode_Close,
+    Main_States::E_ManualMode_Opening,
+    Main_States::E_final
   };
 
   std::ostringstream path;

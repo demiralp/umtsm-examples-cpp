@@ -31,38 +31,31 @@
 #include <Engine.hh>
 
 #include <cassert>
-#include <cstddef>
-#include <cstring>
-#include <csignal>
 #include <cstdlib>
-#include <mutex>
-#include <optional>
-#include <thread>
-
 #include <fstream>
 #include <sstream>
 #include <vector>
 
 namespace
 {
-  static constexpr std::string_view regfile      = "cpp-door";
-  static constexpr std::string_view tmpDirEnvVar = "TMPDIR";
+  constexpr std::string_view regfile      = "cpp-door";
+  constexpr std::string_view tmpDirEnvVar = "TMPDIR";
 }  // namespace
 
 // The implementation of the actions
 void Door::engineRunACCW( [[maybe_unused]] Door_DataType const& input )
 {
-  instanceData.pEngine->trigger_runACCW();
+  instanceData.pEngine->trigger_runACCW( );
 }  // End of action function: engineRunACCW
 
 void Door::engineRunCCW( [[maybe_unused]] Door_DataType const& input )
 {
-  instanceData.pEngine->trigger_runCCW();
+  instanceData.pEngine->trigger_runCCW( );
 }  // End of action function: engineRunCCW
 
 void Door::engineStop( [[maybe_unused]] Door_DataType const& input )
 {
-  instanceData.pEngine->trigger_stop();
+  instanceData.pEngine->trigger_stop( );
 }  // End of action function: engineStop
 
 // The implementation of the Persistency Functions
@@ -94,13 +87,13 @@ try
   Main_States result = Main_States::E_init;
 
   static std::vector< Main_States > const doorStates {
-        Main_States::E_init,
-        Main_States::E_Main,
-        Main_States::E_Open,
-        Main_States::E_Closing,
-        Main_States::E_Close,
-        Main_States::E_Opening,
-        Main_States::E_final
+    Main_States::E_init,
+    Main_States::E_Main,
+    Main_States::E_Open,
+    Main_States::E_Closing,
+    Main_States::E_Close,
+    Main_States::E_Opening,
+    Main_States::E_final
   };
 
   std::ostringstream path;

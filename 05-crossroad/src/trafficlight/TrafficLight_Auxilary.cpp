@@ -34,14 +34,6 @@
 #include "Lane.hh"
 #include "Monitor.hh"
 
-#include <cassert>
-#include <csignal>
-#include <cstddef>
-#include <cstdlib>
-#include <cstring>
-#include <mutex>
-#include <optional>
-#include <thread>
 #include <unistd.h>
 
 namespace

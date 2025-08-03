@@ -42,8 +42,8 @@ Calculator_DataType::~Calculator_DataType( )
 void Calculator_DataType::initialize( )
 {
   Accumulator = 0.0;
-  Operator = Calculator_Operator::E_OP_NONE;
-  ErrorNo = Calculator_Error::E_NO_ERROR;
+  Operator    = Calculator_Operator::E_OP_NONE;
+  ErrorNo     = Calculator_Error::E_NO_ERROR;
 }
 
 void Calculator_DataType::deinitialize( )

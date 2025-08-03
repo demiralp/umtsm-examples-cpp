@@ -33,17 +33,12 @@
 #include "Crossroad.hh"
 #include "Monitor.hh"
 
-#include <cassert>
-#include <csignal>
+#include <chrono>
 #include <cstddef>
 #include <cstdlib>
 #include <cstring>
-#include <mutex>
-#include <optional>
-#include <thread>
-#include <unistd.h>
 
-#include <cmath>
+#include <unistd.h>
 
 namespace
 {
@@ -323,25 +318,25 @@ void ExecutionDirector::PrepareForNextLane( [[maybe_unused]] ExecutionDirector_D
 
   TellLaneAvailability( this, &input, &instanceData );
 
-  bool posiablyLane1 = pLane1->isIn_Available_State( ) && ( instanceData.NextLane == -1 || instanceData.NextLane == 1 );
-  bool posiablyLane2 = pLane2->isIn_Available_State( ) && ( instanceData.NextLane == -1 || instanceData.NextLane == 2 );
-  bool posiablyLane3 = pLane3->isIn_Available_State( ) && ( instanceData.NextLane == -1 || instanceData.NextLane == 3 );
-  bool posiablyLane4 = pLane4->isIn_Available_State( ) && ( instanceData.NextLane == -1 || instanceData.NextLane == 4 );
-  bool posiablyLaneP = pPedestrianLanes->isIn_Available_State( ) && ( instanceData.NextLane == -1 || instanceData.NextLane == 0 );
+  bool possiblyLane1 = pLane1->isIn_Available_State( ) && ( instanceData.NextLane == -1 || instanceData.NextLane == 1 );
+  bool possiblyLane2 = pLane2->isIn_Available_State( ) && ( instanceData.NextLane == -1 || instanceData.NextLane == 2 );
+  bool possiblyLane3 = pLane3->isIn_Available_State( ) && ( instanceData.NextLane == -1 || instanceData.NextLane == 3 );
+  bool possiblyLane4 = pLane4->isIn_Available_State( ) && ( instanceData.NextLane == -1 || instanceData.NextLane == 4 );
+  bool possiblyLaneP = pPedestrianLanes->isIn_Available_State( ) && ( instanceData.NextLane == -1 || instanceData.NextLane == 0 );
 
   if( pLane1->isIn_Open_State( ) )
   {
     pLane1->trigger_Prepare( );
 
-    if( posiablyLane2 )
+    if( possiblyLane2 )
     {
       pLane2->trigger_Prepare( );
     }
-    else if( posiablyLane3 )
+    else if( possiblyLane3 )
     {
       pLane3->trigger_Prepare( );
     }
-    else if( posiablyLane4 )
+    else if( possiblyLane4 )
     {
       pLane4->trigger_Prepare( );
     }
@@ -354,19 +349,19 @@ void ExecutionDirector::PrepareForNextLane( [[maybe_unused]] ExecutionDirector_D
   {
     pLane2->trigger_Prepare( );
 
-    if( posiablyLane3 )
+    if( possiblyLane3 )
     {
       pLane3->trigger_Prepare( );
     }
-    else if( posiablyLane4 )
+    else if( possiblyLane4 )
     {
       pLane4->trigger_Prepare( );
     }
-    else if( posiablyLaneP )
+    else if( possiblyLaneP )
     {
       // Do Nothing
     }
-    else if( posiablyLane1 )
+    else if( possiblyLane1 )
     {
       pLane1->trigger_Prepare( );
     }
@@ -379,19 +374,19 @@ void ExecutionDirector::PrepareForNextLane( [[maybe_unused]] ExecutionDirector_D
   {
     pLane3->trigger_Prepare( );
 
-    if( posiablyLane4 )
+    if( possiblyLane4 )
     {
       pLane4->trigger_Prepare( );
     }
-    else if( posiablyLaneP )
+    else if( possiblyLaneP )
     {
       // Do Nothing
     }
-    else if( posiablyLane1 )
+    else if( possiblyLane1 )
     {
       pLane1->trigger_Prepare( );
     }
-    else if( posiablyLane2 )
+    else if( possiblyLane2 )
     {
       pLane2->trigger_Prepare( );
     }
@@ -404,23 +399,23 @@ void ExecutionDirector::PrepareForNextLane( [[maybe_unused]] ExecutionDirector_D
   {
     pLane4->trigger_Prepare( );
 
-    if( posiablyLane4 )
+    if( possiblyLane4 )
     {
       pLane4->trigger_Prepare( );
     }
-    else if( posiablyLaneP )
+    else if( possiblyLaneP )
     {
       // Do Nothing
     }
-    else if( posiablyLane1 )
+    else if( possiblyLane1 )
     {
       pLane1->trigger_Prepare( );
     }
-    else if( posiablyLane2 )
+    else if( possiblyLane2 )
     {
       pLane2->trigger_Prepare( );
     }
-    else if( posiablyLane3 )
+    else if( possiblyLane3 )
     {
       pLane3->trigger_Prepare( );
     }
@@ -433,19 +428,19 @@ void ExecutionDirector::PrepareForNextLane( [[maybe_unused]] ExecutionDirector_D
   {
     pPedestrianLanes->trigger_Prepare( );
 
-    if( posiablyLane1 )
+    if( possiblyLane1 )
     {
       pLane1->trigger_Prepare( );
     }
-    else if( posiablyLane2 )
+    else if( possiblyLane2 )
     {
       pLane2->trigger_Prepare( );
     }
-    else if( posiablyLane3 )
+    else if( possiblyLane3 )
     {
       pLane3->trigger_Prepare( );
     }
-    else if( posiablyLane4 )
+    else if( possiblyLane4 )
     {
       pLane4->trigger_Prepare( );
     }
@@ -588,11 +583,11 @@ void ExecutionDirector::StartSystemSwitchingTimer( [[maybe_unused]] ExecutionDir
   instanceData.StartSwitchingTime = std::chrono::system_clock::now( );
 }  // End of action function: StartSystemSwitchingTimer
 
-void ExecutionDirector::StartUncontrolMode( [[maybe_unused]] ExecutionDirector_DataType const& input )
+void ExecutionDirector::StartUncontrolledMode( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.pCrossroad->trigger_StopControlling( );
   instanceData.LaneRequested = -1;
-}  // End of action function: StartUncontrolMode
+}  // End of action function: StartUncontrolledMode
 
 void ExecutionDirector::StopTraffic( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {

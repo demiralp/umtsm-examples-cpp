@@ -31,111 +31,102 @@
 
 #include "Timewatch.hh"
 
-#include <cassert>
-#include <csignal>
-#include <cstddef>
-#include <cstdlib>
-#include <cstring>
-#include <mutex>
-#include <optional>
-#include <thread>
-#include <unistd.h>
-
 #include <ncurses.h>
+#include <unistd.h>
 
 // The implementation of the guards
 bool Command::isKeyHPressed( ) const
 {
-  bool const result = (instanceData.key == 'h' || instanceData.key == 'H');
+  bool const result = ( instanceData.key == 'h' || instanceData.key == 'H' );
   return result;
-} // End of guard function: isKeyHPressed
+}  // End of guard function: isKeyHPressed
 
 bool Command::isKeyPPressed( ) const
 {
-  bool const result = (instanceData.key == 'p' || instanceData.key == 'P');
+  bool const result = ( instanceData.key == 'p' || instanceData.key == 'P' );
   return result;
-} // End of guard function: isKeyPPressed
+}  // End of guard function: isKeyPPressed
 
 bool Command::isKeyQPressed( ) const
 {
-  bool const result = (instanceData.key == 'q' || instanceData.key == 'Q');
+  bool const result = ( instanceData.key == 'q' || instanceData.key == 'Q' );
   return result;
-} // End of guard function: isKeyQPressed
+}  // End of guard function: isKeyQPressed
 
 bool Command::isKeyRPressed( ) const
 {
-  bool const result = (instanceData.key == 'r' || instanceData.key == 'R');
+  bool const result = ( instanceData.key == 'r' || instanceData.key == 'R' );
   return result;
-} // End of guard function: isKeyRPressed
+}  // End of guard function: isKeyRPressed
 
 bool Command::isKeySPressed( ) const
 {
-  bool const result = (instanceData.key == 's' || instanceData.key == 'S');
+  bool const result = ( instanceData.key == 's' || instanceData.key == 'S' );
   return result;
-} // End of guard function: isKeySPressed
+}  // End of guard function: isKeySPressed
 
 bool Command::isKeyXPressed( ) const
 {
-  bool const result = (instanceData.key == 'x' || instanceData.key == 'X');
+  bool const result = ( instanceData.key == 'x' || instanceData.key == 'X' );
   return result;
-} // End of guard function: isKeyXPressed
+}  // End of guard function: isKeyXPressed
 
 bool Command::isKeyZPressed( ) const
 {
-  bool const result = (instanceData.key == 'z' || instanceData.key == 'Z');
+  bool const result = ( instanceData.key == 'z' || instanceData.key == 'Z' );
   return result;
-} // End of guard function: isKeyZPressed
+}  // End of guard function: isKeyZPressed
 
 bool Command::isSpacePressed( ) const
 {
-  bool const result = (instanceData.key == ' ');
+  bool const result = ( instanceData.key == ' ' );
   return result;
-} // End of guard function: isSpacePressed
+}  // End of guard function: isSpacePressed
 
 // The implementation of the actions
 void Command::ReadKey( [[maybe_unused]] Command_DataType const& input )
 {
-  instanceData.key= wgetch(stdscr);
+  instanceData.key = wgetch( stdscr );
 }  // End of action function: ReadKey
 
 void Command::SendAbortEvent( [[maybe_unused]] Command_DataType const& input )
 {
-  instanceData.timer->trigger_abort();
+  instanceData.timer->trigger_abort( );
 }  // End of action function: SendAbortEvent
 
 void Command::SendHelpEvent( [[maybe_unused]] Command_DataType const& input )
 {
-  instanceData.timer->trigger_help();
+  instanceData.timer->trigger_help( );
 }  // End of action function: SendHelpEvent
 
 void Command::SendPauseEvent( [[maybe_unused]] Command_DataType const& input )
 {
-  instanceData.timer->trigger_pause();
+  instanceData.timer->trigger_pause( );
 }  // End of action function: SendPauseEvent
 
 void Command::SendPrintLapsEvent( [[maybe_unused]] Command_DataType const& input )
 {
-  instanceData.timer->trigger_print();
+  instanceData.timer->trigger_print( );
 }  // End of action function: SendPrintLapsEvent
 
 void Command::SendRestartEvent( [[maybe_unused]] Command_DataType const& input )
 {
-  instanceData.timer->trigger_restart();
+  instanceData.timer->trigger_restart( );
 }  // End of action function: SendRestartEvent
 
 void Command::SendResumeEvent( [[maybe_unused]] Command_DataType const& input )
 {
-  instanceData.timer->trigger_resume();
+  instanceData.timer->trigger_resume( );
 }  // End of action function: SendResumeEvent
 
 void Command::SendStartEvent( [[maybe_unused]] Command_DataType const& input )
 {
-  instanceData.timer->trigger_start();
+  instanceData.timer->trigger_start( );
 }  // End of action function: SendStartEvent
 
 void Command::SendStopEvent( [[maybe_unused]] Command_DataType const& input )
 {
-  instanceData.timer->trigger_stop();
+  instanceData.timer->trigger_stop( );
 }  // End of action function: SendStopEvent
 
 // End of Command_Auxilary.cpp

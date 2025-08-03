@@ -41,7 +41,7 @@ Command_DataType::~Command_DataType( )
 
 void Command_DataType::initialize( )
 {
-  key = 0;
+  key   = 0;
   timer = nullptr;
 }
 

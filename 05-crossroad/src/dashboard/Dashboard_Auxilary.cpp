@@ -36,15 +36,9 @@
 
 #include <cassert>
 #include <csignal>
-#include <cstddef>
-#include <cstdlib>
-#include <mutex>
-#include <optional>
-#include <string>
-#include <thread>
-#include <unistd.h>
 
 #include <ncurses.h>
+#include <unistd.h>
 
 // The implementation of the guards
 bool Dashboard::IsKey_1( ) const

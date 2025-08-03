@@ -27,7 +27,7 @@
  *  SOFTWARE.
  */
 
-enumeration UncontrolModeType
+enumeration UncontrolledModeType
 {
     E_STOP_AND_CHECK,
     E_CHECK
@@ -44,7 +44,7 @@ sm Lane
     properties
     {
         string Id;
-        UncontrolModeType UncontrolMode;
+        UncontrolledModeType UncontrolledMode;
     }
 
     init -> Unmanaged;
@@ -78,9 +78,9 @@ sm Lane
 
             state Uncontrolled
             {
-                init -> ChoiceUncontrolMode;
+                init -> ChoiceUncontrolledMode;
 
-                choice ChoiceUncontrolMode
+                choice ChoiceUncontrolledMode
                 {
                     [IsCheckAndGo] -> CheckAndGo;
                     -> StopAndCheck;

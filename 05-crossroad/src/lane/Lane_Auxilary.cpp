@@ -29,32 +29,20 @@
 
 #include "Lane.hh"
 
-#include <cassert>
-#include <csignal>
-#include <cstddef>
-#include <cstring>
-#include <mutex>
-#include <optional>
-#include <thread>
-
-#include <cstdio>
-#include <cstdlib>
 #include <fstream>
 #include <sstream>
 #include <vector>
 
-#include <iostream>
-
 namespace
 {
-  static constexpr std::string_view regfile      = "cpp-crossroad-lane";
-  static constexpr std::string_view tmpDirEnvVar = "TMPDIR";
+  constexpr std::string_view regfile      = "cpp-crossroad-lane";
+  constexpr std::string_view tmpDirEnvVar = "TMPDIR";
 }  // namespace
 
 // The implementation of the guards
 bool Lane::IsCheckAndGo( ) const
 {
-  bool const result = instanceData.UncontrolMode == UncontrolModeType::E_CHECK;
+  bool const result = instanceData.UncontrolledMode == UncontrolledModeType::E_CHECK;
   return result;
 }  // End of guard function: IsCheckAndGo
 
