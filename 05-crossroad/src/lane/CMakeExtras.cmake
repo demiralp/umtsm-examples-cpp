@@ -9,11 +9,17 @@
 #
 # Lane
 #
+# LIBLane_SOURCE_EXTRA
 #set(LIBLane_SOURCE_EXTRA )
+# LIBLane_HEADER_EXTRA
 #set(LIBLane_HEADER_EXTRA )
+# LIBLane_LIB_EXTRA
 #set(LIBLane_LIB_EXTRA )
+# LIBLane_INCLUDES_EXTRA
 set(LIBLane_INCLUDES_EXTRA ${CMAKE_SOURCE_DIR}/generated/src/crossroad)
+# TESTLane_INCLUDES_EXTRA
 set(TESTLane_INCLUDES_EXTRA ${CMAKE_SOURCE_DIR}/generated/src/crossroad)
+# TESTLane_LIB_EXTRA
 set(TESTLane_LIB_EXTRA 
     LIBRCrossroad_Static
     LIBRDashboard_Static
@@ -23,3 +29,4 @@ set(TESTLane_LIB_EXTRA
     LIBRPedestrianLights_Static
     -lncurses
 )
+

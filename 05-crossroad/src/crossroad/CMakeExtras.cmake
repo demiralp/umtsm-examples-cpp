@@ -9,9 +9,13 @@
 #
 # Crossroad
 #
+# LIBCrossroad_SOURCE_EXTRA
 #set(LIBCrossroad_SOURCE_EXTRA )
+# LIBCrossroad_HEADER_EXTRA
 #set(LIBCrossroad_HEADER_EXTRA )
+# LIBCrossroad_LIB_EXTRA
 #set(LIBCrossroad_LIB_EXTRA )
+# LIBCrossroad_INCLUDES_EXTRA
 set(LIBCrossroad_INCLUDES_EXTRA
     ${CMAKE_SOURCE_DIR}/generated/src/dashboard
     ${CMAKE_SOURCE_DIR}/generated/src/execution-director
@@ -19,6 +23,7 @@ set(LIBCrossroad_INCLUDES_EXTRA
     ${CMAKE_SOURCE_DIR}/generated/src/pedestrian-light
     ${CMAKE_SOURCE_DIR}/generated/src/trafficlight
 )
+# TESTCrossroad_INCLUDES_EXTRA
 set(TESTCrossroad_INCLUDES_EXTRA
     ${CMAKE_SOURCE_DIR}/generated/test/dashboard
     ${CMAKE_SOURCE_DIR}/generated/test/execution-director
@@ -29,6 +34,7 @@ set(TESTCrossroad_INCLUDES_EXTRA
     ${CMAKE_SOURCE_DIR}/generated/src/pedestrian-light
     ${CMAKE_SOURCE_DIR}/generated/src/monitor
 )
+# TESTCrossroad_LIB_EXTRA
 set(TESTCrossroad_LIB_EXTRA
     LIBRDashboard_Static
     LIBRLane_Static
