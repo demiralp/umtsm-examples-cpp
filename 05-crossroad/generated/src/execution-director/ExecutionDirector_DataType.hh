@@ -46,6 +46,7 @@ class ExecutionDirector_DataType
     bool LaneClosingCompleted;
     Crossroad *pCrossroad;
     Monitor *pMonitor;
+    signed int CurrentLane;
     signed int LaneRequested;
     signed int NextLane;
     Lane_Command LaneCmd1;

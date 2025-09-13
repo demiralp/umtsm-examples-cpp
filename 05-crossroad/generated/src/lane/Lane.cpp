@@ -326,6 +326,11 @@ void Lane::trigger_Close( )
   {
     doneStatus = true;
 
+    if ( isIn_Ready_State( ) )
+    {
+      runningState.Status = Status_States::E_Close;
+    }
+
     if ( isIn_Open_State( ) )
     {
       if ( isIn_PrepareToStop_State( ) )
@@ -385,6 +390,11 @@ void Lane::trigger_Open( )
       {
         runningState.Status = Status_States::E_Open;
       }
+    }
+
+    if ( isIn_PrepareToStop_State( ) )
+    {
+      runningState.Status = Status_States::E_Open;
     }
     else
     {

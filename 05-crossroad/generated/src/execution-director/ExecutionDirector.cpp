@@ -139,16 +139,25 @@ bool ExecutionDirector::isIn_Main_State( ) const noexcept
       ( runningState.Main == Main_States::E_Uncontrolled ) || 
       ( runningState.Main == Main_States::E_Controlled ) || 
       ( runningState.Main == Main_States::E_CheckRequests ) || 
+      ( runningState.Main == Main_States::E_Hold ) || 
+      ( runningState.Main == Main_States::E_OnOpeningLane1 ) || 
       ( runningState.Main == Main_States::E_OpenLane1 ) || 
       ( runningState.Main == Main_States::E_OnCloseLane1 ) || 
+      ( runningState.Main == Main_States::E_CloseLane1 ) || 
+      ( runningState.Main == Main_States::E_OnOpeningLane2 ) || 
       ( runningState.Main == Main_States::E_OpenLane2 ) || 
       ( runningState.Main == Main_States::E_OnCloseLane2 ) || 
+      ( runningState.Main == Main_States::E_CloseLane2 ) || 
+      ( runningState.Main == Main_States::E_OnOpeningLane3 ) || 
       ( runningState.Main == Main_States::E_OpenLane3 ) || 
       ( runningState.Main == Main_States::E_OnCloseLane3 ) || 
+      ( runningState.Main == Main_States::E_CloseLane3 ) || 
+      ( runningState.Main == Main_States::E_OnOpeningLane4 ) || 
       ( runningState.Main == Main_States::E_OpenLane4 ) || 
       ( runningState.Main == Main_States::E_OnCloseLane4 ) || 
+      ( runningState.Main == Main_States::E_CloseLane4 ) || 
       ( runningState.Main == Main_States::E_OpenPedestrianLanes ) || 
-      ( runningState.Main == Main_States::E_OnClosePedestrianLanes ) );
+      ( runningState.Main == Main_States::E_ClosePedestrianLanes ) );
 
   return result;
 }
@@ -202,16 +211,25 @@ bool ExecutionDirector::isIn_Operational_State( ) const noexcept
       ( runningState.Main == Main_States::E_Uncontrolled ) || 
       ( runningState.Main == Main_States::E_Controlled ) || 
       ( runningState.Main == Main_States::E_CheckRequests ) || 
+      ( runningState.Main == Main_States::E_Hold ) || 
+      ( runningState.Main == Main_States::E_OnOpeningLane1 ) || 
       ( runningState.Main == Main_States::E_OpenLane1 ) || 
       ( runningState.Main == Main_States::E_OnCloseLane1 ) || 
+      ( runningState.Main == Main_States::E_CloseLane1 ) || 
+      ( runningState.Main == Main_States::E_OnOpeningLane2 ) || 
       ( runningState.Main == Main_States::E_OpenLane2 ) || 
       ( runningState.Main == Main_States::E_OnCloseLane2 ) || 
+      ( runningState.Main == Main_States::E_CloseLane2 ) || 
+      ( runningState.Main == Main_States::E_OnOpeningLane3 ) || 
       ( runningState.Main == Main_States::E_OpenLane3 ) || 
       ( runningState.Main == Main_States::E_OnCloseLane3 ) || 
+      ( runningState.Main == Main_States::E_CloseLane3 ) || 
+      ( runningState.Main == Main_States::E_OnOpeningLane4 ) || 
       ( runningState.Main == Main_States::E_OpenLane4 ) || 
       ( runningState.Main == Main_States::E_OnCloseLane4 ) || 
+      ( runningState.Main == Main_States::E_CloseLane4 ) || 
       ( runningState.Main == Main_States::E_OpenPedestrianLanes ) || 
-      ( runningState.Main == Main_States::E_OnClosePedestrianLanes ) );
+      ( runningState.Main == Main_States::E_ClosePedestrianLanes ) );
 
   return result;
 }
@@ -237,16 +255,41 @@ bool ExecutionDirector::isIn_Controlled_State( ) const noexcept
 {
   bool const result = isIn_Main_Region( ) &&
     ( ( runningState.Main == Main_States::E_Controlled ) || 
+      ( runningState.Main == Main_States::E_Hold ) || 
+      ( runningState.Main == Main_States::E_OnOpeningLane1 ) || 
       ( runningState.Main == Main_States::E_OpenLane1 ) || 
       ( runningState.Main == Main_States::E_OnCloseLane1 ) || 
+      ( runningState.Main == Main_States::E_CloseLane1 ) || 
+      ( runningState.Main == Main_States::E_OnOpeningLane2 ) || 
       ( runningState.Main == Main_States::E_OpenLane2 ) || 
       ( runningState.Main == Main_States::E_OnCloseLane2 ) || 
+      ( runningState.Main == Main_States::E_CloseLane2 ) || 
+      ( runningState.Main == Main_States::E_OnOpeningLane3 ) || 
       ( runningState.Main == Main_States::E_OpenLane3 ) || 
       ( runningState.Main == Main_States::E_OnCloseLane3 ) || 
+      ( runningState.Main == Main_States::E_CloseLane3 ) || 
+      ( runningState.Main == Main_States::E_OnOpeningLane4 ) || 
       ( runningState.Main == Main_States::E_OpenLane4 ) || 
       ( runningState.Main == Main_States::E_OnCloseLane4 ) || 
+      ( runningState.Main == Main_States::E_CloseLane4 ) || 
       ( runningState.Main == Main_States::E_OpenPedestrianLanes ) || 
-      ( runningState.Main == Main_States::E_OnClosePedestrianLanes ) );
+      ( runningState.Main == Main_States::E_ClosePedestrianLanes ) );
+
+  return result;
+}
+
+bool ExecutionDirector::isIn_Hold_State( ) const noexcept
+{
+  bool const result = isIn_Main_Region( ) &&
+    ( runningState.Main == Main_States::E_Hold );
+
+  return result;
+}
+
+bool ExecutionDirector::isIn_OnOpeningLane1_State( ) const noexcept
+{
+  bool const result = isIn_Main_Region( ) &&
+    ( runningState.Main == Main_States::E_OnOpeningLane1 );
 
   return result;
 }
@@ -267,6 +310,22 @@ bool ExecutionDirector::isIn_OnCloseLane1_State( ) const noexcept
   return result;
 }
 
+bool ExecutionDirector::isIn_CloseLane1_State( ) const noexcept
+{
+  bool const result = isIn_Main_Region( ) &&
+    ( runningState.Main == Main_States::E_CloseLane1 );
+
+  return result;
+}
+
+bool ExecutionDirector::isIn_OnOpeningLane2_State( ) const noexcept
+{
+  bool const result = isIn_Main_Region( ) &&
+    ( runningState.Main == Main_States::E_OnOpeningLane2 );
+
+  return result;
+}
+
 bool ExecutionDirector::isIn_OpenLane2_State( ) const noexcept
 {
   bool const result = isIn_Main_Region( ) &&
@@ -279,6 +338,22 @@ bool ExecutionDirector::isIn_OnCloseLane2_State( ) const noexcept
 {
   bool const result = isIn_Main_Region( ) &&
     ( runningState.Main == Main_States::E_OnCloseLane2 );
+
+  return result;
+}
+
+bool ExecutionDirector::isIn_CloseLane2_State( ) const noexcept
+{
+  bool const result = isIn_Main_Region( ) &&
+    ( runningState.Main == Main_States::E_CloseLane2 );
+
+  return result;
+}
+
+bool ExecutionDirector::isIn_OnOpeningLane3_State( ) const noexcept
+{
+  bool const result = isIn_Main_Region( ) &&
+    ( runningState.Main == Main_States::E_OnOpeningLane3 );
 
   return result;
 }
@@ -299,6 +374,22 @@ bool ExecutionDirector::isIn_OnCloseLane3_State( ) const noexcept
   return result;
 }
 
+bool ExecutionDirector::isIn_CloseLane3_State( ) const noexcept
+{
+  bool const result = isIn_Main_Region( ) &&
+    ( runningState.Main == Main_States::E_CloseLane3 );
+
+  return result;
+}
+
+bool ExecutionDirector::isIn_OnOpeningLane4_State( ) const noexcept
+{
+  bool const result = isIn_Main_Region( ) &&
+    ( runningState.Main == Main_States::E_OnOpeningLane4 );
+
+  return result;
+}
+
 bool ExecutionDirector::isIn_OpenLane4_State( ) const noexcept
 {
   bool const result = isIn_Main_Region( ) &&
@@ -315,6 +406,14 @@ bool ExecutionDirector::isIn_OnCloseLane4_State( ) const noexcept
   return result;
 }
 
+bool ExecutionDirector::isIn_CloseLane4_State( ) const noexcept
+{
+  bool const result = isIn_Main_Region( ) &&
+    ( runningState.Main == Main_States::E_CloseLane4 );
+
+  return result;
+}
+
 bool ExecutionDirector::isIn_OpenPedestrianLanes_State( ) const noexcept
 {
   bool const result = isIn_Main_Region( ) &&
@@ -323,10 +422,10 @@ bool ExecutionDirector::isIn_OpenPedestrianLanes_State( ) const noexcept
   return result;
 }
 
-bool ExecutionDirector::isIn_OnClosePedestrianLanes_State( ) const noexcept
+bool ExecutionDirector::isIn_ClosePedestrianLanes_State( ) const noexcept
 {
   bool const result = isIn_Main_Region( ) &&
-    ( runningState.Main == Main_States::E_OnClosePedestrianLanes );
+    ( runningState.Main == Main_States::E_ClosePedestrianLanes );
 
   return result;
 }
@@ -383,11 +482,27 @@ void ExecutionDirector::trigger_DisableLane1( )
       }
       else if ( isIn_Controlled_State( ) )
       {
-        if ( isIn_OpenLane1_State( ) )
+        if ( isIn_Hold_State( ) )
+        {
+          SetDisableLane1( instanceData );
+        }
+        else if ( isIn_OnOpeningLane1_State( ) )
+        {
+          SetDisableLane1( instanceData );
+        }
+        else if ( isIn_OpenLane1_State( ) )
         {
           SetDisableLane1( instanceData );
         }
         else if ( isIn_OnCloseLane1_State( ) )
+        {
+          SetDisableLane1( instanceData );
+        }
+        else if ( isIn_CloseLane1_State( ) )
+        {
+          SetDisableLane1( instanceData );
+        }
+        else if ( isIn_OnOpeningLane2_State( ) )
         {
           SetDisableLane1( instanceData );
         }
@@ -399,11 +514,27 @@ void ExecutionDirector::trigger_DisableLane1( )
         {
           SetDisableLane1( instanceData );
         }
+        else if ( isIn_CloseLane2_State( ) )
+        {
+          SetDisableLane1( instanceData );
+        }
+        else if ( isIn_OnOpeningLane3_State( ) )
+        {
+          SetDisableLane1( instanceData );
+        }
         else if ( isIn_OpenLane3_State( ) )
         {
           SetDisableLane1( instanceData );
         }
         else if ( isIn_OnCloseLane3_State( ) )
+        {
+          SetDisableLane1( instanceData );
+        }
+        else if ( isIn_CloseLane3_State( ) )
+        {
+          SetDisableLane1( instanceData );
+        }
+        else if ( isIn_OnOpeningLane4_State( ) )
         {
           SetDisableLane1( instanceData );
         }
@@ -415,11 +546,15 @@ void ExecutionDirector::trigger_DisableLane1( )
         {
           SetDisableLane1( instanceData );
         }
+        else if ( isIn_CloseLane4_State( ) )
+        {
+          SetDisableLane1( instanceData );
+        }
         else if ( isIn_OpenPedestrianLanes_State( ) )
         {
           SetDisableLane1( instanceData );
         }
-        else if ( isIn_OnClosePedestrianLanes_State( ) )
+        else if ( isIn_ClosePedestrianLanes_State( ) )
         {
           SetDisableLane1( instanceData );
         }
@@ -486,11 +621,27 @@ void ExecutionDirector::trigger_DisableLane2( )
       }
       else if ( isIn_Controlled_State( ) )
       {
-        if ( isIn_OpenLane1_State( ) )
+        if ( isIn_Hold_State( ) )
+        {
+          SetDisableLane2( instanceData );
+        }
+        else if ( isIn_OnOpeningLane1_State( ) )
+        {
+          SetDisableLane2( instanceData );
+        }
+        else if ( isIn_OpenLane1_State( ) )
         {
           SetDisableLane2( instanceData );
         }
         else if ( isIn_OnCloseLane1_State( ) )
+        {
+          SetDisableLane2( instanceData );
+        }
+        else if ( isIn_CloseLane1_State( ) )
+        {
+          SetDisableLane2( instanceData );
+        }
+        else if ( isIn_OnOpeningLane2_State( ) )
         {
           SetDisableLane2( instanceData );
         }
@@ -502,11 +653,27 @@ void ExecutionDirector::trigger_DisableLane2( )
         {
           SetDisableLane2( instanceData );
         }
+        else if ( isIn_CloseLane2_State( ) )
+        {
+          SetDisableLane2( instanceData );
+        }
+        else if ( isIn_OnOpeningLane3_State( ) )
+        {
+          SetDisableLane2( instanceData );
+        }
         else if ( isIn_OpenLane3_State( ) )
         {
           SetDisableLane2( instanceData );
         }
         else if ( isIn_OnCloseLane3_State( ) )
+        {
+          SetDisableLane2( instanceData );
+        }
+        else if ( isIn_CloseLane3_State( ) )
+        {
+          SetDisableLane2( instanceData );
+        }
+        else if ( isIn_OnOpeningLane4_State( ) )
         {
           SetDisableLane2( instanceData );
         }
@@ -518,11 +685,15 @@ void ExecutionDirector::trigger_DisableLane2( )
         {
           SetDisableLane2( instanceData );
         }
+        else if ( isIn_CloseLane4_State( ) )
+        {
+          SetDisableLane2( instanceData );
+        }
         else if ( isIn_OpenPedestrianLanes_State( ) )
         {
           SetDisableLane2( instanceData );
         }
-        else if ( isIn_OnClosePedestrianLanes_State( ) )
+        else if ( isIn_ClosePedestrianLanes_State( ) )
         {
           SetDisableLane2( instanceData );
         }
@@ -589,11 +760,27 @@ void ExecutionDirector::trigger_DisableLane3( )
       }
       else if ( isIn_Controlled_State( ) )
       {
-        if ( isIn_OpenLane1_State( ) )
+        if ( isIn_Hold_State( ) )
+        {
+          SetDisableLane3( instanceData );
+        }
+        else if ( isIn_OnOpeningLane1_State( ) )
+        {
+          SetDisableLane3( instanceData );
+        }
+        else if ( isIn_OpenLane1_State( ) )
         {
           SetDisableLane3( instanceData );
         }
         else if ( isIn_OnCloseLane1_State( ) )
+        {
+          SetDisableLane3( instanceData );
+        }
+        else if ( isIn_CloseLane1_State( ) )
+        {
+          SetDisableLane3( instanceData );
+        }
+        else if ( isIn_OnOpeningLane2_State( ) )
         {
           SetDisableLane3( instanceData );
         }
@@ -605,11 +792,27 @@ void ExecutionDirector::trigger_DisableLane3( )
         {
           SetDisableLane3( instanceData );
         }
+        else if ( isIn_CloseLane2_State( ) )
+        {
+          SetDisableLane3( instanceData );
+        }
+        else if ( isIn_OnOpeningLane3_State( ) )
+        {
+          SetDisableLane3( instanceData );
+        }
         else if ( isIn_OpenLane3_State( ) )
         {
           SetDisableLane3( instanceData );
         }
         else if ( isIn_OnCloseLane3_State( ) )
+        {
+          SetDisableLane3( instanceData );
+        }
+        else if ( isIn_CloseLane3_State( ) )
+        {
+          SetDisableLane3( instanceData );
+        }
+        else if ( isIn_OnOpeningLane4_State( ) )
         {
           SetDisableLane3( instanceData );
         }
@@ -621,11 +824,15 @@ void ExecutionDirector::trigger_DisableLane3( )
         {
           SetDisableLane3( instanceData );
         }
+        else if ( isIn_CloseLane4_State( ) )
+        {
+          SetDisableLane3( instanceData );
+        }
         else if ( isIn_OpenPedestrianLanes_State( ) )
         {
           SetDisableLane3( instanceData );
         }
-        else if ( isIn_OnClosePedestrianLanes_State( ) )
+        else if ( isIn_ClosePedestrianLanes_State( ) )
         {
           SetDisableLane3( instanceData );
         }
@@ -692,11 +899,27 @@ void ExecutionDirector::trigger_DisableLane4( )
       }
       else if ( isIn_Controlled_State( ) )
       {
-        if ( isIn_OpenLane1_State( ) )
+        if ( isIn_Hold_State( ) )
+        {
+          SetDisableLane4( instanceData );
+        }
+        else if ( isIn_OnOpeningLane1_State( ) )
+        {
+          SetDisableLane4( instanceData );
+        }
+        else if ( isIn_OpenLane1_State( ) )
         {
           SetDisableLane4( instanceData );
         }
         else if ( isIn_OnCloseLane1_State( ) )
+        {
+          SetDisableLane4( instanceData );
+        }
+        else if ( isIn_CloseLane1_State( ) )
+        {
+          SetDisableLane4( instanceData );
+        }
+        else if ( isIn_OnOpeningLane2_State( ) )
         {
           SetDisableLane4( instanceData );
         }
@@ -708,11 +931,27 @@ void ExecutionDirector::trigger_DisableLane4( )
         {
           SetDisableLane4( instanceData );
         }
+        else if ( isIn_CloseLane2_State( ) )
+        {
+          SetDisableLane4( instanceData );
+        }
+        else if ( isIn_OnOpeningLane3_State( ) )
+        {
+          SetDisableLane4( instanceData );
+        }
         else if ( isIn_OpenLane3_State( ) )
         {
           SetDisableLane4( instanceData );
         }
         else if ( isIn_OnCloseLane3_State( ) )
+        {
+          SetDisableLane4( instanceData );
+        }
+        else if ( isIn_CloseLane3_State( ) )
+        {
+          SetDisableLane4( instanceData );
+        }
+        else if ( isIn_OnOpeningLane4_State( ) )
         {
           SetDisableLane4( instanceData );
         }
@@ -724,11 +963,15 @@ void ExecutionDirector::trigger_DisableLane4( )
         {
           SetDisableLane4( instanceData );
         }
+        else if ( isIn_CloseLane4_State( ) )
+        {
+          SetDisableLane4( instanceData );
+        }
         else if ( isIn_OpenPedestrianLanes_State( ) )
         {
           SetDisableLane4( instanceData );
         }
-        else if ( isIn_OnClosePedestrianLanes_State( ) )
+        else if ( isIn_ClosePedestrianLanes_State( ) )
         {
           SetDisableLane4( instanceData );
         }
@@ -795,11 +1038,27 @@ void ExecutionDirector::trigger_EnableLane1( )
       }
       else if ( isIn_Controlled_State( ) )
       {
-        if ( isIn_OpenLane1_State( ) )
+        if ( isIn_Hold_State( ) )
+        {
+          SetEnableLane1( instanceData );
+        }
+        else if ( isIn_OnOpeningLane1_State( ) )
+        {
+          SetEnableLane1( instanceData );
+        }
+        else if ( isIn_OpenLane1_State( ) )
         {
           SetEnableLane1( instanceData );
         }
         else if ( isIn_OnCloseLane1_State( ) )
+        {
+          SetEnableLane1( instanceData );
+        }
+        else if ( isIn_CloseLane1_State( ) )
+        {
+          SetEnableLane1( instanceData );
+        }
+        else if ( isIn_OnOpeningLane2_State( ) )
         {
           SetEnableLane1( instanceData );
         }
@@ -811,11 +1070,27 @@ void ExecutionDirector::trigger_EnableLane1( )
         {
           SetEnableLane1( instanceData );
         }
+        else if ( isIn_CloseLane2_State( ) )
+        {
+          SetEnableLane1( instanceData );
+        }
+        else if ( isIn_OnOpeningLane3_State( ) )
+        {
+          SetEnableLane1( instanceData );
+        }
         else if ( isIn_OpenLane3_State( ) )
         {
           SetEnableLane1( instanceData );
         }
         else if ( isIn_OnCloseLane3_State( ) )
+        {
+          SetEnableLane1( instanceData );
+        }
+        else if ( isIn_CloseLane3_State( ) )
+        {
+          SetEnableLane1( instanceData );
+        }
+        else if ( isIn_OnOpeningLane4_State( ) )
         {
           SetEnableLane1( instanceData );
         }
@@ -827,11 +1102,15 @@ void ExecutionDirector::trigger_EnableLane1( )
         {
           SetEnableLane1( instanceData );
         }
+        else if ( isIn_CloseLane4_State( ) )
+        {
+          SetEnableLane1( instanceData );
+        }
         else if ( isIn_OpenPedestrianLanes_State( ) )
         {
           SetEnableLane1( instanceData );
         }
-        else if ( isIn_OnClosePedestrianLanes_State( ) )
+        else if ( isIn_ClosePedestrianLanes_State( ) )
         {
           SetEnableLane1( instanceData );
         }
@@ -898,11 +1177,27 @@ void ExecutionDirector::trigger_EnableLane2( )
       }
       else if ( isIn_Controlled_State( ) )
       {
-        if ( isIn_OpenLane1_State( ) )
+        if ( isIn_Hold_State( ) )
+        {
+          SetEnableLane2( instanceData );
+        }
+        else if ( isIn_OnOpeningLane1_State( ) )
+        {
+          SetEnableLane2( instanceData );
+        }
+        else if ( isIn_OpenLane1_State( ) )
         {
           SetEnableLane2( instanceData );
         }
         else if ( isIn_OnCloseLane1_State( ) )
+        {
+          SetEnableLane2( instanceData );
+        }
+        else if ( isIn_CloseLane1_State( ) )
+        {
+          SetEnableLane2( instanceData );
+        }
+        else if ( isIn_OnOpeningLane2_State( ) )
         {
           SetEnableLane2( instanceData );
         }
@@ -914,11 +1209,27 @@ void ExecutionDirector::trigger_EnableLane2( )
         {
           SetEnableLane2( instanceData );
         }
+        else if ( isIn_CloseLane2_State( ) )
+        {
+          SetEnableLane2( instanceData );
+        }
+        else if ( isIn_OnOpeningLane3_State( ) )
+        {
+          SetEnableLane2( instanceData );
+        }
         else if ( isIn_OpenLane3_State( ) )
         {
           SetEnableLane2( instanceData );
         }
         else if ( isIn_OnCloseLane3_State( ) )
+        {
+          SetEnableLane2( instanceData );
+        }
+        else if ( isIn_CloseLane3_State( ) )
+        {
+          SetEnableLane2( instanceData );
+        }
+        else if ( isIn_OnOpeningLane4_State( ) )
         {
           SetEnableLane2( instanceData );
         }
@@ -930,11 +1241,15 @@ void ExecutionDirector::trigger_EnableLane2( )
         {
           SetEnableLane2( instanceData );
         }
+        else if ( isIn_CloseLane4_State( ) )
+        {
+          SetEnableLane2( instanceData );
+        }
         else if ( isIn_OpenPedestrianLanes_State( ) )
         {
           SetEnableLane2( instanceData );
         }
-        else if ( isIn_OnClosePedestrianLanes_State( ) )
+        else if ( isIn_ClosePedestrianLanes_State( ) )
         {
           SetEnableLane2( instanceData );
         }
@@ -1001,11 +1316,27 @@ void ExecutionDirector::trigger_EnableLane3( )
       }
       else if ( isIn_Controlled_State( ) )
       {
-        if ( isIn_OpenLane1_State( ) )
+        if ( isIn_Hold_State( ) )
+        {
+          SetEnableLane3( instanceData );
+        }
+        else if ( isIn_OnOpeningLane1_State( ) )
+        {
+          SetEnableLane3( instanceData );
+        }
+        else if ( isIn_OpenLane1_State( ) )
         {
           SetEnableLane3( instanceData );
         }
         else if ( isIn_OnCloseLane1_State( ) )
+        {
+          SetEnableLane3( instanceData );
+        }
+        else if ( isIn_CloseLane1_State( ) )
+        {
+          SetEnableLane3( instanceData );
+        }
+        else if ( isIn_OnOpeningLane2_State( ) )
         {
           SetEnableLane3( instanceData );
         }
@@ -1017,11 +1348,27 @@ void ExecutionDirector::trigger_EnableLane3( )
         {
           SetEnableLane3( instanceData );
         }
+        else if ( isIn_CloseLane2_State( ) )
+        {
+          SetEnableLane3( instanceData );
+        }
+        else if ( isIn_OnOpeningLane3_State( ) )
+        {
+          SetEnableLane3( instanceData );
+        }
         else if ( isIn_OpenLane3_State( ) )
         {
           SetEnableLane3( instanceData );
         }
         else if ( isIn_OnCloseLane3_State( ) )
+        {
+          SetEnableLane3( instanceData );
+        }
+        else if ( isIn_CloseLane3_State( ) )
+        {
+          SetEnableLane3( instanceData );
+        }
+        else if ( isIn_OnOpeningLane4_State( ) )
         {
           SetEnableLane3( instanceData );
         }
@@ -1033,11 +1380,15 @@ void ExecutionDirector::trigger_EnableLane3( )
         {
           SetEnableLane3( instanceData );
         }
+        else if ( isIn_CloseLane4_State( ) )
+        {
+          SetEnableLane3( instanceData );
+        }
         else if ( isIn_OpenPedestrianLanes_State( ) )
         {
           SetEnableLane3( instanceData );
         }
-        else if ( isIn_OnClosePedestrianLanes_State( ) )
+        else if ( isIn_ClosePedestrianLanes_State( ) )
         {
           SetEnableLane3( instanceData );
         }
@@ -1104,11 +1455,27 @@ void ExecutionDirector::trigger_EnableLane4( )
       }
       else if ( isIn_Controlled_State( ) )
       {
-        if ( isIn_OpenLane1_State( ) )
+        if ( isIn_Hold_State( ) )
+        {
+          SetEnableLane4( instanceData );
+        }
+        else if ( isIn_OnOpeningLane1_State( ) )
+        {
+          SetEnableLane4( instanceData );
+        }
+        else if ( isIn_OpenLane1_State( ) )
         {
           SetEnableLane4( instanceData );
         }
         else if ( isIn_OnCloseLane1_State( ) )
+        {
+          SetEnableLane4( instanceData );
+        }
+        else if ( isIn_CloseLane1_State( ) )
+        {
+          SetEnableLane4( instanceData );
+        }
+        else if ( isIn_OnOpeningLane2_State( ) )
         {
           SetEnableLane4( instanceData );
         }
@@ -1120,11 +1487,27 @@ void ExecutionDirector::trigger_EnableLane4( )
         {
           SetEnableLane4( instanceData );
         }
+        else if ( isIn_CloseLane2_State( ) )
+        {
+          SetEnableLane4( instanceData );
+        }
+        else if ( isIn_OnOpeningLane3_State( ) )
+        {
+          SetEnableLane4( instanceData );
+        }
         else if ( isIn_OpenLane3_State( ) )
         {
           SetEnableLane4( instanceData );
         }
         else if ( isIn_OnCloseLane3_State( ) )
+        {
+          SetEnableLane4( instanceData );
+        }
+        else if ( isIn_CloseLane3_State( ) )
+        {
+          SetEnableLane4( instanceData );
+        }
+        else if ( isIn_OnOpeningLane4_State( ) )
         {
           SetEnableLane4( instanceData );
         }
@@ -1136,11 +1519,15 @@ void ExecutionDirector::trigger_EnableLane4( )
         {
           SetEnableLane4( instanceData );
         }
+        else if ( isIn_CloseLane4_State( ) )
+        {
+          SetEnableLane4( instanceData );
+        }
         else if ( isIn_OpenPedestrianLanes_State( ) )
         {
           SetEnableLane4( instanceData );
         }
-        else if ( isIn_OnClosePedestrianLanes_State( ) )
+        else if ( isIn_ClosePedestrianLanes_State( ) )
         {
           SetEnableLane4( instanceData );
         }
@@ -1169,12 +1556,32 @@ void ExecutionDirector::trigger_OpenLane1( )
 
   if ( isIn_Controlled_State( ) )
   {
-    if ( isIn_OpenLane1_State( ) )
+    if ( isIn_Hold_State( ) )
+    {
+      SetNextOpenLane1( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OnOpeningLane1_State( ) )
+    {
+      SetNextOpenLane1( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OpenLane1_State( ) )
     {
       SetNextOpenLane1( instanceData );
       Update( instanceData );
     }
     else if ( isIn_OnCloseLane1_State( ) )
+    {
+      SetNextOpenLane1( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_CloseLane1_State( ) )
+    {
+      SetNextOpenLane1( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OnOpeningLane2_State( ) )
     {
       SetNextOpenLane1( instanceData );
       Update( instanceData );
@@ -1189,12 +1596,32 @@ void ExecutionDirector::trigger_OpenLane1( )
       SetNextOpenLane1( instanceData );
       Update( instanceData );
     }
+    else if ( isIn_CloseLane2_State( ) )
+    {
+      SetNextOpenLane1( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OnOpeningLane3_State( ) )
+    {
+      SetNextOpenLane1( instanceData );
+      Update( instanceData );
+    }
     else if ( isIn_OpenLane3_State( ) )
     {
       SetNextOpenLane1( instanceData );
       Update( instanceData );
     }
     else if ( isIn_OnCloseLane3_State( ) )
+    {
+      SetNextOpenLane1( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_CloseLane3_State( ) )
+    {
+      SetNextOpenLane1( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OnOpeningLane4_State( ) )
     {
       SetNextOpenLane1( instanceData );
       Update( instanceData );
@@ -1209,12 +1636,17 @@ void ExecutionDirector::trigger_OpenLane1( )
       SetNextOpenLane1( instanceData );
       Update( instanceData );
     }
+    else if ( isIn_CloseLane4_State( ) )
+    {
+      SetNextOpenLane1( instanceData );
+      Update( instanceData );
+    }
     else if ( isIn_OpenPedestrianLanes_State( ) )
     {
       SetNextOpenLane1( instanceData );
       Update( instanceData );
     }
-    else if ( isIn_OnClosePedestrianLanes_State( ) )
+    else if ( isIn_ClosePedestrianLanes_State( ) )
     {
       SetNextOpenLane1( instanceData );
       Update( instanceData );
@@ -1235,12 +1667,32 @@ void ExecutionDirector::trigger_OpenLane2( )
 
   if ( isIn_Controlled_State( ) )
   {
-    if ( isIn_OpenLane1_State( ) )
+    if ( isIn_Hold_State( ) )
+    {
+      SetNextOpenLane2( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OnOpeningLane1_State( ) )
+    {
+      SetNextOpenLane2( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OpenLane1_State( ) )
     {
       SetNextOpenLane2( instanceData );
       Update( instanceData );
     }
     else if ( isIn_OnCloseLane1_State( ) )
+    {
+      SetNextOpenLane2( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_CloseLane1_State( ) )
+    {
+      SetNextOpenLane2( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OnOpeningLane2_State( ) )
     {
       SetNextOpenLane2( instanceData );
       Update( instanceData );
@@ -1255,12 +1707,32 @@ void ExecutionDirector::trigger_OpenLane2( )
       SetNextOpenLane2( instanceData );
       Update( instanceData );
     }
+    else if ( isIn_CloseLane2_State( ) )
+    {
+      SetNextOpenLane2( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OnOpeningLane3_State( ) )
+    {
+      SetNextOpenLane2( instanceData );
+      Update( instanceData );
+    }
     else if ( isIn_OpenLane3_State( ) )
     {
       SetNextOpenLane2( instanceData );
       Update( instanceData );
     }
     else if ( isIn_OnCloseLane3_State( ) )
+    {
+      SetNextOpenLane2( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_CloseLane3_State( ) )
+    {
+      SetNextOpenLane2( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OnOpeningLane4_State( ) )
     {
       SetNextOpenLane2( instanceData );
       Update( instanceData );
@@ -1275,12 +1747,17 @@ void ExecutionDirector::trigger_OpenLane2( )
       SetNextOpenLane2( instanceData );
       Update( instanceData );
     }
+    else if ( isIn_CloseLane4_State( ) )
+    {
+      SetNextOpenLane2( instanceData );
+      Update( instanceData );
+    }
     else if ( isIn_OpenPedestrianLanes_State( ) )
     {
       SetNextOpenLane2( instanceData );
       Update( instanceData );
     }
-    else if ( isIn_OnClosePedestrianLanes_State( ) )
+    else if ( isIn_ClosePedestrianLanes_State( ) )
     {
       SetNextOpenLane2( instanceData );
       Update( instanceData );
@@ -1301,12 +1778,32 @@ void ExecutionDirector::trigger_OpenLane3( )
 
   if ( isIn_Controlled_State( ) )
   {
-    if ( isIn_OpenLane1_State( ) )
+    if ( isIn_Hold_State( ) )
+    {
+      SetNextOpenLane3( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OnOpeningLane1_State( ) )
+    {
+      SetNextOpenLane3( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OpenLane1_State( ) )
     {
       SetNextOpenLane3( instanceData );
       Update( instanceData );
     }
     else if ( isIn_OnCloseLane1_State( ) )
+    {
+      SetNextOpenLane3( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_CloseLane1_State( ) )
+    {
+      SetNextOpenLane3( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OnOpeningLane2_State( ) )
     {
       SetNextOpenLane3( instanceData );
       Update( instanceData );
@@ -1321,12 +1818,32 @@ void ExecutionDirector::trigger_OpenLane3( )
       SetNextOpenLane3( instanceData );
       Update( instanceData );
     }
+    else if ( isIn_CloseLane2_State( ) )
+    {
+      SetNextOpenLane3( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OnOpeningLane3_State( ) )
+    {
+      SetNextOpenLane3( instanceData );
+      Update( instanceData );
+    }
     else if ( isIn_OpenLane3_State( ) )
     {
       SetNextOpenLane3( instanceData );
       Update( instanceData );
     }
     else if ( isIn_OnCloseLane3_State( ) )
+    {
+      SetNextOpenLane3( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_CloseLane3_State( ) )
+    {
+      SetNextOpenLane3( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OnOpeningLane4_State( ) )
     {
       SetNextOpenLane3( instanceData );
       Update( instanceData );
@@ -1341,12 +1858,17 @@ void ExecutionDirector::trigger_OpenLane3( )
       SetNextOpenLane3( instanceData );
       Update( instanceData );
     }
+    else if ( isIn_CloseLane4_State( ) )
+    {
+      SetNextOpenLane3( instanceData );
+      Update( instanceData );
+    }
     else if ( isIn_OpenPedestrianLanes_State( ) )
     {
       SetNextOpenLane3( instanceData );
       Update( instanceData );
     }
-    else if ( isIn_OnClosePedestrianLanes_State( ) )
+    else if ( isIn_ClosePedestrianLanes_State( ) )
     {
       SetNextOpenLane3( instanceData );
       Update( instanceData );
@@ -1367,12 +1889,32 @@ void ExecutionDirector::trigger_OpenLane4( )
 
   if ( isIn_Controlled_State( ) )
   {
-    if ( isIn_OpenLane1_State( ) )
+    if ( isIn_Hold_State( ) )
+    {
+      SetNextOpenLane4( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OnOpeningLane1_State( ) )
+    {
+      SetNextOpenLane4( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OpenLane1_State( ) )
     {
       SetNextOpenLane4( instanceData );
       Update( instanceData );
     }
     else if ( isIn_OnCloseLane1_State( ) )
+    {
+      SetNextOpenLane4( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_CloseLane1_State( ) )
+    {
+      SetNextOpenLane4( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OnOpeningLane2_State( ) )
     {
       SetNextOpenLane4( instanceData );
       Update( instanceData );
@@ -1387,12 +1929,32 @@ void ExecutionDirector::trigger_OpenLane4( )
       SetNextOpenLane4( instanceData );
       Update( instanceData );
     }
+    else if ( isIn_CloseLane2_State( ) )
+    {
+      SetNextOpenLane4( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OnOpeningLane3_State( ) )
+    {
+      SetNextOpenLane4( instanceData );
+      Update( instanceData );
+    }
     else if ( isIn_OpenLane3_State( ) )
     {
       SetNextOpenLane4( instanceData );
       Update( instanceData );
     }
     else if ( isIn_OnCloseLane3_State( ) )
+    {
+      SetNextOpenLane4( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_CloseLane3_State( ) )
+    {
+      SetNextOpenLane4( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OnOpeningLane4_State( ) )
     {
       SetNextOpenLane4( instanceData );
       Update( instanceData );
@@ -1407,12 +1969,17 @@ void ExecutionDirector::trigger_OpenLane4( )
       SetNextOpenLane4( instanceData );
       Update( instanceData );
     }
+    else if ( isIn_CloseLane4_State( ) )
+    {
+      SetNextOpenLane4( instanceData );
+      Update( instanceData );
+    }
     else if ( isIn_OpenPedestrianLanes_State( ) )
     {
       SetNextOpenLane4( instanceData );
       Update( instanceData );
     }
-    else if ( isIn_OnClosePedestrianLanes_State( ) )
+    else if ( isIn_ClosePedestrianLanes_State( ) )
     {
       SetNextOpenLane4( instanceData );
       Update( instanceData );
@@ -1433,12 +2000,32 @@ void ExecutionDirector::trigger_OpenPedestrianLanes( )
 
   if ( isIn_Controlled_State( ) )
   {
-    if ( isIn_OpenLane1_State( ) )
+    if ( isIn_Hold_State( ) )
+    {
+      SetNextOpenLanePedestrianLanes( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OnOpeningLane1_State( ) )
+    {
+      SetNextOpenLanePedestrianLanes( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OpenLane1_State( ) )
     {
       SetNextOpenLanePedestrianLanes( instanceData );
       Update( instanceData );
     }
     else if ( isIn_OnCloseLane1_State( ) )
+    {
+      SetNextOpenLanePedestrianLanes( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_CloseLane1_State( ) )
+    {
+      SetNextOpenLanePedestrianLanes( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OnOpeningLane2_State( ) )
     {
       SetNextOpenLanePedestrianLanes( instanceData );
       Update( instanceData );
@@ -1453,12 +2040,32 @@ void ExecutionDirector::trigger_OpenPedestrianLanes( )
       SetNextOpenLanePedestrianLanes( instanceData );
       Update( instanceData );
     }
+    else if ( isIn_CloseLane2_State( ) )
+    {
+      SetNextOpenLanePedestrianLanes( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OnOpeningLane3_State( ) )
+    {
+      SetNextOpenLanePedestrianLanes( instanceData );
+      Update( instanceData );
+    }
     else if ( isIn_OpenLane3_State( ) )
     {
       SetNextOpenLanePedestrianLanes( instanceData );
       Update( instanceData );
     }
     else if ( isIn_OnCloseLane3_State( ) )
+    {
+      SetNextOpenLanePedestrianLanes( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_CloseLane3_State( ) )
+    {
+      SetNextOpenLanePedestrianLanes( instanceData );
+      Update( instanceData );
+    }
+    else if ( isIn_OnOpeningLane4_State( ) )
     {
       SetNextOpenLanePedestrianLanes( instanceData );
       Update( instanceData );
@@ -1473,12 +2080,17 @@ void ExecutionDirector::trigger_OpenPedestrianLanes( )
       SetNextOpenLanePedestrianLanes( instanceData );
       Update( instanceData );
     }
+    else if ( isIn_CloseLane4_State( ) )
+    {
+      SetNextOpenLanePedestrianLanes( instanceData );
+      Update( instanceData );
+    }
     else if ( isIn_OpenPedestrianLanes_State( ) )
     {
       SetNextOpenLanePedestrianLanes( instanceData );
       Update( instanceData );
     }
-    else if ( isIn_OnClosePedestrianLanes_State( ) )
+    else if ( isIn_ClosePedestrianLanes_State( ) )
     {
       SetNextOpenLanePedestrianLanes( instanceData );
       Update( instanceData );
@@ -1525,7 +2137,25 @@ void ExecutionDirector::trigger_ReleaseControl( )
   }
   else if ( isIn_Controlled_State( ) )
   {
-    if ( isIn_OpenLane1_State( ) )
+    if ( isIn_Hold_State( ) )
+    {
+      SetUncontrolledMode( instanceData );
+
+      exit_Hold( );
+      exit_Operational( );
+      enter_SwitchControlState( );
+      runningState.Main = Main_States::E_SwitchControlState;
+    }
+    else if ( isIn_OnOpeningLane1_State( ) )
+    {
+      SetUncontrolledMode( instanceData );
+
+      exit_OnOpeningLane1( );
+      exit_Operational( );
+      enter_SwitchControlState( );
+      runningState.Main = Main_States::E_SwitchControlState;
+    }
+    else if ( isIn_OpenLane1_State( ) )
     {
       SetUncontrolledMode( instanceData );
 
@@ -1539,6 +2169,24 @@ void ExecutionDirector::trigger_ReleaseControl( )
       SetUncontrolledMode( instanceData );
 
       exit_OnCloseLane1( );
+      exit_Operational( );
+      enter_SwitchControlState( );
+      runningState.Main = Main_States::E_SwitchControlState;
+    }
+    else if ( isIn_CloseLane1_State( ) )
+    {
+      SetUncontrolledMode( instanceData );
+
+      exit_CloseLane1( );
+      exit_Operational( );
+      enter_SwitchControlState( );
+      runningState.Main = Main_States::E_SwitchControlState;
+    }
+    else if ( isIn_OnOpeningLane2_State( ) )
+    {
+      SetUncontrolledMode( instanceData );
+
+      exit_OnOpeningLane2( );
       exit_Operational( );
       enter_SwitchControlState( );
       runningState.Main = Main_States::E_SwitchControlState;
@@ -1561,6 +2209,24 @@ void ExecutionDirector::trigger_ReleaseControl( )
       enter_SwitchControlState( );
       runningState.Main = Main_States::E_SwitchControlState;
     }
+    else if ( isIn_CloseLane2_State( ) )
+    {
+      SetUncontrolledMode( instanceData );
+
+      exit_CloseLane2( );
+      exit_Operational( );
+      enter_SwitchControlState( );
+      runningState.Main = Main_States::E_SwitchControlState;
+    }
+    else if ( isIn_OnOpeningLane3_State( ) )
+    {
+      SetUncontrolledMode( instanceData );
+
+      exit_OnOpeningLane3( );
+      exit_Operational( );
+      enter_SwitchControlState( );
+      runningState.Main = Main_States::E_SwitchControlState;
+    }
     else if ( isIn_OpenLane3_State( ) )
     {
       SetUncontrolledMode( instanceData );
@@ -1575,6 +2241,24 @@ void ExecutionDirector::trigger_ReleaseControl( )
       SetUncontrolledMode( instanceData );
 
       exit_OnCloseLane3( );
+      exit_Operational( );
+      enter_SwitchControlState( );
+      runningState.Main = Main_States::E_SwitchControlState;
+    }
+    else if ( isIn_CloseLane3_State( ) )
+    {
+      SetUncontrolledMode( instanceData );
+
+      exit_CloseLane3( );
+      exit_Operational( );
+      enter_SwitchControlState( );
+      runningState.Main = Main_States::E_SwitchControlState;
+    }
+    else if ( isIn_OnOpeningLane4_State( ) )
+    {
+      SetUncontrolledMode( instanceData );
+
+      exit_OnOpeningLane4( );
       exit_Operational( );
       enter_SwitchControlState( );
       runningState.Main = Main_States::E_SwitchControlState;
@@ -1597,6 +2281,15 @@ void ExecutionDirector::trigger_ReleaseControl( )
       enter_SwitchControlState( );
       runningState.Main = Main_States::E_SwitchControlState;
     }
+    else if ( isIn_CloseLane4_State( ) )
+    {
+      SetUncontrolledMode( instanceData );
+
+      exit_CloseLane4( );
+      exit_Operational( );
+      enter_SwitchControlState( );
+      runningState.Main = Main_States::E_SwitchControlState;
+    }
     else if ( isIn_OpenPedestrianLanes_State( ) )
     {
       SetUncontrolledMode( instanceData );
@@ -1606,11 +2299,11 @@ void ExecutionDirector::trigger_ReleaseControl( )
       enter_SwitchControlState( );
       runningState.Main = Main_States::E_SwitchControlState;
     }
-    else if ( isIn_OnClosePedestrianLanes_State( ) )
+    else if ( isIn_ClosePedestrianLanes_State( ) )
     {
       SetUncontrolledMode( instanceData );
 
-      exit_OnClosePedestrianLanes( );
+      exit_ClosePedestrianLanes( );
       exit_Operational( );
       enter_SwitchControlState( );
       runningState.Main = Main_States::E_SwitchControlState;
@@ -1672,7 +2365,23 @@ void ExecutionDirector::trigger_SystemDisabled( )
     }
     else if ( isIn_Controlled_State( ) )
     {
-      if ( isIn_OpenLane1_State( ) )
+      if ( isIn_Hold_State( ) )
+      {
+        exit_Hold( );
+        exit_Operational( );
+        enter_SwitchSystem( );
+        enter_GoesToStandby( );
+        runningState.Main = Main_States::E_GoesToStandby;
+      }
+      else if ( isIn_OnOpeningLane1_State( ) )
+      {
+        exit_OnOpeningLane1( );
+        exit_Operational( );
+        enter_SwitchSystem( );
+        enter_GoesToStandby( );
+        runningState.Main = Main_States::E_GoesToStandby;
+      }
+      else if ( isIn_OpenLane1_State( ) )
       {
         exit_OpenLane1( );
         exit_Operational( );
@@ -1683,6 +2392,22 @@ void ExecutionDirector::trigger_SystemDisabled( )
       else if ( isIn_OnCloseLane1_State( ) )
       {
         exit_OnCloseLane1( );
+        exit_Operational( );
+        enter_SwitchSystem( );
+        enter_GoesToStandby( );
+        runningState.Main = Main_States::E_GoesToStandby;
+      }
+      else if ( isIn_CloseLane1_State( ) )
+      {
+        exit_CloseLane1( );
+        exit_Operational( );
+        enter_SwitchSystem( );
+        enter_GoesToStandby( );
+        runningState.Main = Main_States::E_GoesToStandby;
+      }
+      else if ( isIn_OnOpeningLane2_State( ) )
+      {
+        exit_OnOpeningLane2( );
         exit_Operational( );
         enter_SwitchSystem( );
         enter_GoesToStandby( );
@@ -1704,6 +2429,22 @@ void ExecutionDirector::trigger_SystemDisabled( )
         enter_GoesToStandby( );
         runningState.Main = Main_States::E_GoesToStandby;
       }
+      else if ( isIn_CloseLane2_State( ) )
+      {
+        exit_CloseLane2( );
+        exit_Operational( );
+        enter_SwitchSystem( );
+        enter_GoesToStandby( );
+        runningState.Main = Main_States::E_GoesToStandby;
+      }
+      else if ( isIn_OnOpeningLane3_State( ) )
+      {
+        exit_OnOpeningLane3( );
+        exit_Operational( );
+        enter_SwitchSystem( );
+        enter_GoesToStandby( );
+        runningState.Main = Main_States::E_GoesToStandby;
+      }
       else if ( isIn_OpenLane3_State( ) )
       {
         exit_OpenLane3( );
@@ -1715,6 +2456,22 @@ void ExecutionDirector::trigger_SystemDisabled( )
       else if ( isIn_OnCloseLane3_State( ) )
       {
         exit_OnCloseLane3( );
+        exit_Operational( );
+        enter_SwitchSystem( );
+        enter_GoesToStandby( );
+        runningState.Main = Main_States::E_GoesToStandby;
+      }
+      else if ( isIn_CloseLane3_State( ) )
+      {
+        exit_CloseLane3( );
+        exit_Operational( );
+        enter_SwitchSystem( );
+        enter_GoesToStandby( );
+        runningState.Main = Main_States::E_GoesToStandby;
+      }
+      else if ( isIn_OnOpeningLane4_State( ) )
+      {
+        exit_OnOpeningLane4( );
         exit_Operational( );
         enter_SwitchSystem( );
         enter_GoesToStandby( );
@@ -1736,6 +2493,14 @@ void ExecutionDirector::trigger_SystemDisabled( )
         enter_GoesToStandby( );
         runningState.Main = Main_States::E_GoesToStandby;
       }
+      else if ( isIn_CloseLane4_State( ) )
+      {
+        exit_CloseLane4( );
+        exit_Operational( );
+        enter_SwitchSystem( );
+        enter_GoesToStandby( );
+        runningState.Main = Main_States::E_GoesToStandby;
+      }
       else if ( isIn_OpenPedestrianLanes_State( ) )
       {
         exit_OpenPedestrianLanes( );
@@ -1744,9 +2509,9 @@ void ExecutionDirector::trigger_SystemDisabled( )
         enter_GoesToStandby( );
         runningState.Main = Main_States::E_GoesToStandby;
       }
-      else if ( isIn_OnClosePedestrianLanes_State( ) )
+      else if ( isIn_ClosePedestrianLanes_State( ) )
       {
-        exit_OnClosePedestrianLanes( );
+        exit_ClosePedestrianLanes( );
         exit_Operational( );
         enter_SwitchSystem( );
         enter_GoesToStandby( );
@@ -1910,7 +2675,25 @@ void ExecutionDirector::finalize_Main( )
       }
       else if ( isIn_Controlled_State( ) )
       {
-        if ( isIn_OpenLane1_State( ) )
+        if ( isIn_Hold_State( ) )
+        {
+          if ( doActionHandler.has_value( )
+            && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
+          {
+            pthread_cancel( doActionHandler.value( ) );
+            doActionHandler.reset( );
+          }
+        }
+        else if ( isIn_OnOpeningLane1_State( ) )
+        {
+          if ( doActionHandler.has_value( )
+            && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
+          {
+            pthread_cancel( doActionHandler.value( ) );
+            doActionHandler.reset( );
+          }
+        }
+        else if ( isIn_OpenLane1_State( ) )
         {
           if ( doActionHandler.has_value( )
             && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
@@ -1920,6 +2703,24 @@ void ExecutionDirector::finalize_Main( )
           }
         }
         else if ( isIn_OnCloseLane1_State( ) )
+        {
+          if ( doActionHandler.has_value( )
+            && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
+          {
+            pthread_cancel( doActionHandler.value( ) );
+            doActionHandler.reset( );
+          }
+        }
+        else if ( isIn_CloseLane1_State( ) )
+        {
+          if ( doActionHandler.has_value( )
+            && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
+          {
+            pthread_cancel( doActionHandler.value( ) );
+            doActionHandler.reset( );
+          }
+        }
+        else if ( isIn_OnOpeningLane2_State( ) )
         {
           if ( doActionHandler.has_value( )
             && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
@@ -1946,6 +2747,24 @@ void ExecutionDirector::finalize_Main( )
             doActionHandler.reset( );
           }
         }
+        else if ( isIn_CloseLane2_State( ) )
+        {
+          if ( doActionHandler.has_value( )
+            && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
+          {
+            pthread_cancel( doActionHandler.value( ) );
+            doActionHandler.reset( );
+          }
+        }
+        else if ( isIn_OnOpeningLane3_State( ) )
+        {
+          if ( doActionHandler.has_value( )
+            && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
+          {
+            pthread_cancel( doActionHandler.value( ) );
+            doActionHandler.reset( );
+          }
+        }
         else if ( isIn_OpenLane3_State( ) )
         {
           if ( doActionHandler.has_value( )
@@ -1956,6 +2775,24 @@ void ExecutionDirector::finalize_Main( )
           }
         }
         else if ( isIn_OnCloseLane3_State( ) )
+        {
+          if ( doActionHandler.has_value( )
+            && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
+          {
+            pthread_cancel( doActionHandler.value( ) );
+            doActionHandler.reset( );
+          }
+        }
+        else if ( isIn_CloseLane3_State( ) )
+        {
+          if ( doActionHandler.has_value( )
+            && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
+          {
+            pthread_cancel( doActionHandler.value( ) );
+            doActionHandler.reset( );
+          }
+        }
+        else if ( isIn_OnOpeningLane4_State( ) )
         {
           if ( doActionHandler.has_value( )
             && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
@@ -1982,6 +2819,15 @@ void ExecutionDirector::finalize_Main( )
             doActionHandler.reset( );
           }
         }
+        else if ( isIn_CloseLane4_State( ) )
+        {
+          if ( doActionHandler.has_value( )
+            && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
+          {
+            pthread_cancel( doActionHandler.value( ) );
+            doActionHandler.reset( );
+          }
+        }
         else if ( isIn_OpenPedestrianLanes_State( ) )
         {
           if ( doActionHandler.has_value( )
@@ -1991,7 +2837,7 @@ void ExecutionDirector::finalize_Main( )
             doActionHandler.reset( );
           }
         }
-        else if ( isIn_OnClosePedestrianLanes_State( ) )
+        else if ( isIn_ClosePedestrianLanes_State( ) )
         {
           if ( doActionHandler.has_value( )
             && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
@@ -2071,10 +2917,8 @@ void ExecutionDirector::init_Uncontrolled( )
 
 void ExecutionDirector::init_Controlled( )
 {
-  StopTraffic( instanceData );
-
-  enter_OnClosePedestrianLanes( );
-  runningState.Main = Main_States::E_OnClosePedestrianLanes;
+  enter_Hold( );
+  runningState.Main = Main_States::E_Hold;
   storedState.shallow_Operational = Main_States::E_Controlled;
   store_Shallow_Operational( storedState.shallow_Operational, instanceData );
 }
@@ -2181,6 +3025,46 @@ void* ExecutionDirector::doAction_CheckRequests( )
   return NULL;
 }
 
+void* ExecutionDirector::doAction_Hold( )
+{
+  WaitForSafety( instanceData );
+
+  std::lock_guard<std::mutex> lockGuard( guard );
+
+  doActionHandler.reset( );
+
+  if ( isIn_Hold_State( ) )
+  {
+    exit_Hold( );
+    enter_OnOpeningLane1( );
+    runningState.Main = Main_States::E_OnOpeningLane1;
+    storedState.shallow_Operational = Main_States::E_Controlled;
+    store_Shallow_Operational( storedState.shallow_Operational, instanceData );
+  }
+
+  return NULL;
+}
+
+void* ExecutionDirector::doAction_OnOpeningLane1( )
+{
+  WaitForSafety( instanceData );
+
+  std::lock_guard<std::mutex> lockGuard( guard );
+
+  doActionHandler.reset( );
+
+  if ( isIn_OnOpeningLane1_State( ) )
+  {
+    exit_OnOpeningLane1( );
+    enter_OpenLane1( );
+    runningState.Main = Main_States::E_OpenLane1;
+    storedState.shallow_Operational = Main_States::E_Controlled;
+    store_Shallow_Operational( storedState.shallow_Operational, instanceData );
+  }
+
+  return NULL;
+}
+
 void* ExecutionDirector::doAction_OpenLane1( )
 {
   WaitForLane1( instanceData );
@@ -2203,7 +3087,7 @@ void* ExecutionDirector::doAction_OpenLane1( )
 
 void* ExecutionDirector::doAction_OnCloseLane1( )
 {
-  WaitForNextLaneOpen( instanceData );
+  WaitForClosingLane( instanceData );
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -2211,33 +3095,63 @@ void* ExecutionDirector::doAction_OnCloseLane1( )
 
   if ( isIn_OnCloseLane1_State( ) )
   {
-    if ( IsNextLane2( ) )
+    exit_OnCloseLane1( );
+    enter_CloseLane1( );
+    runningState.Main = Main_States::E_CloseLane1;
+    storedState.shallow_Operational = Main_States::E_Controlled;
+    store_Shallow_Operational( storedState.shallow_Operational, instanceData );
+  }
+
+  return NULL;
+}
+
+void* ExecutionDirector::doAction_CloseLane1( )
+{
+  WaitForSafety( instanceData );
+
+  std::lock_guard<std::mutex> lockGuard( guard );
+
+  doActionHandler.reset( );
+
+  if ( isIn_CloseLane1_State( ) )
+  {
+    PrepareForNextLane( instanceData );
+
+    if ( IsNextLane1( ) )
     {
-      exit_OnCloseLane1( );
-      enter_OpenLane2( );
-      runningState.Main = Main_States::E_OpenLane2;
+      exit_CloseLane1( );
+      enter_OnOpeningLane1( );
+      runningState.Main = Main_States::E_OnOpeningLane1;
+      storedState.shallow_Operational = Main_States::E_Controlled;
+      store_Shallow_Operational( storedState.shallow_Operational, instanceData );
+    }
+    else if ( IsNextLane2( ) )
+    {
+      exit_CloseLane1( );
+      enter_OnOpeningLane2( );
+      runningState.Main = Main_States::E_OnOpeningLane2;
       storedState.shallow_Operational = Main_States::E_Controlled;
       store_Shallow_Operational( storedState.shallow_Operational, instanceData );
     }
     else if ( IsNextLane3( ) )
     {
-      exit_OnCloseLane1( );
-      enter_OpenLane3( );
-      runningState.Main = Main_States::E_OpenLane3;
+      exit_CloseLane1( );
+      enter_OnOpeningLane3( );
+      runningState.Main = Main_States::E_OnOpeningLane3;
       storedState.shallow_Operational = Main_States::E_Controlled;
       store_Shallow_Operational( storedState.shallow_Operational, instanceData );
     }
     else if ( IsNextLane4( ) )
     {
-      exit_OnCloseLane1( );
-      enter_OpenLane4( );
-      runningState.Main = Main_States::E_OpenLane4;
+      exit_CloseLane1( );
+      enter_OnOpeningLane4( );
+      runningState.Main = Main_States::E_OnOpeningLane4;
       storedState.shallow_Operational = Main_States::E_Controlled;
       store_Shallow_Operational( storedState.shallow_Operational, instanceData );
     }
     else if ( IsNextLanePedestrianLanes( ) )
     {
-      exit_OnCloseLane1( );
+      exit_CloseLane1( );
       enter_OpenPedestrianLanes( );
       runningState.Main = Main_States::E_OpenPedestrianLanes;
       storedState.shallow_Operational = Main_States::E_Controlled;
@@ -2245,12 +3159,32 @@ void* ExecutionDirector::doAction_OnCloseLane1( )
     }
     else
     {
-      exit_OnCloseLane1( );
-      enter_OpenLane2( );
-      runningState.Main = Main_States::E_OpenLane2;
+      exit_CloseLane1( );
+      enter_OpenPedestrianLanes( );
+      runningState.Main = Main_States::E_OpenPedestrianLanes;
       storedState.shallow_Operational = Main_States::E_Controlled;
       store_Shallow_Operational( storedState.shallow_Operational, instanceData );
     }
+  }
+
+  return NULL;
+}
+
+void* ExecutionDirector::doAction_OnOpeningLane2( )
+{
+  WaitForSafety( instanceData );
+
+  std::lock_guard<std::mutex> lockGuard( guard );
+
+  doActionHandler.reset( );
+
+  if ( isIn_OnOpeningLane2_State( ) )
+  {
+    exit_OnOpeningLane2( );
+    enter_OpenLane2( );
+    runningState.Main = Main_States::E_OpenLane2;
+    storedState.shallow_Operational = Main_States::E_Controlled;
+    store_Shallow_Operational( storedState.shallow_Operational, instanceData );
   }
 
   return NULL;
@@ -2278,7 +3212,7 @@ void* ExecutionDirector::doAction_OpenLane2( )
 
 void* ExecutionDirector::doAction_OnCloseLane2( )
 {
-  WaitForNextLaneOpen( instanceData );
+  WaitForClosingLane( instanceData );
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -2286,33 +3220,63 @@ void* ExecutionDirector::doAction_OnCloseLane2( )
 
   if ( isIn_OnCloseLane2_State( ) )
   {
+    exit_OnCloseLane2( );
+    enter_CloseLane2( );
+    runningState.Main = Main_States::E_CloseLane2;
+    storedState.shallow_Operational = Main_States::E_Controlled;
+    store_Shallow_Operational( storedState.shallow_Operational, instanceData );
+  }
+
+  return NULL;
+}
+
+void* ExecutionDirector::doAction_CloseLane2( )
+{
+  WaitForSafety( instanceData );
+
+  std::lock_guard<std::mutex> lockGuard( guard );
+
+  doActionHandler.reset( );
+
+  if ( isIn_CloseLane2_State( ) )
+  {
+    PrepareForNextLane( instanceData );
+
     if ( IsNextLane1( ) )
     {
-      exit_OnCloseLane2( );
-      enter_OpenLane1( );
-      runningState.Main = Main_States::E_OpenLane1;
+      exit_CloseLane2( );
+      enter_OnOpeningLane1( );
+      runningState.Main = Main_States::E_OnOpeningLane1;
+      storedState.shallow_Operational = Main_States::E_Controlled;
+      store_Shallow_Operational( storedState.shallow_Operational, instanceData );
+    }
+    else if ( IsNextLane2( ) )
+    {
+      exit_CloseLane2( );
+      enter_OnOpeningLane2( );
+      runningState.Main = Main_States::E_OnOpeningLane2;
       storedState.shallow_Operational = Main_States::E_Controlled;
       store_Shallow_Operational( storedState.shallow_Operational, instanceData );
     }
     else if ( IsNextLane3( ) )
     {
-      exit_OnCloseLane2( );
-      enter_OpenLane3( );
-      runningState.Main = Main_States::E_OpenLane3;
+      exit_CloseLane2( );
+      enter_OnOpeningLane3( );
+      runningState.Main = Main_States::E_OnOpeningLane3;
       storedState.shallow_Operational = Main_States::E_Controlled;
       store_Shallow_Operational( storedState.shallow_Operational, instanceData );
     }
     else if ( IsNextLane4( ) )
     {
-      exit_OnCloseLane2( );
-      enter_OpenLane4( );
-      runningState.Main = Main_States::E_OpenLane4;
+      exit_CloseLane2( );
+      enter_OnOpeningLane4( );
+      runningState.Main = Main_States::E_OnOpeningLane4;
       storedState.shallow_Operational = Main_States::E_Controlled;
       store_Shallow_Operational( storedState.shallow_Operational, instanceData );
     }
     else if ( IsNextLanePedestrianLanes( ) )
     {
-      exit_OnCloseLane2( );
+      exit_CloseLane2( );
       enter_OpenPedestrianLanes( );
       runningState.Main = Main_States::E_OpenPedestrianLanes;
       storedState.shallow_Operational = Main_States::E_Controlled;
@@ -2320,12 +3284,32 @@ void* ExecutionDirector::doAction_OnCloseLane2( )
     }
     else
     {
-      exit_OnCloseLane2( );
-      enter_OpenLane3( );
-      runningState.Main = Main_States::E_OpenLane3;
+      exit_CloseLane2( );
+      enter_OpenPedestrianLanes( );
+      runningState.Main = Main_States::E_OpenPedestrianLanes;
       storedState.shallow_Operational = Main_States::E_Controlled;
       store_Shallow_Operational( storedState.shallow_Operational, instanceData );
     }
+  }
+
+  return NULL;
+}
+
+void* ExecutionDirector::doAction_OnOpeningLane3( )
+{
+  WaitForSafety( instanceData );
+
+  std::lock_guard<std::mutex> lockGuard( guard );
+
+  doActionHandler.reset( );
+
+  if ( isIn_OnOpeningLane3_State( ) )
+  {
+    exit_OnOpeningLane3( );
+    enter_OpenLane3( );
+    runningState.Main = Main_States::E_OpenLane3;
+    storedState.shallow_Operational = Main_States::E_Controlled;
+    store_Shallow_Operational( storedState.shallow_Operational, instanceData );
   }
 
   return NULL;
@@ -2353,7 +3337,7 @@ void* ExecutionDirector::doAction_OpenLane3( )
 
 void* ExecutionDirector::doAction_OnCloseLane3( )
 {
-  WaitForNextLaneOpen( instanceData );
+  WaitForClosingLane( instanceData );
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -2361,33 +3345,63 @@ void* ExecutionDirector::doAction_OnCloseLane3( )
 
   if ( isIn_OnCloseLane3_State( ) )
   {
+    exit_OnCloseLane3( );
+    enter_CloseLane3( );
+    runningState.Main = Main_States::E_CloseLane3;
+    storedState.shallow_Operational = Main_States::E_Controlled;
+    store_Shallow_Operational( storedState.shallow_Operational, instanceData );
+  }
+
+  return NULL;
+}
+
+void* ExecutionDirector::doAction_CloseLane3( )
+{
+  WaitForSafety( instanceData );
+
+  std::lock_guard<std::mutex> lockGuard( guard );
+
+  doActionHandler.reset( );
+
+  if ( isIn_CloseLane3_State( ) )
+  {
+    PrepareForNextLane( instanceData );
+
     if ( IsNextLane1( ) )
     {
-      exit_OnCloseLane3( );
-      enter_OpenLane1( );
-      runningState.Main = Main_States::E_OpenLane1;
+      exit_CloseLane3( );
+      enter_OnOpeningLane1( );
+      runningState.Main = Main_States::E_OnOpeningLane1;
       storedState.shallow_Operational = Main_States::E_Controlled;
       store_Shallow_Operational( storedState.shallow_Operational, instanceData );
     }
     else if ( IsNextLane2( ) )
     {
-      exit_OnCloseLane3( );
-      enter_OpenLane2( );
-      runningState.Main = Main_States::E_OpenLane2;
+      exit_CloseLane3( );
+      enter_OnOpeningLane2( );
+      runningState.Main = Main_States::E_OnOpeningLane2;
+      storedState.shallow_Operational = Main_States::E_Controlled;
+      store_Shallow_Operational( storedState.shallow_Operational, instanceData );
+    }
+    else if ( IsNextLane3( ) )
+    {
+      exit_CloseLane3( );
+      enter_OnOpeningLane3( );
+      runningState.Main = Main_States::E_OnOpeningLane3;
       storedState.shallow_Operational = Main_States::E_Controlled;
       store_Shallow_Operational( storedState.shallow_Operational, instanceData );
     }
     else if ( IsNextLane4( ) )
     {
-      exit_OnCloseLane3( );
-      enter_OpenLane4( );
-      runningState.Main = Main_States::E_OpenLane4;
+      exit_CloseLane3( );
+      enter_OnOpeningLane4( );
+      runningState.Main = Main_States::E_OnOpeningLane4;
       storedState.shallow_Operational = Main_States::E_Controlled;
       store_Shallow_Operational( storedState.shallow_Operational, instanceData );
     }
     else if ( IsNextLanePedestrianLanes( ) )
     {
-      exit_OnCloseLane3( );
+      exit_CloseLane3( );
       enter_OpenPedestrianLanes( );
       runningState.Main = Main_States::E_OpenPedestrianLanes;
       storedState.shallow_Operational = Main_States::E_Controlled;
@@ -2395,12 +3409,32 @@ void* ExecutionDirector::doAction_OnCloseLane3( )
     }
     else
     {
-      exit_OnCloseLane3( );
-      enter_OpenLane4( );
-      runningState.Main = Main_States::E_OpenLane4;
+      exit_CloseLane3( );
+      enter_OpenPedestrianLanes( );
+      runningState.Main = Main_States::E_OpenPedestrianLanes;
       storedState.shallow_Operational = Main_States::E_Controlled;
       store_Shallow_Operational( storedState.shallow_Operational, instanceData );
     }
+  }
+
+  return NULL;
+}
+
+void* ExecutionDirector::doAction_OnOpeningLane4( )
+{
+  WaitForSafety( instanceData );
+
+  std::lock_guard<std::mutex> lockGuard( guard );
+
+  doActionHandler.reset( );
+
+  if ( isIn_OnOpeningLane4_State( ) )
+  {
+    exit_OnOpeningLane4( );
+    enter_OpenLane4( );
+    runningState.Main = Main_States::E_OpenLane4;
+    storedState.shallow_Operational = Main_States::E_Controlled;
+    store_Shallow_Operational( storedState.shallow_Operational, instanceData );
   }
 
   return NULL;
@@ -2428,7 +3462,7 @@ void* ExecutionDirector::doAction_OpenLane4( )
 
 void* ExecutionDirector::doAction_OnCloseLane4( )
 {
-  WaitForNextLaneOpen( instanceData );
+  WaitForClosingLane( instanceData );
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
@@ -2436,33 +3470,63 @@ void* ExecutionDirector::doAction_OnCloseLane4( )
 
   if ( isIn_OnCloseLane4_State( ) )
   {
+    exit_OnCloseLane4( );
+    enter_CloseLane4( );
+    runningState.Main = Main_States::E_CloseLane4;
+    storedState.shallow_Operational = Main_States::E_Controlled;
+    store_Shallow_Operational( storedState.shallow_Operational, instanceData );
+  }
+
+  return NULL;
+}
+
+void* ExecutionDirector::doAction_CloseLane4( )
+{
+  WaitForSafety( instanceData );
+
+  std::lock_guard<std::mutex> lockGuard( guard );
+
+  doActionHandler.reset( );
+
+  if ( isIn_CloseLane4_State( ) )
+  {
+    PrepareForNextLane( instanceData );
+
     if ( IsNextLane1( ) )
     {
-      exit_OnCloseLane4( );
-      enter_OpenLane1( );
-      runningState.Main = Main_States::E_OpenLane1;
+      exit_CloseLane4( );
+      enter_OnOpeningLane1( );
+      runningState.Main = Main_States::E_OnOpeningLane1;
       storedState.shallow_Operational = Main_States::E_Controlled;
       store_Shallow_Operational( storedState.shallow_Operational, instanceData );
     }
     else if ( IsNextLane2( ) )
     {
-      exit_OnCloseLane4( );
-      enter_OpenLane2( );
-      runningState.Main = Main_States::E_OpenLane2;
+      exit_CloseLane4( );
+      enter_OnOpeningLane2( );
+      runningState.Main = Main_States::E_OnOpeningLane2;
       storedState.shallow_Operational = Main_States::E_Controlled;
       store_Shallow_Operational( storedState.shallow_Operational, instanceData );
     }
     else if ( IsNextLane3( ) )
     {
-      exit_OnCloseLane4( );
-      enter_OpenLane3( );
-      runningState.Main = Main_States::E_OpenLane3;
+      exit_CloseLane4( );
+      enter_OnOpeningLane3( );
+      runningState.Main = Main_States::E_OnOpeningLane3;
+      storedState.shallow_Operational = Main_States::E_Controlled;
+      store_Shallow_Operational( storedState.shallow_Operational, instanceData );
+    }
+    else if ( IsNextLane4( ) )
+    {
+      exit_CloseLane4( );
+      enter_OnOpeningLane4( );
+      runningState.Main = Main_States::E_OnOpeningLane4;
       storedState.shallow_Operational = Main_States::E_Controlled;
       store_Shallow_Operational( storedState.shallow_Operational, instanceData );
     }
     else if ( IsNextLanePedestrianLanes( ) )
     {
-      exit_OnCloseLane4( );
+      exit_CloseLane4( );
       enter_OpenPedestrianLanes( );
       runningState.Main = Main_States::E_OpenPedestrianLanes;
       storedState.shallow_Operational = Main_States::E_Controlled;
@@ -2470,7 +3534,7 @@ void* ExecutionDirector::doAction_OnCloseLane4( )
     }
     else
     {
-      exit_OnCloseLane4( );
+      exit_CloseLane4( );
       enter_OpenPedestrianLanes( );
       runningState.Main = Main_States::E_OpenPedestrianLanes;
       storedState.shallow_Operational = Main_States::E_Controlled;
@@ -2492,8 +3556,8 @@ void* ExecutionDirector::doAction_OpenPedestrianLanes( )
   if ( isIn_OpenPedestrianLanes_State( ) )
   {
     exit_OpenPedestrianLanes( );
-    enter_OnClosePedestrianLanes( );
-    runningState.Main = Main_States::E_OnClosePedestrianLanes;
+    enter_ClosePedestrianLanes( );
+    runningState.Main = Main_States::E_ClosePedestrianLanes;
     storedState.shallow_Operational = Main_States::E_Controlled;
     store_Shallow_Operational( storedState.shallow_Operational, instanceData );
   }
@@ -2501,53 +3565,63 @@ void* ExecutionDirector::doAction_OpenPedestrianLanes( )
   return NULL;
 }
 
-void* ExecutionDirector::doAction_OnClosePedestrianLanes( )
+void* ExecutionDirector::doAction_ClosePedestrianLanes( )
 {
-  WaitForNextLaneOpen( instanceData );
+  WaitForSafety( instanceData );
 
   std::lock_guard<std::mutex> lockGuard( guard );
 
   doActionHandler.reset( );
 
-  if ( isIn_OnClosePedestrianLanes_State( ) )
+  if ( isIn_ClosePedestrianLanes_State( ) )
   {
+    PrepareForNextLane( instanceData );
+
     if ( IsNextLane1( ) )
     {
-      exit_OnClosePedestrianLanes( );
-      enter_OpenLane1( );
-      runningState.Main = Main_States::E_OpenLane1;
+      exit_ClosePedestrianLanes( );
+      enter_OnOpeningLane1( );
+      runningState.Main = Main_States::E_OnOpeningLane1;
       storedState.shallow_Operational = Main_States::E_Controlled;
       store_Shallow_Operational( storedState.shallow_Operational, instanceData );
     }
     else if ( IsNextLane2( ) )
     {
-      exit_OnClosePedestrianLanes( );
-      enter_OpenLane2( );
-      runningState.Main = Main_States::E_OpenLane2;
+      exit_ClosePedestrianLanes( );
+      enter_OnOpeningLane2( );
+      runningState.Main = Main_States::E_OnOpeningLane2;
       storedState.shallow_Operational = Main_States::E_Controlled;
       store_Shallow_Operational( storedState.shallow_Operational, instanceData );
     }
     else if ( IsNextLane3( ) )
     {
-      exit_OnClosePedestrianLanes( );
-      enter_OpenLane3( );
-      runningState.Main = Main_States::E_OpenLane3;
+      exit_ClosePedestrianLanes( );
+      enter_OnOpeningLane3( );
+      runningState.Main = Main_States::E_OnOpeningLane3;
       storedState.shallow_Operational = Main_States::E_Controlled;
       store_Shallow_Operational( storedState.shallow_Operational, instanceData );
     }
     else if ( IsNextLane4( ) )
     {
-      exit_OnClosePedestrianLanes( );
-      enter_OpenLane4( );
-      runningState.Main = Main_States::E_OpenLane4;
+      exit_ClosePedestrianLanes( );
+      enter_OnOpeningLane4( );
+      runningState.Main = Main_States::E_OnOpeningLane4;
+      storedState.shallow_Operational = Main_States::E_Controlled;
+      store_Shallow_Operational( storedState.shallow_Operational, instanceData );
+    }
+    else if ( IsNextLanePedestrianLanes( ) )
+    {
+      exit_ClosePedestrianLanes( );
+      enter_OpenPedestrianLanes( );
+      runningState.Main = Main_States::E_OpenPedestrianLanes;
       storedState.shallow_Operational = Main_States::E_Controlled;
       store_Shallow_Operational( storedState.shallow_Operational, instanceData );
     }
     else
     {
-      exit_OnClosePedestrianLanes( );
-      enter_OpenLane1( );
-      runningState.Main = Main_States::E_OpenLane1;
+      exit_ClosePedestrianLanes( );
+      enter_OpenPedestrianLanes( );
+      runningState.Main = Main_States::E_OpenPedestrianLanes;
       storedState.shallow_Operational = Main_States::E_Controlled;
       store_Shallow_Operational( storedState.shallow_Operational, instanceData );
     }
@@ -2628,6 +3702,28 @@ void ExecutionDirector::enter_Controlled( )
   NotifyCrossroad( instanceData );
 }
 
+void ExecutionDirector::enter_Hold( )
+{
+  runningState.Main = Main_States::E_Hold;
+
+  StopTraffic( instanceData );
+
+  NotifyCrossroad( instanceData );
+
+  doActionHandler = launchDoAction( callDoAction_Hold, this, nullptr, 0 );
+}
+
+void ExecutionDirector::enter_OnOpeningLane1( )
+{
+  runningState.Main = Main_States::E_OnOpeningLane1;
+
+  OrderOpeningLane1( instanceData );
+
+  NotifyCrossroad( instanceData );
+
+  doActionHandler = launchDoAction( callDoAction_OnOpeningLane1, this, nullptr, 0 );
+}
+
 void ExecutionDirector::enter_OpenLane1( )
 {
   runningState.Main = Main_States::E_OpenLane1;
@@ -2643,11 +3739,33 @@ void ExecutionDirector::enter_OnCloseLane1( )
 {
   runningState.Main = Main_States::E_OnCloseLane1;
 
-  PrepareForNextLane( instanceData );
+  OrderClosingLane1( instanceData );
 
   NotifyCrossroad( instanceData );
 
   doActionHandler = launchDoAction( callDoAction_OnCloseLane1, this, nullptr, 0 );
+}
+
+void ExecutionDirector::enter_CloseLane1( )
+{
+  runningState.Main = Main_States::E_CloseLane1;
+
+  OrderCloseLane1( instanceData );
+
+  NotifyCrossroad( instanceData );
+
+  doActionHandler = launchDoAction( callDoAction_CloseLane1, this, nullptr, 0 );
+}
+
+void ExecutionDirector::enter_OnOpeningLane2( )
+{
+  runningState.Main = Main_States::E_OnOpeningLane2;
+
+  OrderOpeningLane2( instanceData );
+
+  NotifyCrossroad( instanceData );
+
+  doActionHandler = launchDoAction( callDoAction_OnOpeningLane2, this, nullptr, 0 );
 }
 
 void ExecutionDirector::enter_OpenLane2( )
@@ -2665,11 +3783,33 @@ void ExecutionDirector::enter_OnCloseLane2( )
 {
   runningState.Main = Main_States::E_OnCloseLane2;
 
-  PrepareForNextLane( instanceData );
+  OrderClosingLane2( instanceData );
 
   NotifyCrossroad( instanceData );
 
   doActionHandler = launchDoAction( callDoAction_OnCloseLane2, this, nullptr, 0 );
+}
+
+void ExecutionDirector::enter_CloseLane2( )
+{
+  runningState.Main = Main_States::E_CloseLane2;
+
+  OrderCloseLane2( instanceData );
+
+  NotifyCrossroad( instanceData );
+
+  doActionHandler = launchDoAction( callDoAction_CloseLane2, this, nullptr, 0 );
+}
+
+void ExecutionDirector::enter_OnOpeningLane3( )
+{
+  runningState.Main = Main_States::E_OnOpeningLane3;
+
+  OrderOpeningLane3( instanceData );
+
+  NotifyCrossroad( instanceData );
+
+  doActionHandler = launchDoAction( callDoAction_OnOpeningLane3, this, nullptr, 0 );
 }
 
 void ExecutionDirector::enter_OpenLane3( )
@@ -2687,11 +3827,33 @@ void ExecutionDirector::enter_OnCloseLane3( )
 {
   runningState.Main = Main_States::E_OnCloseLane3;
 
-  PrepareForNextLane( instanceData );
+  OrderClosingLane3( instanceData );
 
   NotifyCrossroad( instanceData );
 
   doActionHandler = launchDoAction( callDoAction_OnCloseLane3, this, nullptr, 0 );
+}
+
+void ExecutionDirector::enter_CloseLane3( )
+{
+  runningState.Main = Main_States::E_CloseLane3;
+
+  OrderCloseLane3( instanceData );
+
+  NotifyCrossroad( instanceData );
+
+  doActionHandler = launchDoAction( callDoAction_CloseLane3, this, nullptr, 0 );
+}
+
+void ExecutionDirector::enter_OnOpeningLane4( )
+{
+  runningState.Main = Main_States::E_OnOpeningLane4;
+
+  OrderOpeningLane4( instanceData );
+
+  NotifyCrossroad( instanceData );
+
+  doActionHandler = launchDoAction( callDoAction_OnOpeningLane4, this, nullptr, 0 );
 }
 
 void ExecutionDirector::enter_OpenLane4( )
@@ -2709,11 +3871,22 @@ void ExecutionDirector::enter_OnCloseLane4( )
 {
   runningState.Main = Main_States::E_OnCloseLane4;
 
-  PrepareForNextLane( instanceData );
+  OrderClosingLane4( instanceData );
 
   NotifyCrossroad( instanceData );
 
   doActionHandler = launchDoAction( callDoAction_OnCloseLane4, this, nullptr, 0 );
+}
+
+void ExecutionDirector::enter_CloseLane4( )
+{
+  runningState.Main = Main_States::E_CloseLane4;
+
+  OrderCloseLane4( instanceData );
+
+  NotifyCrossroad( instanceData );
+
+  doActionHandler = launchDoAction( callDoAction_CloseLane4, this, nullptr, 0 );
 }
 
 void ExecutionDirector::enter_OpenPedestrianLanes( )
@@ -2727,15 +3900,15 @@ void ExecutionDirector::enter_OpenPedestrianLanes( )
   doActionHandler = launchDoAction( callDoAction_OpenPedestrianLanes, this, nullptr, 0 );
 }
 
-void ExecutionDirector::enter_OnClosePedestrianLanes( )
+void ExecutionDirector::enter_ClosePedestrianLanes( )
 {
-  runningState.Main = Main_States::E_OnClosePedestrianLanes;
+  runningState.Main = Main_States::E_ClosePedestrianLanes;
 
-  PrepareForNextLane( instanceData );
+  OrderClosePedestrianLanes( instanceData );
 
   NotifyCrossroad( instanceData );
 
-  doActionHandler = launchDoAction( callDoAction_OnClosePedestrianLanes, this, nullptr, 0 );
+  doActionHandler = launchDoAction( callDoAction_ClosePedestrianLanes, this, nullptr, 0 );
 }
 
 void ExecutionDirector::exit_StandBy( )
@@ -2796,6 +3969,28 @@ void ExecutionDirector::exit_CheckRequests( )
   }
 }
 
+void ExecutionDirector::exit_Hold( )
+{
+  runningState.Main = Main_States::E_Hold;
+  if ( doActionHandler.has_value( )
+    && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
+  {
+    pthread_cancel( doActionHandler.value( ) );
+    doActionHandler.reset( );
+  }
+}
+
+void ExecutionDirector::exit_OnOpeningLane1( )
+{
+  runningState.Main = Main_States::E_OnOpeningLane1;
+  if ( doActionHandler.has_value( )
+    && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
+  {
+    pthread_cancel( doActionHandler.value( ) );
+    doActionHandler.reset( );
+  }
+}
+
 void ExecutionDirector::exit_OpenLane1( )
 {
   runningState.Main = Main_States::E_OpenLane1;
@@ -2810,6 +4005,28 @@ void ExecutionDirector::exit_OpenLane1( )
 void ExecutionDirector::exit_OnCloseLane1( )
 {
   runningState.Main = Main_States::E_OnCloseLane1;
+  if ( doActionHandler.has_value( )
+    && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
+  {
+    pthread_cancel( doActionHandler.value( ) );
+    doActionHandler.reset( );
+  }
+}
+
+void ExecutionDirector::exit_CloseLane1( )
+{
+  runningState.Main = Main_States::E_CloseLane1;
+  if ( doActionHandler.has_value( )
+    && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
+  {
+    pthread_cancel( doActionHandler.value( ) );
+    doActionHandler.reset( );
+  }
+}
+
+void ExecutionDirector::exit_OnOpeningLane2( )
+{
+  runningState.Main = Main_States::E_OnOpeningLane2;
   if ( doActionHandler.has_value( )
     && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
   {
@@ -2840,6 +4057,28 @@ void ExecutionDirector::exit_OnCloseLane2( )
   }
 }
 
+void ExecutionDirector::exit_CloseLane2( )
+{
+  runningState.Main = Main_States::E_CloseLane2;
+  if ( doActionHandler.has_value( )
+    && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
+  {
+    pthread_cancel( doActionHandler.value( ) );
+    doActionHandler.reset( );
+  }
+}
+
+void ExecutionDirector::exit_OnOpeningLane3( )
+{
+  runningState.Main = Main_States::E_OnOpeningLane3;
+  if ( doActionHandler.has_value( )
+    && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
+  {
+    pthread_cancel( doActionHandler.value( ) );
+    doActionHandler.reset( );
+  }
+}
+
 void ExecutionDirector::exit_OpenLane3( )
 {
   runningState.Main = Main_States::E_OpenLane3;
@@ -2854,6 +4093,28 @@ void ExecutionDirector::exit_OpenLane3( )
 void ExecutionDirector::exit_OnCloseLane3( )
 {
   runningState.Main = Main_States::E_OnCloseLane3;
+  if ( doActionHandler.has_value( )
+    && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
+  {
+    pthread_cancel( doActionHandler.value( ) );
+    doActionHandler.reset( );
+  }
+}
+
+void ExecutionDirector::exit_CloseLane3( )
+{
+  runningState.Main = Main_States::E_CloseLane3;
+  if ( doActionHandler.has_value( )
+    && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
+  {
+    pthread_cancel( doActionHandler.value( ) );
+    doActionHandler.reset( );
+  }
+}
+
+void ExecutionDirector::exit_OnOpeningLane4( )
+{
+  runningState.Main = Main_States::E_OnOpeningLane4;
   if ( doActionHandler.has_value( )
     && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
   {
@@ -2884,6 +4145,17 @@ void ExecutionDirector::exit_OnCloseLane4( )
   }
 }
 
+void ExecutionDirector::exit_CloseLane4( )
+{
+  runningState.Main = Main_States::E_CloseLane4;
+  if ( doActionHandler.has_value( )
+    && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
+  {
+    pthread_cancel( doActionHandler.value( ) );
+    doActionHandler.reset( );
+  }
+}
+
 void ExecutionDirector::exit_OpenPedestrianLanes( )
 {
   runningState.Main = Main_States::E_OpenPedestrianLanes;
@@ -2895,9 +4167,9 @@ void ExecutionDirector::exit_OpenPedestrianLanes( )
   }
 }
 
-void ExecutionDirector::exit_OnClosePedestrianLanes( )
+void ExecutionDirector::exit_ClosePedestrianLanes( )
 {
-  runningState.Main = Main_States::E_OnClosePedestrianLanes;
+  runningState.Main = Main_States::E_ClosePedestrianLanes;
   if ( doActionHandler.has_value( )
     && ! pthread_equal( doActionHandler.value( ), pthread_self( ) ) )
   {
@@ -2938,6 +4210,22 @@ void* ExecutionDirector::callDoAction_CheckRequests( void* arg )
   return NULL;
 }
 
+void* ExecutionDirector::callDoAction_Hold( void* arg )
+{
+  ExecutionDirector* obj = reinterpret_cast< ExecutionDirector* >( arg );
+  obj->doAction_Hold( );
+
+  return NULL;
+}
+
+void* ExecutionDirector::callDoAction_OnOpeningLane1( void* arg )
+{
+  ExecutionDirector* obj = reinterpret_cast< ExecutionDirector* >( arg );
+  obj->doAction_OnOpeningLane1( );
+
+  return NULL;
+}
+
 void* ExecutionDirector::callDoAction_OpenLane1( void* arg )
 {
   ExecutionDirector* obj = reinterpret_cast< ExecutionDirector* >( arg );
@@ -2950,6 +4238,22 @@ void* ExecutionDirector::callDoAction_OnCloseLane1( void* arg )
 {
   ExecutionDirector* obj = reinterpret_cast< ExecutionDirector* >( arg );
   obj->doAction_OnCloseLane1( );
+
+  return NULL;
+}
+
+void* ExecutionDirector::callDoAction_CloseLane1( void* arg )
+{
+  ExecutionDirector* obj = reinterpret_cast< ExecutionDirector* >( arg );
+  obj->doAction_CloseLane1( );
+
+  return NULL;
+}
+
+void* ExecutionDirector::callDoAction_OnOpeningLane2( void* arg )
+{
+  ExecutionDirector* obj = reinterpret_cast< ExecutionDirector* >( arg );
+  obj->doAction_OnOpeningLane2( );
 
   return NULL;
 }
@@ -2970,6 +4274,22 @@ void* ExecutionDirector::callDoAction_OnCloseLane2( void* arg )
   return NULL;
 }
 
+void* ExecutionDirector::callDoAction_CloseLane2( void* arg )
+{
+  ExecutionDirector* obj = reinterpret_cast< ExecutionDirector* >( arg );
+  obj->doAction_CloseLane2( );
+
+  return NULL;
+}
+
+void* ExecutionDirector::callDoAction_OnOpeningLane3( void* arg )
+{
+  ExecutionDirector* obj = reinterpret_cast< ExecutionDirector* >( arg );
+  obj->doAction_OnOpeningLane3( );
+
+  return NULL;
+}
+
 void* ExecutionDirector::callDoAction_OpenLane3( void* arg )
 {
   ExecutionDirector* obj = reinterpret_cast< ExecutionDirector* >( arg );
@@ -2982,6 +4302,22 @@ void* ExecutionDirector::callDoAction_OnCloseLane3( void* arg )
 {
   ExecutionDirector* obj = reinterpret_cast< ExecutionDirector* >( arg );
   obj->doAction_OnCloseLane3( );
+
+  return NULL;
+}
+
+void* ExecutionDirector::callDoAction_CloseLane3( void* arg )
+{
+  ExecutionDirector* obj = reinterpret_cast< ExecutionDirector* >( arg );
+  obj->doAction_CloseLane3( );
+
+  return NULL;
+}
+
+void* ExecutionDirector::callDoAction_OnOpeningLane4( void* arg )
+{
+  ExecutionDirector* obj = reinterpret_cast< ExecutionDirector* >( arg );
+  obj->doAction_OnOpeningLane4( );
 
   return NULL;
 }
@@ -3002,6 +4338,14 @@ void* ExecutionDirector::callDoAction_OnCloseLane4( void* arg )
   return NULL;
 }
 
+void* ExecutionDirector::callDoAction_CloseLane4( void* arg )
+{
+  ExecutionDirector* obj = reinterpret_cast< ExecutionDirector* >( arg );
+  obj->doAction_CloseLane4( );
+
+  return NULL;
+}
+
 void* ExecutionDirector::callDoAction_OpenPedestrianLanes( void* arg )
 {
   ExecutionDirector* obj = reinterpret_cast< ExecutionDirector* >( arg );
@@ -3010,10 +4354,10 @@ void* ExecutionDirector::callDoAction_OpenPedestrianLanes( void* arg )
   return NULL;
 }
 
-void* ExecutionDirector::callDoAction_OnClosePedestrianLanes( void* arg )
+void* ExecutionDirector::callDoAction_ClosePedestrianLanes( void* arg )
 {
   ExecutionDirector* obj = reinterpret_cast< ExecutionDirector* >( arg );
-  obj->doAction_OnClosePedestrianLanes( );
+  obj->doAction_ClosePedestrianLanes( );
 
   return NULL;
 }

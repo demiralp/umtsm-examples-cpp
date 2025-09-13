@@ -105,6 +105,58 @@ void ExecutionDirector::NotifyCrossroad( [[maybe_unused]] ExecutionDirector_Data
 {
 }  // End of action function: NotifyCrossroad
 
+void ExecutionDirector::OrderCloseLane1( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+}  // End of action function: OrderCloseLane1
+
+void ExecutionDirector::OrderCloseLane2( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+}  // End of action function: OrderCloseLane2
+
+void ExecutionDirector::OrderCloseLane3( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+}  // End of action function: OrderCloseLane3
+
+void ExecutionDirector::OrderCloseLane4( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+}  // End of action function: OrderCloseLane4
+
+void ExecutionDirector::OrderClosePedestrianLanes( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+}  // End of action function: OrderClosePedestrianLanes
+
+void ExecutionDirector::OrderClosingLane1( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+}  // End of action function: OrderClosingLane1
+
+void ExecutionDirector::OrderClosingLane2( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+}  // End of action function: OrderClosingLane2
+
+void ExecutionDirector::OrderClosingLane3( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+}  // End of action function: OrderClosingLane3
+
+void ExecutionDirector::OrderClosingLane4( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+}  // End of action function: OrderClosingLane4
+
+void ExecutionDirector::OrderOpeningLane1( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+}  // End of action function: OrderOpeningLane1
+
+void ExecutionDirector::OrderOpeningLane2( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+}  // End of action function: OrderOpeningLane2
+
+void ExecutionDirector::OrderOpeningLane3( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+}  // End of action function: OrderOpeningLane3
+
+void ExecutionDirector::OrderOpeningLane4( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+}  // End of action function: OrderOpeningLane4
+
 void ExecutionDirector::OrderOpenLane1( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
 }  // End of action function: OrderOpenLane1
@@ -209,6 +261,10 @@ void ExecutionDirector::Update( [[maybe_unused]] ExecutionDirector_DataType cons
 {
 }  // End of action function: Update
 
+void ExecutionDirector::WaitForClosingLane( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+}  // End of action function: WaitForClosingLane
+
 void ExecutionDirector::WaitForInterval( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
 }  // End of action function: WaitForInterval
@@ -229,13 +285,13 @@ void ExecutionDirector::WaitForLane4( [[maybe_unused]] ExecutionDirector_DataTyp
 {
 }  // End of action function: WaitForLane4
 
-void ExecutionDirector::WaitForNextLaneOpen( [[maybe_unused]] ExecutionDirector_DataType const& input )
-{
-}  // End of action function: WaitForNextLaneOpen
-
 void ExecutionDirector::WaitForPedestrians( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
 }  // End of action function: WaitForPedestrians
+
+void ExecutionDirector::WaitForSafety( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+}  // End of action function: WaitForSafety
 
 void ExecutionDirector::WaitForSystemSwitchingTimer( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {

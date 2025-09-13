@@ -119,7 +119,7 @@ sm TrafficLight
             {
                 entry / SwitchAmberLightOff;
 
-                Check [IsSystemOperational && ( IsLaneOnClosing || IsLaneOnOpening ) ] -> On;
+                Check [IsSystemOperational && ( IsLaneOnClosing || IsLaneOnOpening )] -> On;
 
                 state Flashing
                 {

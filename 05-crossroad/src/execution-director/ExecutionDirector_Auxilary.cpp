@@ -42,17 +42,17 @@
 
 namespace
 {
-  constexpr std::chrono::seconds RUN_LANE_MS( 10U );
-  constexpr std::chrono::seconds RUN_LANE1_MS( RUN_LANE_MS );
-  constexpr std::chrono::seconds RUN_LANE2_MS( RUN_LANE_MS );
-  constexpr std::chrono::seconds RUN_LANE3_MS( RUN_LANE_MS );
-  constexpr std::chrono::seconds RUN_LANE4_MS( RUN_LANE_MS );
-  constexpr std::chrono::seconds RUN_PEDESTRIANLANES_MS( 8U );
-  constexpr std::chrono::seconds RUN_PREPARING_MS( 4U );
-  constexpr std::chrono::seconds RUN_STOPING_TRAFFIC_MS( RUN_LANE_MS );
-  constexpr std::chrono::seconds RUN_SWITCHING_TIME_MS( 7U );
-  constexpr std::chrono::seconds RUN_MIN_SWITCHING_TIME_MS( 5U );
-  constexpr std::chrono::seconds RUN_INTERVAL_TIME_US( 3U );
+  constexpr std::chrono::seconds RUN_LANE_SEC( 10U );
+  constexpr std::chrono::seconds RUN_LANE1_SEC( RUN_LANE_SEC );
+  constexpr std::chrono::seconds RUN_LANE2_SEC( RUN_LANE_SEC );
+  constexpr std::chrono::seconds RUN_LANE3_SEC( RUN_LANE_SEC );
+  constexpr std::chrono::seconds RUN_LANE4_SEC( RUN_LANE_SEC );
+  constexpr std::chrono::seconds RUN_PEDESTRIAN_LANES_SEC( 8U );
+  constexpr std::chrono::seconds RUN_PREPARING_SEC( 4U );
+  constexpr std::chrono::seconds RUN_STOPING_TRAFFIC_SEC( RUN_LANE_SEC );
+  constexpr std::chrono::seconds RUN_SWITCHING_TIME_SEC( 7U );
+  constexpr std::chrono::seconds RUN_MIN_SWITCHING_TIME_SEC( 5U );
+  constexpr std::chrono::seconds RUN_INTERVAL_TIME_SEC( 3U );
 
   // internal functions
   void TellLaneAvailability(
@@ -196,6 +196,85 @@ void ExecutionDirector::NotifyCrossroad( [[maybe_unused]] ExecutionDirector_Data
   instanceData.pMonitor->trigger_Update( );
 }  // End of action function: NotifyCrossroad
 
+void ExecutionDirector::OrderCloseLane1( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+  auto crossroad = instanceData.pCrossroad;
+  crossroad->subSMTrigger_Close( Crossroad::SubstateMachines::E_SubSM_Lane1 );
+}  // End of action function: OrderCloseLane1
+
+void ExecutionDirector::OrderCloseLane2( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+  auto crossroad = instanceData.pCrossroad;
+  crossroad->subSMTrigger_Close( Crossroad::SubstateMachines::E_SubSM_Lane2 );
+}  // End of action function: OrderCloseLane2
+
+void ExecutionDirector::OrderCloseLane3( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+  auto crossroad = instanceData.pCrossroad;
+  crossroad->subSMTrigger_Close( Crossroad::SubstateMachines::E_SubSM_Lane3 );
+}  // End of action function: OrderCloseLane3
+
+void ExecutionDirector::OrderCloseLane4( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+  auto crossroad = instanceData.pCrossroad;
+  crossroad->subSMTrigger_Close( Crossroad::SubstateMachines::E_SubSM_Lane4 );
+}  // End of action function: OrderCloseLane4
+
+void ExecutionDirector::OrderClosePedestrianLanes( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+  auto crossroad = instanceData.pCrossroad;
+  crossroad->subSMTrigger_Close( Crossroad::SubstateMachines::E_SubSM_PedestrianLanes );
+}  // End of action function: OrderClosePedestrianLanes
+
+void ExecutionDirector::OrderClosingLane1( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+  auto crossroad = instanceData.pCrossroad;
+  crossroad->subSMTrigger_Prepare( Crossroad::SubstateMachines::E_SubSM_Lane1 );
+}  // End of action function: OrderClosingLane1
+
+void ExecutionDirector::OrderClosingLane2( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+  auto crossroad = instanceData.pCrossroad;
+  crossroad->subSMTrigger_Prepare( Crossroad::SubstateMachines::E_SubSM_Lane2 );
+}  // End of action function: OrderClosingLane2
+
+void ExecutionDirector::OrderClosingLane3( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+  auto crossroad = instanceData.pCrossroad;
+  crossroad->subSMTrigger_Prepare( Crossroad::SubstateMachines::E_SubSM_Lane3 );
+}  // End of action function: OrderClosingLane3
+
+void ExecutionDirector::OrderClosingLane4( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+  auto crossroad = instanceData.pCrossroad;
+  crossroad->subSMTrigger_Prepare( Crossroad::SubstateMachines::E_SubSM_Lane4 );
+}  // End of action function: OrderClosingLane4
+
+void ExecutionDirector::OrderOpeningLane1( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+  auto crossroad = instanceData.pCrossroad;
+  crossroad->subSMTrigger_Prepare( Crossroad::SubstateMachines::E_SubSM_Lane1 );
+
+}  // End of action function: OrderOpeningLane1
+
+void ExecutionDirector::OrderOpeningLane2( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+  auto crossroad = instanceData.pCrossroad;
+  crossroad->subSMTrigger_Prepare( Crossroad::SubstateMachines::E_SubSM_Lane2 );
+}  // End of action function: OrderOpeningLane2
+
+void ExecutionDirector::OrderOpeningLane3( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+  auto crossroad = instanceData.pCrossroad;
+  crossroad->subSMTrigger_Prepare( Crossroad::SubstateMachines::E_SubSM_Lane3 );
+}  // End of action function: OrderOpeningLane3
+
+void ExecutionDirector::OrderOpeningLane4( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+  auto crossroad = instanceData.pCrossroad;
+  crossroad->subSMTrigger_Prepare( Crossroad::SubstateMachines::E_SubSM_Lane4 );
+}  // End of action function: OrderOpeningLane4
+
 void ExecutionDirector::OrderOpenLane1( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   auto crossroad = instanceData.pCrossroad;
@@ -212,6 +291,7 @@ void ExecutionDirector::OrderOpenLane1( [[maybe_unused]] ExecutionDirector_DataT
   if( crossroad->getSubSM_Lane1( )->isIn_Available_State( ) )
   {
     crossroad->subSMTrigger_Open( Crossroad::SubstateMachines::E_SubSM_Lane1 );
+    instanceData.CurrentLane = 1;
   }
   else
   {
@@ -235,6 +315,7 @@ void ExecutionDirector::OrderOpenLane2( [[maybe_unused]] ExecutionDirector_DataT
   if( crossroad->getSubSM_Lane2( )->isIn_Available_State( ) )
   {
     crossroad->subSMTrigger_Open( Crossroad::SubstateMachines::E_SubSM_Lane2 );
+    instanceData.CurrentLane = 2;
   }
   else
   {
@@ -258,6 +339,7 @@ void ExecutionDirector::OrderOpenLane3( [[maybe_unused]] ExecutionDirector_DataT
   if( crossroad->getSubSM_Lane3( )->isIn_Available_State( ) )
   {
     crossroad->subSMTrigger_Open( Crossroad::SubstateMachines::E_SubSM_Lane3 );
+    instanceData.CurrentLane = 3;
   }
   else
   {
@@ -281,6 +363,7 @@ void ExecutionDirector::OrderOpenLane4( [[maybe_unused]] ExecutionDirector_DataT
   if( crossroad->getSubSM_Lane4( )->isIn_Available_State( ) )
   {
     crossroad->subSMTrigger_Open( Crossroad::SubstateMachines::E_SubSM_Lane4 );
+    instanceData.CurrentLane = 4;
   }
   else
   {
@@ -301,6 +384,7 @@ void ExecutionDirector::OrderOpenPedestrianLanes( [[maybe_unused]] ExecutionDire
   crossroad->subSMTrigger_Close( Crossroad::SubstateMachines::E_SubSM_Lane3 );
   crossroad->subSMTrigger_Close( Crossroad::SubstateMachines::E_SubSM_Lane4 );
   crossroad->subSMTrigger_Open( Crossroad::SubstateMachines::E_SubSM_PedestrianLanes );
+  instanceData.CurrentLane = 0;
 }  // End of action function: OrderOpenPedestrianLanes
 
 void ExecutionDirector::PrepareForNextLane( [[maybe_unused]] ExecutionDirector_DataType const& input )
@@ -324,125 +408,115 @@ void ExecutionDirector::PrepareForNextLane( [[maybe_unused]] ExecutionDirector_D
   bool possiblyLane4 = pLane4->isIn_Available_State( ) && ( instanceData.NextLane == -1 || instanceData.NextLane == 4 );
   bool possiblyLaneP = pPedestrianLanes->isIn_Available_State( ) && ( instanceData.NextLane == -1 || instanceData.NextLane == 0 );
 
-  if( pLane1->isIn_Open_State( ) )
+  if( instanceData.CurrentLane == 1 )
   {
-    pLane1->trigger_Prepare( );
-
     if( possiblyLane2 )
     {
-      pLane2->trigger_Prepare( );
+      instanceData.NextLane = 2;
     }
     else if( possiblyLane3 )
     {
-      pLane3->trigger_Prepare( );
+      instanceData.NextLane = 3;
     }
     else if( possiblyLane4 )
     {
-      pLane4->trigger_Prepare( );
+      instanceData.NextLane = 4;
+    }
+    else if( possiblyLaneP )
+    {
+      instanceData.NextLane = 0;
     }
     else
     {
       // No other available lanes
     }
   }
-  else if( pLane2->isIn_Open_State( ) )
+  else if( instanceData.CurrentLane == 2 )
   {
-    pLane2->trigger_Prepare( );
-
     if( possiblyLane3 )
     {
-      pLane3->trigger_Prepare( );
+      instanceData.NextLane = 3;
     }
     else if( possiblyLane4 )
     {
-      pLane4->trigger_Prepare( );
+      instanceData.NextLane = 4;
     }
     else if( possiblyLaneP )
     {
-      // Do Nothing
+      instanceData.NextLane = 0;
     }
     else if( possiblyLane1 )
     {
-      pLane1->trigger_Prepare( );
+      instanceData.NextLane = 1;
     }
     else
     {
       // No other available lanes
     }
   }
-  else if( pLane3->isIn_Open_State( ) )
+  else if( instanceData.CurrentLane == 3 )
   {
-    pLane3->trigger_Prepare( );
-
     if( possiblyLane4 )
     {
-      pLane4->trigger_Prepare( );
+      instanceData.NextLane = 4;
     }
     else if( possiblyLaneP )
     {
-      // Do Nothing
+      instanceData.NextLane = 0;
     }
     else if( possiblyLane1 )
     {
-      pLane1->trigger_Prepare( );
+      instanceData.NextLane = 1;
     }
     else if( possiblyLane2 )
     {
-      pLane2->trigger_Prepare( );
+      instanceData.NextLane = 2;
     }
     else
     {
       // No other available lanes
     }
   }
-  else if( pLane4->isIn_Open_State( ) )
+  else if( instanceData.CurrentLane == 4 )
   {
-    pLane4->trigger_Prepare( );
-
-    if( possiblyLane4 )
+    if( possiblyLaneP )
     {
-      pLane4->trigger_Prepare( );
-    }
-    else if( possiblyLaneP )
-    {
-      // Do Nothing
+      instanceData.NextLane = 0;
     }
     else if( possiblyLane1 )
     {
-      pLane1->trigger_Prepare( );
+      instanceData.NextLane = 1;
     }
     else if( possiblyLane2 )
     {
-      pLane2->trigger_Prepare( );
+      instanceData.NextLane = 2;
     }
     else if( possiblyLane3 )
     {
-      pLane3->trigger_Prepare( );
+      instanceData.NextLane = 3;
     }
     else
     {
       // No other available lanes
     }
   }
-  else if( pPedestrianLanes->isIn_Open_State( ) )
+  else if( instanceData.CurrentLane == 0 )
   {
-    pPedestrianLanes->trigger_Prepare( );
-
     if( possiblyLane1 )
     {
-      pLane1->trigger_Prepare( );
+      instanceData.NextLane = 1;
     }
     else if( possiblyLane2 )
     {
-      pLane2->trigger_Prepare( );
+      instanceData.NextLane = 2;
     }
     else if( possiblyLane3 )
     {
-      pLane3->trigger_Prepare( );
+      instanceData.NextLane = 3;
     }
     else if( possiblyLane4 )
     {
-      pLane4->trigger_Prepare( );
+      instanceData.NextLane = 4;
     }
     else
     {
@@ -451,9 +525,31 @@ void ExecutionDirector::PrepareForNextLane( [[maybe_unused]] ExecutionDirector_D
   }
   else
   {
-    /* No other availabe lanes */
+    if( possiblyLane1 )
+    {
+      instanceData.NextLane = 1;
+    }
+    else if( possiblyLane2 )
+    {
+      instanceData.NextLane = 2;
+    }
+    else if( possiblyLane3 )
+    {
+      instanceData.NextLane = 3;
+    }
+    else if( possiblyLane4 )
+    {
+      instanceData.NextLane = 4;
+    }
+    else if( possiblyLaneP )
+    {
+      instanceData.NextLane = 0;
+    }
+    else
+    {
+      // No other available lanes
+    }
   }
-
 }  // End of action function: PrepareForNextLane
 
 void ExecutionDirector::SetControlledMode( [[maybe_unused]] ExecutionDirector_DataType const& input )
@@ -610,9 +706,14 @@ void ExecutionDirector::Update( [[maybe_unused]] ExecutionDirector_DataType cons
   instanceData.pMonitor->trigger_Update( );
 }  // End of action function: Update
 
+void ExecutionDirector::WaitForClosingLane( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+  std::this_thread::sleep_for( RUN_INTERVAL_TIME_SEC );
+}  // End of action function: WaitForClosingLane
+
 void ExecutionDirector::WaitForInterval( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
-  std::this_thread::sleep_for( RUN_INTERVAL_TIME_US );
+  std::this_thread::sleep_for( RUN_INTERVAL_TIME_SEC );
 }  // End of action function: WaitForInterval
 
 void ExecutionDirector::WaitForLane1( [[maybe_unused]] ExecutionDirector_DataType const& input )
@@ -620,7 +721,7 @@ void ExecutionDirector::WaitForLane1( [[maybe_unused]] ExecutionDirector_DataTyp
   if( instanceData.pCrossroad->getSubSM_Lane1( )->isIn_Available_State( ) )
   {
     instanceData.LaneClosingCompleted = false;
-    std::this_thread::sleep_for( RUN_LANE1_MS );
+    std::this_thread::sleep_for( RUN_LANE1_SEC );
   }
 }  // End of action function: WaitForLane1
 
@@ -629,7 +730,7 @@ void ExecutionDirector::WaitForLane2( [[maybe_unused]] ExecutionDirector_DataTyp
   if( instanceData.pCrossroad->getSubSM_Lane2( )->isIn_Available_State( ) )
   {
     instanceData.LaneClosingCompleted = false;
-    std::this_thread::sleep_for( RUN_LANE2_MS );
+    std::this_thread::sleep_for( RUN_LANE2_SEC );
   }
 }  // End of action function: WaitForLane2
 
@@ -638,7 +739,7 @@ void ExecutionDirector::WaitForLane3( [[maybe_unused]] ExecutionDirector_DataTyp
   if( instanceData.pCrossroad->getSubSM_Lane3( )->isIn_Available_State( ) )
   {
     instanceData.LaneClosingCompleted = false;
-    std::this_thread::sleep_for( RUN_LANE3_MS );
+    std::this_thread::sleep_for( RUN_LANE3_SEC );
   }
 }  // End of action function: WaitForLane3
 
@@ -647,33 +748,29 @@ void ExecutionDirector::WaitForLane4( [[maybe_unused]] ExecutionDirector_DataTyp
   if( instanceData.pCrossroad->getSubSM_Lane4( )->isIn_Available_State( ) )
   {
     instanceData.LaneClosingCompleted = false;
-    std::this_thread::sleep_for( RUN_LANE4_MS );
+    std::this_thread::sleep_for( RUN_LANE4_SEC );
   }
 }  // End of action function: WaitForLane4
-
-void ExecutionDirector::WaitForNextLaneOpen( [[maybe_unused]] ExecutionDirector_DataType const& input )
-{
-  if( ! input.LaneClosingCompleted )
-  {
-    std::this_thread::sleep_for( RUN_PREPARING_MS );
-    instanceData.LaneClosingCompleted = true;
-  }
-}  // End of action function: WaitForNextLaneOpen
 
 void ExecutionDirector::WaitForPedestrians( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.LaneClosingCompleted = false;
-  std::this_thread::sleep_for( RUN_PEDESTRIANLANES_MS );
+  std::this_thread::sleep_for( RUN_PEDESTRIAN_LANES_SEC );
 }  // End of action function: WaitForPedestrians
+
+void ExecutionDirector::WaitForSafety( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+  std::this_thread::sleep_for( RUN_INTERVAL_TIME_SEC );
+}  // End of action function: WaitForSafety
 
 void ExecutionDirector::WaitForSystemSwitchingTimer( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   auto const now = std::chrono::system_clock::now( );
 
-  auto remainingtime = RUN_SWITCHING_TIME_MS - ( now - input.StartSwitchingTime );
-  if( remainingtime < RUN_MIN_SWITCHING_TIME_MS )
+  auto remainingtime = RUN_SWITCHING_TIME_SEC - ( now - input.StartSwitchingTime );
+  if( remainingtime < RUN_MIN_SWITCHING_TIME_SEC )
   {
-    remainingtime = RUN_MIN_SWITCHING_TIME_MS;
+    remainingtime = RUN_MIN_SWITCHING_TIME_SEC;
   }
 
   std::this_thread::sleep_for( remainingtime );
@@ -681,7 +778,7 @@ void ExecutionDirector::WaitForSystemSwitchingTimer( [[maybe_unused]] ExecutionD
 
 void ExecutionDirector::WaitForTrafficStops( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
-  std::this_thread::sleep_for( RUN_STOPING_TRAFFIC_MS );
+  std::this_thread::sleep_for( RUN_STOPING_TRAFFIC_SEC );
 }  // End of action function: WaitForTrafficStops
 
 // The implementation of the Persistency Functions
@@ -731,7 +828,7 @@ ExecutionDirector::Main_States ExecutionDirector::load_Shallow_Operational( [[ma
     Main_States::E_OpenLane4,
     Main_States::E_OnCloseLane4,
     Main_States::E_OpenPedestrianLanes,
-    Main_States::E_OnClosePedestrianLanes,
+    Main_States::E_ClosePedestrianLanes,
     Main_States::E_final
   };
 

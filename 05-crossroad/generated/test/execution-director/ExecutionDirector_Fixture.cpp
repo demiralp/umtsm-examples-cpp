@@ -44,6 +44,7 @@ namespace sm
       // instanceData.ControlModeStatus = 
       // instanceData.StartSwitchingTime = 
       // instanceData.LaneClosingCompleted = 
+      // instanceData.CurrentLane = 
       // instanceData.LaneRequested = 
       // instanceData.NextLane = 
       // instanceData.LaneCmd1 = 

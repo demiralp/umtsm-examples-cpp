@@ -52,11 +52,11 @@ namespace sm
         // The mock of the guards
         MOCK_METHOD( bool, IsControlledModeRequested, ( ), ( const, override ) );
         MOCK_METHOD( bool, IsUncontrolledModeRequested, ( ), ( const, override ) );
+        MOCK_METHOD( bool, IsNextLane1, ( ), ( const, override ) );
         MOCK_METHOD( bool, IsNextLane2, ( ), ( const, override ) );
         MOCK_METHOD( bool, IsNextLane3, ( ), ( const, override ) );
         MOCK_METHOD( bool, IsNextLane4, ( ), ( const, override ) );
         MOCK_METHOD( bool, IsNextLanePedestrianLanes, ( ), ( const, override ) );
-        MOCK_METHOD( bool, IsNextLane1, ( ), ( const, override ) );
 
         // The mock of the actions
         MOCK_METHOD( void, StopTraffic, ( ExecutionDirector_DataType const& input ), ( override ) );
@@ -74,18 +74,32 @@ namespace sm
         MOCK_METHOD( void, Update, ( ExecutionDirector_DataType const& input ), ( override ) );
         MOCK_METHOD( void, WaitForInterval, ( ExecutionDirector_DataType const& input ), ( override ) );
         MOCK_METHOD( void, StartControlMode, ( ExecutionDirector_DataType const& input ), ( override ) );
+        MOCK_METHOD( void, WaitForSafety, ( ExecutionDirector_DataType const& input ), ( override ) );
+        MOCK_METHOD( void, OrderOpeningLane1, ( ExecutionDirector_DataType const& input ), ( override ) );
         MOCK_METHOD( void, OrderOpenLane1, ( ExecutionDirector_DataType const& input ), ( override ) );
         MOCK_METHOD( void, WaitForLane1, ( ExecutionDirector_DataType const& input ), ( override ) );
+        MOCK_METHOD( void, OrderClosingLane1, ( ExecutionDirector_DataType const& input ), ( override ) );
+        MOCK_METHOD( void, WaitForClosingLane, ( ExecutionDirector_DataType const& input ), ( override ) );
+        MOCK_METHOD( void, OrderCloseLane1, ( ExecutionDirector_DataType const& input ), ( override ) );
         MOCK_METHOD( void, PrepareForNextLane, ( ExecutionDirector_DataType const& input ), ( override ) );
-        MOCK_METHOD( void, WaitForNextLaneOpen, ( ExecutionDirector_DataType const& input ), ( override ) );
+        MOCK_METHOD( void, OrderOpeningLane2, ( ExecutionDirector_DataType const& input ), ( override ) );
         MOCK_METHOD( void, OrderOpenLane2, ( ExecutionDirector_DataType const& input ), ( override ) );
         MOCK_METHOD( void, WaitForLane2, ( ExecutionDirector_DataType const& input ), ( override ) );
+        MOCK_METHOD( void, OrderClosingLane2, ( ExecutionDirector_DataType const& input ), ( override ) );
+        MOCK_METHOD( void, OrderCloseLane2, ( ExecutionDirector_DataType const& input ), ( override ) );
+        MOCK_METHOD( void, OrderOpeningLane3, ( ExecutionDirector_DataType const& input ), ( override ) );
         MOCK_METHOD( void, OrderOpenLane3, ( ExecutionDirector_DataType const& input ), ( override ) );
         MOCK_METHOD( void, WaitForLane3, ( ExecutionDirector_DataType const& input ), ( override ) );
+        MOCK_METHOD( void, OrderClosingLane3, ( ExecutionDirector_DataType const& input ), ( override ) );
+        MOCK_METHOD( void, OrderCloseLane3, ( ExecutionDirector_DataType const& input ), ( override ) );
+        MOCK_METHOD( void, OrderOpeningLane4, ( ExecutionDirector_DataType const& input ), ( override ) );
         MOCK_METHOD( void, OrderOpenLane4, ( ExecutionDirector_DataType const& input ), ( override ) );
         MOCK_METHOD( void, WaitForLane4, ( ExecutionDirector_DataType const& input ), ( override ) );
+        MOCK_METHOD( void, OrderClosingLane4, ( ExecutionDirector_DataType const& input ), ( override ) );
+        MOCK_METHOD( void, OrderCloseLane4, ( ExecutionDirector_DataType const& input ), ( override ) );
         MOCK_METHOD( void, OrderOpenPedestrianLanes, ( ExecutionDirector_DataType const& input ), ( override ) );
         MOCK_METHOD( void, WaitForPedestrians, ( ExecutionDirector_DataType const& input ), ( override ) );
+        MOCK_METHOD( void, OrderClosePedestrianLanes, ( ExecutionDirector_DataType const& input ), ( override ) );
         MOCK_METHOD( void, SetNextOpenLane1, ( ExecutionDirector_DataType const& input ), ( override ) );
         MOCK_METHOD( void, SetNextOpenLane2, ( ExecutionDirector_DataType const& input ), ( override ) );
         MOCK_METHOD( void, SetNextOpenLane3, ( ExecutionDirector_DataType const& input ), ( override ) );

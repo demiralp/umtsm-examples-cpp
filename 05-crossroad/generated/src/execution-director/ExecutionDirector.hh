@@ -57,16 +57,25 @@ class ExecutionDirector
       E_Uncontrolled,
       E_CheckRequests,
       E_Controlled,
+      E_Hold,
+      E_OnOpeningLane1,
       E_OpenLane1,
       E_OnCloseLane1,
+      E_CloseLane1,
+      E_OnOpeningLane2,
       E_OpenLane2,
       E_OnCloseLane2,
+      E_CloseLane2,
+      E_OnOpeningLane3,
       E_OpenLane3,
       E_OnCloseLane3,
+      E_CloseLane3,
+      E_OnOpeningLane4,
       E_OpenLane4,
       E_OnCloseLane4,
+      E_CloseLane4,
       E_OpenPedestrianLanes,
-      E_OnClosePedestrianLanes,
+      E_ClosePedestrianLanes,
       E_final
     };
 
@@ -120,16 +129,25 @@ class ExecutionDirector
     bool isIn_Uncontrolled_State( ) const noexcept;
     bool isIn_CheckRequests_State( ) const noexcept;
     bool isIn_Controlled_State( ) const noexcept;
+    bool isIn_Hold_State( ) const noexcept;
+    bool isIn_OnOpeningLane1_State( ) const noexcept;
     bool isIn_OpenLane1_State( ) const noexcept;
     bool isIn_OnCloseLane1_State( ) const noexcept;
+    bool isIn_CloseLane1_State( ) const noexcept;
+    bool isIn_OnOpeningLane2_State( ) const noexcept;
     bool isIn_OpenLane2_State( ) const noexcept;
     bool isIn_OnCloseLane2_State( ) const noexcept;
+    bool isIn_CloseLane2_State( ) const noexcept;
+    bool isIn_OnOpeningLane3_State( ) const noexcept;
     bool isIn_OpenLane3_State( ) const noexcept;
     bool isIn_OnCloseLane3_State( ) const noexcept;
+    bool isIn_CloseLane3_State( ) const noexcept;
+    bool isIn_OnOpeningLane4_State( ) const noexcept;
     bool isIn_OpenLane4_State( ) const noexcept;
     bool isIn_OnCloseLane4_State( ) const noexcept;
+    bool isIn_CloseLane4_State( ) const noexcept;
     bool isIn_OpenPedestrianLanes_State( ) const noexcept;
-    bool isIn_OnClosePedestrianLanes_State( ) const noexcept;
+    bool isIn_ClosePedestrianLanes_State( ) const noexcept;
 
     void trigger_DisableLane1( );
     void trigger_DisableLane2( );
@@ -161,16 +179,25 @@ class ExecutionDirector
     void* doAction_GoesToStandby( );
     void* doAction_SwitchControlState( );
     void* doAction_CheckRequests( );
+    void* doAction_Hold( );
+    void* doAction_OnOpeningLane1( );
     void* doAction_OpenLane1( );
     void* doAction_OnCloseLane1( );
+    void* doAction_CloseLane1( );
+    void* doAction_OnOpeningLane2( );
     void* doAction_OpenLane2( );
     void* doAction_OnCloseLane2( );
+    void* doAction_CloseLane2( );
+    void* doAction_OnOpeningLane3( );
     void* doAction_OpenLane3( );
     void* doAction_OnCloseLane3( );
+    void* doAction_CloseLane3( );
+    void* doAction_OnOpeningLane4( );
     void* doAction_OpenLane4( );
     void* doAction_OnCloseLane4( );
+    void* doAction_CloseLane4( );
     void* doAction_OpenPedestrianLanes( );
-    void* doAction_OnClosePedestrianLanes( );
+    void* doAction_ClosePedestrianLanes( );
 
     void enter_StandBy( );
     void enter_SwitchSystem( );
@@ -180,16 +207,25 @@ class ExecutionDirector
     void enter_Uncontrolled( );
     void enter_CheckRequests( );
     void enter_Controlled( );
+    void enter_Hold( );
+    void enter_OnOpeningLane1( );
     void enter_OpenLane1( );
     void enter_OnCloseLane1( );
+    void enter_CloseLane1( );
+    void enter_OnOpeningLane2( );
     void enter_OpenLane2( );
     void enter_OnCloseLane2( );
+    void enter_CloseLane2( );
+    void enter_OnOpeningLane3( );
     void enter_OpenLane3( );
     void enter_OnCloseLane3( );
+    void enter_CloseLane3( );
+    void enter_OnOpeningLane4( );
     void enter_OpenLane4( );
     void enter_OnCloseLane4( );
+    void enter_CloseLane4( );
     void enter_OpenPedestrianLanes( );
-    void enter_OnClosePedestrianLanes( );
+    void enter_ClosePedestrianLanes( );
 
     void exit_StandBy( );
     void exit_GoesToOperational( );
@@ -197,16 +233,25 @@ class ExecutionDirector
     void exit_SwitchControlState( );
     void exit_Operational( );
     void exit_CheckRequests( );
+    void exit_Hold( );
+    void exit_OnOpeningLane1( );
     void exit_OpenLane1( );
     void exit_OnCloseLane1( );
+    void exit_CloseLane1( );
+    void exit_OnOpeningLane2( );
     void exit_OpenLane2( );
     void exit_OnCloseLane2( );
+    void exit_CloseLane2( );
+    void exit_OnOpeningLane3( );
     void exit_OpenLane3( );
     void exit_OnCloseLane3( );
+    void exit_CloseLane3( );
+    void exit_OnOpeningLane4( );
     void exit_OpenLane4( );
     void exit_OnCloseLane4( );
+    void exit_CloseLane4( );
     void exit_OpenPedestrianLanes( );
-    void exit_OnClosePedestrianLanes( );
+    void exit_ClosePedestrianLanes( );
 
     void init_Main( );
     void init_Operational( );
@@ -230,6 +275,19 @@ class ExecutionDirector
     virtual void DisableSystem( ExecutionDirector_DataType const& input );
     virtual void EnableSystem( ExecutionDirector_DataType const& input );
     virtual void NotifyCrossroad( ExecutionDirector_DataType const& input );
+    virtual void OrderCloseLane1( ExecutionDirector_DataType const& input );
+    virtual void OrderCloseLane2( ExecutionDirector_DataType const& input );
+    virtual void OrderCloseLane3( ExecutionDirector_DataType const& input );
+    virtual void OrderCloseLane4( ExecutionDirector_DataType const& input );
+    virtual void OrderClosePedestrianLanes( ExecutionDirector_DataType const& input );
+    virtual void OrderClosingLane1( ExecutionDirector_DataType const& input );
+    virtual void OrderClosingLane2( ExecutionDirector_DataType const& input );
+    virtual void OrderClosingLane3( ExecutionDirector_DataType const& input );
+    virtual void OrderClosingLane4( ExecutionDirector_DataType const& input );
+    virtual void OrderOpeningLane1( ExecutionDirector_DataType const& input );
+    virtual void OrderOpeningLane2( ExecutionDirector_DataType const& input );
+    virtual void OrderOpeningLane3( ExecutionDirector_DataType const& input );
+    virtual void OrderOpeningLane4( ExecutionDirector_DataType const& input );
     virtual void OrderOpenLane1( ExecutionDirector_DataType const& input );
     virtual void OrderOpenLane2( ExecutionDirector_DataType const& input );
     virtual void OrderOpenLane3( ExecutionDirector_DataType const& input );
@@ -256,13 +314,14 @@ class ExecutionDirector
     virtual void StartUncontrolledMode( ExecutionDirector_DataType const& input );
     virtual void StopTraffic( ExecutionDirector_DataType const& input );
     virtual void Update( ExecutionDirector_DataType const& input );
+    virtual void WaitForClosingLane( ExecutionDirector_DataType const& input );
     virtual void WaitForInterval( ExecutionDirector_DataType const& input );
     virtual void WaitForLane1( ExecutionDirector_DataType const& input );
     virtual void WaitForLane2( ExecutionDirector_DataType const& input );
     virtual void WaitForLane3( ExecutionDirector_DataType const& input );
     virtual void WaitForLane4( ExecutionDirector_DataType const& input );
-    virtual void WaitForNextLaneOpen( ExecutionDirector_DataType const& input );
     virtual void WaitForPedestrians( ExecutionDirector_DataType const& input );
+    virtual void WaitForSafety( ExecutionDirector_DataType const& input );
     virtual void WaitForSystemSwitchingTimer( ExecutionDirector_DataType const& input );
     virtual void WaitForTrafficStops( ExecutionDirector_DataType const& input );
 
@@ -277,16 +336,25 @@ class ExecutionDirector
     static void* callDoAction_GoesToStandby( void* arg );
     static void* callDoAction_SwitchControlState( void* arg );
     static void* callDoAction_CheckRequests( void* arg );
+    static void* callDoAction_Hold( void* arg );
+    static void* callDoAction_OnOpeningLane1( void* arg );
     static void* callDoAction_OpenLane1( void* arg );
     static void* callDoAction_OnCloseLane1( void* arg );
+    static void* callDoAction_CloseLane1( void* arg );
+    static void* callDoAction_OnOpeningLane2( void* arg );
     static void* callDoAction_OpenLane2( void* arg );
     static void* callDoAction_OnCloseLane2( void* arg );
+    static void* callDoAction_CloseLane2( void* arg );
+    static void* callDoAction_OnOpeningLane3( void* arg );
     static void* callDoAction_OpenLane3( void* arg );
     static void* callDoAction_OnCloseLane3( void* arg );
+    static void* callDoAction_CloseLane3( void* arg );
+    static void* callDoAction_OnOpeningLane4( void* arg );
     static void* callDoAction_OpenLane4( void* arg );
     static void* callDoAction_OnCloseLane4( void* arg );
+    static void* callDoAction_CloseLane4( void* arg );
     static void* callDoAction_OpenPedestrianLanes( void* arg );
-    static void* callDoAction_OnClosePedestrianLanes( void* arg );
+    static void* callDoAction_ClosePedestrianLanes( void* arg );
 
     static pthread_t launchDoAction( void *(*threadStart)(void *), ExecutionDirector* pStateMachine, void *stackAddr, size_t stackSize );
   };

@@ -41,12 +41,10 @@
 #include <ncurses.h>
 #include <unistd.h>
 
-#include <iostream>
-
 namespace
 {
   /* internal functions */
-  char const* LaneNo2Name( int no )
+  char const* LaneNumberToName( int number )
   {
     static char const* const name[] = {
       "Pedestrian Lanes",
@@ -57,7 +55,7 @@ namespace
       "N/A"
     };
 
-    return name[ ( no < 0 || no > 4 ) ? 5 : no ];
+    return name[ ( number < 0 || number > 4 ) ? 5 : number ];
   }
 
   void PrintHelpLine( char const* const key, char const* const summary )
@@ -190,7 +188,6 @@ void Monitor::DisplayStatusOfLanes( [[maybe_unused]] Monitor_DataType const& inp
       usleep( 10000 );
     }
 
-    std::cout << "310\n";
     clear( );
 
     attron( COLOR_PAIR( 1 ) );
@@ -214,7 +211,7 @@ void Monitor::DisplayStatusOfLanes( [[maybe_unused]] Monitor_DataType const& inp
     {
       printw( "LANE4 IS ON CLOSING" );
     }
-    else if( executor->isIn_OnClosePedestrianLanes_State( ) )
+    else if( executor->isIn_ClosePedestrianLanes_State( ) )
     {
       printw( "PEDESTRIAN LANES ARE ON CLOSING" );
     }
@@ -282,7 +279,7 @@ void Monitor::DisplayStatusOfLanes( [[maybe_unused]] Monitor_DataType const& inp
     }
     else
     {
-      printw( "UNKNOWN" );
+      printw( "SAFETY GAP" );
     }
     attroff( COLOR_PAIR( 2 ) );
 
@@ -355,9 +352,7 @@ void Monitor::DisplayStatusOfLanes( [[maybe_unused]] Monitor_DataType const& inp
     attroff( COLOR_PAIR( 1 ) );
 
     attron( COLOR_PAIR( 2 ) );
-    printw( "Next -> %s Requested -> %s\n",
-            LaneNo2Name( pExecutorData->NextLane ),
-            LaneNo2Name( pExecutorData->LaneRequested ) );
+    printw( "Requested -> %s\n", LaneNumberToName( pExecutorData->LaneRequested ) );
     attroff( COLOR_PAIR( 2 ) );
 
     attron( COLOR_PAIR( 1 ) );

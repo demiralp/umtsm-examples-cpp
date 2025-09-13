@@ -46,6 +46,7 @@ void ExecutionDirector_DataType::initialize( )
   pCrossroad           = nullptr;
   pMonitor             = nullptr;
   LaneClosingCompleted = false;
+  CurrentLane          = -1;
   LaneRequested        = -1;
   NextLane             = -1;
   LaneCmd1             = Lane_Command::E_CMD_NOPE;

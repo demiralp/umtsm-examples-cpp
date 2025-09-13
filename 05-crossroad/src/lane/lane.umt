@@ -117,18 +117,18 @@ sm Lane
 
             state Ready
             {
-                // blank
+                Close --> Close;
             }
         }
 
         state Open
         {
-            Prepare ->PrepareToStop;
+            Prepare -> PrepareToStop;
             Close -> Close;
 
             state PrepareToStop
             {
-                // blank
+                Open --> Open;
             }
         }
     }

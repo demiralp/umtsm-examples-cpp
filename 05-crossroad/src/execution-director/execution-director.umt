@@ -59,6 +59,7 @@ sm ExecutionDirector
         boolean LaneClosingCompleted;
         optional Crossroad pCrossroad;
         optional Monitor pMonitor;
+        int CurrentLane;
         int LaneRequested;
         int NextLane;
         Lane_Command LaneCmd1;
@@ -150,9 +151,25 @@ sm ExecutionDirector
         state Controlled
         {
             entry / StartControlMode, NotifyCrossroad;
-            init -> OnClosePedestrianLanes / StopTraffic;
+            init -> Hold;
+
+            state Hold 
+            {
+                entry / StopTraffic, NotifyCrossroad;
+                do / WaitForSafety;
+
+                -> OnOpeningLane1;
+            }
 
             // ------------------------------- 1 ----------------------------
+            state OnOpeningLane1
+            {
+                entry / OrderOpeningLane1, NotifyCrossroad;
+                do / WaitForSafety;
+
+                -> OpenLane1;
+            }
+
             state OpenLane1
             {
                 entry / OrderOpenLane1, NotifyCrossroad;
@@ -163,17 +180,29 @@ sm ExecutionDirector
 
             state OnCloseLane1
             {
-                entry / PrepareForNextLane, NotifyCrossroad;
-                do / WaitForNextLaneOpen;
+                entry / OrderClosingLane1, NotifyCrossroad;
+                do / WaitForClosingLane;
 
-                [IsNextLane2] -> OpenLane2;
-                [IsNextLane3] -> OpenLane3;
-                [IsNextLane4] -> OpenLane4;
-                [IsNextLanePedestrianLanes] -> OpenPedestrianLanes;;
-                -> OpenLane2;
+                -> CloseLane1;
+            }
+
+            state CloseLane1
+            {
+                entry / OrderCloseLane1, NotifyCrossroad;
+                do / WaitForSafety;
+
+                -> ShiftNextLane / PrepareForNextLane;
             }
 
             // ------------------------------- 2 ----------------------------
+            state OnOpeningLane2
+            {
+                entry / OrderOpeningLane2, NotifyCrossroad;
+                do / WaitForSafety;
+
+                -> OpenLane2;
+            }
+
             state OpenLane2
             {
                 entry / OrderOpenLane2, NotifyCrossroad;
@@ -184,17 +213,29 @@ sm ExecutionDirector
 
             state OnCloseLane2
             {
-                entry / PrepareForNextLane, NotifyCrossroad;
-                do / WaitForNextLaneOpen;
+                entry / OrderClosingLane2, NotifyCrossroad;
+                do / WaitForClosingLane;
 
-                [IsNextLane1] -> OpenLane1;
-                [IsNextLane3] -> OpenLane3;
-                [IsNextLane4] -> OpenLane4;
-                [IsNextLanePedestrianLanes] -> OpenPedestrianLanes;;
-                -> OpenLane3;
+                -> CloseLane2;
+            }
+
+            state CloseLane2
+            {
+                entry / OrderCloseLane2, NotifyCrossroad;
+                do / WaitForSafety;
+
+                -> ShiftNextLane / PrepareForNextLane;
             }
 
             // ------------------------------- 3 ----------------------------
+            state OnOpeningLane3
+            {
+                entry / OrderOpeningLane3, NotifyCrossroad;
+                do / WaitForSafety;
+
+                -> OpenLane3;
+            }
+
             state OpenLane3
             {
                 entry / OrderOpenLane3, NotifyCrossroad;
@@ -205,17 +246,29 @@ sm ExecutionDirector
 
             state OnCloseLane3
             {
-                entry / PrepareForNextLane, NotifyCrossroad;
-                do / WaitForNextLaneOpen;
+                entry / OrderClosingLane3, NotifyCrossroad;
+                do / WaitForClosingLane;
 
-                [IsNextLane1] -> OpenLane1;
-                [IsNextLane2] -> OpenLane2;
-                [IsNextLane4] -> OpenLane4;
-                [IsNextLanePedestrianLanes] -> OpenPedestrianLanes;;
-                -> OpenLane4;
+                -> CloseLane3;
+            }
+
+            state CloseLane3
+            {
+                entry / OrderCloseLane3, NotifyCrossroad;
+                do / WaitForSafety;
+
+                -> ShiftNextLane / PrepareForNextLane;
             }
 
             // ------------------------------- 4 ----------------------------
+            state OnOpeningLane4
+            {
+                entry / OrderOpeningLane4, NotifyCrossroad;
+                do / WaitForSafety;
+
+                -> OpenLane4;
+            }
+
             state OpenLane4
             {
                 entry / OrderOpenLane4, NotifyCrossroad;
@@ -226,14 +279,18 @@ sm ExecutionDirector
 
             state OnCloseLane4
             {
-                entry / PrepareForNextLane, NotifyCrossroad;
-                do / WaitForNextLaneOpen;
+                entry / OrderClosingLane4, NotifyCrossroad;
+                do / WaitForClosingLane;
 
-                [IsNextLane1] -> OpenLane1;
-                [IsNextLane2] -> OpenLane2;
-                [IsNextLane3] -> OpenLane3;
-                [IsNextLanePedestrianLanes] -> OpenPedestrianLanes;
-                -> OpenPedestrianLanes;
+                -> CloseLane4;
+            }
+
+            state CloseLane4
+            {
+                entry / OrderCloseLane4, NotifyCrossroad;
+                do / WaitForSafety;
+
+                -> ShiftNextLane / PrepareForNextLane;
             }
 
             // ------------------------ Pedestrian Lanes --------------------
@@ -242,19 +299,27 @@ sm ExecutionDirector
                 entry / OrderOpenPedestrianLanes, NotifyCrossroad;
                 do / WaitForPedestrians;
 
-                -> OnClosePedestrianLanes;
+                -> ClosePedestrianLanes;
             }
 
-            state OnClosePedestrianLanes
+            state ClosePedestrianLanes
             {
-                entry / PrepareForNextLane, NotifyCrossroad;
-                do / WaitForNextLaneOpen;
+                entry / OrderClosePedestrianLanes, NotifyCrossroad;
+                do / WaitForSafety;
 
-                [IsNextLane1] -> OpenLane1;
-                [IsNextLane2] -> OpenLane2;
-                [IsNextLane3] -> OpenLane3;
-                [IsNextLane4] -> OpenLane4;
-                -> OpenLane1;
+                -> ShiftNextLane / PrepareForNextLane;
+            }
+
+            // ----------------------------- Common -------------------------
+            choice ShiftNextLane
+            {
+                [IsNextLane1] -> OnOpeningLane1;
+                [IsNextLane2] -> OnOpeningLane2;
+                [IsNextLane3] -> OnOpeningLane3;
+                [IsNextLane4] -> OnOpeningLane4;
+                [IsNextLanePedestrianLanes] -> OpenPedestrianLanes;
+
+                -> OpenPedestrianLanes;
             }
 
             ReleaseControl -> SwitchControlState / SetUncontrolledMode;
