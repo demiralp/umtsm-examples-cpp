@@ -42,17 +42,18 @@
 
 namespace
 {
-  constexpr std::chrono::seconds RUN_LANE_SEC( 10U );
+  constexpr char const* const regfile = "cpp-crossroad-executor.bin";
+
+  constexpr std::chrono::seconds RUN_LANE_SEC( 7U );
   constexpr std::chrono::seconds RUN_LANE1_SEC( RUN_LANE_SEC );
   constexpr std::chrono::seconds RUN_LANE2_SEC( RUN_LANE_SEC );
   constexpr std::chrono::seconds RUN_LANE3_SEC( RUN_LANE_SEC );
   constexpr std::chrono::seconds RUN_LANE4_SEC( RUN_LANE_SEC );
-  constexpr std::chrono::seconds RUN_PEDESTRIAN_LANES_SEC( 8U );
-  constexpr std::chrono::seconds RUN_PREPARING_SEC( 4U );
-  constexpr std::chrono::seconds RUN_STOPING_TRAFFIC_SEC( RUN_LANE_SEC );
-  constexpr std::chrono::seconds RUN_SWITCHING_TIME_SEC( 7U );
-  constexpr std::chrono::seconds RUN_MIN_SWITCHING_TIME_SEC( 5U );
-  constexpr std::chrono::seconds RUN_INTERVAL_TIME_SEC( 3U );
+  constexpr std::chrono::seconds RUN_PEDESTRIAN_LANES_SEC( 10U );
+  constexpr std::chrono::seconds RUN_STOPING_TRAFFIC_SEC( 3U );
+  constexpr std::chrono::seconds RUN_SWITCHING_TIME_SEC( 5U );
+  constexpr std::chrono::seconds RUN_MIN_SWITCHING_TIME_SEC( 3U );
+  constexpr std::chrono::seconds RUN_INTERVAL_TIME_SEC( 2U );
 
   // internal functions
   void TellLaneAvailability(
@@ -160,6 +161,12 @@ bool ExecutionDirector::IsNextLanePedestrianLanes( ) const
   return result;
 }  // End of guard function: IsNextLanePedestrianLanes
 
+bool ExecutionDirector::IsStandByModeRequested( ) const
+{
+  bool const result = instanceData.ControlModeStatus == ControlMode::STANDBY;
+  return result;
+}  // End of guard function: IsStandByModeRequested
+
 bool ExecutionDirector::IsUncontrolledModeRequested( ) const
 {
   bool const result = instanceData.ControlModeStatus == ControlMode::UNCONTROLLED;
@@ -254,7 +261,6 @@ void ExecutionDirector::OrderOpeningLane1( [[maybe_unused]] ExecutionDirector_Da
 {
   auto crossroad = instanceData.pCrossroad;
   crossroad->subSMTrigger_Prepare( Crossroad::SubstateMachines::E_SubSM_Lane1 );
-
 }  // End of action function: OrderOpeningLane1
 
 void ExecutionDirector::OrderOpeningLane2( [[maybe_unused]] ExecutionDirector_DataType const& input )
@@ -663,6 +669,11 @@ void ExecutionDirector::SetNextOpenLanePedestrianLanes( [[maybe_unused]] Executi
   instanceData.LaneRequested = 0;
 }  // End of action function: SetNextOpenLanePedestrianLanes
 
+void ExecutionDirector::SetStandByMode( [[maybe_unused]] ExecutionDirector_DataType const& input )
+{
+  instanceData.ControlModeStatus = ControlMode::STANDBY;
+}  // End of action function: SetStandByMode
+
 void ExecutionDirector::SetUncontrolledMode( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
   instanceData.ControlModeStatus = ControlMode::UNCONTROLLED;
@@ -782,30 +793,32 @@ void ExecutionDirector::WaitForTrafficStops( [[maybe_unused]] ExecutionDirector_
 }  // End of action function: WaitForTrafficStops
 
 // The implementation of the Persistency Functions
-void ExecutionDirector::store_Shallow_Operational( [[maybe_unused]] Main_States state, [[maybe_unused]] ExecutionDirector_DataType const& instance ) const
+void ExecutionDirector::store_Deep_Operational( [[maybe_unused]] Main_States state, [[maybe_unused]] ExecutionDirector_DataType const& instance, [[maybe_unused]] bool finalWrite ) const
 {
-  static char const* const regfile = "crossroad-executor.bin";
-  char const* folder               = getenv( "TMPDIR" );
-  char path[ 256 ];
-  if( folder == 0 )
+  if( finalWrite )
   {
-    folder = "/tmp";
-  }
+    char const* folder = getenv( "TMPDIR" );
+    char path[ 256 ];
+    if( folder == 0 )
+    {
+      folder = "/tmp";
+    }
 
-  strcpy( path, folder );
-  strcat( path, "/" );
-  strcat( path, regfile );
+    strcpy( path, folder );
+    strcat( path, "/" );
+    strcat( path, regfile );
 
-  FILE* fd = fopen( path, "wb" );
-  if( fd != NULL )
-  {
-    uint16_t sdata = (uint16_t)state;
-    fwrite( &sdata, sizeof( sdata ), 1, fd );
-    fclose( fd );
+    FILE* fd = fopen( path, "wb" );
+    if( fd != NULL )
+    {
+      uint16_t sdata = (uint16_t)state;
+      fwrite( &sdata, sizeof( sdata ), 1, fd );
+      fclose( fd );
+    }
   }
 }  // End of action function: store_Shallow_Operational
 
-ExecutionDirector::Main_States ExecutionDirector::load_Shallow_Operational( [[maybe_unused]] ExecutionDirector_DataType const& instance ) const
+ExecutionDirector::Main_States ExecutionDirector::load_Deep_Operational( [[maybe_unused]] ExecutionDirector_DataType const& instance ) const
 {
   static constexpr Main_States mainStates[] = {
     Main_States::E_init,
@@ -832,12 +845,13 @@ ExecutionDirector::Main_States ExecutionDirector::load_Shallow_Operational( [[ma
     Main_States::E_final
   };
 
+  static constexpr size_t sizeMainStates = sizeof( mainStates ) / sizeof( mainStates[ 0 ] );
+
   static constexpr std::size_t maxState = sizeof( mainStates ) / sizeof( mainStates[ 0 ] );
 
   Main_States result = Main_States::E_init;
 
-  static char const* const regfile = "crossroad-executor.bin";
-  char const* folder               = getenv( "TMPDIR" );
+  char const* folder = getenv( "TMPDIR" );
   char path[ 256 ];
   if( folder == 0 )
   {
@@ -853,9 +867,13 @@ ExecutionDirector::Main_States ExecutionDirector::load_Shallow_Operational( [[ma
   {
     uint16_t sdata;
     fread( &sdata, sizeof( sdata ), 1, fd );
-    if( sdata >= 0 && sdata <= maxState )
+    for( size_t i = 0; i < sizeMainStates; ++i )
     {
-      result = mainStates[ sdata ];
+      if( static_cast< uint16_t >( mainStates[ i ] ) == sdata )
+      {
+        result = mainStates[ i ];
+        break;
+      }
     }
     fclose( fd );
   }

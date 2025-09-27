@@ -47,23 +47,26 @@ bool Lane::IsCheckAndGo( ) const
 }  // End of guard function: IsCheckAndGo
 
 // The implementation of the Persistency Functions
-void Lane::store_Shallow_Availability( [[maybe_unused]] Availability_States state, [[maybe_unused]] Lane_DataType const& instance ) const
+void Lane::store_Shallow_Availability( [[maybe_unused]] Availability_States state, [[maybe_unused]] Lane_DataType const& instance, [[maybe_unused]] bool finalWrite ) const
 try
 {
-  std::ostringstream path;
-  char* folder = getenv( tmpDirEnvVar.data( ) );
-
-  path << ( folder ? folder : "/tmp" ) << '/' << regfile << instance.Id << ".bin";
-
-  std::ofstream stream( path.str( ), std::ios::out | std::ios::binary );
-
-  if( stream.is_open( ) )
+  if( finalWrite )
   {
-    uint16_t sdata = (uint16_t)state;
-    stream << sdata;
-  }
+    std::ostringstream path;
+    char* folder = getenv( tmpDirEnvVar.data( ) );
 
-  stream.close( );
+    path << ( folder ? folder : "/tmp" ) << '/' << regfile << instance.Id << ".bin";
+
+    std::ofstream stream( path.str( ), std::ios::out | std::ios::binary );
+
+    if( stream.is_open( ) )
+    {
+      uint16_t sdata = (uint16_t)state;
+      stream << sdata;
+    }
+
+    stream.close( );
+  }
 }
 catch( ... )
 {

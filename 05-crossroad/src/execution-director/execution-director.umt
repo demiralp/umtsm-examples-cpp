@@ -35,6 +35,7 @@ type external TimePoint;
 enumeration ControlMode
 {
     PERSISTENT_CONTROL_MODE,
+    STANDBY,
     CONTROLLED,
     UNCONTROLLED
 }
@@ -50,6 +51,8 @@ enumeration Lane_Command
 // ExecutionDirector
 //*********************************************************
 
+assume deep history is explicit;
+assume shallow history is explicit;
 sm ExecutionDirector
 {
     properties
@@ -72,7 +75,7 @@ sm ExecutionDirector
 
     state StandBy
     {
-        entry / StopTraffic, DisableSystem, NotifyCrossroad;
+        entry / StopTraffic, DisableSystem, ClearControlMode, NotifyCrossroad;
         exit / EnableSystem;
 
         SystemEnabled -> GoesToOperational / ClearControlMode;
@@ -88,20 +91,21 @@ sm ExecutionDirector
         {
             do / WaitForSystemSwitchingTimer;
 
-            SystemDisabled -> GoesToStandby;
+            SystemDisabled / SetStandByMode;
             TakeControl / SetControlledMode;
             ReleaseControl / SetUncontrolledMode;
 
+            [IsStandByModeRequested] -> GoesToStandby;
             [IsControlledModeRequested]-> Controlled;
             [IsUncontrolledModeRequested] -> Uncontrolled;
-            -> Operational;
+            -> history Operational;
         }
 
         state GoesToStandby
         {
             do / WaitForSystemSwitchingTimer;
 
-            SystemEnabled -> GoesToOperational;
+            SystemEnabled -> GoesToOperational / ClearControlMode;
             TakeControl -> GoesToOperational / SetControlledMode;
             ReleaseControl -> GoesToOperational / SetUncontrolledMode;
 
@@ -114,30 +118,30 @@ sm ExecutionDirector
         entry / StopTraffic;
         do / WaitForTrafficStops;
 
-        SystemDisabled -> GoesToStandby;
+        SystemDisabled / SetStandByMode;
         TakeControl / SetControlledMode;
         ReleaseControl / SetUncontrolledMode;
 
-        [IsControlledModeRequested]-> Controlled;
+        [IsStandByModeRequested] -> GoesToStandby;
+        [IsControlledModeRequested] -> history Controlled;
         [IsUncontrolledModeRequested] -> Uncontrolled;
-        -> Operational;
+        -> history Operational;
     }
-
 
     state Operational
     {
-        persistent history -> Uncontrolled;
+        persistent deep history -> Uncontrolled;
 
         exit / StopTraffic;
-
-        SystemDisabled -> GoesToStandby;
 
         state Uncontrolled
         {
             init -> CheckRequests;
-            entry / StartUncontrolledMode, NotifyCrossroad;
+            entry / StartUncontrolledMode, ClearControlMode, NotifyCrossroad;
 
             TakeControl -> SwitchControlState / SetControlledMode;
+
+            SystemDisabled -> GoesToStandby / SetStandByMode;
 
             state CheckRequests
             {
@@ -152,6 +156,7 @@ sm ExecutionDirector
         {
             entry / StartControlMode, NotifyCrossroad;
             init -> Hold;
+            deep history -> Hold;
 
             state Hold 
             {
@@ -191,6 +196,10 @@ sm ExecutionDirector
                 entry / OrderCloseLane1, NotifyCrossroad;
                 do / WaitForSafety;
 
+                [IsUncontrolledModeRequested] -> SwitchControlState;
+                [IsStandByModeRequested] -> GoesToStandby;
+
+                
                 -> ShiftNextLane / PrepareForNextLane;
             }
 
@@ -223,6 +232,9 @@ sm ExecutionDirector
             {
                 entry / OrderCloseLane2, NotifyCrossroad;
                 do / WaitForSafety;
+
+                [IsUncontrolledModeRequested] -> SwitchControlState;
+                [IsStandByModeRequested] -> GoesToStandby;
 
                 -> ShiftNextLane / PrepareForNextLane;
             }
@@ -257,6 +269,9 @@ sm ExecutionDirector
                 entry / OrderCloseLane3, NotifyCrossroad;
                 do / WaitForSafety;
 
+                [IsUncontrolledModeRequested] -> SwitchControlState;
+                [IsStandByModeRequested] -> GoesToStandby;
+
                 -> ShiftNextLane / PrepareForNextLane;
             }
 
@@ -290,6 +305,9 @@ sm ExecutionDirector
                 entry / OrderCloseLane4, NotifyCrossroad;
                 do / WaitForSafety;
 
+                [IsUncontrolledModeRequested] -> SwitchControlState;
+                [IsStandByModeRequested] -> GoesToStandby;
+
                 -> ShiftNextLane / PrepareForNextLane;
             }
 
@@ -307,6 +325,9 @@ sm ExecutionDirector
                 entry / OrderClosePedestrianLanes, NotifyCrossroad;
                 do / WaitForSafety;
 
+                [IsUncontrolledModeRequested] -> SwitchControlState;
+                [IsStandByModeRequested] -> GoesToStandby;
+
                 -> ShiftNextLane / PrepareForNextLane;
             }
 
@@ -322,7 +343,8 @@ sm ExecutionDirector
                 -> OpenPedestrianLanes;
             }
 
-            ReleaseControl -> SwitchControlState / SetUncontrolledMode;
+            SystemDisabled / SetStandByMode;
+            ReleaseControl / SetUncontrolledMode;
 
             OpenLane1 / SetNextOpenLane1, Update;
             OpenLane2 / SetNextOpenLane2, Update;

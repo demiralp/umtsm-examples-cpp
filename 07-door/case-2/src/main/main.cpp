@@ -132,6 +132,13 @@ int main( )
     // blank
   }
 
+  dashboard.halt( );
+  sopenend.halt( );
+  scloseend.halt( );
+  button.halt( );
+  door.halt( );
+  engine.halt( );
+
   // exit the application
   clear( );
   printw( "Exited!\n" );

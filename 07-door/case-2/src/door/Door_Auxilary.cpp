@@ -72,23 +72,26 @@ void Door::wait( [[maybe_unused]] Door_DataType const& input )
 }  // End of action function: wait
 
 // The implementation of the Persistency Functions
-void Door::store_Shallow_Main( [[maybe_unused]] Main_States state, [[maybe_unused]] Door_DataType const& instance ) const
+void Door::store_Shallow_Main( [[maybe_unused]] Main_States state, [[maybe_unused]] Door_DataType const& instance, [[maybe_unused]] bool finalWrite ) const
 try
 {
-  std::ostringstream path;
-  char* folder = getenv( tmpDirEnvVar.data( ) );
-
-  path << ( folder ? folder : "/tmp" ) << '/' << regfile << instance.id << ".bin";
-
-  std::ofstream stream( path.str( ), std::ios::out | std::ios::binary );
-
-  if( stream.is_open( ) )
+  if( finalWrite )
   {
-    uint16_t sdata = (uint16_t)state;
-    stream << sdata;
-  }
+    std::ostringstream path;
+    char* folder = getenv( tmpDirEnvVar.data( ) );
 
-  stream.close( );
+    path << ( folder ? folder : "/tmp" ) << '/' << regfile << instance.id << ".bin";
+
+    std::ofstream stream( path.str( ), std::ios::out | std::ios::binary );
+
+    if( stream.is_open( ) )
+    {
+      uint16_t sdata = (uint16_t)state;
+      stream << sdata;
+    }
+
+    stream.close( );
+  }
 }
 catch( ... )
 {

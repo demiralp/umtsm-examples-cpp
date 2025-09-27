@@ -171,8 +171,8 @@ int main( )
   // Start entire the State Machines
   monitor.start( );
   dashboard.start( );
-  executor.start( );
   crossroad.start( );
+  executor.start( );
 
   // Allow entire the state machines run for  indefinite time until CTRL-C is pressed
   signal( SIGINT, signal_handler );
@@ -181,6 +181,11 @@ int main( )
   {
     // blank
   }
+
+  executor.halt( );
+  crossroad.halt( );
+  dashboard.halt( );
+  monitor.halt( );
 
   // exit the application
   clear( );

@@ -352,7 +352,19 @@ void Monitor::DisplayStatusOfLanes( [[maybe_unused]] Monitor_DataType const& inp
     attroff( COLOR_PAIR( 1 ) );
 
     attron( COLOR_PAIR( 2 ) );
-    printw( "Requested -> %s\n", LaneNumberToName( pExecutorData->LaneRequested ) );
+    printw( "Requested -> " );
+    if( executor->IsStandByModeRequested( ) )
+    {
+      printw( "Stand by mode\n" );
+    }
+    else if( executor->IsUncontrolledModeRequested( ) )
+    {
+      printw( "Uncontrolled mode\n" );
+    }
+    else
+    {
+      printw( "%s\n", LaneNumberToName( pExecutorData->LaneRequested ) );
+    }
     attroff( COLOR_PAIR( 2 ) );
 
     attron( COLOR_PAIR( 1 ) );
