@@ -75,7 +75,7 @@ namespace
     Lane* pLane[ 4 ];
 
     auto crossroad = pInstanceData->pCrossroad;
-    auto executor  = pInstanceData->pExecutionDirector;
+    auto executor = pInstanceData->pExecutionDirector;
 
     pLane[ 0 ] = crossroad->getSubSM_Lane1( );
     pLane[ 1 ] = crossroad->getSubSM_Lane2( );
@@ -164,7 +164,7 @@ void Monitor::DisplayStatusOfLanes( [[maybe_unused]] Monitor_DataType const& inp
 {
   Lane* pLane[ 4 ];
   auto crossroad = instanceData.pCrossroad;
-  auto executor  = instanceData.pExecutionDirector;
+  auto executor = instanceData.pExecutionDirector;
 
   pLane[ 0 ] = crossroad->getSubSM_Lane1( );
   pLane[ 1 ] = crossroad->getSubSM_Lane2( );
@@ -211,9 +211,21 @@ void Monitor::DisplayStatusOfLanes( [[maybe_unused]] Monitor_DataType const& inp
     {
       printw( "LANE4 IS ON CLOSING" );
     }
-    else if( executor->isIn_ClosePedestrianLanes_State( ) )
+    else if( executor->isIn_OnOpeningLane1_State( ) )
     {
-      printw( "PEDESTRIAN LANES ARE ON CLOSING" );
+      printw( "LANE1 IS ON OPENING" );
+    }
+    else if( executor->isIn_OnOpeningLane2_State( ) )
+    {
+      printw( "LANE2 IS ON OPENING" );
+    }
+    else if( executor->isIn_OnOpeningLane3_State( ) )
+    {
+      printw( "LANE3 IS ON OPENING" );
+    }
+    else if( executor->isIn_OnOpeningLane4_State( ) )
+    {
+      printw( "LANE4 IS ON OPENING" );
     }
     else if( executor->isIn_OpenLane1_State( ) )
     {
@@ -288,14 +300,14 @@ void Monitor::DisplayStatusOfLanes( [[maybe_unused]] Monitor_DataType const& inp
     for( int lane = 0; lane < 4; ++lane )
     {
       bool const available = pLane[ lane ]->isIn_Available_State( );
-      bool const red       = pTrafficLight[ lane ]->isIn_Red_On_State( )
+      bool const red = pTrafficLight[ lane ]->isIn_Red_On_State( )
         || pTrafficLight[ lane ]->isIn_Red_On_Flashing_State( );
       bool const amber = pTrafficLight[ lane ]->isIn_Amber_On_State( )
         || pTrafficLight[ lane ]->isIn_Amber_On_Flashing_State( );
       bool const green = pTrafficLight[ lane ]->isIn_Green_On_State( )
         || pTrafficLight[ lane ]->isIn_Green_On_Flashing_State( );
 
-      int const redColor   = red ? 3 : 6;
+      int const redColor = red ? 3 : 6;
       int const amberColor = amber ? 4 : 6;
       int const greenColor = green ? 5 : 6;
 
@@ -328,7 +340,7 @@ void Monitor::DisplayStatusOfLanes( [[maybe_unused]] Monitor_DataType const& inp
     bool const green = pPedestrianLights->isIn_Green_On_State( )
       || pPedestrianLights->isIn_Green_On_Flashing_State( );
 
-    int const redColor   = red ? 3 : 6;
+    int const redColor = red ? 3 : 6;
     int const greenColor = green ? 5 : 6;
 
     attron( COLOR_PAIR( 1 ) );
