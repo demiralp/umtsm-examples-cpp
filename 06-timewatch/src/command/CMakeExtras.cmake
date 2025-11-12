@@ -16,7 +16,7 @@ set(LIBCommand_INCLUDES_EXTRA
     ${CMAKE_SOURCE_DIR}/generated/src/command
     ${CMAKE_SOURCE_DIR}/generated/src/timewatch
 )
-set(TESTCommand_INCLUDES_EXTRA ${CMAKE_SOURCE_DIR}/generated/test/timewatch)
+set(TESTCommand_INCLUDES_EXTRA ${CMAKE_SOURCE_DIR}/generated/test/timewatch/unittest)
 set(TESTCommand_LIB_EXTRA 
     LIBRTimewatch_Static
     -lncurses)

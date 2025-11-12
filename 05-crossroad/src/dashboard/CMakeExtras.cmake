@@ -26,9 +26,9 @@ set(LIBDashboard_INCLUDES_EXTRA
 )
 # TESTDashboard_INCLUDES_EXTRA
 set(TESTDashboard_INCLUDES_EXTRA
-    ${CMAKE_SOURCE_DIR}/generated/test/crossroad
-    ${CMAKE_SOURCE_DIR}/generated/test/execution-director
-    ${CMAKE_SOURCE_DIR}/generated/test/monitor
+    ${CMAKE_SOURCE_DIR}/generated/test/crossroad/unittest
+    ${CMAKE_SOURCE_DIR}/generated/test/execution-director/unittest
+    ${CMAKE_SOURCE_DIR}/generated/test/monitor/unittest
 )
 # TESTDashboard_LIB_EXTRA
 set(TESTDashboard_LIB_EXTRA

@@ -27,9 +27,9 @@ set(LIBTrafficLight_INCLUDES_EXTRA
 )
 # TESTTrafficLight_INCLUDES_EXTRA
 set(TESTTrafficLight_INCLUDES_EXTRA
-    ${CMAKE_SOURCE_DIR}/generated/test/execution-director
-    ${CMAKE_SOURCE_DIR}/generated/test/monitor
-    ${CMAKE_SOURCE_DIR}/generated/test/lane
+    ${CMAKE_SOURCE_DIR}/generated/test/execution-director/unittest
+    ${CMAKE_SOURCE_DIR}/generated/test/monitor/unittest
+    ${CMAKE_SOURCE_DIR}/generated/test/lane/unittest
 )
 # TESTTrafficLight_LIB_EXTRA
 set(TESTTrafficLight_LIB_EXTRA 

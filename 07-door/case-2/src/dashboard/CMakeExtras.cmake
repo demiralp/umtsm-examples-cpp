@@ -20,11 +20,11 @@ set(LIBDashboard_INCLUDES_EXTRA
     ${CMAKE_SOURCE_DIR}/generated/src/sensor_open_end
 )
 set(TESTDashboard_INCLUDES_EXTRA 
-    ${CMAKE_SOURCE_DIR}/generated/test/door
-    ${CMAKE_SOURCE_DIR}/generated/test/button
-    ${CMAKE_SOURCE_DIR}/generated/test/engine
-    ${CMAKE_SOURCE_DIR}/generated/test/sensor_close_end
-    ${CMAKE_SOURCE_DIR}/generated/test/sensor_open_end
+    ${CMAKE_SOURCE_DIR}/generated/test/door/unittest
+    ${CMAKE_SOURCE_DIR}/generated/test/button/unittest
+    ${CMAKE_SOURCE_DIR}/generated/test/engine/unittest
+    ${CMAKE_SOURCE_DIR}/generated/test/sensor_close_end/unittest
+    ${CMAKE_SOURCE_DIR}/generated/test/sensor_open_end/unittest
 )
 set(TESTDashboard_LIB_EXTRA
     LIBRDoor_Static

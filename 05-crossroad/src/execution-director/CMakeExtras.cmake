@@ -27,8 +27,8 @@ set(LIBExecutionDirector_INCLUDES_EXTRA
 )
 # TESTExecutionDirector_INCLUDES_EXTRA
 set(TESTExecutionDirector_INCLUDES_EXTRA
-    ${CMAKE_SOURCE_DIR}/generated/test/crossroad
-    ${CMAKE_SOURCE_DIR}/generated/test/monitor
+    ${CMAKE_SOURCE_DIR}/generated/test/crossroad/unittest
+    ${CMAKE_SOURCE_DIR}/generated/test/monitor/unittest
 )
 # TESTExecutionDirector_LIB_EXTRA
 set(TESTExecutionDirector_LIB_EXTRA 

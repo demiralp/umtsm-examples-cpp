@@ -16,7 +16,7 @@ set(LIBButton_INCLUDES_EXTRA
     ${CMAKE_SOURCE_DIR}/generated/src/door
 )
 set(TESTButton_INCLUDES_EXTRA
-    ${CMAKE_SOURCE_DIR}/generated/test/door
+    ${CMAKE_SOURCE_DIR}/generated/test/door/unittest
 )
 set(TESTButton_LIB_EXTRA
     LIBRDoor_Static

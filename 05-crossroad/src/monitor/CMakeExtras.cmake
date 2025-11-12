@@ -25,11 +25,11 @@ set(LIBMonitor_INCLUDES_EXTRA
 )
 # TESTMonitor_INCLUDES_EXTRA
 set(TESTMonitor_INCLUDES_EXTRA
-    ${CMAKE_SOURCE_DIR}/generated/test/crossroad
-    ${CMAKE_SOURCE_DIR}/generated/test/execution-director
-    ${CMAKE_SOURCE_DIR}/generated/test/lane
-    ${CMAKE_SOURCE_DIR}/generated/test/pedestrian-light
-    ${CMAKE_SOURCE_DIR}/generated/test/trafficlight
+    ${CMAKE_SOURCE_DIR}/generated/test/crossroad/unittest
+    ${CMAKE_SOURCE_DIR}/generated/test/execution-director/unittest
+    ${CMAKE_SOURCE_DIR}/generated/test/lane/unittest
+    ${CMAKE_SOURCE_DIR}/generated/test/pedestrian-light/unittest
+    ${CMAKE_SOURCE_DIR}/generated/test/trafficlight/unittest
 )
 # TESTMonitor_LIB_EXTRA
 set(TESTMonitor_LIB_EXTRA 

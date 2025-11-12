@@ -15,7 +15,7 @@ set(LIBDoor_LIB_EXTRA -lncurses)
 set(LIBDoor_INCLUDES_EXTRA
     ${CMAKE_SOURCE_DIR}/generated/src/engine
 )
-set(TESTDoor_INCLUDES_EXTRA ${CMAKE_SOURCE_DIR}/generated/test/engine)
+set(TESTDoor_INCLUDES_EXTRA ${CMAKE_SOURCE_DIR}/generated/test/engine/unittest)
 set(TESTDoor_LIB_EXTRA 
     LIBREngine_Static
     -lncurses

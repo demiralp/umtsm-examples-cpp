@@ -25,12 +25,12 @@ set(LIBCrossroad_INCLUDES_EXTRA
 )
 # TESTCrossroad_INCLUDES_EXTRA
 set(TESTCrossroad_INCLUDES_EXTRA
-    ${CMAKE_SOURCE_DIR}/generated/test/dashboard
-    ${CMAKE_SOURCE_DIR}/generated/test/execution-director
-    ${CMAKE_SOURCE_DIR}/generated/test/lane
-    ${CMAKE_SOURCE_DIR}/generated/test/trafficlight
-    ${CMAKE_SOURCE_DIR}/generated/test/pedestrian-light
-    ${CMAKE_SOURCE_DIR}/generated/test/monitor
+    ${CMAKE_SOURCE_DIR}/generated/test/dashboard/unittest
+    ${CMAKE_SOURCE_DIR}/generated/test/execution-director/unittest
+    ${CMAKE_SOURCE_DIR}/generated/test/lane/unittest
+    ${CMAKE_SOURCE_DIR}/generated/test/trafficlight/unittest
+    ${CMAKE_SOURCE_DIR}/generated/test/pedestrian-light/unittest
+    ${CMAKE_SOURCE_DIR}/generated/test/monitor/unittest
     ${CMAKE_SOURCE_DIR}/generated/src/pedestrian-light
     ${CMAKE_SOURCE_DIR}/generated/src/monitor
 )
