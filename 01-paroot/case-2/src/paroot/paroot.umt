@@ -41,12 +41,12 @@ sm Paroot
 {
     properties
     {
-        float32 paramA;
-        float32 paramB;
-        float32 paramC;
-        float32 delta;
-        float32 root1;
-        float32 root2;
+        float64 paramA;
+        float64 paramB;
+        float64 paramC;
+        float64 delta;
+        float64 root1;
+        float64 root2;
         Complex croot1;
         Complex croot2;
         Paroot_Solution solutionType;

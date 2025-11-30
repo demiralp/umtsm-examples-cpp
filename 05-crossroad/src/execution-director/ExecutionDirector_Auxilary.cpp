@@ -176,7 +176,7 @@ bool ExecutionDirector::IsUncontrolledModeRequested( ) const
 // The implementation of the actions
 void ExecutionDirector::CheckRouteRequest( [[maybe_unused]] ExecutionDirector_DataType const& input )
 {
-  instanceData.NextLane      = input.LaneRequested;
+  instanceData.NextLane = input.LaneRequested;
   instanceData.LaneRequested = -1;
 
   TellLaneAvailability( this, &input, &instanceData );
@@ -397,13 +397,13 @@ void ExecutionDirector::PrepareForNextLane( [[maybe_unused]] ExecutionDirector_D
 {
   auto crossroad = instanceData.pCrossroad;
 
-  auto pLane1           = crossroad->getSubSM_Lane1( );
-  auto pLane2           = crossroad->getSubSM_Lane2( );
-  auto pLane3           = crossroad->getSubSM_Lane3( );
-  auto pLane4           = crossroad->getSubSM_Lane4( );
+  auto pLane1 = crossroad->getSubSM_Lane1( );
+  auto pLane2 = crossroad->getSubSM_Lane2( );
+  auto pLane3 = crossroad->getSubSM_Lane3( );
+  auto pLane4 = crossroad->getSubSM_Lane4( );
   auto pPedestrianLanes = crossroad->getSubSM_PedestrianLanes( );
 
-  instanceData.NextLane      = instanceData.LaneRequested;
+  instanceData.NextLane = instanceData.LaneRequested;
   instanceData.LaneRequested = -1;
 
   TellLaneAvailability( this, &input, &instanceData );
@@ -866,13 +866,15 @@ ExecutionDirector::Main_States ExecutionDirector::load_Deep_Operational( [[maybe
   if( fd != NULL )
   {
     uint16_t sdata;
-    fread( &sdata, sizeof( sdata ), 1, fd );
-    for( size_t i = 0; i < sizeMainStates; ++i )
+    if( fread( &sdata, sizeof( sdata ), 1, fd ) )
     {
-      if( static_cast< uint16_t >( mainStates[ i ] ) == sdata )
+      for( size_t i = 0; i < sizeMainStates; ++i )
       {
-        result = mainStates[ i ];
-        break;
+        if( static_cast< uint16_t >( mainStates[ i ] ) == sdata )
+        {
+          result = mainStates[ i ];
+          break;
+        }
       }
     }
     fclose( fd );

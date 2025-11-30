@@ -52,7 +52,7 @@ sm Calculator
 {
     properties
     {
-        float64 Accumulator;
+        float80 Accumulator;
         Calculator_Operator Operator;
         Calculator_Error ErrorNo;
     }
