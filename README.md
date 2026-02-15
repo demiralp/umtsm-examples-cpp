@@ -1,3 +1,4 @@
+![UMTSM - Unified Modelling Technologies State Machine](UMTSM-Logo_01.png)
 # UMTSM C++ Examples
 
 Examples of Generating State Machines in C++
@@ -31,11 +32,11 @@ Build configuration files (`CMakeLists.txt`) required to compile the examples ar
 The repository includes the following sample applications:
 
 - **01-paroot** — Solves parabolic equations
-  - `case-0`: A classical approach before introducing state machines. 
+  - `case-0`: A classical approach before introducing state machines. (Without using UMTSM)
   - `case-1`: The basic state machine modeling converted from _case-0_.
   - `case-2`: Detailed state machine model of the problem.
 
-- **02-numberguess** — A number guessing game (between 1 and 99)
+- **02-numberguess** — A number guessing game
   - `case-1`: Computer takes a number between 1 and 99 and the player guess it.
   - `case-2`: The improved version of the _case-1_. The player can be drow, cancel the game any time.
   - `case-3`: The improved version of _case-2_. Computer applies some time box to enter a guees and complete the game. 
